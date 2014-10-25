@@ -1,0 +1,42 @@
+{
+  "name": "angular-esri-map",
+  "version": "0.0.0",
+  "description": "A collection of directives to help you use Esri maps and servies in an Angular app",
+  "main": "dist/angular-esri-map.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.8.9",
+    "gulp-clean": "~0.3.0",
+    "gulp-concat": "~2.2.0",
+    "gulp-debug": "^1.0.1",
+    "gulp-jshint": "^1.8.5",
+    "gulp-ng-annotate": "^0.3.3",
+    "gulp-rename": "~1.2.0",
+    "gulp-strip-debug": "~0.3.0",
+    "gulp-uglify": "~0.3.0",
+    "gulp-util": "~2.2.16",
+    "run-sequence": "~0.3.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Esri/angular-esri-map.git"
+  },
+  "keywords": [
+    "Angular",
+    "Esri"
+  ],
+  "author": "Tom Wayson <twayson@esri.com> (http://tomwayson.com)",
+  "contributors": [
+    "Patrick Arlt <parlt@esri.com> (http://patrickarlt.com)",
+    "Matt Priour <mpriour@esr.com> (https://github.com/mpriour)",
+    "Tom Wayson <twayson@esri.com> (http://tomwayson.com)"
+  ],
+  "license": "Apache",
+  "bugs": {
+    "url": "https://github.com/Esri/angular-esri-map/issues"
+  },
+  "homepage": "https://github.com/Esri/angular-esri-map"
+}
