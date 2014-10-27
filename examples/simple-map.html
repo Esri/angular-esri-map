@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="simple-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Simple Map Example</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body ng-controller="SimpleMapController">
+        <esri-map id="map" lat="37.75" lng="-122.45" zoom="map.zoom" basemap="map.basemap">
+        </esri-map>
+        <p>Zoom: {{map.zoom}}</p>
+        <p>Compare with <a href="https://developers.arcgis.com/javascript/jssamples/map_simple.html">this sample</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="../dist/angular-esri-map.js"></script>
+        <script type="text/javascript">
+            angular.module('simple-map-example', ['esri.map'])
+                .controller('SimpleMapController', function ($scope) {
+                    $scope.map = {
+                      zoom: 13,
+                      basemap: 'topo'
+                    };
+                });
+        </script>
+    </body>
+</html>
