@@ -3,18 +3,30 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <title>Simple Map Example</title>
+        <title>Set Basemap</title>
 
         <!-- load Esri CSS -->
         <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
-        <h2>Simple Map Example</h2>
+
         <!-- add map to page and bind to scope map parameters -->
-        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+        <h2>Set Basemap</h2>
+        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
         </esri-map>
-        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_simple.html">this sample</a>.</p>
+        <p>Basemap: <select ng-model="map.basemap">
+            <option value="gray">Gray</option>
+            <option value="topo">Topographic</option>
+            <option value="streets">Streets</option>
+            <option value="satellite">Satellite</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="oceans">Oceans</option>
+            <option value="national-geographic">National Geographic</option>
+            <option value="osm">Open Street Map</option>
+          </select>
+          Lat: {{map.center.lat}} Lng: {{map.center.lng}}, Zoom: {{map.zoom}}
+        </p>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_agol.html">this sample</a>.</p>
 
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
@@ -28,10 +40,11 @@
                 .controller('MapController', function ($scope) {
                     $scope.map = {
                         center: {
-                            lng: -122.45,
-                            lat: 37.75
+                            lng: -31.036,
+                            lat: 42.747
                         },
-                        zoom: 13
+                        zoom: 3,
+                        basemap: 'satellite'
                     };
                 });
         </script>
