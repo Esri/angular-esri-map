@@ -4,14 +4,15 @@ var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
-var debug = require('gulp-debug');
 var rename = require('gulp-rename');
 var stripDebug = require('gulp-strip-debug');
 var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 
+var allJsFiles = 'src/**/*.js';
+
 gulp.task('lint', function() {
-  return gulp.src('src/**/*.js')
+  return gulp.src(allJsFiles)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
@@ -38,3 +39,11 @@ gulp.task('build-js', function() {
 gulp.task('build', function(callback) {
   runSequence('lint', 'clean', 'build-js', callback);
 });
+
+// Watch Files For Changes
+gulp.task('watch', function() {
+    gulp.watch(allJsFiles, ['build']);
+});
+
+// Default Task
+gulp.task('default', ['build', 'watch']);

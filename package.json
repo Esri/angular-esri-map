@@ -11,7 +11,6 @@
     "gulp": "^3.8.9",
     "gulp-clean": "~0.3.0",
     "gulp-concat": "~2.2.0",
-    "gulp-debug": "^1.0.1",
     "gulp-jshint": "^1.8.5",
     "gulp-ng-annotate": "^0.3.3",
     "gulp-rename": "~1.2.0",
