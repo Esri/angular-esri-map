@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Angular Esri Map Examples</title>
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="styles/narrow.css">
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body >
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right" role="tablist">
+          <li role="presentation" class="active"><a href="http://github.com/esri/angular-esri">github</a></li>
+        </ul>
+        <h3 class="text-muted">angular-esri-map</h3>
+      </div>
+
+      <div class="jumbotron">
+        <h1>&lt;esri-map/&gt;</h1>
+        <p class="lead">Examples showing how to use the angular-esri-map directive.</p>
+        <p> While this directive can be used, we intend this to be used as an example for building your own 
+        application-specific directives.</p>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4><a href="simple-map.html">Simple map</a></h4>
+          <p>Simplest possible map - simply setting the </p>
+
+          <h4><a href="set-basemap.html">Set basemap</a></h4>
+          <p>Shows how to use angular binding to link a select list to the basemap property of the map.</p>
+
+          <h4><a href="set-center-zoom.html">Set map center and zoom</a></h4>
+          <p>Demonstrates two-way binding of the center, and zoom properties.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4><a href="feature-layers.html">Feature layers</a></h4>
+          <p>Loads two feature layers into the map.</p>
+
+          <h4><a href="legend.html">Legend</a></h4>
+          <p>Add a legend via to the map.</p>
+
+          <h4><a href="map-events.html">Map events</a></h4>
+          <p>Shows how to listen for events raised by the map directive.</p>
+        </div>
+      </div>
+
+      
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Zen of Directives and Maps</h1>
+          <p>If you've read this far, you will have noticed that these are very, very simple
+            directives. For example - there is no way to apply styles to the feature layers, nor
+            is there support for any of the 20+ other layers supported by the Esri Javascript API. This was not and oversight, it was by design. </p>
+            <p>We feel that the value of directives (or web components for that matter) is to 
+              package up complex components, exposing a limited, simple declarative interface
+              as html-elements &amp; attributes. Attempting to encapsulate all the layers, renderers, symbols and events of the JS API in a set of directives would simply add more bulk to the javascript, and create another complex api to learn and support. 
+            </p>
+            <h2>Roll Your Own Directives</h2>
+            <p>We believe that you will have the best success integrating maps with 
+              your angular applications if you build directives that focus on your problem domain.
+            </p>
+            <p>For example - suppose you are building an application for a local government. There is a very good chance that you would be integrating a few standard types of maps. Using the examples provided in this repo you could create directives like...</p>
+            <pre><code>
+&lt;parcel-map pin=&quot;ABC123&quot;&gt;&lt;/parcel-map&gt;
+&lt;lot-layout-map lot=&quot;93920-A-23&quot;&gt;&lt;/lot-layout-map&gt;
+&lt;workorder-map order=&quot;10-31-14-002&quot;&gt;&lt;/workorder-map&gt;
+            </code></pre>
+            <p>These directives could be easily integrated into any views in the over-arching application, or even shared across a suite of applications. 
+            </p>
+
+            <h2>Some thoughts on Angular...</h2>
+            <p>At Esri we use a number of differnt javascript application frameworks, including Angular. While we find that using Angular can lead to huge productivity increases, and massively streamlined code - it is worth noting that Angular is a silver bullet for all types of web applications.
+            </p>
+            <p>Where we have seen the greatest benefit is in situations where the majority of the application functionality is "forms-over-data", with a few maps added in. Similarly, when we have tried to use Angular on single-page, full-screen mapping applications, we have found ourselves working against the framework. 
+            </p>
+            <p>So, as the old saying goes <em>use the right tool for the job!</em></p>
+        </div>
+      </div>
+
+
+      <div class="footer">
+        <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
+      </div>
+
+    </div> <!-- /container -->
+
+    </body>
+</html>
