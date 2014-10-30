@@ -26,7 +26,10 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('MapController', function ($scope) {
                     $scope.map = {
-                        center: [-122.45, 37.75],
+                        center: {
+                            lng: -122.45,
+                            lat: 37.75
+                        },
                         zoom: 13,
                         loaded: false,
                     };
