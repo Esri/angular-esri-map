@@ -17,7 +17,8 @@
     "gulp-strip-debug": "~0.3.0",
     "gulp-uglify": "~0.3.0",
     "gulp-util": "~2.2.16",
-    "run-sequence": "~0.3.6"
+    "run-sequence": "~0.3.6",
+    "browser-sync": "~1.6.1"
   },
   "repository": {
     "type": "git",
