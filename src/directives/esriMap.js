@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map', []).directive('esriMap', function($q, $timeout) {
+    angular.module('esri.map', []).directive('esriMap', function($q, $timeout, $esriLoader) {
 
         // don't apply if already in digest cycle
         // TODO: is there a better way to do this, since it's an anti-pattern:
@@ -86,11 +86,11 @@
                     mapOptions.basemap = $scope.basemap;
                 }
 
-                // load esri dependencies via AMD
-                require(['esri/map'], function(Map) {
+                $esriLoader('esri/map').then(function(Map){
 
                     // initialize map and resolve the deferred
                     var map = new Map($attrs.id, mapOptions);
+
                     mapDeferred.resolve(map);
 
                     // make a reference to the map object available
@@ -110,6 +110,7 @@
                             map.setBasemap(newBasemap);
                         }
                     });
+
                     // $scope.$watch(function(scope) {
                     //     console.log('function watched');
                     //     return scope.center && scope.center.lat + ',' + scope.center.lng;
@@ -120,6 +121,7 @@
                     //         map.centerAt([newCenter.lng, newCenter.lat]);
                     //     }
                     // });
+
                     $scope.$watch('center.lng', function(newLng, oldLng) {
                         var digits = getLatLngSignificantDigits($scope.zoom);
                         if (!map.loaded || !newLng || !oldLng || newLng.toFixed(digits) === oldLng.toFixed(digits) || !$scope.center.lat) {
