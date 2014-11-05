@@ -1,6 +1,8 @@
 (function(angular) {
     'use strict';
 
+    angular.module('esri.map', []);
+
     angular.module('esri.map').factory('esriLoader', function ($q) {
         return function(moduleName){
             var deferred = $q.defer();
