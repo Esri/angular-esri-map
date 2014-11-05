@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var clean = require('gulp-clean');
@@ -10,31 +11,33 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 
-var allJsFiles = 'src/**/*.js';
+var srcJsFiles = 'src/**/*.js';
 
 gulp.task('lint', function() {
-  return gulp.src(allJsFiles)
+  return gulp.src(srcJsFiles)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 gulp.task('clean', function() {
-  return gulp.src('dist')
+  return gulp.src(['dist', 'app/scripts'])
     .pipe(clean({force: true}));
 });
 
-
-
 gulp.task('build-js', function() {
-  return gulp.src(['src/directives/esriMap.js',
+  return gulp.src([
+    'src/services/esriLoader.js',
+    'src/directives/esriMap.js',
     'src/directives/esriFeatureLayer.js',
     'src/directives/esriLegend.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('app/scripts'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(rename('angular-esri-map.min.js'))
+    .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('app/scripts'))
     .on('error', gutil.log);
 });
@@ -42,11 +45,6 @@ gulp.task('build-js', function() {
 gulp.task('build', function(callback) {
   runSequence('lint', 'clean', 'build-js', callback);
 });
-
-// Watch Files For Changes
-// gulp.task('watch', function() {
-//     gulp.watch(allJsFiles, ['build']);
-// });
 
 gulp.task('serve', function() {
   browserSync({
@@ -59,9 +57,8 @@ gulp.task('serve', function() {
     notify: false
   });
 
-  gulp.watch(['./app/scripts/**/*.*','./app/*.html','./app/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./app/*.html','./app/styles/*.css'], ['build', browserSync.reload ]);
 });
-
 
 // Default Task
 //gulp.task('default', ['build', 'serve']);
