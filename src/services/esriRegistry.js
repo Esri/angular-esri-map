@@ -24,6 +24,10 @@
           instance.reject(arg);
           return arg;
         });
+
+        return function(){
+          delete registry[name];
+        }
       },
 
       get: function(name){
