@@ -62,7 +62,7 @@
                 var deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
 
                 // remove this from the registry when the scope is destroyed
-                $scope.on('destroy', deregister);
+                $scope.on('$destroy', deregister);
 
                 // setup our map options based on the attributes and scope
                 var mapOptions = {};
