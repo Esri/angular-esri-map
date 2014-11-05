@@ -61,10 +61,6 @@
                 // setup our map options based on the attributes and scope
                 var mapOptions = {};
 
-                var centerTimeout,
-                    tempCenterLat,
-                    tempCenterLng;
-
                 // center/zoom/extent
                 // check for convenience extent attribute
                 // otherwise get from scope center/zoom
@@ -111,91 +107,30 @@
                         }
                     });
 
-                    // $scope.$watch(function(scope) {
-                    //     console.log('function watched');
-                    //     return scope.center && scope.center.lat + ',' + scope.center.lng;
-                    // }, function (newCenter, oldCenter) {
-                    //     console.log('diff');
-                    //     if (map.loaded && !angular.equals(newCenter, oldCenter)) {
-                    //         console.log('centerAt');
-                    //         map.centerAt([newCenter.lng, newCenter.lat]);
-                    //     }
-                    // });
-
-                    $scope.$watch('center.lng', function(newLng, oldLng) {
-                        var digits = getLatLngSignificantDigits($scope.zoom);
-                        if (!map.loaded || !newLng || !oldLng || newLng.toFixed(digits) === oldLng.toFixed(digits) || !$scope.center.lat) {
-                            return;
-                        }
-                        console.log('lng diff', newLng, oldLng);
-                        if (centerTimeout) {
-                            $timeout.cancel(centerTimeout);
-                        }
-                        tempCenterLng = newLng;
-                        centerTimeout = $timeout(function() {
-                            console.log('newLng', newLng, oldLng);
-                            map.centerAt([tempCenterLng, tempCenterLat || $scope.center.lat]);
-                            tempCenterLng = null;
-                            tempCenterLat = null;
-                        }, 500);
-                    });
-                    $scope.$watch('center.lat', function(newLat, oldLat) {
-                        var digits = getLatLngSignificantDigits($scope.zoom);
-                        if (!map.loaded || !newLat || !oldLat || newLat.toFixed(digits) === oldLat.toFixed(digits) || !$scope.center.lng) {
-                            return;
-                        }
-                        console.log('lat diff', newLat, oldLat, digits);
-                        if (centerTimeout) {
-                            $timeout.cancel(centerTimeout);
-                        }
-                        tempCenterLat = newLat;
-                        centerTimeout = $timeout(function() {
-                            console.log('newLat', newLat, oldLat);
-                            map.centerAt([tempCenterLng || $scope.center.lng, tempCenterLat]);
-                            tempCenterLng = null;
-                            tempCenterLat = null;
-                        }, 500);
-                    });
-                    $scope.$watch('zoom', function(newZoom, oldZoom) {
-                        if (map.loaded && newZoom !== oldZoom) {
-                            map.setZoom(newZoom);
-                        }
+                    $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenter,oldCenter)
+                    {
+                        console.log("center/zoom changed", newCenterZoom, oldCenterZoom);
+                        newCenterZoom = newCenterZoom.split(',');
+                        map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]);
                     });
 
-                    // // listen for map events and update scope
-                    // map.on('zoom-end', function(e) {
-                    //     console.log('zoom-end', e);
-                    //     safeApply($scope, function() {
-                    //         $scope.zoom = e.level;
-                    //     });
-                    // });
+                    map.on('extent-change', function(e) 
+                    {
+                        console.log('extent-change', e.extent.toJson());
+                        console.log('extent-change geo', map.geographicExtent);
 
+                        var geoCenter = map.geographicExtent.getCenter();
 
-                    map.on('extent-change', function(e) {
-                        console.log('extent-change', e);
-                        safeApply($scope, function() {
-                            var geoCenter, digits;
+                        $scope.$apply(function()
+                        {
+                            $scope.center.lng = geoCenter.x;
+                            $scope.center.lat = geoCenter.y;
                             $scope.zoom = map.getZoom();
-                            digits = getLatLngSignificantDigits($scope.zoom);
 
-                            // TODO: get center x/y/spatialReference?
-                            // $scope.center = e.extent.getCenter().toJson();
-
-                            if (map.geographicExtent) {
-                                geoCenter = map.geographicExtent.getCenter();
-                                if ($scope.center.lng.toFixed(digits) !== geoCenter.x.toFixed(digits)) {
-                                    $scope.center.lng = geoCenter.x;
-                                }
-                                if ($scope.center.lat.toFixed(digits) !== geoCenter.y.toFixed(digits)) {
-                                    $scope.center.lat = geoCenter.y;
-                                }
-                            }
-                            // if extent change handler defined, call it
-                            if ($attrs.extentChange) {
+                            if( $attrs.extentChange )
                                 $scope.extentChange()(e);
-                            }
                         });
-                        // $scope.$emit('mapExtentChange', e);
+
                     });
 
                     // clean up

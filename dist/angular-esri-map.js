@@ -134,55 +134,40 @@
                         }
                     });
 
-                    // $scope.$watch(function(scope) {
-                    //     console.log('function watched');
-                    //     return scope.center && scope.center.lat + ',' + scope.center.lng;
-                    // }, function (newCenter, oldCenter) {
-                    //     console.log('diff');
-                    //     if (map.loaded && !angular.equals(newCenter, oldCenter)) {
-                    //         console.log('centerAt');
-                    //         map.centerAt([newCenter.lng, newCenter.lat]);
-                    //     }
-                    // });
+/*
+                    $scope.$watch(function(scope) {
+                         console.log('function watched', scope.center);
+                         return scope.center && (scope.center.lat + ',' + scope.center.lng);
+                    }, function (newCenter, oldCenter) 
+                    {
+                         console.log('centerAt',newCenter,map.geographicExtent.getCenter());
+                         $timeout(function(){ map.centerAt([newCenter.lng, newCenter.lat]) },0);
+                    });
+*/
 
+/**/
+                    $scope.$watch(function(scope){ return scope.center.lng + "," + scope.center.lat;}, function(newCenter,oldCenter)
+                    {
+                        console.log("center changed", newCenter, oldCenter);
+                        var lnglat = newCenter.split(',');
+                        map.centerAt([lnglat[0], lnglat[1]);
+                    });
+//*/                    
+                    /*
                     $scope.$watch('center.lng', function(newLng, oldLng) {
-                        var digits = getLatLngSignificantDigits($scope.zoom);
-                        if (!map.loaded || !newLng || !oldLng || newLng.toFixed(digits) === oldLng.toFixed(digits) || !$scope.center.lat) {
-                            return;
-                        }
-                        console.log('lng diff', newLng, oldLng);
-                        if (centerTimeout) {
-                            $timeout.cancel(centerTimeout);
-                        }
-                        tempCenterLng = newLng;
-                        centerTimeout = $timeout(function() {
-                            console.log('newLng', newLng, oldLng);
-                            map.centerAt([tempCenterLng, tempCenterLat || $scope.center.lat]);
-                            tempCenterLng = null;
-                            tempCenterLat = null;
-                        }, 500);
+                        console.log("center.lng changed",newLng,oldLng);
+                        var geoCenter = map.geographicExtent.getCenter();
+                        $timeout(function(){ map.centerAt([newLng, geoCenter.y]); },0);
                     });
                     $scope.$watch('center.lat', function(newLat, oldLat) {
-                        var digits = getLatLngSignificantDigits($scope.zoom);
-                        if (!map.loaded || !newLat || !oldLat || newLat.toFixed(digits) === oldLat.toFixed(digits) || !$scope.center.lng) {
-                            return;
-                        }
-                        console.log('lat diff', newLat, oldLat, digits);
-                        if (centerTimeout) {
-                            $timeout.cancel(centerTimeout);
-                        }
-                        tempCenterLat = newLat;
-                        centerTimeout = $timeout(function() {
-                            console.log('newLat', newLat, oldLat);
-                            map.centerAt([tempCenterLng || $scope.center.lng, tempCenterLat]);
-                            tempCenterLng = null;
-                            tempCenterLat = null;
-                        }, 500);
+                        console.log("center.lat changed",newLat,oldLat);
+                        var geoCenter = map.geographicExtent.getCenter();
+                        $timeout(function(){ map.centerAt([geoCenter.x, newLat]); },0);
                     });
+                    */
                     $scope.$watch('zoom', function(newZoom, oldZoom) {
-                        if (map.loaded && newZoom !== oldZoom) {
-                            map.setZoom(newZoom);
-                        }
+                        console.log("zoom changed", newZoom, oldZoom);
+                        map.setZoom(newZoom);
                     });
 
                     // // listen for map events and update scope
@@ -195,30 +180,34 @@
 
 
                     map.on('extent-change', function(e) {
-                        console.log('extent-change', e);
-                        safeApply($scope, function() {
-                            var geoCenter, digits;
-                            $scope.zoom = map.getZoom();
-                            digits = getLatLngSignificantDigits($scope.zoom);
+                        console.log('extent-change', e.extent.toJson());
+/*
+                            $scope.$apply(function()
+                            {
 
-                            // TODO: get center x/y/spatialReference?
-                            // $scope.center = e.extent.getCenter().toJson();
+                            //safeApply($scope, function() {
+                                console.log("extent changed");
+                                var geoCenter, digits;
+                                $scope.zoom = map.getZoom();
+                                //digits = getLatLngSignificantDigits($scope.zoom);
 
-                            if (map.geographicExtent) {
-                                geoCenter = map.geographicExtent.getCenter();
-                                if ($scope.center.lng.toFixed(digits) !== geoCenter.x.toFixed(digits)) {
+                                // TODO: get center x/y/spatialReference?
+                                //$scope.center = e.extent.getCenter().toJson();
+
+                                if (map.geographicExtent) {
+                                    geoCenter = map.geographicExtent.getCenter();
                                     $scope.center.lng = geoCenter.x;
-                                }
-                                if ($scope.center.lat.toFixed(digits) !== geoCenter.y.toFixed(digits)) {
                                     $scope.center.lat = geoCenter.y;
                                 }
-                            }
-                            // if extent change handler defined, call it
-                            if ($attrs.extentChange) {
-                                $scope.extentChange()(e);
-                            }
-                        });
+
+                                // if extent change handler defined, call it
+                                if ($attrs.extentChange) {
+                                    $scope.extentChange()(e);
+                                }
+                            });
+                        //});
                         // $scope.$emit('mapExtentChange', e);
+                        */
                     });
 
                     // clean up
