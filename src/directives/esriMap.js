@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map', []).directive('esriMap', function($q, $timeout, $esriLoader) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader) {
 
         // don't apply if already in digest cycle
         // TODO: is there a better way to do this, since it's an anti-pattern:
@@ -86,7 +86,7 @@
                     mapOptions.basemap = $scope.basemap;
                 }
 
-                $esriLoader('esri/map').then(function(Map){
+                esriLoader('esri/map').then(function(Map){
 
                     // initialize map and resolve the deferred
                     var map = new Map($attrs.id, mapOptions);
