@@ -107,7 +107,8 @@
                         }
                     });
 
-                    $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenter,oldCenter)
+                    $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenterZoom,oldCenterZoom)
+                    // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom)
                     {
                         console.log("center/zoom changed", newCenterZoom, oldCenterZoom);
                         newCenterZoom = newCenterZoom.split(',');
