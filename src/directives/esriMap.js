@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader, esriRegistry) {
 
         // don't apply if already in digest cycle
         // TODO: is there a better way to do this, since it's an anti-pattern:
@@ -57,6 +57,9 @@
                 // only do this once per directive
                 // this deferred will be resolved with the map
                 var mapDeferred = $q.defer();
+
+                // add this map to the registry
+                esriRegistry._register($attrs.registerAs, mapDeferred);
 
                 // setup our map options based on the attributes and scope
                 var mapOptions = {};
