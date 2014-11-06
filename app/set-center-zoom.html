@@ -14,7 +14,10 @@
         <h2>Set Map Center and Zoom</h2>
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
         </esri-map>
-        <p>Lat: <input type="number" step="any" ng-model="map.center.lat" /> Lng: <input type="number" step="any" ng-model="map.center.lng" />, Zoom:
+        <p>
+            Lat: <input type="number" step="any" ng-model="map.center.lat" /> 
+            Lng: <input type="number" step="any" ng-model="map.center.lng" />, 
+            Zoom:
             <select ng-model="map.zoom">
                 <option>0</option>
                 <option>1</option>
@@ -44,7 +47,7 @@
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="scripts/angular-esri-map.js"></script>
         <!-- run example app controller -->
@@ -62,18 +65,19 @@
                     $scope.cities = {
                         SanFrancisco: {
                             lng: -122.45,
-                            lat: 37.75
+                            lat: 37.75,
+                            zoom: 10
                         },
                         NewYork: {
                             lng: -74.0059,
-                            lat: 40.7127
+                            lat: 40.7127,
+                            zoom: 12
                         }
                     }
                     $scope.zoomToCity = function(city){
                         $scope.map.center.lat = city.lat;
                         $scope.map.center.lng = city.lng;
-                        // TODO: why doesn't this work?
-                        // $scope.map.zoom = 12;
+                        $scope.map.zoom = city.zoom;
                     }
                 });
         </script>
