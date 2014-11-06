@@ -3,23 +3,6 @@
 
     angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader) {
 
-        // don't apply if already in digest cycle
-        // TODO: is there a better way to do this, since it's an anti-pattern:
-        // https://github.com/angular/angular.js/wiki/Anti-Patterns
-        function safeApply ($scope, fn) {
-            var phase = $scope.$root.$$phase;
-            if (phase === '$apply' || phase === '$digest') {
-                console.log('trying to apply in ' + phase);
-                $scope.$eval(fn);
-            } else {
-                $scope.$apply(fn);
-            }
-        }
-
-        function getLatLngSignificantDigits(zoom) {
-            return Math.max(Math.floor(zoom / 2) - 2, 0);
-        }
-
         return {
             // element only
             restrict: 'E',
@@ -107,31 +90,55 @@
                         }
                     });
 
+                    $scope.inEvent = false;
+
                     $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenterZoom,oldCenterZoom)
-                    // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom)
+                    // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
                     {
-                        console.log("center/zoom changed", newCenterZoom, oldCenterZoom);
+                        if( $scope.inEvent ) {                            
+                            return;
+                        }
+
+                        $scope.inEvent = true;  // prevent circular updates between $watch and $apply
+
+                        console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                         newCenterZoom = newCenterZoom.split(',');
-                        map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]);
+                        map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
+                        {
+                            console.log('after centerAndZoom()');
+                            $scope.inEvent = false;
+                        });
                     });
 
                     map.on('extent-change', function(e) 
                     {
-                        console.log('extent-change', e.extent.toJson());
-                        console.log('extent-change geo', map.geographicExtent);
+                        if( $scope.inEvent ) {                            
+                            return;
+                        }
 
-                        var geoCenter = map.geographicExtent.getCenter();
+                        $scope.inEvent = true;  // prevent circular updates between $watch and $apply
+
+                        console.log('extent-change geo', map.geographicExtent);
 
                         $scope.$apply(function()
                         {
+                            var geoCenter = map.geographicExtent.getCenter();
+
                             $scope.center.lng = geoCenter.x;
                             $scope.center.lat = geoCenter.y;
                             $scope.zoom = map.getZoom();
 
-                            if( $attrs.extentChange )
+                            // we might want to execute event handler even if $scope.inEvent is true
+                            if( $attrs.extentChange ) {                                
                                 $scope.extentChange()(e);
-                        });
+                            }
 
+                            $timeout(function(){ 
+                                // this will be executed after the $digest cycle
+                                console.log('after apply()'); 
+                                $scope.inEvent = false; 
+                            },0);
+                        });
                     });
 
                     // clean up
