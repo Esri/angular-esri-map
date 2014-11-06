@@ -47,6 +47,10 @@
           instance.reject(arg);
           return arg;
         });
+
+        return function(){
+          delete registry[name];
+        }
       },
 
       get: function(name){
@@ -132,7 +136,12 @@
                 var mapDeferred = $q.defer();
 
                 // add this map to the registry
-                esriRegistry._register($attrs.registerAs, mapDeferred);
+                if($attrs.registerAs){
+                    var deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
+
+                    // remove this from the registry when the scope is destroyed
+                    $scope.$on('$destroy', deregister);
+                }
 
                 // setup our map options based on the attributes and scope
                 var mapOptions = {};
