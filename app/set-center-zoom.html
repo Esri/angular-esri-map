@@ -19,26 +19,7 @@
             Lng: <input type="number" step="any" ng-model="map.center.lng" />, 
             Zoom:
             <select ng-model="map.zoom">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-                <option>13</option>
-                <option>14</option>
-                <option>15</option>
-                <option>16</option>
-                <option>17</option>
-                <option>18</option>
-                <option>19</option>
+                <option ng-repeat="level in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]">{{level}}</option>
             </select>
             <button ng-click="zoomToCity(cities.SanFrancisco)">San Francisco</button>
             <button ng-click="zoomToCity(cities.NewYork)">New York</button>
