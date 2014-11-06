@@ -88,8 +88,9 @@
             scope: {
                 // two-way binding for center/zoom
                 // because map pan/zoom can chnage these
-                center: '=',
-                zoom: '=',
+                center: '=?',
+                zoom: '=?',
+                itemInfo: '=?',
                 // one-way binding for other properties
                 basemap: '@',
                 // function binding for event handlers
@@ -132,7 +133,13 @@
                     {
                         arcgisUtils.createMap($attrs.webmapId,$attrs.id).then(function(response)
                         {
-                            mapDeferred.resolve(response.map);
+                            mapDeferred.resolve(response.map);                            
+
+                            var geoCenter = response.map.geographicExtent.getCenter();
+                            $scope.center.lng = geoCenter.x;
+                            $scope.center.lat = geoCenter.y;
+                            $scope.zoom = response.map.getZoom();
+                            $scope.itemInfo = response.itemInfo;
                         });                    
                     }
                     else
@@ -195,15 +202,17 @@
                                 return;
                             }
 
-                            $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
-
                             console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                             newCenterZoom = newCenterZoom.split(',');
-                            map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
-                            {
-                                console.log('after centerAndZoom()');
-                                $scope.inUpdateCycle = false;
-                            });
+                            if( newCenterZoom[0] !== "" && newCenterZoom[1] !== "" && newCenterZoom[2] !== "" )
+                            {                            
+                                $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
+                                map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
+                                {
+                                    console.log('after centerAndZoom()');
+                                    $scope.inUpdateCycle = false;
+                                });
+                            }
                         });
 
                         map.on('extent-change', function(e) 
