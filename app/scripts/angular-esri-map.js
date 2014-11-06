@@ -1,7 +1,6 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map', []).directive('esriMap', function($q, $timeout) {
     angular.module('esri.map', []);
 
     angular.module('esri.map').factory('esriLoader', function ($q) {
@@ -26,24 +25,6 @@
     'use strict';
 
     angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader) {
-    angular.module('esri.map', []).directive('esriMap', ["$q", "$timeout", function($q, $timeout) {
-
-        // don't apply if already in digest cycle
-        // TODO: is there a better way to do this, since it's an anti-pattern:
-        // https://github.com/angular/angular.js/wiki/Anti-Patterns
-        function safeApply ($scope, fn) {
-            var phase = $scope.$root.$$phase;
-            if (phase === '$apply' || phase === '$digest') {
-                void 0;
-                $scope.$eval(fn);
-            } else {
-                $scope.$apply(fn);
-            }
-        }
-
-        function getLatLngSignificantDigits(zoom) {
-            return Math.max(Math.floor(zoom / 2) - 2, 0);
-        }
 
         return {
             // element only
@@ -78,17 +59,13 @@
             },
 
             // directive api
-            controller: ["$scope", "$element", "$attrs", function($scope, $element, $attrs) {
+            controller: function($scope, $element, $attrs) {
                 // only do this once per directive
                 // this deferred will be resolved with the map
                 var mapDeferred = $q.defer();
 
                 // setup our map options based on the attributes and scope
                 var mapOptions = {};
-
-                var centerTimeout,
-                    tempCenterLat,
-                    tempCenterLng;
 
                 // center/zoom/extent
                 // check for convenience extent attribute
@@ -136,80 +113,55 @@
                         }
                     });
 
-/*
-                    $scope.$watch(function(scope) {
-                         console.log('function watched', scope.center);
-                         return scope.center && (scope.center.lat + ',' + scope.center.lng);
-                    }, function (newCenter, oldCenter) 
+                    $scope.inEvent = false;
+
+                    $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenterZoom,oldCenterZoom)
+                    // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
                     {
-                         console.log('centerAt',newCenter,map.geographicExtent.getCenter());
-                         $timeout(function(){ map.centerAt([newCenter.lng, newCenter.lat]) },0);
-                    });
-*/
+                        if( $scope.inEvent ) {                            
+                            return;
+                        }
 
-/**/
-                    $scope.$watch(function(scope){ return scope.center.lng + "," + scope.center.lat;}, function(newCenter,oldCenter)
+                        $scope.inEvent = true;  // prevent circular updates between $watch and $apply
+
+                        console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
+                        newCenterZoom = newCenterZoom.split(',');
+                        map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
+                        {
+                            console.log('after centerAndZoom()');
+                            $scope.inEvent = false;
+                        });
+                    });
+
+                    map.on('extent-change', function(e) 
                     {
-                        void 0;
-                        var lnglat = newCenter.split(',');
-                        map.centerAt([lnglat[0], lnglat[1]]);
-                    });
-//*/                    
-                    /*
-                    $scope.$watch('center.lng', function(newLng, oldLng) {
-                        console.log("center.lng changed",newLng,oldLng);
-                        var geoCenter = map.geographicExtent.getCenter();
-                        $timeout(function(){ map.centerAt([newLng, geoCenter.y]); },0);
-                    });
-                    $scope.$watch('center.lat', function(newLat, oldLat) {
-                        console.log("center.lat changed",newLat,oldLat);
-                        var geoCenter = map.geographicExtent.getCenter();
-                        $timeout(function(){ map.centerAt([geoCenter.x, newLat]); },0);
-                    });
-                    */
-                    $scope.$watch('zoom', function(newZoom, oldZoom) {
-                        void 0;
-                        map.setZoom(newZoom);
-                    });
+                        if( $scope.inEvent ) {                            
+                            return;
+                        }
 
-                    // // listen for map events and update scope
-                    // map.on('zoom-end', function(e) {
-                    //     console.log('zoom-end', e);
-                    //     safeApply($scope, function() {
-                    //         $scope.zoom = e.level;
-                    //     });
-                    // });
+                        $scope.inEvent = true;  // prevent circular updates between $watch and $apply
 
+                        console.log('extent-change geo', map.geographicExtent);
 
-                    map.on('extent-change', function(e) {
-                        void 0;
-/*
-                            $scope.$apply(function()
-                            {
+                        $scope.$apply(function()
+                        {
+                            var geoCenter = map.geographicExtent.getCenter();
 
-                            //safeApply($scope, function() {
-                                console.log("extent changed");
-                                var geoCenter, digits;
-                                $scope.zoom = map.getZoom();
-                                //digits = getLatLngSignificantDigits($scope.zoom);
+                            $scope.center.lng = geoCenter.x;
+                            $scope.center.lat = geoCenter.y;
+                            $scope.zoom = map.getZoom();
 
-                                // TODO: get center x/y/spatialReference?
-                                //$scope.center = e.extent.getCenter().toJson();
+                            // we might want to execute event handler even if $scope.inEvent is true
+                            if( $attrs.extentChange ) {                                
+                                $scope.extentChange()(e);
+                            }
 
-                                if (map.geographicExtent) {
-                                    geoCenter = map.geographicExtent.getCenter();
-                                    $scope.center.lng = geoCenter.x;
-                                    $scope.center.lat = geoCenter.y;
-                                }
-
-                                // if extent change handler defined, call it
-                                if ($attrs.extentChange) {
-                                    $scope.extentChange()(e);
-                                }
-                            });
-                        //});
-                        // $scope.$emit('mapExtentChange', e);
-                        */
+                            $timeout(function(){ 
+                                // this will be executed after the $digest cycle
+                                console.log('after apply()'); 
+                                $scope.inEvent = false; 
+                            },0);
+                        });
                     });
 
                     // clean up
@@ -244,16 +196,16 @@
                 this.getLayerInfos = function() {
                     return this.layerInfos;
                 };
-            }]
+            }
         };
-    }]);
+    });
 
 })(angular);
 
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriFeatureLayer', ["$q", function ($q) {
+    angular.module('esri.map').directive('esriFeatureLayer', function ($q) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
@@ -268,7 +220,7 @@
             replace: true,
 
             // define an interface for working with this directive
-            controller: ["$scope", "$element", "$attrs", function ($scope, $element, $attrs) {
+            controller: function ($scope, $element, $attrs) {
                 var layerDeferred = $q.defer();
 
                 require([
@@ -282,7 +234,7 @@
                 this.getLayer = function () {
                     return layerDeferred.promise;
                 };
-            }],
+            },
 
             // now we can link our directive to the scope, but we can also add it to the map..
             link: function (scope, element, attrs, controllers) {
@@ -307,7 +259,7 @@
                 });
             }
         };
-    }]);
+    });
 
 })(angular);
 
@@ -321,7 +273,7 @@
      * # esriLegend
      */
     angular.module('esri.map')
-      .directive('esriLegend', ["$document", "$q", function ($document, $q) {
+      .directive('esriLegend', function ($document, $q) {
         return {
           //run last
           priority: -10,
@@ -366,6 +318,6 @@
             });
           }
         };
-      }]);
+      });
 
 })(angular);
