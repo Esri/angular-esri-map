@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="esri-webmap-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Webmap Example</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Webmap Example</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <esri-map id="map" webmap-id="4778fee6371d4e83a22786029f30c7e1" center="map.center" zoom="map.zoom">
+        </esri-map>
+        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_simple.html">this sample</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="scripts/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-webmap-example', ['esri.map'])
+                .controller('MapController', function ($scope) {
+                    $scope.map = {
+                        center: {
+                            lng: -122.45,
+                            lat: 37.75
+                        },
+                        zoom: 13
+                    };
+                });
+        </script>
+    </body>
+</html>
