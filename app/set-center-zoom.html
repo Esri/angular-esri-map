@@ -15,8 +15,8 @@
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
         </esri-map>
         <p>
-            Lat: <input type="number" step="any" ng-model="map.center.lat" ng-model-options="{updateOn:'blur', debounce: 100}" /> 
-            Lng: <input type="number" step="any" ng-model="map.center.lng" ng-model-options="{updateOn:'blur', debounce: 100}" />, 
+            Lat: <input type="number" step="any" ng-model="map.center.lat" /> 
+            Lng: <input type="number" step="any" ng-model="map.center.lng" />, 
             Zoom:
             <select ng-model="map.zoom">
                 <option>0</option>
@@ -47,7 +47,6 @@
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.5/angular.js"></script> -->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="scripts/angular-esri-map.js"></script>
