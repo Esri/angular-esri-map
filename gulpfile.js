@@ -10,6 +10,7 @@ var stripDebug = require('gulp-strip-debug');
 var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
+var deploy = require('gulp-gh-pages');
 
 var srcJsFiles = 'src/**/*.js';
 
@@ -39,7 +40,6 @@ gulp.task('build-js', function() {
     .pipe(uglify())
     .pipe(rename('angular-esri-map.min.js'))
     .pipe(gulp.dest('dist'))
-    .pipe(gulp.dest('app/scripts'))
     .on('error', gutil.log);
 });
 
@@ -59,6 +59,13 @@ gulp.task('serve', function() {
   });
 
   gulp.watch([srcJsFiles,'./app/*.html','./app/styles/*.css'], ['build', browserSync.reload ]);
+});
+
+gulp.task('deploy', ['build'], function () {
+  return gulp.src('./app/**/*')
+    .pipe(deploy({
+      push: true // dry run
+    }));
 });
 
 // Default Task

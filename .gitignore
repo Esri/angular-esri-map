@@ -1,3 +1,6 @@
+# built files under app folder
+app/scripts
+
 # Logs
 logs
 *.log

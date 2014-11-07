@@ -4,7 +4,7 @@ angular-esri-map
 A collection of directives to help you use Esri maps and services in an Angular app
 
 ### Demos
-Here are [a few demos](http://esri.github.io/angular-esri-map/app/index.html) showing how to use this module to bring Esri maps into your own Angular applications.
+Here are [a few demos](http://esri.github.io/angular-esri-map/) showing how to use this module to bring Esri maps into your own Angular applications.
 
 ### Example
 Here is a quick example to get you started. Just change the paths to point to the proper libraries and go.
