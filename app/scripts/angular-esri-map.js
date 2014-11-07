@@ -50,7 +50,7 @@
 
         return function(){
           delete registry[name];
-        }
+        };
       },
 
       get: function(name){
@@ -204,7 +204,7 @@
 
                             console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                             newCenterZoom = newCenterZoom.split(',');
-                            if( newCenterZoom[0] !== "" && newCenterZoom[1] !== "" && newCenterZoom[2] !== "" )
+                            if( newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '' )
                             {                            
                                 $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
                                 map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()

@@ -27,7 +27,7 @@
 
         return function(){
           delete registry[name];
-        }
+        };
       },
 
       get: function(name){
