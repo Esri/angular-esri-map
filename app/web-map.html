@@ -5,6 +5,8 @@
         <meta charset="utf-8">
         <title>Webmap Example</title>
 
+        <!-- dijit theme only needed for chart tooltip in popup in this web map -->
+        <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
         <!-- load Esri CSS -->
         <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
         <style>
@@ -14,13 +16,13 @@
         }
         </style>
     </head>
-    <body ng-controller="MapController">
+    <body ng-controller="MapController" class="claro">
         <h2>Webmap Example: {{itemInfo.item.title}}
             <small>
             <a ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">
                 <span ng-show="isCollapsed">+info</span>
                 <span ng-hide="isCollapsed">hide</span>
-            </a>        
+            </a>
             </small>
         </h2>
         <div ng-hide="isCollapsed" ng-bind-html="itemInfo.item.snippet"></div>
@@ -31,7 +33,7 @@
         <div>
             <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
         </div>
-
+        <p>Compare with <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
