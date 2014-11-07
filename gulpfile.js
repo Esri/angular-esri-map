@@ -63,8 +63,13 @@ gulp.task('serve', function() {
 
 gulp.task('deploy', ['build'], function () {
   return gulp.src('./app/**/*')
+    .pipe(deploy());
+});
+
+gulp.task('deploy-prod', ['build'], function () {
+  return gulp.src('./app/**/*')
     .pipe(deploy({
-      push: true // dry run
+      remoteUrl: 'https://github.com/Esri/angular-esri-map.git'
     }));
 });
 
