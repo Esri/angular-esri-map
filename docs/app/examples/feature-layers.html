@@ -1,0 +1,8 @@
+<h2>Feature Layers Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+    <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
+    <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
+</esri-map>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+<p>Based on <a href="http://jsfiddle.net/patrickarlt/xy3nm1sq/1/">this JS Fiddle</a>.</p>

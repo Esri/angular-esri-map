@@ -1,0 +1,7 @@
+<h2>Map Events Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" register-as="myMap" center="map.center" zoom="map.zoom" basemap="topo" load="mapLoaded" extent-change="extentChanged">
+</esri-map>
+<p>The map is
+    <strong ng-show="!map.loaded">not</strong>loaded.</p>
+<p>Extent: {{ map.extent.toJson() }}</p>

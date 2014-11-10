@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-docs">
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Angular Esri Map</title>
+
+    <!-- load bootstrap css -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/narrow.css">
+    <!-- load Esri CSS -->
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    <!-- dijit theme only needed for chart tooltip in popup in this web map -->
+    <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
+    <!-- custom styles for this app -->
+    <style type="text/css">
+    .jumbotron {
+        background: #091926 url('images/jumbotron-background.jpg') no-repeat right;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body class="claro">
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right" role="tablist">
+                <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
+                </li>
+                <li role="presentation" ng-class="{ active: page === 'about' }"><a ng-href="#/about">About</a>
+                </li>
+                <li role="presentation"><a href="http://github.com/esri/angular-esri-map">GitHub</a>
+                </li>
+            </ul>
+            <h3 class="text-muted">angular-esri-map</h3>
+        </div>
+        <div ng-view=""></div>
+        <div class="footer">
+            <p>
+                <span class="glyphicon glyphicon-heart"></span>from Esri</p>
+        </div>
+    </div>
+    <!-- /container -->
+    <!-- load Esri JavaScript API -->
+    <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+    <!-- load Angular -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+    <!-- load angular-esri-map module -->
+    <script src="lib/angular-esri-map.js"></script>
+    <!-- load this app -->
+    <script type="text/javascript" src="app/app.js"></script>
+    <!-- <script type="text/javascript" src="app/home/home.js"></script> -->
+    <script type="text/javascript" src="app/examples/examples.js"></script>
+    <script type="text/javascript" src="app/examples/simple-map.js"></script>
+    <script type="text/javascript" src="app/examples/web-map.js"></script>
+    <script type="text/javascript" src="app/examples/feature-layers.js"></script>
+    <script type="text/javascript" src="app/examples/legend.js"></script>
+    <script type="text/javascript" src="app/examples/basemap.js"></script>
+    <script type="text/javascript" src="app/examples/center-and-zoom.js"></script>
+    <script type="text/javascript" src="app/examples/map-events.js"></script>
+    <script type="text/javascript" src="app/about/about.js"></script>
+</body>
+
+</html>

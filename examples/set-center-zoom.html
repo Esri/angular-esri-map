@@ -15,8 +15,8 @@
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
         </esri-map>
         <p>
-            Lat: <input type="number" step="any" ng-model="map.center.lat" /> 
-            Lng: <input type="number" step="any" ng-model="map.center.lng" />, 
+            Lat: <input type="number" step="any" ng-model="map.center.lat" />
+            Lng: <input type="number" step="any" ng-model="map.center.lng" />,
             Zoom:
             <select ng-model="map.zoom">
                 <option ng-repeat="level in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]">{{level}}</option>
@@ -30,7 +30,7 @@
         <!-- load Angular -->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
         <!-- load angular-esri-map directives -->
-        <script src="scripts/angular-esri-map.js"></script>
+        <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
@@ -54,12 +54,12 @@
                             lat: 40.7127,
                             zoom: 12
                         }
-                    }
+                    };
                     $scope.zoomToCity = function(city){
                         $scope.map.center.lat = city.lat;
                         $scope.map.center.lng = city.lng;
                         $scope.map.zoom = city.zoom;
-                    }
+                    };
                 });
         </script>
     </body>

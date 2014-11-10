@@ -33,14 +33,14 @@
         <div>
             <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
         </div>
-        <p>Compare with <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
         <!-- load angular-esri-map directives -->
-        <script src="scripts/angular-esri-map.js"></script>
+        <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
         <script type="text/javascript">
             angular.module('esri-webmap-example', ['esri.map', 'ngSanitize'])

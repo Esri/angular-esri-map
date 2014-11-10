@@ -1,0 +1,13 @@
+<h2>Set Map Center and Zoom</h2>
+<esri-map id="map" center="map.center" zoom="map.zoom" basemap="{{map.basemap}}">
+</esri-map>
+<p>
+    Lat:
+    <input type="number" step="any" ng-model="map.center.lat" />Lng:
+    <input type="number" step="any" ng-model="map.center.lng" />, Zoom:
+    <select ng-model="map.zoom">
+        <option ng-repeat="level in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]">{{level}}</option>
+    </select>
+    <button ng-click="zoomToCity(cities.SanFrancisco)">San Francisco</button>
+    <button ng-click="zoomToCity(cities.NewYork)">New York</button>
+</p>
