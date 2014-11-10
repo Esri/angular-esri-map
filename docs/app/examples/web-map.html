@@ -1,0 +1,17 @@
+<h2>Webmap Example: {{itemInfo.item.title}}
+    <small>
+        <a ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">
+            <span ng-show="isCollapsed">+info</span>
+            <span ng-hide="isCollapsed">hide</span>
+        </a>
+    </small>
+</h2>
+<div ng-hide="isCollapsed" ng-bind-html="itemInfo.item.snippet"></div>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" register-as="myMap" webmap-id="4778fee6371d4e83a22786029f30c7e1" center="map.center" zoom="map.zoom" item-info="itemInfo">
+</esri-map>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+<p>
+    <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
+</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>

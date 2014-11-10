@@ -12,19 +12,25 @@ var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var deploy = require('gulp-gh-pages');
 
+// source directives and services
 var srcJsFiles = 'src/**/*.js';
 
+// lint source javascript files
 gulp.task('lint', function() {
   return gulp.src(srcJsFiles)
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
+// clean built copies of javascript files
+// from dist folder and docs
 gulp.task('clean', function() {
-  return gulp.src(['dist', 'app/scripts'])
+  return gulp.src(['dist', 'docs/lib'])
     .pipe(clean({force: true}));
 });
 
+// concatenate and minify source javascript files
+// and copy into dist folder and docs
 gulp.task('build-js', function() {
   return gulp.src([
     'src/services/esriLoader.js',
@@ -34,7 +40,7 @@ gulp.task('build-js', function() {
     'src/directives/esriLegend.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
-    .pipe(gulp.dest('app/scripts'))
+    .pipe(gulp.dest('docs/lib'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(uglify())
@@ -43,35 +49,39 @@ gulp.task('build-js', function() {
     .on('error', gutil.log);
 });
 
+// lint then clean and build javascript
 gulp.task('build', function(callback) {
   runSequence('lint', 'clean', 'build-js', callback);
 });
 
-gulp.task('serve', function() {
+// serve docs on local web server
+// and reload anytime source code or docs are modified
+gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: 'app',
-      directory: false
+      baseDir: ['docs', 'examples']
     },
     open: true,
     port: 9002,
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./app/*.html','./app/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./docs/**.*.html', './docs/app/**/*.js', './docs/styles/*.css'], ['build', browserSync.reload ]);
 });
 
+// deploy to github pages
 gulp.task('deploy', ['build'], function () {
-  return gulp.src('./app/**/*')
+  return gulp.src('./docs/**/*')
     .pipe(deploy());
 });
 
+// deploy to Esri's github pages
 gulp.task('deploy-prod', ['build'], function () {
-  return gulp.src('./app/**/*')
+  return gulp.src('./docs/**/*')
     .pipe(deploy({
       remoteUrl: 'https://github.com/Esri/angular-esri-map.git'
     }));
 });
 
 // Default Task
-//gulp.task('default', ['build', 'serve']);
+gulp.task('default', ['serve']);

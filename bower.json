@@ -8,7 +8,7 @@
     "Matt Priour <mpriour@esr.com> (https://github.com/mpriour)",
     "Tom Wayson <twayson@esri.com> (http://tomwayson.com)"
   ],
-  "description": "A collection of directives to help you use Esri maps and services in your Angular apps",
+  "description": "A collection of directives to help you use Esri maps and services in your Angular applications",
   "main": ["dist/angular-esri-map.js", "angular-esri-map.min.js"],
   "keywords": [
     "Angular",
