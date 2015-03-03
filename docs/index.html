@@ -11,8 +11,6 @@
     <link rel="stylesheet" type="text/css" href="styles/narrow.css">
     <!-- load Esri CSS -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
-    <!-- dijit theme only needed for chart tooltip in popup in this web map -->
-    <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
     <!-- custom styles for this app -->
     <style type="text/css">
     .jumbotron {
@@ -22,7 +20,7 @@
     </style>
 </head>
 
-<body class="claro">
+<body>
     <div class="container">
         <div class="header">
             <ul class="nav nav-pills pull-right" role="tablist">
@@ -37,11 +35,9 @@
         </div>
         <div ng-view=""></div>
         <div class="footer">
-            <p>
-                <span class="glyphicon glyphicon-heart"></span>from Esri</p>
+            <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
         </div>
-    </div>
-    <!-- /container -->
+    </div><!-- /container -->
     <!-- load Esri JavaScript API -->
     <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
     <!-- load Angular -->
