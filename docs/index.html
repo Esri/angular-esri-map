@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="styles/narrow.css">
 
     <!-- code snippet syntax highlighting -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
 
     <!-- load Esri CSS -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
@@ -28,6 +28,14 @@
         .tab-container {
             padding-top: 1em;
         }
+
+        /* overrides for narrow theme */
+        @media (min-width: 768px) {
+          .container {
+            max-width: 950px;
+          }
+        }
+
     </style>
 </head>
 
