@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('esri-map-docs')
-    .controller('BasemapCtrl', function($scope) {
-        $scope.$parent.page = 'examples';
+    .controller('BasemapCtrl', function($scope, $route) {
         $scope.map = {
             center: {
                 lng: -31.036,

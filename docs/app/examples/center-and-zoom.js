@@ -2,7 +2,6 @@
 
 angular.module('esri-map-docs')
     .controller('CenterAndZoomCtrl', function($scope) {
-        $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
                 lng: -122.45,
@@ -27,5 +26,5 @@ angular.module('esri-map-docs')
             $scope.map.center.lat = city.lat;
             $scope.map.center.lng = city.lng;
             $scope.map.zoom = city.zoom;
-        }
+        };
     });

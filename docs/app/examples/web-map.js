@@ -2,7 +2,6 @@
 
 angular.module('esri-map-docs')
     .controller('WebMapCtrl', function($scope, esriLoader, esriRegistry) {
-        $scope.$parent.page = 'examples';
         $scope.map = {
             center: {
                 lng: -122.6819,
