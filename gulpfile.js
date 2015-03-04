@@ -59,7 +59,7 @@ gulp.task('build', function(callback) {
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: ['docs', 'examples']
+      baseDir: ['docs', 'test']
     },
     open: true,
     port: 9002,
