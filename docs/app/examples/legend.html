@@ -1,7 +1,7 @@
 <h2>Legend Example</h2>
 <!-- add map to page and bind to scope map parameters -->
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-xs-8 col-sm-9 col-lg-10">
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo" style="width: 100%">
             <esri-feature-layer title="Rivers" url="http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/MapServer/1"></esri-feature-layer>
             <esri-feature-layer title="Water Bodies" url="http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/MapServer/0"></esri-feature-layer>
@@ -10,7 +10,7 @@
         <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/widget_legend.html">this sample</a>.</p>
     </div>
-    <div class="col-md-3">
+    <div class="col-xs-4 col-sm-3 col-lg-2">
         <div id="legend"></div>
     </div>
 </div>
