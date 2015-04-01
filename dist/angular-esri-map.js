@@ -75,6 +75,14 @@
   });
 
 })(angular);
+/*
+    Changes made by Edwin Sheldon (eas604@github) per Apache license:
+    Added support for the following ESRI JavaScript API attributes for the map constructor:
+        attributionWidth, autoResize, displayGraphicsOnPan, fadeOnZoom, fitExtent, force3DTransforms,
+        logo, maxScale, maxZoom, minScale, minZoom, nav, navigationMode, optimizePanAnimation,
+        resizeDelay, scale, showAttribution, showInfoWindowOnClick, slider, sliderOrientation,
+        sliderPosition, sliderStyle, smartNavigation, wrapAround180
+ */
 (function(angular) {
     'use strict';
 
@@ -84,10 +92,10 @@
             // element only
             restrict: 'E',
 
-            // isoloate scope
+            // isolate scope
             scope: {
                 // two-way binding for center/zoom
-                // because map pan/zoom can chnage these
+                // because map pan/zoom can change these
                 center: '=?',
                 zoom: '=?',
                 itemInfo: '=?',
@@ -133,14 +141,14 @@
                     {
                         arcgisUtils.createMap($attrs.webmapId,$attrs.id).then(function(response)
                         {
-                            mapDeferred.resolve(response.map);                            
+                            mapDeferred.resolve(response.map);
 
                             var geoCenter = response.map.geographicExtent.getCenter();
                             $scope.center.lng = geoCenter.x;
                             $scope.center.lat = geoCenter.y;
                             $scope.zoom = response.map.getZoom();
                             $scope.itemInfo = response.itemInfo;
-                        });                    
+                        });
                     }
                     else
                     {
@@ -167,6 +175,64 @@
                         if ($scope.basemap) {
                             mapOptions.basemap = $scope.basemap;
                         }
+
+                        // strings
+                        if ($attrs.navigationMode) {
+                            if ($attrs.navigationMode !== 'css-transforms' && $attrs.navigationMode !== 'classic') {
+                                throw new Error('navigationMode must be \'css-transforms\' or \'classic\'.');
+                            } else {
+                                mapOptions.navigationMode = $attrs.navigationMode;
+                            }
+                        }
+
+                        if ($attrs.sliderOrientation) {
+                            if ($attrs.sliderOrientation !== 'horizontal' && $attrs.sliderOrientation !== 'vertical') {
+                                throw new Error('sliderOrientation must be \'horizontal\' or \'vertical\'.');
+                            } else {
+                                mapOptions.sliderOrientation = $attrs.sliderOrientation;
+                            }
+                        }
+
+                        if ($attrs.sliderPosition) {
+                            var allowed = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
+                            if (allowed.indexOf($attrs.sliderPosition) < 0) {
+                                throw new Error('sliderPosition must be in ' + allowed);
+                            } else {
+                                mapOptions.sliderPosition = $attrs.sliderPosition;
+                            }
+                        }
+
+                        // This attribute does not seem to have any effect on the underlying map slider.
+                        // Not sure if it is being passed to the API correctly.
+                        if ($attrs.sliderStyle) {
+                            if ($attrs.sliderStyle !== 'large' && $attrs.sliderStyle !== 'small') {
+                                throw new Error('sliderStyle must be \'large\' or \'small\'.');
+                            } else {
+                                mapOptions.sliderStyle = $attrs.sliderStyle;
+                            }
+                        }
+
+                        // booleans
+                        var bools = [
+                            'autoResize', 'displayGraphicsOnPan', 'fadeOnZoom', 'fitExtent', 'force3DTransforms',
+                            'logo', 'nav', 'optimizePanAnimation', 'showAttribution', 'showInfoWindowOnClick',
+                            'slider', 'smartNavigation', 'wrapAround180'
+                        ];
+                        angular.forEach(bools, function (key) {
+                            if (typeof $attrs[key] !== 'undefined') {
+                                mapOptions[key] = $attrs[key].toString() === 'true';
+                            }
+                        });
+
+                        // numeric attributes
+                        var numeric = [
+                            'attributionWidth', 'maxScale', 'maxZoom', 'minScale', 'minZoom', 'resizeDelay', 'scale'
+                        ];
+                        angular.forEach(numeric, function (key) {
+                            if ($attrs[key]) {
+                                mapOptions[key] = $attrs[key];
+                            }
+                        });
 
                         // initialize map and resolve the deferred
                         var map = new Map($attrs.id, mapOptions);
@@ -198,14 +264,14 @@
                         $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenterZoom,oldCenterZoom)
                         // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
                         {
-                            if( $scope.inUpdateCycle ) {                            
+                            if( $scope.inUpdateCycle ) {
                                 return;
                             }
 
                             console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                             newCenterZoom = newCenterZoom.split(',');
                             if( newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '' )
-                            {                            
+                            {
                                 $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
                                 map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
                                 {
@@ -215,9 +281,9 @@
                             }
                         });
 
-                        map.on('extent-change', function(e) 
+                        map.on('extent-change', function(e)
                         {
-                            if( $scope.inUpdateCycle ) {                            
+                            if( $scope.inUpdateCycle ) {
                                 return;
                             }
 
@@ -234,14 +300,14 @@
                                 $scope.zoom = map.getZoom();
 
                                 // we might want to execute event handler even if $scope.inUpdateCycle is true
-                                if( $attrs.extentChange ) {                                
+                                if( $attrs.extentChange ) {
                                     $scope.extentChange()(e);
                                 }
 
-                                $timeout(function(){ 
+                                $timeout(function(){
                                     // this will be executed after the $digest cycle
-                                    console.log('after apply()'); 
-                                    $scope.inUpdateCycle = false; 
+                                    console.log('after apply()');
+                                    $scope.inUpdateCycle = false;
                                 },0);
                             });
                         });
