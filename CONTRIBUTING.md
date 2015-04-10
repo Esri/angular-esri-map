@@ -2,9 +2,9 @@ Esri welcomes contributions from anyone and everyone. Please see our [guidelines
 
 ### Before filing an issue
 
-Please look through both the open and closed [issues](https://github.com/Esri/angular-esri-map/issues) to see if others have had the same issue.
+Please look through both the open and closed [existing issues](https://github.com/Esri/angular-esri-map/issues) as well as the angular-esri-map discussons on [GeoNet](https://geonet.esri.com/tags/#/?tags=angular-esri-map) and [GIS Stackexchange](http://gis.stackexchange.com/questions/tagged/angular-esri-map) to see if anyone else has experienced (and maybe even solved) a similar issue.
 
-If you're just looking for help, you'll probably attract the most eyes if you post in the [ArcGIS API for JavaScript place](https://geonet.esri.com/discussion/create.jspa?containerType=14&containerID=2128&question=true&tags=angular-esri-map,angularjs) on GeoNet, and/or on [GIS Stackexchange](http://gis.stackexchange.com/questions/ask?tags=angular-esri-map,arcgis-javascript-api,angularjs). Either way, *be sure to include the* ***angular-esri-map*** *tag* so that it gets seen by contributors to this repo.
+If you don't find anything there, and you're just looking for help, you'll probably attract the most eyes if you post in the [ArcGIS API for JavaScript place](https://geonet.esri.com/discussion/create.jspa?containerType=14&containerID=2128&question=true&tags=angular-esri-map,angularjs) on GeoNet, and/or on [GIS Stackexchange](http://gis.stackexchange.com/questions/ask?tags=angular-esri-map,arcgis-javascript-api,angularjs). Either way, *be sure to include the* ***angular-esri-map*** *tag* so that it gets seen by contributors to this repo.
 
 If you think you're encountering a new bug, please feel free to log an [issue](https://github.com/Esri/angular-esri-map/issues/new) and include the steps to reproduce the problem (and preferably a running sample).
 
