@@ -78,7 +78,8 @@
     </div><!-- /container -->
 
     <!-- load Esri JavaScript API -->
-    <script type="text/javascript" src="http://js.arcgis.com/3.12compact"></script>
+    <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
+    <script defer type="text/javascript" src="http://js.arcgis.com/3.12compact"></script>
 
     <!-- load Angular -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
