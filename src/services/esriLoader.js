@@ -6,16 +6,21 @@
     angular.module('esri.map').factory('esriLoader', function ($q) {
         return function(moduleName){
             var deferred = $q.defer();
-
-            require([moduleName], function(module){
-                if(module){
-                    deferred.resolve(module);
-                } else {
-                    deferred.reject('Couldn\'t load ' + moduleName);
-                }
-            });
-
+            if (angular.isString(moduleName)) {
+                require([moduleName], function (obj) {
+                    deferred.resolve(obj);
+                });
+            }
+            else if (angular.isArray(moduleName)) {
+                require(moduleName, function (obj) {
+                    deferred.resolve(arguments);
+                });
+            }
+            else {
+                deferred.reject('An Array<String> or String is required to load modules.')
+            }
             return deferred.promise;
+
         };
     });
 
