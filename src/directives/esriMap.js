@@ -9,7 +9,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader, esriRegistry) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
 
         return {
             // element only

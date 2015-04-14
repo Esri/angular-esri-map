@@ -6,16 +6,21 @@
     angular.module('esri.map').factory('esriLoader', function ($q) {
         return function(moduleName){
             var deferred = $q.defer();
-
-            require([moduleName], function(module){
-                if(module){
+            if (angular.isString(moduleName)) {
+                require([moduleName], function (module) {
                     deferred.resolve(module);
-                } else {
-                    deferred.reject('Couldn\'t load ' + moduleName);
-                }
-            });
-
+                });
+            }
+            else if (angular.isArray(moduleName)) {
+                require(moduleName, function (modules) {
+                    deferred.resolve(modules);
+                });
+            }
+            else {
+                deferred.reject('An Array<String> or String is required to load modules.');
+            }
             return deferred.promise;
+
         };
     });
 
@@ -86,7 +91,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriLoader, esriRegistry) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
 
         return {
             // element only

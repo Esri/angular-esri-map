@@ -7,17 +7,17 @@
         return function(moduleName){
             var deferred = $q.defer();
             if (angular.isString(moduleName)) {
-                require([moduleName], function (obj) {
-                    deferred.resolve(obj);
+                require([moduleName], function (module) {
+                    deferred.resolve(module);
                 });
             }
             else if (angular.isArray(moduleName)) {
-                require(moduleName, function (obj) {
-                    deferred.resolve(arguments);
+                require(moduleName, function (modules) {
+                    deferred.resolve(modules);
                 });
             }
             else {
-                deferred.reject('An Array<String> or String is required to load modules.')
+                deferred.reject('An Array<String> or String is required to load modules.');
             }
             return deferred.promise;
 

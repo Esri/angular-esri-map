@@ -1,6 +1,6 @@
 {
   "name": "angular-esri-map",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "description": "A collection of directives to help you use Esri maps and services in your Angular applications",
   "main": "dist/angular-esri-map.js",
   "directories": {
