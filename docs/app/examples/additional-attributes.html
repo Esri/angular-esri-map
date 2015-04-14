@@ -1,0 +1,24 @@
+<h2>Additional Attributes Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<div style="width: 800px">
+    <div style="width: 600px; float:left;">
+        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo" style="width: 100%"
+            max-zoom="{{map.maxZoom}}" min-zoom="{{map.minZoom}}" resize-delay="{{map.resizeDelay}}"
+            navigation-mode="{{map.navigationMode}}" slider-orientation="{{map.sliderOrientation}}"
+            slider-position="{{map.sliderPosition}}" display-graphics-on-pan="{{map.displayGraphicsOnPan}}"
+            fade-on-zoom="{{map.fadeOnZoom}}" logo="{{map.logo}}" wrap-around180="{{map.wrapAround180}}">
+          <esri-feature-layer title="Rivers" url="http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/MapServer/1"></esri-feature-layer>
+          <esri-feature-layer title="Water Bodies" url="http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Hydrography/Watershed173811/MapServer/0"></esri-feature-layer>
+          <div esri-legend target-id="legend"></div>
+        </esri-map>
+        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+        <p>Min Zoom: {{map.minZoom}}, Max Zoom: {{map.maxZoom}}, Resize Delay: {{map.resizeDelay}}ms,
+        Navigation Mode: {{map.navigationMode}}</p>
+        <p>Slider Orientation: {{map.sliderOrientation}}, Slider Position: {{map.sliderPosition}}, Display
+        Graphics on Pan: {{map.displayGraphicsOnPan}}</p>
+        <p>Fade on Zoom: {{map.fadeOnZoom}}, Logo: {{map.logo}}, Wrap Around 180: {{map.wrapAround180}}</p>
+    </div>
+    <div style="width: 200px; float: right;">
+        <div id="legend"></div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<h2>Registry Pattern Example</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" register-as="myMap" center="map.center" zoom="map.zoom" basemap="topo">
+</esri-map>
+<p ng-show="!map.point">Click the map to see point X / Y.</p>
+<p ng-show="map.point">Clicked point X: {{ map.point.x }}, Y: {{ map.point.y }}</p>
