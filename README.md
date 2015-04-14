@@ -29,7 +29,7 @@ Once you've added the module to your application, you can use the sample code be
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.12/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
     <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
@@ -37,7 +37,7 @@ Once you've added the module to your application, you can use the sample code be
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.12compact"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
