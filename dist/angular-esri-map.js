@@ -87,6 +87,8 @@
         logo, maxScale, maxZoom, minScale, minZoom, nav, navigationMode, optimizePanAnimation,
         resizeDelay, scale, showAttribution, showInfoWindowOnClick, slider, sliderOrientation,
         sliderPosition, sliderStyle, smartNavigation, wrapAround180
+
+    Added removeLayer function so layers can be removed from map.
  */
 (function(angular) {
     'use strict';
@@ -337,6 +339,13 @@
                     });
                 };
 
+                // support removing layers, e.g. when esriFeatureLayer goes out of scope
+                this.removeLayer = function (layer) {
+                    return this.getMap().then(function (map) {
+                        return map.removeLayer(layer);
+                    });
+                };
+
                 // array to store layer info, needed for legend
                 // TODO: is this the right place for this?
                 // can it be done on the legend directive itself?
@@ -356,6 +365,10 @@
 
 })(angular);
 
+/*
+    Added support for layer in the scope so the layer can be added/removed dynamically,
+    e.g. in ng-repeat directives
+ */
 (function(angular) {
     'use strict';
 
@@ -373,13 +386,18 @@
             // since we aren't declaring a template this essentially destroys the element
             replace: true,
 
+            // isolate scope for feature layer so it can be added/removed dynamically
+            scope: {
+                url: '@'
+            },
+
             // define an interface for working with this directive
-            controller: function ($scope, $element, $attrs) {
+            controller: function ($scope) {
                 var layerDeferred = $q.defer();
 
                 require([
                     'esri/layers/FeatureLayer'], function (FeatureLayer) {
-                    var layer = new FeatureLayer($attrs.url);
+                    var layer = new FeatureLayer($scope.url);
 
                     layerDeferred.resolve(layer);
                 });
@@ -406,6 +424,11 @@
                       layer: layer,
                       hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
                       defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
+                    });
+
+                    // Remove the layer from the map when the layer scope is destroyed
+                    scope.$on('$destroy', function () {
+                        mapController.removeLayer(layer);
                     });
 
                     // return the layer

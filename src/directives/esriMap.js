@@ -5,6 +5,8 @@
         logo, maxScale, maxZoom, minScale, minZoom, nav, navigationMode, optimizePanAnimation,
         resizeDelay, scale, showAttribution, showInfoWindowOnClick, slider, sliderOrientation,
         sliderPosition, sliderStyle, smartNavigation, wrapAround180
+
+    Added removeLayer function so layers can be removed from map.
  */
 (function(angular) {
     'use strict';
@@ -252,6 +254,13 @@
                 this.addLayer = function(layer) {
                     return this.getMap().then(function(map) {
                         return map.addLayer(layer);
+                    });
+                };
+
+                // support removing layers, e.g. when esriFeatureLayer goes out of scope
+                this.removeLayer = function (layer) {
+                    return this.getMap().then(function (map) {
+                        return map.removeLayer(layer);
                     });
                 };
 
