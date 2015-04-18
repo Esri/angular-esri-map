@@ -1,11 +1,11 @@
-(function(angular) {
+(function (angular) {
     'use strict';
     // NOTE: ngSelect and hljs are only included to support
     // tabs that dynamically load code and highlight syntax
     // see: https://github.com/pc035860/angular-highlightjs#demos
     angular
         .module('esri-map-docs', ['ngRoute', 'ngSanitize', 'ngSelect', 'hljs', 'esri.map'])
-        .config(function($routeProvider) {
+        .config(function ($routeProvider) {
             $routeProvider
             .when('/examples', {
                 templateUrl: 'app/examples/examples.html',
@@ -18,6 +18,10 @@
             .when('/examples/feature-layers', {
                 templateUrl: 'app/examples/feature-layers.html',
                 controller: 'FeatureLayersCtrl'
+            })
+            .when('/examples/dynamic-map-service-layers', {
+                templateUrl: 'app/examples/dynamic-map-service-layers.html',
+                controller: 'DynamicMapServiceLayersCtrl'
             })
             .when('/examples/web-map', {
                 templateUrl: 'app/examples/web-map.html',
