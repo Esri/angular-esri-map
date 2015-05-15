@@ -25,12 +25,17 @@
             },
 
             // define an interface for working with this directive
-            controller: function ($scope) {
+            controller: function ($scope, $element, $attrs) {
                 var layerDeferred = $q.defer();
 
                 require([
                     'esri/layers/FeatureLayer'], function (FeatureLayer) {
-                    var layer = new FeatureLayer($scope.url);
+                        
+                    var layerOptions = {};
+                    if ($attrs.definitionExpression) {
+                        layerOptions.definitionExpression = $attrs.definitionExpression;
+                    }
+                    var layer = new FeatureLayer($scope.url, layerOptions);
 
                     layerDeferred.resolve(layer);
                 });
