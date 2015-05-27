@@ -11,12 +11,6 @@
      */
     angular.module('esri.map').factory('esriLoader', function ($q) {
 
-        return {
-            bootstrap: bootstrap,
-            isLoaded:  isLoaded,
-            require:   requireModule
-        };
-
         /**
          * Load the ESRI ArcGIS API
          *
@@ -29,7 +23,7 @@
 
           // Don't reload API if it is already loaded
           if ( angular.isDefined(window.esri) ) {
-            deferred.reject("ESRI API is already loaded.");
+            deferred.reject('ESRI API is already loaded.');
           }
 
           // Default options object to empty hash
@@ -41,7 +35,7 @@
           script.src    = options.url || 'http://js.arcgis.com/3.13compact';
 
           // Set onload callback to resolve promise
-          script.onload = function() { deferred.resolve( window.esri ); }
+          script.onload = function() { deferred.resolve( window.esri ); };
 
           document.body.appendChild(script);
 
@@ -77,6 +71,13 @@
           }
           return deferred.promise;
         }
+
+        // Return list of aformentioned functions
+        return {
+            bootstrap: bootstrap,
+            isLoaded:  isLoaded,
+            require:   requireModule
+        };
     });
 
 })(angular);
