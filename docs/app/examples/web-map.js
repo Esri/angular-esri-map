@@ -11,7 +11,7 @@ angular.module('esri-map-docs')
         };
         $scope.goToBookmark = function(bookmark) {
             esriRegistry.get('myMap').then(function(map) {
-                esriLoader('esri/geometry/Extent').then(function(Extent) {
+                esriLoader.require('esri/geometry/Extent').then(function(Extent) {
                     var extent = new Extent(bookmark.extent);
                     map.setExtent(extent);
                 });
