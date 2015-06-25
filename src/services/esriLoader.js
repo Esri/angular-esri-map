@@ -57,18 +57,27 @@
          */
         function requireModule(moduleName){
           var deferred = $q.defer();
+
+          // Throw Error is ESRI is not loaded yet
+          if ( !isLoaded() ) {
+            deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
+            return deferred.promise;
+          }
           if (angular.isString(moduleName)) {
-              require([moduleName], function (module) {
-                  deferred.resolve(module);
-              });
-          } else if (angular.isArray(moduleName)) {
-              require(moduleName, function (modules) {
-                  deferred.resolve(modules);
-              });
+            require([moduleName], function (module) {
+              deferred.resolve(module);
+            });
+          }
+          else if (angular.isArray(moduleName)) {
+            require(moduleName, function () {
+              // Grab all of the modules pass back from require callback and send as array to promise.
+              deferred.resolve(Array.prototype.slice.call(arguments));
+            });
           }
           else {
-              deferred.reject('An Array<String> or String is required to load modules.');
+            deferred.reject('An Array<String> or String is required to load modules.');
           }
+
           return deferred.promise;
         }
 
