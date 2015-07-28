@@ -4,23 +4,30 @@
     angular.module('esri.map', []);
 
     angular.module('esri.map').factory('esriLoader', function ($q) {
-        return function(moduleName){
+        return function (moduleName, callback) {
             var deferred = $q.defer();
             if (angular.isString(moduleName)) {
                 require([moduleName], function (module) {
+                    if (callback !== null && callback !== undefined) {
+                        callback(module);
+                    }
+
                     deferred.resolve(module);
                 });
             }
             else if (angular.isArray(moduleName)) {
-                require(moduleName, function (modules) {
-                    deferred.resolve(modules);
+                require(moduleName, function () {
+                    if (callback !== null && callback !== undefined) {
+                        callback.apply(this, arguments);
+                    }
+
+                    deferred.resolve(arguments);
                 });
             }
             else {
                 deferred.reject('An Array<String> or String is required to load modules.');
             }
             return deferred.promise;
-
         };
     });
 
@@ -388,6 +395,25 @@
                 this.getLayer = function () {
                     return layerDeferred.promise;
                 };
+
+                // set the visibility of the feature layer
+                this.setVisible = function (isVisible) {
+                    var visibleDeferred = $q.defer();
+
+                    this.getLayer().then(function (layer) {
+                        if (isVisible === true || isVisible.toString().toLowerCase() === 'true') {
+                            layer.show();
+                        }
+                        else if(isVisible === false || isVisible.toString().toLowerCase() === 'false')
+                        {
+                            layer.hide();
+                        }
+
+                        visibleDeferred.resolve();
+                    });
+
+                    return visibleDeferred.promise;
+                };
             },
 
             // now we can link our directive to the scope, but we can also add it to the map..
@@ -395,6 +421,20 @@
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
+
+                var visible = attrs['visible'] || true;
+                var isVisible = scope.$eval(visible);
+
+                // set the initial visible state of the feature layer
+                layerController.setVisible(isVisible);
+
+                // add a $watch condition on the visible attribute, if it changes and the new value is different than the previous, then use to
+                // set the visibility of the feature layer
+                scope.$watch(function () { return scope.$eval(attrs['visible']); }, function (newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        layerController.setVisible(newVal);
+                    }
+                });
 
                 layerController.getLayer().then(function (layer) {
                     // add layer
