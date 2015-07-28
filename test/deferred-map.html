@@ -41,6 +41,10 @@
 
                           // Set Loaded to be true
                           $scope.loaded = true;
+
+                          esriLoader.require(['esri/dijit/Legend', 'dijit/registry'], function(legend, registry) {
+                            console.log('esriLoader.require(), loaded modules esri/dijit/Legend and dijit/registry');
+                          });
                           
                           // Once the API is loaded set the map parameters
                           $scope.map = {

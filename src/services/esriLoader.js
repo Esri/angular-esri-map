@@ -53,25 +53,39 @@
          * Load ESRI Module, this will use dojo's AMD loader
          *
          * @param {String|Array} modules A string of a module or an array of modules to be loaded.
+         * @param {Function} optional callback function used to support AMD style loading, promise and callback are both add to the event loop, possible race condition.
          * @return {Promise} Returns a $q style promise which is resolved once modules are loaded
          */
-        function requireModule(moduleName){
+        function requireModule(moduleName, callback){
           var deferred = $q.defer();
 
-          // Throw Error is ESRI is not loaded yet
+          // Throw Error if ESRI is not loaded yet
           if ( !isLoaded() ) {
             deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
             return deferred.promise;
           }
           if (angular.isString(moduleName)) {
             require([moduleName], function (module) {
+
+              // Check if callback exists, and execute if it does
+              if ( callback && angular.isFunction(callback) ) {
+                  callback(module);
+              }
               deferred.resolve(module);
             });
           }
           else if (angular.isArray(moduleName)) {
             require(moduleName, function () {
+
+              var args = Array.prototype.slice.call(arguments)
+
+              // callback check, sends modules loaded as arguments
+              if ( callback && angular.isFunction(callback) ) {
+                  callback.apply(this, args);
+              }
+
               // Grab all of the modules pass back from require callback and send as array to promise.
-              deferred.resolve(Array.prototype.slice.call(arguments));
+              deferred.resolve(args);
             });
           }
           else {

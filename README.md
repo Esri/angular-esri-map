@@ -29,7 +29,7 @@ Once you've added the module to your application, you can use the sample code be
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
     <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
@@ -37,7 +37,7 @@ Once you've added the module to your application, you can use the sample code be
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
@@ -90,7 +90,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/esri/contributing).
+Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/Esri/angular-esri-map/blob/master/CONTRIBUTING.md).
 
 ## Licensing
 Copyright 2014 Esri
@@ -107,7 +107,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-A copy of the license is available in the repository's [license.txt]( https://raw.github.com/Esri/angular-esri-map/master/license.txt) file.
+A copy of the license is available in the repository's [license.txt](https://raw.github.com/Esri/angular-esri-map/master/LICENSE) file.
 
 [](Esri Tags: ArcGIS Web Mapping Angular Framework)
 [](Esri Language: JavaScript)

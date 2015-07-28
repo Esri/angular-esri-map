@@ -7,6 +7,7 @@ angular.module('esri-map-docs')
                 lng: -122.676207,
                 lat: 45.523452
             },
-            zoom: 12
+            zoom: 12,
+            showTrees: false
         };
     });

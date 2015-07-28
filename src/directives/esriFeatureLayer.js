@@ -30,6 +30,23 @@
                 this.getLayer = function () {
                     return layerDeferred.promise;
                 };
+
+                // set the visibility of the feature layer
+                this.setVisible = function (isVisible) {
+                    var visibleDeferred = $q.defer();
+
+                    this.getLayer().then(function (layer) {
+                        if (isVisible) {
+                            layer.show();
+                        } else {
+                            layer.hide();
+                        }
+
+                        visibleDeferred.resolve();
+                    });
+
+                    return visibleDeferred.promise;
+                };
             },
 
             // now we can link our directive to the scope, but we can also add it to the map..
@@ -37,6 +54,20 @@
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
+
+                var visible = attrs.visible || 'true';
+                var isVisible = scope.$eval(visible);
+
+                // set the initial visible state of the feature layer
+                layerController.setVisible(isVisible);
+
+                // add a $watch condition on the visible attribute, if it changes and the new value is different than the previous, then use to
+                // set the visibility of the feature layer
+                scope.$watch(function () { return scope.$eval(attrs.visible); }, function (newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        layerController.setVisible(newVal);
+                    }
+                });
 
                 layerController.getLayer().then(function (layer) {
                     // add layer

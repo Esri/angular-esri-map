@@ -53,22 +53,45 @@
          * Load ESRI Module, this will use dojo's AMD loader
          *
          * @param {String|Array} modules A string of a module or an array of modules to be loaded.
+         * @param {Function} optional callback function used to support AMD style loading, promise and callback are both add to the event loop, possible race condition.
          * @return {Promise} Returns a $q style promise which is resolved once modules are loaded
          */
-        function requireModule(moduleName){
+        function requireModule(moduleName, callback){
           var deferred = $q.defer();
+
+          // Throw Error if ESRI is not loaded yet
+          if ( !isLoaded() ) {
+            deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
+            return deferred.promise;
+          }
           if (angular.isString(moduleName)) {
-              require([moduleName], function (module) {
-                  deferred.resolve(module);
-              });
-          } else if (angular.isArray(moduleName)) {
-              require(moduleName, function (modules) {
-                  deferred.resolve(modules);
-              });
+            require([moduleName], function (module) {
+
+              // Check if callback exists, and execute if it does
+              if ( callback && angular.isFunction(callback) ) {
+                  callback(module);
+              }
+              deferred.resolve(module);
+            });
+          }
+          else if (angular.isArray(moduleName)) {
+            require(moduleName, function () {
+
+              var args = Array.prototype.slice.call(arguments)
+
+              // callback check, sends modules loaded as arguments
+              if ( callback && angular.isFunction(callback) ) {
+                  callback.apply(this, args);
+              }
+
+              // Grab all of the modules pass back from require callback and send as array to promise.
+              deferred.resolve(args);
+            });
           }
           else {
-              deferred.reject('An Array<String> or String is required to load modules.');
+            deferred.reject('An Array<String> or String is required to load modules.');
           }
+
           return deferred.promise;
         }
 
@@ -444,6 +467,23 @@
                 this.getLayer = function () {
                     return layerDeferred.promise;
                 };
+
+                // set the visibility of the feature layer
+                this.setVisible = function (isVisible) {
+                    var visibleDeferred = $q.defer();
+
+                    this.getLayer().then(function (layer) {
+                        if (isVisible) {
+                            layer.show();
+                        } else {
+                            layer.hide();
+                        }
+
+                        visibleDeferred.resolve();
+                    });
+
+                    return visibleDeferred.promise;
+                };
             },
 
             // now we can link our directive to the scope, but we can also add it to the map..
@@ -451,6 +491,20 @@
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
+
+                var visible = attrs.visible || 'true';
+                var isVisible = scope.$eval(visible);
+
+                // set the initial visible state of the feature layer
+                layerController.setVisible(isVisible);
+
+                // add a $watch condition on the visible attribute, if it changes and the new value is different than the previous, then use to
+                // set the visibility of the feature layer
+                scope.$watch(function () { return scope.$eval(attrs.visible); }, function (newVal, oldVal) {
+                    if (newVal !== oldVal) {
+                        layerController.setVisible(newVal);
+                    }
+                });
 
                 layerController.getLayer().then(function (layer) {
                     // add layer
