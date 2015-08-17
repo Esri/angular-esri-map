@@ -15,7 +15,7 @@
          * Load the ESRI ArcGIS API
          *
          * @param {Object} options Send a list of options of how to load the API.
-         * @param {String} options.url the url to load the ESRI API, defaults to http://js.arcgis.com/3.13compact
+         * @param {String} options.url the url to load the ESRI API, defaults to http://js.arcgis.com/3.14compact
          * @return {Promise} Returns a $q style which is resolved once the ESRI API has loaded.
          */
         function bootstrap(options) {
@@ -32,7 +32,7 @@
           // Create Script Object to be loaded
           var script    = document.createElement('script');
           script.type   = 'text/javascript';
-          script.src    = options.url || 'http://js.arcgis.com/3.13compact';
+          script.src    = options.url || 'http://js.arcgis.com/3.14compact';
 
           // Set onload callback to resolve promise
           script.onload = function() { deferred.resolve( window.esri ); };
