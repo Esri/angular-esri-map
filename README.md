@@ -58,6 +58,10 @@ Once you've added the module to your application, you can use the sample code be
 
 See the documentation for [examples](http://esri.github.io/angular-esri-map/#examples) of how to use the other directives.
 
+### Lazy Loading of the ArcGIS API for JavaScript
+
+If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Deferred Map Example page](http://esri.github.io/angular-esri-map/deferred-map.html) for an example of how to do this.
+
 ## Development Instructions
 
 Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
