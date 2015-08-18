@@ -38,7 +38,7 @@ Once you've added the module to your application, you can use the sample code be
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
@@ -71,7 +71,7 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-These directives were built using Angular v1.2 (specifically 1.2.16) and the ArcGIS API for JavaScript v3.11+. They will likely work with other verstions of those frameworks, but have not been tested outside of the above versions.
+These directives were originally built using Angular v1.2.16 and the ArcGIS API for JavaScript v3.11. They have been tested on every minor release of each of those libraries since then.
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
