@@ -6,13 +6,13 @@
         <title>Deferred Map Example</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
         <h2>Deferred Map Example</h2>
         <p>Click the button to lazy load the ESRI Map API. This can be used when you want to defer the inclusion of the ESRI ArcGIS API until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
-        <button ng-click="lazyload()">Load ESRI API and Map</button>
-        <!-- add map to page only until ESRI API has loaded -->
+        <button ng-click="lazyload()" ng-disabled="loaded">Load ESRI API and Map</button>
+        <!-- add map to page only once the ESRI API has loaded -->
         <div ng-if="loaded">
           <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
           </esri-map>
@@ -28,35 +28,30 @@
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
                 .controller('MapController', function ($scope, esriLoader) {
-                    
+
                     // Default loaded to be false
                     $scope.loaded = false;
 
                     // This function will be called when you click the button
                     $scope.lazyload = function() {
-                      
-                      // Make a call to load ESRI API resources, a promise is provided for when the resources has finished loading.
-                      esriLoader.bootstrap()
-                        .then(function() {
 
-                          // Set Loaded to be true
-                          $scope.loaded = true;
+                        // Make a call to load ESRI API resources, a promise is provided for when the resources has finished loading.
+                        esriLoader.bootstrap().then(function() {
 
-                          esriLoader.require(['esri/dijit/Legend', 'dijit/registry'], function(legend, registry) {
-                            console.log('esriLoader.require(), loaded modules esri/dijit/Legend and dijit/registry');
-                          });
-                          
-                          // Once the API is loaded set the map parameters
-                          $scope.map = {
+                            // Set Loaded to be true
+                            $scope.loaded = true;
+
+                            // Once the API is loaded set the map parameters
+                            $scope.map = {
                               center: {
                                   lng: -77.00,
                                   lat: 38.88
                               },
                               zoom: 13
-                          };
-
+                            };
                         });
                     };
+
                 });
         </script>
     </body>
