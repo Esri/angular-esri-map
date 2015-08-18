@@ -77,7 +77,7 @@
           else if (angular.isArray(moduleName)) {
             require(moduleName, function () {
 
-              var args = Array.prototype.slice.call(arguments)
+              var args = Array.prototype.slice.call(arguments);
 
               // callback check, sends modules loaded as arguments
               if ( callback && angular.isFunction(callback) ) {
