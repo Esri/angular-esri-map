@@ -159,14 +159,6 @@
   });
 
 })(angular);
-/*
-    Changes made by Edwin Sheldon (eas604@github) per Apache license:
-    Added support for the following ESRI JavaScript API attributes for the map constructor:
-        attributionWidth, autoResize, displayGraphicsOnPan, fadeOnZoom, fitExtent, force3DTransforms,
-        logo, maxScale, maxZoom, minScale, minZoom, nav, navigationMode, optimizePanAnimation,
-        resizeDelay, scale, showAttribution, showInfoWindowOnClick, slider, sliderOrientation,
-        sliderPosition, sliderStyle, smartNavigation, wrapAround180
- */
 (function(angular) {
     'use strict';
 
@@ -187,7 +179,11 @@
                 basemap: '@',
                 // function binding for event handlers
                 load: '&',
-                extentChange: '&'
+                extentChange: '&',
+                // function binding for reading object hash from attribute string
+                // or from scope object property
+                // see Example 7 here: https://gist.github.com/CMCDragonkai/6282750
+                mapOptions: '&'
             },
 
             // replace tag with div with same id
@@ -223,7 +219,7 @@
                 {
                     if($attrs.webmapId)
                     {
-                        arcgisUtils.createMap($attrs.webmapId,$attrs.id).then(function(response)
+                        arcgisUtils.createMap($attrs.webmapId, $attrs.id).then(function(response)
                         {
                             mapDeferred.resolve(response.map);
 
@@ -237,7 +233,7 @@
                     else
                     {
                         // setup our map options based on the attributes and scope
-                        var mapOptions = {};
+                        var mapOptions = $scope.mapOptions() || {};
 
                         // center/zoom/extent
                         // check for convenience extent attribute
@@ -255,68 +251,10 @@
                             }
                         }
 
-                        // basemap
+                        // $scope.basemap takes precedence over $scope.mapOptions.basemap
                         if ($scope.basemap) {
                             mapOptions.basemap = $scope.basemap;
                         }
-
-                        // strings
-                        if ($attrs.navigationMode) {
-                            if ($attrs.navigationMode !== 'css-transforms' && $attrs.navigationMode !== 'classic') {
-                                throw new Error('navigationMode must be \'css-transforms\' or \'classic\'.');
-                            } else {
-                                mapOptions.navigationMode = $attrs.navigationMode;
-                            }
-                        }
-
-                        if ($attrs.sliderOrientation) {
-                            if ($attrs.sliderOrientation !== 'horizontal' && $attrs.sliderOrientation !== 'vertical') {
-                                throw new Error('sliderOrientation must be \'horizontal\' or \'vertical\'.');
-                            } else {
-                                mapOptions.sliderOrientation = $attrs.sliderOrientation;
-                            }
-                        }
-
-                        if ($attrs.sliderPosition) {
-                            var allowed = ['top-left', 'top-right', 'bottom-left', 'bottom-right'];
-                            if (allowed.indexOf($attrs.sliderPosition) < 0) {
-                                throw new Error('sliderPosition must be in ' + allowed);
-                            } else {
-                                mapOptions.sliderPosition = $attrs.sliderPosition;
-                            }
-                        }
-
-                        // This attribute does not seem to have any effect on the underlying map slider.
-                        // Not sure if it is being passed to the API correctly.
-                        if ($attrs.sliderStyle) {
-                            if ($attrs.sliderStyle !== 'large' && $attrs.sliderStyle !== 'small') {
-                                throw new Error('sliderStyle must be \'large\' or \'small\'.');
-                            } else {
-                                mapOptions.sliderStyle = $attrs.sliderStyle;
-                            }
-                        }
-
-                        // booleans
-                        var bools = [
-                            'autoResize', 'displayGraphicsOnPan', 'fadeOnZoom', 'fitExtent', 'force3DTransforms',
-                            'logo', 'nav', 'optimizePanAnimation', 'showAttribution', 'showInfoWindowOnClick',
-                            'slider', 'smartNavigation', 'wrapAround180'
-                        ];
-                        angular.forEach(bools, function (key) {
-                            if (typeof $attrs[key] !== 'undefined') {
-                                mapOptions[key] = $attrs[key].toString() === 'true';
-                            }
-                        });
-
-                        // numeric attributes
-                        var numeric = [
-                            'attributionWidth', 'maxScale', 'maxZoom', 'minScale', 'minZoom', 'resizeDelay', 'scale'
-                        ];
-                        angular.forEach(numeric, function (key) {
-                            if ($attrs[key]) {
-                                mapOptions[key] = $attrs[key];
-                            }
-                        });
 
                         // initialize map and resolve the deferred
                         var map = new Map($attrs.id, mapOptions);
