@@ -8,15 +8,17 @@ angular.module('esri-map-docs')
                 lat: 38.374
             },
             zoom: 13,
-            minZoom: 10,
-            maxZoom: 15,
-            resizeDelay: 500,
-            navigationMode: 'classic',
-            sliderOrientation: 'horizontal',
-            sliderPosition: 'top-right',
-            displayGraphicsOnPan: true,
-            fadeOnZoom: false,
-            logo: false,
-            wrapAround180: false
+            mapOptions: {
+                minZoom: 10,
+                maxZoom: 15,
+                resizeDelay: 500,
+                navigationMode: 'classic',
+                sliderOrientation: 'horizontal',
+                sliderPosition: 'top-right',
+                displayGraphicsOnPan: true,
+                fadeOnZoom: false,
+                logo: false,
+                wrapAround180: false
+            }
         };
     });
