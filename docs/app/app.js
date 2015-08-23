@@ -43,9 +43,9 @@
                 templateUrl: 'app/examples/registry-pattern.html',
                 controller: 'RegistryPatternCtrl'
             })
-            .when('/examples/additional-attributes', {
-                templateUrl: 'app/examples/additional-attributes.html',
-                controller: 'AdditionalAttributesCtrl'
+            .when('/examples/additional-map-options', {
+                templateUrl: 'app/examples/additional-map-options.html',
+                controller: 'AdditionalMapOptionsCtrl'
             })
             .when('/about', {
                 templateUrl: 'app/about/about.html',
