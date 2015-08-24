@@ -217,9 +217,15 @@
 
                 require(['esri/map','esri/arcgis/utils'], function(Map, arcgisUtils)
                 {
+                    // setup our mapOptions based on object hash from attribute string
+                    // or from scope object property
+                    var mapOptions = $scope.mapOptions() || {};
+                    
                     if($attrs.webmapId)
                     {
-                        arcgisUtils.createMap($attrs.webmapId, $attrs.id).then(function(response)
+                        arcgisUtils.createMap($attrs.webmapId, $attrs.id, {
+                                mapOptions: mapOptions
+                            }).then(function(response)
                         {
                             mapDeferred.resolve(response.map);
 
@@ -232,9 +238,6 @@
                     }
                     else
                     {
-                        // setup our map options based on the attributes and scope
-                        var mapOptions = $scope.mapOptions() || {};
-
                         // center/zoom/extent
                         // check for convenience extent attribute
                         // otherwise get from scope center/zoom
