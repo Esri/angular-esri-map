@@ -36,8 +36,7 @@
                 // since we are using compile we need to return our linker function
                 // the 'link' function handles how our directive responds to changes in $scope
                 /*jshint unused: false*/
-                return function(scope, element, attrs, controller) {
-                };
+                return function(scope, element, attrs, controller) {};
             },
 
             // directive api
@@ -47,25 +46,22 @@
                 var mapDeferred = $q.defer();
 
                 // add this map to the registry
-                if($attrs.registerAs){
+                if ($attrs.registerAs) {
                     var deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
 
                     // remove this from the registry when the scope is destroyed
                     $scope.$on('$destroy', deregister);
                 }
 
-                require(['esri/map','esri/arcgis/utils'], function(Map, arcgisUtils)
-                {
+                require(['esri/map', 'esri/arcgis/utils'], function(Map, arcgisUtils) {
                     // setup our mapOptions based on object hash from attribute string
                     // or from scope object property
                     var mapOptions = $scope.mapOptions() || {};
-                    
-                    if($attrs.webmapId)
-                    {
+
+                    if ($attrs.webmapId) {
                         arcgisUtils.createMap($attrs.webmapId, $attrs.id, {
-                                mapOptions: mapOptions
-                            }).then(function(response)
-                        {
+                            mapOptions: mapOptions
+                        }).then(function(response) {
                             mapDeferred.resolve(response.map);
 
                             var geoCenter = response.map.geographicExtent.getCenter();
@@ -74,9 +70,7 @@
                             $scope.zoom = response.map.getZoom();
                             $scope.itemInfo = response.itemInfo;
                         });
-                    }
-                    else
-                    {
+                    } else {
                         // center/zoom/extent
                         // check for convenience extent attribute
                         // otherwise get from scope center/zoom
@@ -103,8 +97,7 @@
                         mapDeferred.resolve(map);
                     }
 
-                    mapDeferred.promise.then(function(map)
-                    {
+                    mapDeferred.promise.then(function(map) {
                         // make a reference to the map object available
                         // to the controller once it is loaded.
                         map.on('load', function() {
@@ -125,38 +118,36 @@
 
                         $scope.inUpdateCycle = false;
 
-                        $scope.$watch(function(scope){ return [scope.center.lng,scope.center.lat, scope.zoom].join(',');}, function(newCenterZoom,oldCenterZoom)
-                        // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
-                        {
-                            if( $scope.inUpdateCycle ) {
-                                return;
-                            }
-
-                            console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
-                            newCenterZoom = newCenterZoom.split(',');
-                            if( newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '' )
+                        $scope.$watch(function(scope) {
+                                return [scope.center.lng, scope.center.lat, scope.zoom].join(',');
+                            }, function(newCenterZoom, oldCenterZoom)
+                            // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
                             {
-                                $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
-                                map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function()
-                                {
-                                    console.log('after centerAndZoom()');
-                                    $scope.inUpdateCycle = false;
-                                });
-                            }
-                        });
+                                if ($scope.inUpdateCycle) {
+                                    return;
+                                }
 
-                        map.on('extent-change', function(e)
-                        {
-                            if( $scope.inUpdateCycle ) {
+                                console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
+                                newCenterZoom = newCenterZoom.split(',');
+                                if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
+                                    $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
+                                    map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
+                                        console.log('after centerAndZoom()');
+                                        $scope.inUpdateCycle = false;
+                                    });
+                                }
+                            });
+
+                        map.on('extent-change', function(e) {
+                            if ($scope.inUpdateCycle) {
                                 return;
                             }
 
-                            $scope.inUpdateCycle = true;  // prevent circular updates between $watch and $apply
+                            $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
 
                             console.log('extent-change geo', map.geographicExtent);
 
-                            $scope.$apply(function()
-                            {
+                            $scope.$apply(function() {
                                 var geoCenter = map.geographicExtent.getCenter();
 
                                 $scope.center.lng = geoCenter.x;
@@ -164,20 +155,20 @@
                                 $scope.zoom = map.getZoom();
 
                                 // we might want to execute event handler even if $scope.inUpdateCycle is true
-                                if( $attrs.extentChange ) {
+                                if ($attrs.extentChange) {
                                     $scope.extentChange()(e);
                                 }
 
-                                $timeout(function(){
+                                $timeout(function() {
                                     // this will be executed after the $digest cycle
                                     console.log('after apply()');
                                     $scope.inUpdateCycle = false;
-                                },0);
+                                }, 0);
                             });
                         });
 
                         // clean up
-                        $scope.$on('$destroy', function () {
+                        $scope.$on('$destroy', function() {
                             map.destroy();
                             // TODO: anything else?
                         });
