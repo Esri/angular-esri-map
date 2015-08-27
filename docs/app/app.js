@@ -47,6 +47,10 @@
                 templateUrl: 'app/examples/additional-map-options.html',
                 controller: 'AdditionalMapOptionsCtrl'
             })
+            .when('/examples/advanced-map-options', {
+                templateUrl: 'app/examples/advanced-map-options.html',
+                controller: 'AdvancedMapOptionsCtrl'
+            })
             .when('/about', {
                 templateUrl: 'app/about/about.html',
                 controller: 'AboutCtrl'

@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, $log, esriRegistry) {
 
         return {
             // element only
@@ -53,10 +53,25 @@
                     $scope.$on('$destroy', deregister);
                 }
 
-                require(['esri/map', 'esri/arcgis/utils'], function(Map, arcgisUtils) {
+                require(['esri/map', 'esri/arcgis/utils', 'esri/geometry/Extent', 'esri/dijit/Popup'], function(Map, arcgisUtils, Extent, Popup) {
                     // setup our mapOptions based on object hash from attribute string
                     // or from scope object property
                     var mapOptions = $scope.mapOptions() || {};
+
+                    // construct optional Extent for mapOptions
+                    if (mapOptions.hasOwnProperty('extent')) {
+                        // construct if parent controller isn'tsupplying a valid and already constructed Extent
+                        // e.g. if the controller or HTML view are only providing JSON
+                        if (mapOptions.extent.declaredClass !== 'esri.geometry.Extent') {
+                            mapOptions.extent = new Extent(mapOptions.extent);
+                        }
+                    }
+
+                    // construct optional infoWindow from mapOptions
+                    // default to a new Popup dijit for now
+                    if (mapOptions.hasOwnProperty('infoWindow')) {
+                        mapOptions.infoWindow = new Popup(mapOptions.infoWindow.options, mapOptions.infoWindow.srcNodeRef);
+                    }
 
                     if ($attrs.webmapId) {
                         arcgisUtils.createMap($attrs.webmapId, $attrs.id, {
@@ -72,11 +87,9 @@
                         });
                     } else {
                         // center/zoom/extent
-                        // check for convenience extent attribute
+                        // check for mapOptions extent property
                         // otherwise get from scope center/zoom
-                        if ($attrs.extent) {
-                            mapOptions.extent = $scope[$attrs.extent];
-                        } else {
+                        if (!mapOptions.extent) {
                             if ($scope.center.lng && $scope.center.lat) {
                                 mapOptions.center = [$scope.center.lng, $scope.center.lat];
                             } else if ($scope.center) {
@@ -118,41 +131,39 @@
 
                         $scope.inUpdateCycle = false;
 
-                        $scope.$watch(function(scope) {
-                                return [scope.center.lng, scope.center.lat, scope.zoom].join(',');
-                            }, function(newCenterZoom, oldCenterZoom)
-                            // $scope.$watchGroup(['center.lng','center.lat', 'zoom'], function(newCenterZoom,oldCenterZoom) // supported starting at Angular 1.3
-                            {
+
+                        if (!angular.isUndefined($scope.center) || !angular.isUndefined($scope.zoom)) {
+                            $scope.$watchGroup(['center.lng', 'center.lat', 'zoom'], function(newCenterZoom, oldCenterZoom) {
                                 if ($scope.inUpdateCycle) {
                                     return;
                                 }
-
-                                console.log('center/zoom changed', newCenterZoom, oldCenterZoom);
-                                newCenterZoom = newCenterZoom.split(',');
+                                $log.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                                 if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
                                     $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
                                     map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
-                                        console.log('after centerAndZoom()');
+                                        $log.log('after centerAndZoom()');
                                         $scope.inUpdateCycle = false;
                                     });
                                 }
                             });
+                        }
 
                         map.on('extent-change', function(e) {
                             if ($scope.inUpdateCycle) {
                                 return;
                             }
-
                             $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
-
-                            console.log('extent-change geo', map.geographicExtent);
+                            
+                            $log.log('extent-change: ', e.extent);
+                            $log.log('extent-change geographic: ', map.geographicExtent);
 
                             $scope.$apply(function() {
-                                var geoCenter = map.geographicExtent.getCenter();
-
-                                $scope.center.lng = geoCenter.x;
-                                $scope.center.lat = geoCenter.y;
-                                $scope.zoom = map.getZoom();
+                                if (e.extent.spatialReference.wkid === 4326 || e.extent.spatialReference.isWebMercator()) {
+                                    var geoCenter = map.geographicExtent.getCenter();
+                                    $scope.center.lng = geoCenter.x;
+                                    $scope.center.lat = geoCenter.y;
+                                    $scope.zoom = map.getZoom(); 
+                                }
 
                                 // we might want to execute event handler even if $scope.inUpdateCycle is true
                                 if ($attrs.extentChange) {
@@ -161,7 +172,7 @@
 
                                 $timeout(function() {
                                     // this will be executed after the $digest cycle
-                                    console.log('after apply()');
+                                    $log.log('after apply()');
                                     $scope.inUpdateCycle = false;
                                 }, 0);
                             });
