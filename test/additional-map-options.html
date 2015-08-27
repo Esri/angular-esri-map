@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Additional Map Options</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Additional Attributes Example</h2>
+        <h3>Inline Object Hash Attribute String, along with a WebmapId</h3>
+        <!-- add map to page and bind to scope map parameters -->
+        <div style="max-width: 800px">
+            <esri-map id="map" center="map.center" zoom="map.zoom" item-info="itemInfo" webmap-id="8e42e164d4174da09f61fe0d3f206641" style="width: 100%"
+                map-options="{
+                    minZoom: 10,
+                    maxZoom: 18,
+                    resizeDelay: 500,
+                    navigationMode: 'classic',
+                    sliderOrientation: 'horizontal',
+                    sliderPosition: 'bottom-left',
+                    displayGraphicsOnPan: true,
+                    fadeOnZoom: false,
+                    logo: true,
+                    wrapAround180: false
+                }">
+            </esri-map>
+            <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{ map.zoom }}</p>
+            <p>Min Zoom: 10, Max Zoom: 18, Resize Delay: 500ms, Navigation Mode: "classic"</p>
+            <p>Slider Orientation: "horizontal", Slider Position: "bottom-left", Display Graphics on Pan: true</p>
+            <p>Fade on Zoom: false, Logo: true, Wrap Around 180: false</p>
+            <p>
+                <span>Webmap item title:</span>
+                <span>{{ itemInfo.item.title }}</span>
+            </p>
+            <p>
+                <span>Webmap item info:</span>
+                <span ng-bind-html="itemInfo.item.snippet"></span>
+            </p>
+            <p>
+                <span>Webmap item id:</span>
+                <span>{{ itemInfo.item.id }}</span>
+            </p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map', 'ngSanitize'])
+                .controller('MapController', function ($scope) {
+                    $scope.map = {
+                        center: {
+                            lng: -96.53,
+                            lat: 38.374
+                        },
+                        zoom: 13
+                    };
+                });
+        </script>
+    </body>
+</html>
