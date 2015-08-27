@@ -250,16 +250,18 @@
                         // center/zoom/extent
                         // check for mapOptions extent property
                         // otherwise get from scope center/zoom
-                        if (!mapOptions.extent) {
-                            if ($scope.center.lng && $scope.center.lat) {
-                                mapOptions.center = [$scope.center.lng, $scope.center.lat];
-                            } else if ($scope.center) {
-                                mapOptions.center = $scope.center;
+                        // if (!mapOptions.extent) {
+                            if ($scope.center) {
+                                if ($scope.center.lng && $scope.center.lat) {
+                                    mapOptions.center = [$scope.center.lng, $scope.center.lat];
+                                } else {
+                                    mapOptions.center = $scope.center;
+                                }
                             }
                             if ($scope.zoom) {
                                 mapOptions.zoom = $scope.zoom;
                             }
-                        }
+                        // }
 
                         // $scope.basemap takes precedence over $scope.mapOptions.basemap
                         if ($scope.basemap) {
@@ -306,7 +308,9 @@
                             });
                         }
 
-                        // listen for changes to map extent and update $scope
+                        // listen for changes to map extent and then
+                        // update $scope.center and $scope.zoom
+                        // and call extent-change handler (if any)
                         map.on('extent-change', function(e) {
                             if ($scope.inUpdateCycle) {
                                 return;
@@ -315,8 +319,10 @@
                             $scope.$apply(function() {
                                 if (e.extent.spatialReference.wkid === 4326 || e.extent.spatialReference.isWebMercator()) {
                                     var geoCenter = map.geographicExtent.getCenter();
-                                    $scope.center.lng = geoCenter.x;
-                                    $scope.center.lat = geoCenter.y;
+                                    $scope.center = {
+                                        lat: geoCenter.y,
+                                        lng: geoCenter.x
+                                    };
                                     $scope.zoom = map.getZoom();
                                 }
 
