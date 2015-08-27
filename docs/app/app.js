@@ -47,9 +47,9 @@
                 templateUrl: 'app/examples/additional-map-options.html',
                 controller: 'AdditionalMapOptionsCtrl'
             })
-            .when('/examples/advanced-map-options', {
-                templateUrl: 'app/examples/advanced-map-options.html',
-                controller: 'AdvancedMapOptionsCtrl'
+            .when('/examples/no-basemap', {
+                templateUrl: 'app/examples/no-basemap.html',
+                controller: 'NoBasemapCtrl'
             })
             .when('/about', {
                 templateUrl: 'app/about/about.html',

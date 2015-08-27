@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('esri-map-docs')
-    .controller('AdvancedMapOptionsCtrl', function($scope, $filter) {
+    .controller('NoBasemapCtrl', function($scope, $filter) {
         $scope.map = {
             mapOptions: {
                 extent: {
