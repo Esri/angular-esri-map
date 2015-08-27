@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function($q, $timeout, $log, esriRegistry) {
+    angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
 
         return {
             // element only
@@ -122,47 +122,41 @@
                             });
                         });
 
-                        // listen for changes to scope and update map
+                        // listen for changes to $scope.basemap and update map
                         $scope.$watch('basemap', function(newBasemap, oldBasemap) {
                             if (map.loaded && newBasemap !== oldBasemap) {
                                 map.setBasemap(newBasemap);
                             }
                         });
 
+                        // listen for changes to $scope.center and $scope.zoom and update map
                         $scope.inUpdateCycle = false;
-
-
                         if (!angular.isUndefined($scope.center) || !angular.isUndefined($scope.zoom)) {
-                            $scope.$watchGroup(['center.lng', 'center.lat', 'zoom'], function(newCenterZoom, oldCenterZoom) {
+                            $scope.$watchGroup(['center.lng', 'center.lat', 'zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
                                 if ($scope.inUpdateCycle) {
                                     return;
                                 }
-                                $log.log('center/zoom changed', newCenterZoom, oldCenterZoom);
                                 if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
                                     $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
                                     map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
-                                        $log.log('after centerAndZoom()');
                                         $scope.inUpdateCycle = false;
                                     });
                                 }
                             });
                         }
 
+                        // listen for changes to map extent and update $scope
                         map.on('extent-change', function(e) {
                             if ($scope.inUpdateCycle) {
                                 return;
                             }
                             $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
-                            
-                            $log.log('extent-change: ', e.extent);
-                            $log.log('extent-change geographic: ', map.geographicExtent);
-
                             $scope.$apply(function() {
                                 if (e.extent.spatialReference.wkid === 4326 || e.extent.spatialReference.isWebMercator()) {
                                     var geoCenter = map.geographicExtent.getCenter();
                                     $scope.center.lng = geoCenter.x;
                                     $scope.center.lat = geoCenter.y;
-                                    $scope.zoom = map.getZoom(); 
+                                    $scope.zoom = map.getZoom();
                                 }
 
                                 // we might want to execute event handler even if $scope.inUpdateCycle is true
@@ -172,7 +166,6 @@
 
                                 $timeout(function() {
                                     // this will be executed after the $digest cycle
-                                    $log.log('after apply()');
                                     $scope.inUpdateCycle = false;
                                 }, 0);
                             });
@@ -181,7 +174,6 @@
                         // clean up
                         $scope.$on('$destroy', function() {
                             map.destroy();
-                            // TODO: anything else?
                         });
                     });
                 });
