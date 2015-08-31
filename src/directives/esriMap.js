@@ -3,6 +3,19 @@
 
     angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
 
+        // get the map's center in geographic coords
+        function getCenter(map) {
+            var geoCenter = map.geographicExtent && map.geographicExtent.getCenter();
+            if (geoCenter) {
+                return {
+                    lat: geoCenter.y,
+                    lng: geoCenter.x
+                };
+            } else {
+                return null;
+            }
+        }
+
         return {
             // element only
             restrict: 'E',
@@ -73,48 +86,58 @@
                         mapOptions.infoWindow = new Popup(mapOptions.infoWindow.options, mapOptions.infoWindow.srcNodeRef);
                     }
 
+                    // check for 1 way bound properties (basemap)
+                    // $scope.basemap takes precedence over $scope.mapOptions.basemap
+                    if ($scope.basemap) {
+                        mapOptions.basemap = $scope.basemap;
+                    }
+
+                    // check for 2 way bound properties (center and zoom)
+                    // $scope.center takes precedence over $scope.mapOptions.center
+                    if ($scope.center) {
+                        if ($scope.center.lng && $scope.center.lat) {
+                            mapOptions.center = [$scope.center.lng, $scope.center.lat];
+                        } else {
+                            mapOptions.center = $scope.center;
+                        }
+                    }
+
+                    // $scope.zoom takes precedence over $scope.mapOptions.zoom
+                    if ($scope.zoom) {
+                        mapOptions.zoom = $scope.zoom;
+                    }
+
+                    // initialize map and resolve the deferred
                     if ($attrs.webmapId) {
+                        // load map object from web map
                         arcgisUtils.createMap($attrs.webmapId, $attrs.id, {
                             mapOptions: mapOptions
                         }).then(function(response) {
-                            mapDeferred.resolve(response.map);
-
-                            var geoCenter = response.map.geographicExtent.getCenter();
-                            $scope.center.lng = geoCenter.x;
-                            $scope.center.lat = geoCenter.y;
-                            $scope.zoom = response.map.getZoom();
+                            // add item info to scope
                             $scope.itemInfo = response.itemInfo;
+                            // TODO: update layer info for legend after loading web map?
+                            mapDeferred.resolve(response.map);
                         });
                     } else {
-                        // center/zoom/extent
-                        // check for mapOptions extent property
-                        // otherwise get from scope center/zoom
-                        // if (!mapOptions.extent) {
-                            if ($scope.center) {
-                                if ($scope.center.lng && $scope.center.lat) {
-                                    mapOptions.center = [$scope.center.lng, $scope.center.lat];
-                                } else {
-                                    mapOptions.center = $scope.center;
-                                }
-                            }
-                            if ($scope.zoom) {
-                                mapOptions.zoom = $scope.zoom;
-                            }
-                        // }
-
-                        // $scope.basemap takes precedence over $scope.mapOptions.basemap
-                        if ($scope.basemap) {
-                            mapOptions.basemap = $scope.basemap;
-                        }
-
-                        // initialize map and resolve the deferred
+                        // create a new map object
                         var map = new Map($attrs.id, mapOptions);
+                        // TODO: only resolve map deferred after map is loaded?
                         mapDeferred.resolve(map);
                     }
 
                     mapDeferred.promise.then(function(map) {
+                        // TODO: do we have to update scope properties on map load?
+                        // var center = getCenter(map);
+                        // console.log('center: ', center);
+                        // console.log('zoom: ', map.getZoom());
+                        // if (center) {
+                        //     $scope.center = center;
+                        // }
+                        // $scope.zoom = map.getZoom();
+
                         // make a reference to the map object available
                         // to the controller once it is loaded.
+                        // TODO: will load event even fire if using a web map?
                         map.on('load', function() {
                             if (!$attrs.load) {
                                 return;
@@ -156,16 +179,13 @@
                             }
                             $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
                             $scope.$apply(function() {
-                                if (e.extent.spatialReference.wkid === 4326 || e.extent.spatialReference.isWebMercator()) {
-                                    var geoCenter = map.geographicExtent.getCenter();
-                                    $scope.center = {
-                                        lat: geoCenter.y,
-                                        lng: geoCenter.x
-                                    };
-                                    $scope.zoom = map.getZoom();
+                                var center = getCenter(map);
+                                if (center) {
+                                    $scope.center = center;
                                 }
+                                $scope.zoom = map.getZoom();
 
-                                // we might want to execute event handler even if $scope.inUpdateCycle is true
+                                // execute extent change event handler, if supplied
                                 if ($attrs.extentChange) {
                                     $scope.extentChange()(e);
                                 }
@@ -197,8 +217,6 @@
                 };
 
                 // array to store layer info, needed for legend
-                // TODO: is this the right place for this?
-                // can it be done on the legend directive itself?
                 this.addLayerInfo = function(lyrInfo) {
                     if (!this.layerInfos) {
                         this.layerInfos = [lyrInfo];
