@@ -121,7 +121,6 @@
                     } else {
                         // create a new map object
                         var map = new Map($attrs.id, mapOptions);
-                        // TODO: only resolve map deferred after map is loaded?
                         mapDeferred.resolve(map);
                     }
 
@@ -137,15 +136,17 @@
 
                         // make a reference to the map object available
                         // to the controller once it is loaded.
-                        // TODO: will load event even fire if using a web map?
-                        map.on('load', function() {
-                            if (!$attrs.load) {
-                                return;
-                            }
-                            $scope.$apply(function() {
+                        if ($attrs.load) {
+                            if (map.loaded) {
                                 $scope.load()(map);
-                            });
-                        });
+                            } else {
+                                map.on('load', function() {
+                                    $scope.$apply(function() {
+                                        $scope.load()(map);
+                                    });
+                                });
+                            }
+                        }
 
                         // listen for changes to $scope.basemap and update map
                         $scope.$watch('basemap', function(newBasemap, oldBasemap) {
