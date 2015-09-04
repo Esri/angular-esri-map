@@ -3,17 +3,16 @@
 
     angular.module('esri.map').directive('esriMap', function($q, $timeout, esriRegistry) {
 
-        // get the map's center in geographic coords
-        function getCenter(map) {
+        // update two-way bound scope properties based on map state
+        function updateScopeFromMap(scope, map) {
             var geoCenter = map.geographicExtent && map.geographicExtent.getCenter();
             if (geoCenter) {
-                return {
+                scope.center = {
                     lat: geoCenter.y,
                     lng: geoCenter.x
                 };
-            } else {
-                return null;
             }
+            scope.zoom = map.getZoom();
         }
 
         return {
@@ -131,21 +130,22 @@
                     }
 
                     mapDeferred.promise.then(function(map) {
-                        // TODO: do we have to update scope properties on map load?
-                        // var center = getCenter(map);
-                        // console.log('center: ', center);
-                        // console.log('zoom: ', map.getZoom());
-                        // if (center) {
-                        //     $scope.center = center;
-                        // }
-                        // $scope.zoom = map.getZoom();
-
-                        // make a reference to the map object available
-                        // to the controller once it is loaded.
-                        if ($attrs.load) {
-                            if (map.loaded) {
+                        if (map.loaded) {
+                            // map already loaded, we need to
+                            // update two-way bound scope properties
+                            updateScopeFromMap($scope, map);
+                            // make map object available to caller
+                            // by calling the load event handler
+                            if ($attrs.load) {
                                 $scope.load()(map);
-                            } else {
+                            }
+                        } else {
+                            // map is not yet loaded, this means that
+                            // two-way bound scope properties
+                            // will be updated by extent-change handler below
+                            // so don't need to update them here
+                            // just set up a handler for the map load event (if any)
+                            if ($attrs.load) {
                                 map.on('load', function() {
                                     $scope.$apply(function() {
                                         $scope.load()(map);
@@ -169,7 +169,8 @@
                                     return;
                                 }
                                 if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
-                                    $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
+                                    // prevent circular updates between $watch and $apply
+                                    $scope.inUpdateCycle = true;
                                     map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
                                         $scope.inUpdateCycle = false;
                                     });
@@ -177,26 +178,21 @@
                             });
                         }
 
-                        // listen for changes to map extent and then
-                        // update $scope.center and $scope.zoom
-                        // and call extent-change handler (if any)
+                        // listen for changes to map extent and
+                        // call extent-change handler (if any)
+                        // also update $scope.center and $scope.zoom
                         map.on('extent-change', function(e) {
+                            if ($attrs.extentChange) {
+                                $scope.extentChange()(e);
+                            }
+                            // prevent circular updates between $watch and $apply
                             if ($scope.inUpdateCycle) {
                                 return;
                             }
-                            $scope.inUpdateCycle = true; // prevent circular updates between $watch and $apply
+                            $scope.inUpdateCycle = true;
                             $scope.$apply(function() {
-                                var center = getCenter(map);
-                                if (center) {
-                                    $scope.center = center;
-                                }
-                                $scope.zoom = map.getZoom();
-
-                                // execute extent change event handler, if supplied
-                                if ($attrs.extentChange) {
-                                    $scope.extentChange()(e);
-                                }
-
+                                // update scope properties
+                                updateScopeFromMap($scope, map);
                                 $timeout(function() {
                                     // this will be executed after the $digest cycle
                                     $scope.inUpdateCycle = false;
