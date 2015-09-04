@@ -215,6 +215,9 @@
 
             // directive api
             controller: function($scope, $element, $attrs) {
+                // get a reference to the controller
+                var self = this;
+
                 // only do this once per directive
                 // this deferred will be resolved with the map
                 var mapDeferred = $q.defer();
@@ -274,14 +277,17 @@
                         arcgisUtils.createMap($attrs.webmapId, $attrs.id, {
                             mapOptions: mapOptions
                         }).then(function(response) {
+                            // update layer infos for legend
+                            self.layerInfos = arcgisUtils.getLegendLayers(response);
                             // add item info to scope
                             $scope.itemInfo = response.itemInfo;
-                            // TODO: update layer info for legend after loading web map?
+                            // resolve the promise with the map
                             mapDeferred.resolve(response.map);
                         });
                     } else {
                         // create a new map object
                         var map = new Map($attrs.id, mapOptions);
+                        // resolve the promise with the map
                         mapDeferred.resolve(map);
                     }
 
