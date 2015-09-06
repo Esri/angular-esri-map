@@ -11,6 +11,7 @@ var runSequence = require('run-sequence');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var deploy = require('gulp-gh-pages');
+var angularProtractor = require('gulp-angular-protractor');
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
@@ -81,6 +82,19 @@ gulp.task('deploy-prod', ['build'], function () {
     .pipe(deploy({
       remoteUrl: 'https://github.com/Esri/angular-esri-map.git'
     }));
+});
+
+gulp.task('test', ['serve'], function() {
+  return gulp.src(['./test/**/*.js'])
+    .pipe(angularProtractor({
+      'configFile': 'test/e2e/conf.js',
+      'args': ['--baseUrl', 'http://localhost:9002'],
+      'autoStartStopServer': true
+      // 'debug': true
+    }))
+    .on('error', function(e) {
+      throw e;
+    });
 });
 
 // Default Task
