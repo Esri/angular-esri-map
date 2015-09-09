@@ -3,7 +3,7 @@
 'use strict';
 
 describe('Simple Map Example', function() {
-    // element finders
+    // shared element locator(s)
     var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
     var map = element(by.id('map'));
 
@@ -17,6 +17,23 @@ describe('Simple Map Example', function() {
         }, 5000);
     }
 
+    // helper for waiting on async map attributes to change
+    function getAsyncAttributeValue(element, attribute) {
+        return browser.wait(function() {
+            var deferred = protractor.promise.defer();
+            // setting an artificial timeout to wait and hope
+            // that an async map attribute such as "data-zoom" is different
+            setTimeout(function() {
+                element.getAttribute(attribute).then(function(value) {
+                    // resolve the deferred for both the the browser.wait()
+                    // and to get outside access to the attribute value
+                    deferred.fulfill(value);
+                });
+            }, 2000);
+            return deferred.promise;
+        }, 5000);
+    }
+
     beforeEach(function() {
         // refer to conf.js to get the baseUrl that is prepended
         browser.get('/simple-map.html');
@@ -27,34 +44,16 @@ describe('Simple Map Example', function() {
     });
 
     it('should click on the "zoom in" and change the map zoom value from "13" to "14"', function() {
+        // element locator(s) specific to this test
         waitUntilElementReady(zoomIn);
         waitUntilElementReady(map);
 
         expect(map.getAttribute('data-zoom')).toEqual('13');
 
-        // NOTE: The above 1-line assertion can also be written with a callback,
-        //  since action methods return promises.
-        // map.getAttribute('data-zoom').then(function(value) {
-        //     console.log('data-zoom: ', value);
-        //     expect(value).toEqual('13');
-        // });
-
         zoomIn.click();
 
-        // TODO: can we find a better way to wait for JSAPI map values to change in the DOM?
-        browser.wait(function() {
-            var deferred = protractor.promise.defer();
-            // setting an artificial timeout to wait & hope that "data-zoom" is different
-            setTimeout(function() {
-                map.getAttribute('data-zoom').then(function(value) {
-                    expect(value).toEqual('14');
-                    // resolve the deferred for the sake of the browser.wait()
-                    deferred.fulfill(true);
-                });
-            }, 2000);
-
-            return deferred.promise;
-        }, 5000);
-
+        getAsyncAttributeValue(map, 'data-zoom').then(function(newValue) {
+            expect(newValue).toEqual('14');
+        });
     });
 });

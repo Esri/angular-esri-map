@@ -1,13 +1,15 @@
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
 
-    // TODO: how do we want to organize specs?
-    specs: ['spec.js'],
+    specs: ['simple-map.js', 'set-basemap.js'],
 
-    // TODO: which browsers need to be tested?
-    multiCapabilities: [{
-        browserName: 'chrome'
-    }/*, {
-        browserName: 'firefox'
-    }*/]
+    browserName: 'chrome',
+
+    beforeLaunch: function() {
+        // TODO: investigate if shared funcs can be added once to all specs here
+    },
+
+    onPrepare: function() {
+        // TODO: investigate if shared funcs can be added once to all specs here
+    }
 };
