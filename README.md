@@ -10,15 +10,18 @@ Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how y
 
 ### Quick Start
 
-To use these directives in your own Angular application, first install the module as a dependency using bower:
+To use these directives in your own Angular application, first install the module as a dependency using any of the following methods.
 
 ```bash
+# install via bower
 bower install angular-esri-map
+
+# OR install via npm
+npm install angular-esri-map
 ```
+Alternatively, you can clone or [download](https://github.com/Esri/angular-esri-map/releases) this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
 
-Or clone or download this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
-
-Once you've added the module to your application, you can use the sample code below to use the map and feature layer directives. Just change the paths to point to the locations of the libraries in your environment and go.
+Once you've added the module to your application, you can use the sample code below to use the map and feature layer directives. Just change the "path/to/angular-esri-map.js" to point to the location of the file in your environment and load the page in a browser.
 
 ![App](https://raw.github.com/Esri/angular-esri-map/master/angular-esri-map.png)
 

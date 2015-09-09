@@ -3,12 +3,10 @@
   "version": "1.0.0-beta.4",
   "description": "A collection of directives to help you use Esri maps and services in your Angular applications",
   "main": "dist/angular-esri-map.js",
-  "directories": {
-    "example": "examples"
-  },
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "~1.6.1",
+    "gh-release": "^2.0.1",
     "gulp": "^3.8.9",
     "gulp-clean": "~0.3.0",
     "gulp-concat": "~2.2.0",
@@ -32,13 +30,21 @@
   "author": "Tom Wayson <twayson@esri.com> (http://tomwayson.com)",
   "contributors": [
     "Javier Abadía <javier.abadia@esri.es> (https://github.com/jabadia)",
+    "Dave Bouwman <DBouwman@esri.com> (https://github.com/dbouwman)",
     "Patrick Arlt <parlt@esri.com> (http://patrickarlt.com)",
     "Matt Priour <mpriour@esr.com> (https://github.com/mpriour)",
+    "Jacob Wasilkowski <JWasilkowski@esri.com> (https://github.com/jwasil)",
     "Tom Wayson <twayson@esri.com> (http://tomwayson.com)"
   ],
   "license": "Apache",
   "bugs": {
     "url": "https://github.com/Esri/angular-esri-map/issues"
   },
-  "homepage": "https://github.com/Esri/angular-esri-map"
+  "homepage": "https://github.com/Esri/angular-esri-map",
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp lint",
+    "release": "./scripts/release.sh",
+    "start": "gulp"
+  }
 }

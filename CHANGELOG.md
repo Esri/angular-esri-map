@@ -5,17 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
-None.
+### Maintenance
+
+Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 
 ## [Beta 4](v1.0.0-beta.4)
 
 ### Added
 
-* The esriMap directive's additonal map options now support advanced options such as Extent and Popup. https://github.com/Esri/angular-esri-map/pull/71
+* The esriMap directive's additional map options now support advanced options such as Extent and Popup. https://github.com/Esri/angular-esri-map/pull/71
 
 ### Changed
 
-* The esriMap directive now reads additonal map options by scope function binding, and these options are passed into the construction of a map from a webmapId. https://github.com/Esri/angular-esri-map/pull/71
+* The esriMap directive now reads additional map options by scope function binding, and these options are passed into the construction of a map from a webmapId. https://github.com/Esri/angular-esri-map/pull/71
 * Changes to accommodate a thorough review of the map directive life cycle, and adjustments to make sure all properties are updated and events fired as expected. https://github.com/Esri/angular-esri-map/pull/76
 * Several existing docs and test pages updated ([web map example](http://esri.github.io/angular-esri-map/#/examples/web-map) includes a legend).
 

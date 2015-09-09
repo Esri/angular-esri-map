@@ -4,15 +4,14 @@
 VERSION=$(node --eval "console.log(require('./package.json').version);")
 NAME=$(node --eval "console.log(require('./package.json').name);")
 
-# TODO: build and test
-# npm test || exit 1
+# build and test
+npm test || exit 1
 
 # checkout temp branch for release
 git checkout -b gh-release
 
-# run prepublish to build files
-# npm run prepublish
-gulp build
+# run build
+npm run build
 
 # force add files
 git add dist -f
@@ -24,7 +23,6 @@ git commit -m "build $VERSION"
 git push upstream gh-release
 
 # create a ZIP archive of the dist files
-# zip -r $NAME-v$VERSION.zip dist
 7z a -r $NAME-v$VERSION.zip dist
 
 # run gh-release to create the tag and push release to github
@@ -36,4 +34,4 @@ git branch -D gh-release
 git push upstream :gh-release
 
 # publish release on NPM
-# npm publish
+npm publish
