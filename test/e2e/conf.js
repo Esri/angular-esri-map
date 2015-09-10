@@ -27,7 +27,7 @@ exports.config = {
                 // that an async map attribute such as "data-zoom" is different
                 setTimeout(function() {
                     element.getAttribute(attribute).then(function(value) {
-                        // resolve the deferred for both the the browser.wait()
+                        // resolve the deferred for both the browser.wait()
                         // and to get outside access to the attribute value
                         deferred.fulfill(value);
                     });
