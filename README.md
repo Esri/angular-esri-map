@@ -73,7 +73,7 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 2. `cd` into the `angular-esri-map` folder
 3. Install the dependencies with `npm install`
 4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
-5. Modify the directive source files (under `src`) or documentation (under `docs`) and your browser will automatically reload as you save your changes
+5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
 6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
 
 ## Dependencies
