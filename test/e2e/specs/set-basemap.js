@@ -1,10 +1,10 @@
-/* globals beforeEach, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue*/
+/* globals beforeAll, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue*/
 'use strict';
 describe('Set Basemap', function() {
     // shared element locators
     var map = element(by.id('map'));
 
-    beforeEach(function() {
+    beforeAll(function() {
         // refer to "gulp test" task to get the baseUrl that is prepended
         browser.get('/set-basemap.html');
     });

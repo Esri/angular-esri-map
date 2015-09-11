@@ -1,10 +1,10 @@
-/* globals beforeEach, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue*/
+/* globals beforeAll, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue*/
 'use strict';
 describe('Set Basemap', function() {
     // shared element locators
     var map = element(by.id('map'));
 
-    beforeEach(function() {
+    beforeAll(function() {
         // refer to "gulp test" task to get the baseUrl that is prepended
         browser.get('/web-map.html');
     });
@@ -30,7 +30,7 @@ describe('Set Basemap', function() {
         // "isDisplayed", or if the ElementArrayFinder itself has a "count() > 0".
         // However, this seems to be available more often than not if used later in our assertion.
         var bookmarks = element.all(by.repeater('bookmark in itemInfo.itemData.bookmarks'));
-        
+
         expect(bookmarks.count()).toEqual(1);
 
         bookmarks.first().click();

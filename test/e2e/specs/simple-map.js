@@ -1,11 +1,11 @@
-/* globals beforeEach, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue */
+/* globals beforeAll, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue */
 'use strict';
 describe('Simple Map Example', function() {
     // shared element locator(s)
     var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
     var map = element(by.id('map'));
 
-    beforeEach(function() {
+    beforeAll(function() {
         // refer to conf.js to get the baseUrl that is prepended
         browser.get('/simple-map.html');
     });
