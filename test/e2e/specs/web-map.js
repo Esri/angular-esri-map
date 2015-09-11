@@ -1,5 +1,7 @@
-/* globals beforeAll, describe, it, browser, element, expect, by, waitUntilElementIsReady, getAsyncAttributeValue*/
 'use strict';
+
+var helper = require('../helper');
+
 describe('Set Basemap', function() {
     // shared element locators
     var map = element(by.id('map'));
@@ -13,15 +15,15 @@ describe('Set Basemap', function() {
         // element locator(s) specific to this test
         var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
 
-        waitUntilElementIsReady(zoomIn);
-        waitUntilElementIsReady(map);
+        helper.waitUntilElementIsReady(zoomIn);
+        helper.waitUntilElementIsReady(map);
 
         // something to alter the map's zoom before testing the bookmark
         zoomIn.click();
         zoomIn.click();
 
         // zoom should NOT be 4
-        getAsyncAttributeValue(map, 'data-zoom').then(function(newValue) {
+        helper.getAsyncAttributeValue(map, 'data-zoom').then(function(newValue) {
             expect(newValue).not.toEqual('4');
         });
 
@@ -36,7 +38,7 @@ describe('Set Basemap', function() {
         bookmarks.first().click();
 
         // zoom should be 4
-        getAsyncAttributeValue(map, 'data-zoom').then(function(newValue) {
+        helper.getAsyncAttributeValue(map, 'data-zoom').then(function(newValue) {
             expect(newValue).toEqual('4');
         });
     });
