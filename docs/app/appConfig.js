@@ -5,7 +5,7 @@
         routePath: '/examples/',
         routeTemplateUrl: 'app/examples/'
     };
-    
+
     var config = {
         examplePages: [{
             toc: {
@@ -43,7 +43,7 @@
         }, {
             toc: {
                 title: 'Set Map Center and Zoom',
-                description: 'Demonstrates two-way binding of the center, and zoom properties.',
+                description: 'Demonstrates two-way binding of the center and zoom properties.',
                 url: urlPrefixes.templateHref + 'center-and-zoom'
             },
             route: {
