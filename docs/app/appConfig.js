@@ -33,22 +33,22 @@
             toc: {
                 title: 'Set Basemap',
                 description: 'Shows how to use angular binding to link a select list to the basemap property of the map.',
-                url: urlPrefixes.templateHref + 'basemap'
+                url: urlPrefixes.templateHref + 'set-basemap'
             },
             route: {
-                path: urlPrefixes.routePath + 'basemap',
-                templateUrl: urlPrefixes.routeTemplateUrl + 'basemap.html',
+                path: urlPrefixes.routePath + 'set-basemap',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'set-basemap.html',
                 controller: 'BasemapCtrl'
             }
         }, {
             toc: {
                 title: 'Set Map Center and Zoom',
                 description: 'Demonstrates two-way binding of the center and zoom properties.',
-                url: urlPrefixes.templateHref + 'center-and-zoom'
+                url: urlPrefixes.templateHref + 'set-center-zoom'
             },
             route: {
-                path: urlPrefixes.routePath + 'center-and-zoom',
-                templateUrl: urlPrefixes.routeTemplateUrl + 'center-and-zoom.html',
+                path: urlPrefixes.routePath + 'set-center-zoom',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'set-center-zoom.html',
                 controller: 'CenterAndZoomCtrl'
             }
         }, {
