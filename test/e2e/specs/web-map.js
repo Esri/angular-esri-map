@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-describe('Set Basemap', function() {
+describe('Web Map', function() {
     // shared element locators
     var map = element(by.id('map'));
 

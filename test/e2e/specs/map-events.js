@@ -14,9 +14,8 @@ describe('Map Events', function() {
     it('should load the map and change the text of a "<p>" element', function() {
         // element locator(s) specific to this test
         var mapLoadedInfo = element(by.id('mapLoadedInfo'));
-
-        expect(mapLoadedInfo.getText()).toBe('The map is not loaded.');
         helper.waitUntilElementIsReady(map);
+        
         helper.getAsyncAttributeValue(map, 'data-zoom').then(function() {
             expect(mapLoadedInfo.getText()).toBe('The map is loaded.');
         });

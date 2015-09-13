@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-describe('Simple Map Example', function() {
+describe('Simple Map', function() {
     // shared element locator(s)
     var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
     var map = element(by.id('map'));
