@@ -13,7 +13,7 @@ describe('Simple Map Example', function() {
     });
 
     it('should have a title', function() {
-        expect(browser.getTitle()).toEqual('Simple Map Example');
+        expect(browser.getTitle()).toEqual('Simple Map');
     });
 
     it('should click on the "zoom in" and change the map zoom value from "13" to "14"', function() {
