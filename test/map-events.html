@@ -13,8 +13,8 @@
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo" load="mapLoaded" extent-change="extentChanged">
         </esri-map>
-        <p>The map is <strong ng-show="!map.loaded">not</strong> loaded.</p>
-        <p>Extent: {{ map.extent.toJson() }}</p>
+        <p id="mapLoadedInfo">The map is <strong ng-show="!map.loaded">not</strong> loaded.</p>
+        <p id="extentInfo">Extent: {{ map.extent.toJson() }}</p>
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
         <!-- load Angular -->
