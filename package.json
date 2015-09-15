@@ -45,7 +45,7 @@
   "homepage": "https://github.com/Esri/angular-esri-map",
   "scripts": {
     "build": "gulp build",
-    "test": "gulp lint",
+    "test": "gulp test",
     "release": "./scripts/release.sh",
     "start": "gulp"
   }

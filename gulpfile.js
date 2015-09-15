@@ -55,7 +55,7 @@ gulp.task('build', function(callback) {
   runSequence('lint', 'clean', 'build-js', callback);
 });
 
-// serve docs on local web server
+// serve docs and tests on local web server
 // and reload anytime source code or docs are modified
 gulp.task('serve', ['build'], function() {
   browserSync({
@@ -68,6 +68,21 @@ gulp.task('serve', ['build'], function() {
   });
 
   gulp.watch([srcJsFiles,'./docs/**.*.html', './docs/app/**/*.js', './docs/styles/*.css'], ['build', browserSync.reload ]);
+});
+
+// serve tests on local web server
+gulp.task('serve-test', ['build'], function() {
+  browserSync({
+    server: {
+      baseDir: 'test',
+      routes: {
+        '/lib': 'docs/lib'
+      }
+    },
+    open: false,
+    port: 9002,
+    notify: false
+  });
 });
 
 // deploy to github pages
@@ -84,7 +99,7 @@ gulp.task('deploy-prod', ['build'], function () {
     }));
 });
 
-gulp.task('test', ['serve'], function() {
+gulp.task('test', ['serve-test'], function() {
   return gulp.src(['./test/e2e/specs/*.js'])
     .pipe(angularProtractor({
       'configFile': 'test/e2e/conf.js',
@@ -92,6 +107,9 @@ gulp.task('test', ['serve'], function() {
       'autoStartStopServer': true
       // 'debug': true
     }))
+    .on('end', function() {
+      browserSync.exit();
+    })
     .on('error', function(e) {
       throw e;
     });
