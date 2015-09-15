@@ -2,13 +2,22 @@
 
 var helper = require('../helper');
 
-describe('Set Basemap', function() {
+describe('Web Map', function() {
     // shared element locators
     var map = element(by.id('map'));
 
     beforeAll(function() {
         // refer to "gulp test" task to get the baseUrl that is prepended
         browser.get('/web-map.html');
+    });
+
+    it('should have a legend', function() {
+        var legend = element(by.id('legend'));
+        helper.waitUntilElementIsReady(legend);
+        // should be an instance of the legend dijit
+        helper.getAsyncAttributeValue(legend, 'widgetid').then(function(newValue) {
+            expect(newValue).toEqual('legend');
+        });
     });
 
     it('should load 1 bookmark and then click on this bookmark to change the map "data-zoom" value to "4"', function() {
