@@ -9,13 +9,14 @@ describe('Feature Layers', function() {
     var mapGraphics = element(by.id('map_gc'));
     var featureLayer1 = element(by.id('graphicsLayer1_layer'));
     var featureLayer2 = element(by.id('graphicsLayer2_layer'));
+    var featureLayer3 = element(by.id('graphicsLayer3_layer'));
 
     beforeAll(function() {
         // refer to conf.js to get the baseUrl that is prepended
         browser.get('/feature-layers.html');
     });
 
-    it('should check that the map has 1 polygon layer and 1 point layer', function() {
+    it('should check that the map has 1 layer of each type (point, line, polygon)', function() {
         // element locator(s) specific to this test
         helper.waitUntilElementIsReady(zoomIn);
         helper.waitUntilElementIsReady(map);
@@ -27,6 +28,10 @@ describe('Feature Layers', function() {
 
         helper.getAsyncAttributeValue(featureLayer2, 'data-geometry-type').then(function(value) {
             expect(value).toEqual('point');
+        });
+
+        helper.getAsyncAttributeValue(featureLayer3, 'data-geometry-type').then(function(value) {
+            expect(value).toEqual('polyline');
         });
     });
 

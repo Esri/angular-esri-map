@@ -13,7 +13,9 @@
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
             <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
-            <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0" visible="map.showTrees"></esri-feature-layer>
+            <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0" visible="{{map.showTrees}}"></esri-feature-layer>
+            <esri-feature-layer definition-expression="TYPE = 'SC'"
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/ArcGIS/rest/services/Portland_Light_Rail_Lines/FeatureServer/0"></esri-feature-layer>
         </esri-map>
         <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
         <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
@@ -28,6 +30,7 @@
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
         <script type="text/javascript">
+            'use strict';
             angular.module('esri-map-example', ['esri.map'])
                 .controller('MapController', function ($scope) {
                     $scope.map = {

@@ -1,6 +1,10 @@
 (function(angular) {
     'use strict';
 
+    function isTrue(val) {
+        return val === true || val === 'true';
+    }
+
     angular.module('esri.map').directive('esriFeatureLayer', function ($q) {
         // this object will tell angular how our directive behaves
         return {
@@ -15,13 +19,27 @@
             // since we aren't declaring a template this essentially destroys the element
             replace: true,
 
+            // isolate scope for feature layer so it can be added/removed dynamically
+            scope: {
+                url: '@',
+                visible: '@?'
+            },
+
             // define an interface for working with this directive
             controller: function ($scope, $element, $attrs) {
                 var layerDeferred = $q.defer();
 
                 require([
                     'esri/layers/FeatureLayer'], function (FeatureLayer) {
-                    var layer = new FeatureLayer($attrs.url);
+
+                    var layerOptions = {};
+                    if ($attrs.definitionExpression) {
+                        layerOptions.definitionExpression = $attrs.definitionExpression;
+                    }
+                    if ($scope.visible !== undefined) {
+                        layerOptions.visible = isTrue($scope.visible);
+                    }
+                    var layer = new FeatureLayer($scope.url, layerOptions);
 
                     layerDeferred.resolve(layer);
                 });
@@ -32,16 +50,12 @@
                 };
 
                 // set the visibility of the feature layer
-                this.setVisible = function (isVisible) {
+                this.setVisible = function (visible) {
+                    var isVisible = isTrue(visible);
                     var visibleDeferred = $q.defer();
 
                     this.getLayer().then(function (layer) {
-                        if (isVisible) {
-                            layer.show();
-                        } else {
-                            layer.hide();
-                        }
-
+                        layer.setVisibility(isVisible);
                         visibleDeferred.resolve();
                     });
 
@@ -55,15 +69,9 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                var visible = attrs.visible || 'true';
-                var isVisible = scope.$eval(visible);
-
-                // set the initial visible state of the feature layer
-                layerController.setVisible(isVisible);
-
-                // add a $watch condition on the visible attribute, if it changes and the new value is different than the previous, then use to
+                // watch the scope's visible property for changes
                 // set the visibility of the feature layer
-                scope.$watch(function () { return scope.$eval(attrs.visible); }, function (newVal, oldVal) {
+                scope.$watch('visible', function (newVal, oldVal) {
                     if (newVal !== oldVal) {
                         layerController.setVisible(newVal);
                     }
@@ -79,6 +87,11 @@
                       layer: layer,
                       hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
                       defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
+                    });
+
+                    // Remove the layer from the map when the layer scope is destroyed
+                    scope.$on('$destroy', function () {
+                        mapController.removeLayer(layer);
                     });
 
                     // return the layer

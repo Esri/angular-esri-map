@@ -220,6 +220,13 @@
                     });
                 };
 
+                // support removing layers, e.g. when esriFeatureLayer goes out of scope
+                this.removeLayer = function (layer) {
+                    return this.getMap().then(function (map) {
+                        return map.removeLayer(layer);
+                    });
+                };
+
                 // array to store layer info, needed for legend
                 this.addLayerInfo = function(lyrInfo) {
                     if (!this.layerInfos) {
