@@ -85,7 +85,7 @@ gulp.task('deploy-prod', ['build'], function () {
 });
 
 gulp.task('test', ['serve'], function() {
-  return gulp.src(['./test/**/*.js'])
+  return gulp.src(['./test/e2e/specs/*.js'])
     .pipe(angularProtractor({
       'configFile': 'test/e2e/conf.js',
       'args': ['--baseUrl', 'http://localhost:9002'],
