@@ -5,14 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Added
+
+Geographic center coordinates are normalized prior to updating esriMap scope values [#93](https://github.com/Esri/angular-esri-map/issues/93)
+
+Add or remove layers from the map programatically [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
+
+Set [definition expression option](https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1) of feature layer when adding it to the map [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
+
 ### Documentation
 
 Examples pages are now driven by configurable JSON and have more consistent titles [#94](https://github.com/Esri/angular-esri-map/pull/94)
 
 Using `ng-options` for zoom level select Set Center and Zoom example page so that it has the correct value selected initially [c8659fce](https://github.com/Esri/angular-esri-map/commit/c8659fce94a94c5361a4cb047410b7cf0c4c87e4)
-
-### Enhancements
-Geographic center coordinates are normalized prior to updating esriMap scope values. [#93](https://github.com/Esri/angular-esri-map/issues/93)
 
 ### Tests
 
