@@ -7,6 +7,7 @@
         function updateScopeFromMap(scope, map) {
             var geoCenter = map.geographicExtent && map.geographicExtent.getCenter();
             if (geoCenter) {
+                geoCenter = geoCenter.normalize();
                 scope.center = {
                     lat: geoCenter.y,
                     lng: geoCenter.x

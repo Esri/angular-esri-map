@@ -11,6 +11,8 @@ Examples pages are now driven by configurable JSON and have more consistent titl
 
 Using `ng-options` for zoom level select Set Center and Zoom example page so that it has the correct value selected initially [c8659fce](https://github.com/Esri/angular-esri-map/commit/c8659fce94a94c5361a4cb047410b7cf0c4c87e4)
 
+### Enhancements
+Geographic center coordinates are normalized prior to updating esriMap scope values. [#93](https://github.com/Esri/angular-esri-map/issues/93)
 
 ### Tests
 
