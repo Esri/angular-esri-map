@@ -85,8 +85,12 @@
 
                     // construct optional infoWindow from mapOptions
                     // default to a new Popup dijit for now
+                    // mapOptions.infoWindow expects:
+                    //  {options: <Object>, srcNodeRef: <Node | String>}
                     if (mapOptions.hasOwnProperty('infoWindow')) {
-                        mapOptions.infoWindow = new Popup(mapOptions.infoWindow.options, mapOptions.infoWindow.srcNodeRef);
+                        if (mapOptions.infoWindow.hasOwnProperty('srcNodeRef')) {
+                            mapOptions.infoWindow = new Popup(mapOptions.infoWindow.options || {}, mapOptions.infoWindow.srcNodeRef);
+                        }
                     }
 
                     // check for 1 way bound properties (basemap)
