@@ -23,6 +23,7 @@
             scope: {
                 url: '@',
                 visible: '@?',
+                opacity: '@?',
                 definitionExpression: '@?',
                 // function binding for reading object hash from attribute string
                 // or from scope object property
@@ -40,6 +41,11 @@
                     // $scope.visible takes precedence over $scope.layerOptions.visible
                     if (angular.isDefined($scope.visible)) {
                         layerOptions.visible = isTrue($scope.visible);
+                    }
+
+                    // $scope.opacity takes precedence over $scope.layerOptions.opacity
+                    if ($scope.opacity) {
+                        layerOptions.opacity = Number($scope.opacity); 
                     }
 
                     // $scope.definitionExpression takes precedence over $scope.layerOptions.definitionExpression
@@ -78,24 +84,38 @@
 
                     var layer = new FeatureLayer($scope.url, layerOptions);
                     layerDeferred.resolve(layer);
+
+                    layerDeferred.promise.then(function(layer) {
+                        // watch the scope's visible property for changes
+                        // set the visibility of the feature layer
+                        $scope.$watch('visible', function(newVal, oldVal) {
+                            if (newVal !== oldVal) {
+                                layer.setVisibility(isTrue(newVal));
+                            }
+                        });
+
+                        // watch the scope's opacity property for changes
+                        // set the opacity of the feature layer
+                        $scope.$watch('opacity', function(newVal, oldVal) {
+                            if (newVal !== oldVal) {
+                                layer.setOpacity(Number(newVal));
+                            }
+                        });
+
+                        // watch the scope's definitionExpression property for changes
+                        // set the definitionExpression of the feature layer
+                        $scope.$watch('definitionExpression', function(newVal, oldVal) {
+                            console.log(arguments);
+                            if (newVal !== oldVal) {
+                                layer.setDefinitionExpression(newVal);
+                            }
+                        });
+                    });
                 });
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
                     return layerDeferred.promise;
-                };
-
-                // set the visibility of the feature layer
-                this.setVisible = function(visible) {
-                    var isVisible = isTrue(visible);
-                    var visibleDeferred = $q.defer();
-
-                    this.getLayer().then(function(layer) {
-                        layer.setVisibility(isVisible);
-                        visibleDeferred.resolve();
-                    });
-
-                    return visibleDeferred.promise;
                 };
             },
 
@@ -104,14 +124,6 @@
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
-
-                // watch the scope's visible property for changes
-                // set the visibility of the feature layer
-                scope.$watch('visible', function(newVal, oldVal) {
-                    if (newVal !== oldVal) {
-                        layerController.setVisible(newVal);
-                    }
-                });
 
                 layerController.getLayer().then(function(layer) {
                     // add layer

@@ -12,11 +12,23 @@
         <h2>Feature Layers</h2>
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-            <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
-            <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0" visible="{{map.showTrees}}"></esri-feature-layer>
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
+                opacity="{{map.parksOpacity}}"
+                >
+            </esri-feature-layer>
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
+                visible="{{map.showTrees}}"
+                definition-expression="{{map.treesDefExpression}}"
+                >
+            </esri-feature-layer>
+            <!-- a standalone definition-expression will take precedence over one provided within the layer-options -->
+            <!-- see an example of this in the following <esri-feature-layer> -->
             <esri-feature-layer
                 url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/ArcGIS/rest/services/Portland_Light_Rail_Lines/FeatureServer/0"
-                definition-expression="TYPE = 'SC'"
+                definition-expression="1=1"
+                opacity="0.85"
                 layer-options="{
                     autoGeneralize: true,
                     className: 'portland-light-rail',
@@ -42,9 +54,27 @@
             </esri-feature-layer>
         </esri-map>
         <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
+        
+        <hr>
+
+        <p>Set trees definition expression, for example:
+        <ul style="font-style: italic;">
+            <li>HEIGHT > 100</li>
+            <li>COMMON_NAM LIKE '%pine%'</li>
+        </ul>
+        <p>Continuous model change:</p>
+        <input type="text" ng-model="map.treesDefExpression" />
+        <p>On form submit model change:</p>
+        <form ng-submit="submitTreesDefExpression()">
+          <input type="text" ng-model="defExpressionInputText" name="text" />
+          <input type="submit" id="submit" value="Submit" />
+        </form>
+        
+        <hr>
+
+        <p><label><input type="number" ng-model="map.parksOpacity" min="0" max="1" step="0.05"/> Set parks opacity</label></p>
         <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <p>Based on <a href="http://jsfiddle.net/patrickarlt/xy3nm1sq/1/">this JS Fiddle</a>.</p>
-
 
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
@@ -56,14 +86,21 @@
         <script type="text/javascript">
             'use strict';
             angular.module('esri-map-example', ['esri.map'])
-                .controller('MapController', function ($scope) {
+                .controller('MapController', function($scope) {
                     $scope.map = {
                         center: {
                             lng: -122.676207,
                             lat: 45.523452
                         },
                         zoom: 12,
-                        showTrees: false
+                        parksOpacity: 0.8,
+                        showTrees: false,
+                        treesDefExpression: 'HEIGHT > 70'
+                    };
+                    $scope.submitTreesDefExpression = function() {
+                        if ($scope.defExpressionInputText) {
+                            $scope.map.treesDefExpression = $scope.defExpressionInputText;
+                        }
                     };
                 });
         </script>
