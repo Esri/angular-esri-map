@@ -105,7 +105,6 @@
                         // watch the scope's definitionExpression property for changes
                         // set the definitionExpression of the feature layer
                         $scope.$watch('definitionExpression', function(newVal, oldVal) {
-                            console.log(arguments);
                             if (newVal !== oldVal) {
                                 layer.setDefinitionExpression(newVal);
                             }
