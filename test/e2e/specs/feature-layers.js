@@ -53,10 +53,10 @@ describe('Feature Layers', function() {
 
     it('should submit a new definition expression and change the total number of point layer image DOM nodes', function() {
         // element locator(s) specific to this test
-        var defExpressionInputText = element(by.model('defExpressionInputText'));
+        var treesDefExpressionInputText = element(by.model('treesDefExpressionInputText'));
         var defExpressionSubmit = element(by.id('submit'));
 
-        defExpressionInputText.sendKeys('HEIGHT > 180');
+        treesDefExpressionInputText.sendKeys('HEIGHT > 180');
         defExpressionSubmit.click();
 
         var featureLayerChildImageNodes = featureLayer2.all(by.tagName('image'));
