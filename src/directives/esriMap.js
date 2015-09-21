@@ -76,7 +76,7 @@
 
                     // construct optional Extent for mapOptions
                     if (mapOptions.hasOwnProperty('extent')) {
-                        // construct if parent controller isn'tsupplying a valid and already constructed Extent
+                        // construct if parent controller isn't supplying a valid and already constructed Extent
                         // e.g. if the controller or HTML view are only providing JSON
                         if (mapOptions.extent.declaredClass !== 'esri.geometry.Extent') {
                             mapOptions.extent = new Extent(mapOptions.extent);

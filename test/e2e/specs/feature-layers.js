@@ -7,9 +7,12 @@ describe('Feature Layers', function() {
     var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
     var map = element(by.id('map'));
     var mapGraphics = element(by.id('map_gc'));
+    // polygon
     var featureLayer1 = element(by.id('graphicsLayer1_layer'));
+    // point
     var featureLayer2 = element(by.id('graphicsLayer2_layer'));
-    var featureLayer3 = element(by.id('graphicsLayer3_layer'));
+    // polyline, with unique ID defined by JSAPI constructor options
+    var featureLayer3 = element(by.id('PortlandLightRail_layer'));
 
     beforeAll(function() {
         // refer to conf.js to get the baseUrl that is prepended
@@ -46,5 +49,35 @@ describe('Feature Layers', function() {
             // but we want to give the layer time to display itself after executing showTreesToggle.click()
             expect(featureLayer2.getCssValue('display')).toEqual('block');
         });
+    });
+
+    it('should submit a new definition expression and change the total number of point layer image DOM nodes', function() {
+        // element locator(s) specific to this test
+        var defExpressionInputText = element(by.model('defExpressionInputText'));
+        var defExpressionSubmit = element(by.id('submit'));
+
+        defExpressionInputText.sendKeys('HEIGHT > 180');
+        defExpressionSubmit.click();
+
+        var featureLayerChildImageNodes = featureLayer2.all(by.tagName('image'));
+        helper.getAsyncAttributeValue(featureLayer2, 'data-geometry-type').then(function() {
+            // we are not concerned with the data-geometry-type
+            // but we want to give the layer time to display itself after submitting the def expression form
+            expect(featureLayerChildImageNodes.count()).toEqual(2);
+        });
+    });
+
+    it('should change the opacity of the polygon layer', function() {
+        // element locator(s) specific to this test
+        var parksOpacityInputText = element(by.model('map.parksOpacity'));
+
+        var beforeOpacity = featureLayer1.getAttribute('opacity');
+        
+        parksOpacityInputText.clear();
+        parksOpacityInputText.sendKeys('0');
+        
+        var afterOpacity = featureLayer1.getAttribute('opacity');
+
+        expect(afterOpacity).not.toBe(beforeOpacity);
     });
 });
