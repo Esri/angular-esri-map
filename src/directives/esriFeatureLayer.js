@@ -32,7 +32,7 @@
             },
 
             // define an interface for working with this directive
-            controller: function($scope, $element, $attrs) {
+            controller: function($scope) {
                 var layerDeferred = $q.defer();
 
                 require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
@@ -45,7 +45,7 @@
 
                     // $scope.opacity takes precedence over $scope.layerOptions.opacity
                     if ($scope.opacity) {
-                        layerOptions.opacity = Number($scope.opacity); 
+                        layerOptions.opacity = Number($scope.opacity);
                     }
 
                     // $scope.definitionExpression takes precedence over $scope.layerOptions.definitionExpression

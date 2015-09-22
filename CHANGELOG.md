@@ -13,7 +13,7 @@ Add or remove layers from the map programatically [#51](https://github.com/Esri/
 
 Set [definition expression option](https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1) of feature layer when adding it to the map [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
 
-**esriFeatureLayer** directive now accepts optional opacity and JSAPI construction layer options.  Opacity and definition expression act just like the visible option, and are watched for changes and can be adjusted at any time. [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
+**esriFeatureLayer** directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
 
 ### Documentation
 
