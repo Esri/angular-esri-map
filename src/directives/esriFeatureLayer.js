@@ -125,8 +125,9 @@
                 var mapController = controllers[1];
 
                 layerController.getLayer().then(function(layer) {
-                    // add layer
-                    mapController.addLayer(layer);
+                    // add layer at index position 0
+                    // so that layers can be declaratively added to map in top-to-bottom order
+                    mapController.addLayer(layer, 0);
 
                     // Look for layerInfo related attributes. Add them to the map's layerInfos array for access in other components
                     mapController.addLayerInfo({

@@ -13,15 +13,9 @@
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
             <esri-feature-layer
-                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
-                opacity="{{map.parksOpacity}}"
-                >
-            </esri-feature-layer>
-            <esri-feature-layer
                 url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
                 visible="{{map.showTrees}}"
-                definition-expression="{{map.treesDefExpression}}"
-                >
+                definition-expression="{{map.treesDefExpression}}">
             </esri-feature-layer>
             <!-- a standalone definition-expression will take precedence over one provided within the layer-options -->
             <!-- see an example of this in the following <esri-feature-layer> -->
@@ -51,6 +45,10 @@
                     useMapTime: true,
                     visible: true
                 }">
+            </esri-feature-layer>
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
+                opacity="{{map.parksOpacity}}">
             </esri-feature-layer>
         </esri-map>
         <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
