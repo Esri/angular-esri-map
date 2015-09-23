@@ -7,12 +7,12 @@ describe('Feature Layers', function() {
     var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
     var map = element(by.id('map'));
     var mapGraphics = element(by.id('map_gc'));
-    // polygon
-    var featureLayer1 = element(by.id('graphicsLayer1_layer'));
     // point
-    var featureLayer2 = element(by.id('graphicsLayer2_layer'));
+    var pointFeatureLayer = element(by.id('graphicsLayer1_layer'));
     // polyline, with unique ID defined by JSAPI constructor options
-    var featureLayer3 = element(by.id('PortlandLightRail_layer'));
+    var polylineFeatureLayer = element(by.id('PortlandLightRail_layer'));
+    // polygon
+    var polygonFeatureLayer = element(by.id('graphicsLayer2_layer'));
 
     beforeAll(function() {
         // refer to conf.js to get the baseUrl that is prepended
@@ -25,16 +25,16 @@ describe('Feature Layers', function() {
         helper.waitUntilElementIsReady(map);
         helper.waitUntilElementIsReady(mapGraphics);
 
-        helper.getAsyncAttributeValue(featureLayer1, 'data-geometry-type').then(function(value) {
-            expect(value).toEqual('polygon');
-        });
-
-        helper.getAsyncAttributeValue(featureLayer2, 'data-geometry-type').then(function(value) {
+        helper.getAsyncAttributeValue(pointFeatureLayer, 'data-geometry-type').then(function(value) {
             expect(value).toEqual('point');
         });
 
-        helper.getAsyncAttributeValue(featureLayer3, 'data-geometry-type').then(function(value) {
+        helper.getAsyncAttributeValue(polylineFeatureLayer, 'data-geometry-type').then(function(value) {
             expect(value).toEqual('polyline');
+        });
+        
+        helper.getAsyncAttributeValue(polygonFeatureLayer, 'data-geometry-type').then(function(value) {
+            expect(value).toEqual('polygon');
         });
     });
 
@@ -44,10 +44,10 @@ describe('Feature Layers', function() {
 
         showTreesToggle.click();
 
-        helper.getAsyncAttributeValue(featureLayer2, 'data-geometry-type').then(function() {
+        helper.getAsyncAttributeValue(pointFeatureLayer, 'data-geometry-type').then(function() {
             // we are not concerned with the data-geometry-type
             // but we want to give the layer time to display itself after executing showTreesToggle.click()
-            expect(featureLayer2.getCssValue('display')).toEqual('block');
+            expect(pointFeatureLayer.getCssValue('display')).toEqual('block');
         });
     });
 
@@ -59,8 +59,8 @@ describe('Feature Layers', function() {
         treesDefExpressionInputText.sendKeys('HEIGHT > 180');
         defExpressionSubmit.click();
 
-        var featureLayerChildImageNodes = featureLayer2.all(by.tagName('image'));
-        helper.getAsyncAttributeValue(featureLayer2, 'data-geometry-type').then(function() {
+        var featureLayerChildImageNodes = pointFeatureLayer.all(by.tagName('image'));
+        helper.getAsyncAttributeValue(pointFeatureLayer, 'data-geometry-type').then(function() {
             // we are not concerned with the data-geometry-type
             // but we want to give the layer time to display itself after submitting the def expression form
             expect(featureLayerChildImageNodes.count()).toEqual(2);
@@ -71,12 +71,12 @@ describe('Feature Layers', function() {
         // element locator(s) specific to this test
         var parksOpacityInputText = element(by.model('map.parksOpacity'));
 
-        var beforeOpacity = featureLayer1.getAttribute('opacity');
+        var beforeOpacity = polygonFeatureLayer.getAttribute('opacity');
         
         parksOpacityInputText.clear();
         parksOpacityInputText.sendKeys('0');
         
-        var afterOpacity = featureLayer1.getAttribute('opacity');
+        var afterOpacity = polygonFeatureLayer.getAttribute('opacity');
 
         expect(afterOpacity).not.toBe(beforeOpacity);
     });

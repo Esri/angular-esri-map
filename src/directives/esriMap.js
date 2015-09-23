@@ -218,9 +218,11 @@
                 };
 
                 // adds the layer, returns the promise that will be resolved with the result of map.addLayer
-                this.addLayer = function(layer) {
+                this.addLayer = function(layer, index) {
+                    // layer: valid JSAPI layer
+                    // index: optional <Number>; likely only used internally by, for example, esriFeatureLayer
                     return this.getMap().then(function(map) {
-                        return map.addLayer(layer);
+                        return map.addLayer(layer, index);
                     });
                 };
 

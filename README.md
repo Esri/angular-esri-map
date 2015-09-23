@@ -36,8 +36,8 @@ Once you've added the module to your application, you can use the sample code be
     </head>
     <body ng-controller="MapController">
     <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
+        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>

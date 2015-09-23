@@ -13,7 +13,7 @@ Add or remove layers from the map programatically [#51](https://github.com/Esri/
 
 Set [definition expression option](https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1) of feature layer when adding it to the map [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
 
-**esriFeatureLayer** directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
+esriFeatureLayer directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
 
 ### Documentation
 
@@ -21,7 +21,7 @@ Examples pages are now driven by configurable JSON and have more consistent titl
 
 Using `ng-options` for zoom level select Set Center and Zoom example page so that it has the correct value selected initially [c8659fce](https://github.com/Esri/angular-esri-map/commit/c8659fce94a94c5361a4cb047410b7cf0c4c87e4)
 
-Feature-layers example now includes adjustable layer opacity, definition expression, and additional information on the **esriFeatureLayer** directive options [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100).
+Feature-layers example now includes adjustable layer opacity, definition expression, and additional information on the esriFeatureLayer directive options [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100).
 
 ### Tests
 
