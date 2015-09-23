@@ -42,11 +42,8 @@
                 }
                 legend = new Legend(opts, targetId);
                 legend.startup();
-                scope.layers = legend.layers;
-                angular.forEach(scope.layers, function(layer, i) {
-                  scope.$watch('layers['+i+'].renderer',function() {
-                    legend.refresh();
-                  });
+                scope.$watchCollection(function () { return mapController.getLayerInfos(); }, function (newValue/*, oldValue, scope*/) {
+                    legend.refresh(newValue);
                 });
                 legendDeferred.resolve(legend);
               });

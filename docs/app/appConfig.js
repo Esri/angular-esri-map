@@ -64,6 +64,17 @@
             }
         }, {
             toc: {
+                title: 'Dynamic Map Service Layer',
+                description: 'Loads a dynamic map service layer into the map, and specifies layers to be shown.  Also uses infoTemplate to display identify information about features on the map.',
+                url: urlPrefixes.templateHref + 'dynamic-map-service-layers'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'dynamic-map-service-layers',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'dynamic-map-service-layers.html',
+                controller: 'DynamicMapServiceLayersCtrl'
+            }
+        }, {
+            toc: {
                 title: 'Legend',
                 description: 'Show a legend for the map.',
                 url: urlPrefixes.templateHref + 'legend'
