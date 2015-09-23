@@ -11,9 +11,12 @@ Geographic center coordinates are normalized prior to updating esriMap scope val
 
 Add or remove layers from the map programatically [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
 
-Set [definition expression option](https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1) of feature layer when adding it to the map [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
+esriFeatureLayer directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604) [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
 
-esriFeatureLayer directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
+### Changed
+
+Map directive's `addLayer` accepts an optional index argument, and layers are now added in the order that they appear in the markup
+[#104](https://github.com/Esri/angular-esri-map/issues/104)
 
 ### Documentation
 
@@ -31,7 +34,7 @@ Added functional testing using [Protractor](https://angular.github.io/protractor
 
 Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 
-## [Beta 4][v1.0.0-beta.4]
+## [v1.0.0-beta.4]
 
 ### Added
 
@@ -52,7 +55,7 @@ Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 
 * [No Basemap](http://esri.github.io/angular-esri-map/#/examples/no-basemap) and [Additional Map Options](http://esri.github.io/angular-esri-map/#/examples/additional-map-options)
 
-## [Beta 3][v0.0.1-beta.3]
+## [v0.0.1-beta.3]
 
 ### Added
 
@@ -74,7 +77,7 @@ Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 
 Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their contributions and continued patience.
 
-## [Beta 2][v0.0.1-beta.2]
+## [v0.0.1-beta.2]
 
 ### Added
 
@@ -97,7 +100,7 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * [Additional Map Options](http://esri.github.io/angular-esri-map/#/examples/additional-attributes)
   * _NOTE: This demo page address has changed after Beta 3 to [Additional Map Options](http://esri.github.io/angular-esri-map/#/examples/additional-map-options)_
 
-## [Beta 1][v0.0.1-beta.1]
+## [v0.0.1-beta.1]
 
 ### Added
 
