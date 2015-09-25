@@ -4,31 +4,38 @@
     angular.module('esri.map').directive('esriInfoTemplate', function () {
         // this object will tell angular how our directive behaves
         return {
-            // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
+            // only allow esriInfoTemplate to be used as an element (<esri-feature-layer>)
             restrict: 'E',
 
-            // require the esriFeatureLayer to have its own controller as well an esriMap controller
+            // require the esriInfoTemplate to have its own controller as well an esriMap controller
             // you can access these controllers in the link function
-            require: ['esriInfoTemplate', '^esriDynamicMapServiceLayer'],
+            require: ['?esriInfoTemplate', '?^esriDynamicMapServiceLayer'],
 
             // replace this element with our template.
             // since we aren't declaring a template this essentially destroys the element
             replace: true,
 
-            // define an interface for working with this directive
-            controller: function (/*$scope, $element, $attrs*/) {
-            },
+            compile: function($element) {
 
-            // now we can link our directive to the scope, but we can also add it to the map..
-            link: function (scope, element, attrs, controllers) {
-                // hide element
-                element.addClass('hidden');
-                // controllers is now an array of the controllers from the 'require' option
-                // var templateController = controllers[0];
-                var layerController = controllers[1];
+                // get info template content from element inner HTML
+                var content = $element.html();
 
-                layerController.InfoTemplates.push({ layerIDs: attrs.layerIds, title: attrs.title, content: element.html() });
+                // clear element inner HTML
+                $element.html('');
 
+                // since we are using compile we need to return our linker function
+                // the 'link' function handles how our directive responds to changes in $scope
+                return function (scope, element, attrs, controllers) {
+                    // controllers is now an array of the controllers from the 'require' option
+                    // var templateController = controllers[0];
+                    var dynamicMapServiceLayerController = controllers[1];
+                    if (dynamicMapServiceLayerController) {
+                        dynamicMapServiceLayerController.setInfoTemplate(attrs.layerId, {
+                            title: attrs.title,
+                            content: content
+                        });
+                    }
+                };
             }
         };
     });

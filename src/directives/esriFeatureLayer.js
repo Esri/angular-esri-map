@@ -86,6 +86,7 @@
                     layerDeferred.resolve(layer);
 
                     layerDeferred.promise.then(function(layer) {
+                        // TODO: move these watches to the link function
                         // watch the scope's visible property for changes
                         // set the visibility of the feature layer
                         $scope.$watch('visible', function(newVal, oldVal) {
@@ -132,6 +133,7 @@
                     mapController.addLayerInfo({
                         title: attrs.title || layer.name,
                         layer: layer,
+                        // TODO: are these the right params to send
                         hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
                         defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
                     });
