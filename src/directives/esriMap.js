@@ -238,7 +238,7 @@
                     if (!this.layerInfos) {
                         this.layerInfos = [lyrInfo];
                     } else {
-                        this.layerInfos.push(lyrInfo);
+                        this.layerInfos.unshift(lyrInfo);
                     }
                 };
                 this.getLayerInfos = function() {
