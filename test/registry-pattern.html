@@ -6,7 +6,7 @@
         <title>Registry Pattern</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
         <h2>Registry Pattern</h2>
@@ -16,9 +16,9 @@
         <p ng-show="!map.point">Click the map to see point X / Y.</p>
         <p ng-show="map.point">Clicked point X: {{ map.point.x }}, Y: {{ map.point.y }}</p>
         <!-- load Esri JavaScript API -->
-        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->

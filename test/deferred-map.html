@@ -6,7 +6,7 @@
         <title>Deferred Map</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
         <h2>Deferred Map</h2>
@@ -21,7 +21,7 @@
         </div>
 
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
@@ -35,8 +35,11 @@
                     // This function will be called when you click the button
                     $scope.lazyload = function() {
 
-                        // Make a call to load ESRI API resources, a promise is provided for when the resources has finished loading.
-                        esriLoader.bootstrap().then(function() {
+                        // Make a call to load Esri JSAPI resources at version 3.11.
+                        // A promise is provided for when the resources have finished loading.
+                        esriLoader.bootstrap({
+                            url: 'http://js.arcgis.com/3.11compact'
+                        }).then(function() {
 
                             // Set Loaded to be true
                             $scope.loaded = true;

@@ -78,7 +78,7 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-These directives were originally built using Angular v1.2.16 and the ArcGIS API for JavaScript v3.11. They have been tested on every minor release of each of those libraries since then.
+These directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.11. They have been tested on every minor release of each of those libraries since then.
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
