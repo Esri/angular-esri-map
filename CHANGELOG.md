@@ -15,8 +15,8 @@ esriFeatureLayer directive now includes optional attributes for opacity, definit
 
 ### Changed
 
-Map directive's `addLayer` accepts an optional index argument, and layers are now added in the order that they appear in the markup
-[#104](https://github.com/Esri/angular-esri-map/issues/104)
+Map directive's `addLayer` accepts an optional index argument, and layers are now added to the esriMap and esriLegend in the order that they appear in the markup.
+[#104](https://github.com/Esri/angular-esri-map/issues/104) and [#111](https://github.com/Esri/angular-esri-map/issues/111)
 
 ### Documentation
 
