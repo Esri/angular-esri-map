@@ -11,7 +11,7 @@ describe('Registry Pattern', function() {
         browser.get('/registry-pattern.html');
     });
 
-    it('should click on the "zoom in" and change the map zoom value from "13" to "14"', function() {
+    it('should click on the map and begin showing click information in a text element', function() {
         // element locator(s) specific to this test
         var mapClickInfo = element(by.id('mapClickInfo'));
         helper.waitUntilElementIsReady(map);
