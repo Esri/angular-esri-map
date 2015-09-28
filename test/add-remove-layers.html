@@ -3,13 +3,13 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <title>Add/Remove Layers Example</title>
+        <title>Add/Remove Layers</title>
 
         <!-- load Esri CSS -->
         <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
-        <h2>Add/Remove Layers Example</h2>
+        <h2>Add/Remove Layers</h2>
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
             <esri-feature-layer ng-repeat="url in selectedLayers" url="{{url}}"></esri-feature-layer>
@@ -44,12 +44,12 @@
 
                     $scope.layers = [
                         {
-                            name: 'Parks',
-                            url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
-                        },
-                        {
                             name: 'Heritage Trees',
                             url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
+                        },
+                        {
+                            name: 'Parks',
+                            url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
                         }
                     ];
 

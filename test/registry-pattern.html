@@ -14,7 +14,7 @@
         <esri-map id="map" register-as="myMap" center="map.center" zoom="map.zoom" basemap="topo">
         </esri-map>
         <p ng-show="!map.point">Click the map to see point X / Y.</p>
-        <p ng-show="map.point">Clicked point X: {{ map.point.x }}, Y: {{ map.point.y }}</p>
+        <p id="mapClickInfo" ng-show="map.point">Clicked point X: {{ map.point.x }}, Y: {{ map.point.y }}</p>
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->

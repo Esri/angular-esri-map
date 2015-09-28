@@ -28,7 +28,7 @@ Feature-layers example now includes adjustable layer opacity, definition express
 
 ### Tests
 
-Added functional testing using [Protractor](https://angular.github.io/protractor/#/) [#82](https://github.com/Esri/angular-esri-map/pull/82) [#94](https://github.com/Esri/angular-esri-map/pull/94)
+Added functional testing using [Protractor](https://angular.github.io/protractor/#/). [#82](https://github.com/Esri/angular-esri-map/pull/82), [#94](https://github.com/Esri/angular-esri-map/pull/94), [#112](https://github.com/Esri/angular-esri-map/pull/112)
 
 ### Maintenance
 
