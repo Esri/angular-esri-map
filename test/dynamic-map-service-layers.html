@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Dynamic Map Service Layers Example</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+        <style>
+            .esriPopup .titlePane {
+                text-shadow: none;
+            }
+
+            .esriPopup .titleButton.next {
+                right: 40px;
+            }
+
+            .esriPopup .titleButton.prev {
+                right: 53px;
+            }
+
+            .demographicInfoContent {
+                padding-top: 10px;
+            }
+
+            .demographicInnerSpacing {
+                display: inline-block;
+                width:     8px;
+            }
+
+            .demographicNumericPadding {
+                width:            90px;
+                display:        inline-block;
+                text-align: right;
+            }
+        </style>
+    </head>
+    <body ng-controller="MapController">
+        <h2>Dynamic Map Service Layers Example</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <!-- NOTE: using one-time binding (::) for all url and options parameters
+        as they are only evaluated in the map/layer constructors -->
+        <esri-map id="map" map-options="::map.options">
+            <!-- dynamic map service layer w/ inline url and options
+            as well as info template defined in a directive -->
+            <esri-dynamic-map-service-layer url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
+                <esri-info-template layer-id="0" title="<b>Oil and Gas data</b>">
+                    ${FIELD_NAME} production field<br>
+                    <div class="demographicInfoContent">
+                        Gas production: ${PROD_GAS}
+                        <br>Oil production: ${PROD_OIL}
+                    </div>
+                </esri-info-template>
+            </esri-dynamic-map-service-layer>
+            <!-- dynamic map service layer w/ url and options bound to scope properties -->
+            <esri-dynamic-map-service-layer url="{{ ::demographicsLayer.url }}" layer-options="::demographicsLayer.options" visible-layers="1,2" />
+        </esri-map>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_twodynamic.html">this sample</a></p>
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function ($scope) {
+
+                    var _censusInfoContent = '<div class="demographicInfoContent">' +
+                    '<div class="demographicNumericPadding">${AGE_5_17:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 5 - 17<br>' +
+                    '<div class="demographicNumericPadding">${AGE_40_49:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 40 - 49<br>' +
+                    '<div class="demographicNumericPadding">${AGE_65_UP:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 65 and older' +
+                    '</div>';
+
+                    // functions used in popup templates must have a global scope :(
+                    window.formatNumber = function(value/*, key, data*/) {
+                        var searchText = '' + value;
+                        var formattedString = searchText.replace(/(\d)(?=(\d\d\d)+(?!\d))/gm, '$1,');
+                        return formattedString;
+                    };
+
+                    $scope.map = {
+                        options: {
+                          basemap: 'topo',
+                          center: [-94.75290067627297, 39.034671990514816], // long, lat
+                          zoom: 12,
+                          sliderStyle: 'small'/*,
+                          infoWindow: popup*/
+                      }
+                    };
+                    $scope.demographicsLayer = {
+                        url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+                        options: {
+                            id: 'demographicsLayer',
+                            opacity: 0.8,
+                            showAttribution: false,
+                            infoTemplates: {
+                                1: {
+                                    infoTemplate: {
+                                        title: '<b>Census Information</b>',
+                                        content: 'Demographics for:<br>Tract: ${TRACT:formatNumber} Blockgroup: ${BLKGRP}<br>' + _censusInfoContent
+                                    }
+                                },
+                                2: {
+                                    infoTemplate: {
+                                        title: '<b>Census Information</b>',
+                                        content: 'Demographics for:<br>${NAME}, ${STATE_NAME}<br>' + _censusInfoContent
+                                    }
+                                }
+                            }
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>
