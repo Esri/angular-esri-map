@@ -11,12 +11,18 @@ Geographic center coordinates are normalized prior to updating esriMap scope val
 
 Add or remove layers from the map programatically [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604)
 
-esriFeatureLayer directive now includes optional attributes for opacity, definition expression, and constructor options.  Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604) [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
+The feature layer directive now includes optional attributes for opacity, definition expression, and constructor options. Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604) [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
+
+Added a directive for dynamic map service layers. Like the feature layer directive, it has optional attributes for visibility, opacity and constructor options. [#52](https://github.com/Esri/angular-esri-map/issues/52) [@Kollibri](https://github.com/Kollibri)
+
+Added a directive to set the info template(s) for layers so that they show a popup when clicked. [#52](https://github.com/Esri/angular-esri-map/issues/52) [#118](https://github.com/Esri/angular-esri-map/issues/118) [@Kollibri](https://github.com/Kollibri)
 
 ### Changed
 
 Map directive's `addLayer` accepts an optional index argument, and layers are now added to the esriMap and esriLegend in the order that they appear in the markup.
 [#104](https://github.com/Esri/angular-esri-map/issues/104) and [#111](https://github.com/Esri/angular-esri-map/issues/111)
+
+Legend directive now uses `$scope.$watchCollection` to watch `map.layerInfos` for changes and refresh the legend appropriately. [#52](https://github.com/Esri/angular-esri-map/issues/52) [@Kollibri](https://github.com/Kollibri)
 
 ### Documentation
 
@@ -25,6 +31,8 @@ Examples pages are now driven by configurable JSON and have more consistent titl
 Using `ng-options` for zoom level select Set Center and Zoom example page so that it has the correct value selected initially [c8659fce](https://github.com/Esri/angular-esri-map/commit/c8659fce94a94c5361a4cb047410b7cf0c4c87e4)
 
 Feature-layers example now includes adjustable layer opacity, definition expression, and additional information on the esriFeatureLayer directive options [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100).
+
+Added an example page for the new dynamic map service layer. [c69329b9](https://github.com/Esri/angular-esri-map/commit/c69329b97ec0cd29d7aeb02a60f6691b2a525842)
 
 ### Tests
 
