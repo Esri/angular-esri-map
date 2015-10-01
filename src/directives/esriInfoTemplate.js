@@ -9,7 +9,7 @@
 
             // require the esriInfoTemplate to have its own controller as well an esriMap controller
             // you can access these controllers in the link function
-            require: ['?esriInfoTemplate', '?^esriDynamicMapServiceLayer'],
+            require: ['?esriInfoTemplate', '?^esriDynamicMapServiceLayer', '?^esriFeatureLayer'],
 
             // replace this element with our template.
             // since we aren't declaring a template this essentially destroys the element
@@ -29,8 +29,17 @@
                     // controllers is now an array of the controllers from the 'require' option
                     // var templateController = controllers[0];
                     var dynamicMapServiceLayerController = controllers[1];
+                    var featureLayerController = controllers[2];
+                    
                     if (dynamicMapServiceLayerController) {
                         dynamicMapServiceLayerController.setInfoTemplate(attrs.layerId, {
+                            title: attrs.title,
+                            content: content
+                        });
+                    }
+                    
+                    if (featureLayerController) {
+                        featureLayerController.setInfoTemplate({
                             title: attrs.title,
                             content: content
                         });

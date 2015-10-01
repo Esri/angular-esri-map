@@ -17,7 +17,7 @@ angular.module('esri-map-docs')
                 displayOnPan: true,
                 id: 'PortlandLightRail',
                 infoTemplate: {
-                    title: 'Attributes',
+                    title: 'Portland Light Rail',
                     content: '${*}'
                 },
                 maxAllowableOffset: 500,

@@ -80,4 +80,20 @@ describe('Feature Layers', function() {
 
         expect(afterOpacity).not.toBe(beforeOpacity);
     });
+
+    it('should click on the map and display a popup', function() {
+        // element locator(s) specific to this test
+        helper.waitUntilElementIsReady(map);
+        var popup = element(by.className('esriPopup'));
+
+        map.click();
+
+        helper.getAsyncAttributeValue(map, 'data-zoom').then(function() {
+            // we are not concerned with the map's data-zoom
+            // but we want to give the click action some time to update the class names
+            expect(popup.getAttribute('class')).toBe('esriPopup esriPopupVisible');
+        });
+    });
+
+
 });

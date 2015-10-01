@@ -33,9 +33,31 @@
 
             // define an interface for working with this directive
             controller: function($scope) {
+                var self = this;
                 var layerDeferred = $q.defer();
 
                 require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
+
+                    // layerOptions.infoTemplate expects one of the following:
+                    //  1. [title <String | Function>, content <String | Function>]
+                    //  2. {title: <String | Function>, content: <String | Function>}
+                    //  3. a valid Esri JSAPI InfoTemplate
+                    // TODO: refactor to shared factory/service to be used by feature layer directive as well
+                    function objectToInfoTemplate(infoTemplate) {
+                        // only attempt to construct if a valid InfoTemplate wasn't already passed in
+                        if (infoTemplate.declaredClass === 'esri.InfoTemplate') {
+                            return infoTemplate;
+                        } else {
+                            // construct infoTemplate from object, using 2 args style:
+                            //  https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html#infotemplate2
+                            if (angular.isArray(infoTemplate) && infoTemplate.length === 2) {
+                                return new InfoTemplate(infoTemplate[0], infoTemplate[1]);
+                            } else {
+                                return new InfoTemplate(infoTemplate.title, infoTemplate.content);
+                            }
+                        }
+                    }
+
                     var layerOptions = $scope.layerOptions() || {};
 
                     // $scope.visible takes precedence over $scope.layerOptions.visible
@@ -53,26 +75,18 @@
                         layerOptions.definitionExpression = $scope.definitionExpression;
                     }
 
-                    // layerOptions.infoTemplate expects one of the following:
-                    //  1. [title <String | Function>, content <String | Function>]
-                    //  2. {title: <String | Function>, content: <String | Function>}
-                    //  3. a valid Esri JSAPI InfoTemplate
+                    // $scope.layerOptions.infoTemplate takes precedence over
+                    // layer options defined in nested esriLayerOption directives
                     if (layerOptions.hasOwnProperty('infoTemplate')) {
-                        var infoT = layerOptions.infoTemplate; // shortcut reference
-                        if (infoT.declaredClass !== 'esri.InfoTemplate') {
-                            // only attempt to construct if a valid InfoTemplate wasn't already passed in
-                            // construct optional infoTemplate from layerOptions, using 2 args style:
-                            //  https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html#infotemplate2
-                            if (angular.isArray(infoT) && infoT.length === 2) {
-                                var title = infoT[0];
-                                var content = infoT[1];
-                                layerOptions.infoTemplate = new InfoTemplate(title, content);
-                            } else {
-                                if (infoT.hasOwnProperty('title') && infoT.hasOwnProperty('content')) {
-                                    layerOptions.infoTemplate = new InfoTemplate(infoT.title, infoT.content);
-                                }
-                            }
-                        }
+                        self.setInfoTemplate(layerOptions.infoTemplate);
+                    }
+
+                    // normalize info template defined in $scope.layerOptions.infoTemplate
+                    // or nested esriLayerOption directive to be instance of esri/InfoTemplate
+                    // and pass to layer constructor in layerOptions
+                    if (self._infoTemplate) {
+                        self._infoTemplate = objectToInfoTemplate(self._infoTemplate);
+                        layerOptions.infoTemplate = self._infoTemplate;
                     }
 
                     // layerOptions.mode expects a FeatureLayer constant name as a <String>
@@ -84,38 +98,15 @@
 
                     var layer = new FeatureLayer($scope.url, layerOptions);
                     layerDeferred.resolve(layer);
-
-                    layerDeferred.promise.then(function(layer) {
-                        // TODO: move these watches to the link function
-                        // watch the scope's visible property for changes
-                        // set the visibility of the feature layer
-                        $scope.$watch('visible', function(newVal, oldVal) {
-                            if (newVal !== oldVal) {
-                                layer.setVisibility(isTrue(newVal));
-                            }
-                        });
-
-                        // watch the scope's opacity property for changes
-                        // set the opacity of the feature layer
-                        $scope.$watch('opacity', function(newVal, oldVal) {
-                            if (newVal !== oldVal) {
-                                layer.setOpacity(Number(newVal));
-                            }
-                        });
-
-                        // watch the scope's definitionExpression property for changes
-                        // set the definitionExpression of the feature layer
-                        $scope.$watch('definitionExpression', function(newVal, oldVal) {
-                            if (newVal !== oldVal) {
-                                layer.setDefinitionExpression(newVal);
-                            }
-                        });
-                    });
                 });
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
                     return layerDeferred.promise;
+                };
+
+                this.setInfoTemplate = function(infoTemplate) {
+                    this._infoTemplate = infoTemplate;
                 };
             },
 
@@ -137,6 +128,30 @@
                         // TODO: are these the right params to send
                         hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
                         defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
+                    });
+
+                    // watch the scope's visible property for changes
+                    // set the visibility of the feature layer
+                    scope.$watch('visible', function(newVal, oldVal) {
+                        if (newVal !== oldVal) {
+                            layer.setVisibility(isTrue(newVal));
+                        }
+                    });
+
+                    // watch the scope's opacity property for changes
+                    // set the opacity of the feature layer
+                    scope.$watch('opacity', function(newVal, oldVal) {
+                        if (newVal !== oldVal) {
+                            layer.setOpacity(Number(newVal));
+                        }
+                    });
+
+                    // watch the scope's definitionExpression property for changes
+                    // set the definitionExpression of the feature layer
+                    scope.$watch('definitionExpression', function(newVal, oldVal) {
+                        if (newVal !== oldVal) {
+                            layer.setDefinitionExpression(newVal);
+                        }
                     });
 
                     // remove the layer from the map when the layer scope is destroyed

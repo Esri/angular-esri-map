@@ -30,7 +30,10 @@
                     displayOnPan: true,
                     gdbVersion: '10.3',
                     id: 'PortlandLightRail',
-                    infoTemplate: {title: 'Attributes', content: '${*}'},
+                    infoTemplate: {
+                        title: 'Portland Light Rail',
+                        content: '${*}'
+                    },
                     maxAllowableOffset: 500,
                     mode: 'MODE_SNAPSHOT',
                     opacity: 1.0,
@@ -48,7 +51,14 @@
             </esri-feature-layer>
             <esri-feature-layer
                 url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
-                opacity="{{map.parksOpacity}}">
+                opacity="{{map.parksOpacity}}"
+                layer-options="{
+                    outFields:['NAME', 'ACRES']
+                }">
+                <esri-info-template title="Portland Parks">
+                    <div>Name: ${NAME}</div>
+                    <div>Size: ${ACRES:NumberFormat(places:1)} acres</div>
+                </esri-info-template>
             </esri-feature-layer>
         </esri-map>
         <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
