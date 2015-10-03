@@ -25,6 +25,9 @@
                 visible: '@?',
                 opacity: '@?',
                 definitionExpression: '@?',
+                // function binding for event handlers
+                load: '&',
+                updateEnd: '&',
                 // function binding for reading object hash from attribute string
                 // or from scope object property
                 // see Example 7 here: https://gist.github.com/CMCDragonkai/6282750
@@ -153,6 +156,30 @@
                             layer.setDefinitionExpression(newVal);
                         }
                     });
+
+                    // call load handler (if any)
+                    if (attrs.load) {
+                        if (layer.loaded) {
+                        // layer is already loaded
+                        // make layer object available to caller immediately
+                            scope.load()(layer);
+                        } else {
+                            // layer is not yet loaded
+                            // wait for load event, and then make layer object available
+                            layer.on('load', function() {
+                                scope.$apply(function() {
+                                    scope.load()(layer);
+                                });
+                            });
+                        }
+                    }
+
+                    // call updateEnd handler (if any)
+                    if (attrs.updateEnd) {
+                        layer.on('update-end', function(e) {
+                            scope.updateEnd()(e);
+                        });
+                    }
 
                     // remove the layer from the map when the layer scope is destroyed
                     scope.$on('$destroy', function() {
