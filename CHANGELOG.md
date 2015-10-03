@@ -34,6 +34,8 @@ Feature-layers example now includes adjustable layer opacity, definition express
 
 Added an example page for the new dynamic map service layer. [c69329b9](https://github.com/Esri/angular-esri-map/commit/c69329b97ec0cd29d7aeb02a60f6691b2a525842)
 
+Added an example page showing how to add/remove layers from a map. [061ed936](https://github.com/Esri/angular-esri-map/commit/061ed9368f9931bc3fc03b536366f0b53c294b5e)
+
 ### Tests
 
 Added functional testing using [Protractor](https://angular.github.io/protractor/#/). [#82](https://github.com/Esri/angular-esri-map/pull/82), [#94](https://github.com/Esri/angular-esri-map/pull/94), [#112](https://github.com/Esri/angular-esri-map/pull/112)
