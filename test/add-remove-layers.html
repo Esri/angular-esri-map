@@ -10,19 +10,19 @@
     </head>
     <body ng-controller="MapController">
         <h2>Add/Remove Layers</h2>
-        <!-- add map to page and bind to scope map parameters -->
-        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+        <!-- add map to page -->
+        <esri-map id="map" map-options="{
+                        center: [-122.676207, 45.523452],
+                        zoom: 12,
+                        basemap: 'topo'
+                    }">
+            <!-- watch list of selected layers and add/remove each to/from the map -->
             <esri-feature-layer ng-repeat="url in selectedLayers" url="{{url}}"></esri-feature-layer>
         </esri-map>
-        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-
-        <div>
-            <p>Layers</p>
-            <div ng-repeat="layer in layers">
-                <input type="checkbox" ng-model="selected" ng-change="toggleLayer(layer.url)" /> {{layer.name}} <br />
-            </div>
+        <p>Click the checkbox next to each layer to add or remove it to/from the map.</p>
+        <div ng-repeat="layer in layers">
+            <input type="checkbox" ng-model="selected" ng-change="toggleLayer(layer.url)" /> {{layer.name}} <br />
         </div>
-
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
@@ -34,14 +34,7 @@
             'use strict';
             angular.module('esri-map-example', ['esri.map'])
                 .controller('MapController', function ($scope) {
-                    $scope.map = {
-                        center: {
-                            lng: -122.676207,
-                            lat: 45.523452
-                        },
-                        zoom: 12
-                    };
-
+                    // list of layers that can be added to the map
                     $scope.layers = [
                         {
                             name: 'Heritage Trees',
@@ -53,8 +46,10 @@
                         }
                     ];
 
+                    // list of layers currently added to the map
                     $scope.selectedLayers = [];
 
+                    // add/remove a layer to/from the map by URL
                     $scope.toggleLayer = function (url) {
                         console.log('Toggling ' + url);
                         var index = $scope.selectedLayers.indexOf(url);

@@ -86,6 +86,17 @@
             }
         }, {
             toc: {
+                title: 'Add / Remove Layers',
+                description: 'Shows how to add/remove layers to/from the map.',
+                url: urlPrefixes.templateHref + 'add-remove-layers'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'add-remove-layers',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'add-remove-layers.html',
+                controller: 'AddRemoveLayersCtrl'
+            }
+        }, {
+            toc: {
                 title: 'Map Events',
                 description: 'Shows how to listen for events raised by the map directive and get a direct reference to the map object.',
                 url: urlPrefixes.templateHref + 'map-events'
