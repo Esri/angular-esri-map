@@ -23,8 +23,12 @@
             </esri-feature-layer>
         </esri-map>
         <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
-        <p id="treesLayerVisibleInfo">The trees feature layer is <strong ng-show="!map.showTrees">not</strong> visible.</p>
-        <p id="treesLayerLoadedInfo">The trees feature layer is <strong ng-show="!map.treesLoaded">not</strong> loaded.</p>
+        <p>Trees feature layer info:</p>
+        <ul>
+            <li id="treesLoadedInfo">is <strong ng-show="!map.treesLoaded">NOT</strong> loaded</li>
+            <li id="treesUpdateEndCountInfo">has been updated <strong>{{map.treesUpdateEndCount}}</strong> times</li>
+            <li id="treesVisibleInfo">is <strong ng-show="!map.showTrees">NOT</strong> visible</li>
+        </ul>
         <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <p>Based on <a href="http://jsfiddle.net/patrickarlt/xy3nm1sq/1/">this JS Fiddle</a>.</p>
 
@@ -47,16 +51,18 @@
                         zoom: 12,
                         showTrees: false,
                         treesLoaded: false,
-                        treesUpdateEnd: {}
+                        treesUpdateEndCount: 0
                     };
                     $scope.treesLayerLoaded = function(layer) {
-                        // now there is a reference to the layer
+                        // a 1-time reference to the layer is available
                         console.log(layer);
                         $scope.map.treesLoaded = true;
                     };
                     $scope.treesLayerUpdateEnd = function(e) {
-                        // now there is a reference to the layer's updateEnd event object
+                        // reference to the layer's updateEnd event object is available
+                        // e.target will also provide reference to the layer
                         console.log(e);
+                        $scope.map.treesUpdateEndCount+=1;
                     };
                 });
         </script>

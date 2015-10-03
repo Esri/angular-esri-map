@@ -160,8 +160,8 @@
                     // call load handler (if any)
                     if (attrs.load) {
                         if (layer.loaded) {
-                        // layer is already loaded
-                        // make layer object available to caller immediately
+                            // layer is already loaded
+                            // make layer object available to caller immediately
                             scope.load()(layer);
                         } else {
                             // layer is not yet loaded
@@ -177,7 +177,9 @@
                     // call updateEnd handler (if any)
                     if (attrs.updateEnd) {
                         layer.on('update-end', function(e) {
-                            scope.updateEnd()(e);
+                            scope.$apply(function() {
+                                scope.updateEnd()(e);
+                            });
                         });
                     }
 
