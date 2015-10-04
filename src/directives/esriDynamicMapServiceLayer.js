@@ -20,7 +20,7 @@
         return visibleLayers;
     }
 
-    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function ($q) {
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function ($q, esriMapUtils) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriDynamicMapServiceLayer to be used as an element (<esri-dynamic-map-service-layer>)
@@ -50,8 +50,8 @@
             controller: function ($scope, $element, $attrs) {
                 var self = this;
                 var layerDeferred = $q.defer();
-                // TODO: remove?
-                // self.infoTemplates = [];
+
+                this.layerType = 'ArcGISDynamicMapServiceLayer';
 
                 // set the info template for a layer
                 this.setInfoTemplate = function(layerId, infoTemplate) {
@@ -180,51 +180,8 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                layerController.getLayer().then(function (layer) {
-                    // add layer
-                    mapController.addLayer(layer);
-
-                    //look for layerInfo related attributes. Add them to the map's layerInfos array for access in other components
-                    mapController.addLayerInfo({
-                        title: attrs.title || layer.name,
-                        layer: layer,
-                        // TODO: are these the right params to send
-                        hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
-                        defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
-                    });
-
-                    // watch the scope's visible property for changes
-                    // set the visibility of the layer
-                    scope.$watch('visible', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setVisibility(isTrue(newVal));
-                        }
-                    });
-
-                    // watch the scope's opacity property for changes
-                    // set the opacity of the layer
-                    scope.$watch('opacity', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setOpacity(Number(newVal));
-                        }
-                    });
-
-                    // watch the scope's visibleLayers property for changes
-                    // set the visible layers of the layer
-                    scope.$watch('visibleLayers', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setVisibleLayers(parseVisibleLayers(newVal));
-                        }
-                    });
-
-                    // remove the layer from the map when the layer scope is destroyed
-                    scope.$on('$destroy', function() {
-                        mapController.removeLayer(layer);
-                    });
-
-                    // return the layer
-                    return layer;
-                });
+                // bind directive attributes to layer properties and events
+                esriMapUtils.initLayerDirecive(scope, attrs, layerController, mapController);
             }
         };
     });

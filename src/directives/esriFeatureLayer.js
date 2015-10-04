@@ -5,7 +5,7 @@
         return val === true || val === 'true';
     }
 
-    angular.module('esri.map').directive('esriFeatureLayer', function($q) {
+    angular.module('esri.map').directive('esriFeatureLayer', function($q, esriMapUtils) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
@@ -38,6 +38,8 @@
             controller: function($scope) {
                 var self = this;
                 var layerDeferred = $q.defer();
+
+                this.layerType = 'FeatureLayer';
 
                 require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
 
@@ -119,35 +121,10 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                layerController.getLayer().then(function(layer) {
-                    // add layer at index position 0
-                    // so that layers can be declaratively added to map in top-to-bottom order
-                    mapController.addLayer(layer, 0);
+                // bind directive attributes to layer properties and events
+                esriMapUtils.initLayerDirecive(scope, attrs, layerController, mapController).then(function(layer) {
 
-                    // Look for layerInfo related attributes. Add them to the map's layerInfos array for access in other components
-                    mapController.addLayerInfo({
-                        title: attrs.title || layer.name,
-                        layer: layer,
-                        // TODO: are these the right params to send
-                        hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
-                        defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
-                    });
-
-                    // watch the scope's visible property for changes
-                    // set the visibility of the feature layer
-                    scope.$watch('visible', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setVisibility(isTrue(newVal));
-                        }
-                    });
-
-                    // watch the scope's opacity property for changes
-                    // set the opacity of the feature layer
-                    scope.$watch('opacity', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setOpacity(Number(newVal));
-                        }
-                    });
+                    // additional directive attribute binding specific to this type of layer
 
                     // watch the scope's definitionExpression property for changes
                     // set the definitionExpression of the feature layer
@@ -156,40 +133,6 @@
                             layer.setDefinitionExpression(newVal);
                         }
                     });
-
-                    // call load handler (if any)
-                    if (attrs.load) {
-                        if (layer.loaded) {
-                            // layer is already loaded
-                            // make layer object available to caller immediately
-                            scope.load()(layer);
-                        } else {
-                            // layer is not yet loaded
-                            // wait for load event, and then make layer object available
-                            layer.on('load', function() {
-                                scope.$apply(function() {
-                                    scope.load()(layer);
-                                });
-                            });
-                        }
-                    }
-
-                    // call updateEnd handler (if any)
-                    if (attrs.updateEnd) {
-                        layer.on('update-end', function(e) {
-                            scope.$apply(function() {
-                                scope.updateEnd()(e);
-                            });
-                        });
-                    }
-
-                    // remove the layer from the map when the layer scope is destroyed
-                    scope.$on('$destroy', function() {
-                        mapController.removeLayer(layer);
-                    });
-
-                    // return the layer
-                    return layer;
                 });
             }
         };
