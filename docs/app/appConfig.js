@@ -108,6 +108,17 @@
             }
         }, {
             toc: {
+                title: 'Layer Events',
+                description: 'Shows how to listen for events raised by layer directives and get a direct reference to the layer object.',
+                url: urlPrefixes.templateHref + 'layer-events'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'layer-events',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'layer-events.html',
+                controller: 'LayerEventsCtrl'
+            }
+        }, {
+            toc: {
                 title: 'Registry Pattern',
                 description: 'Shows how to get a reference to the map object by using the registry.',
                 url: urlPrefixes.templateHref + 'registry-pattern'

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Feature Layer Events</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Layer Events</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
+                visible="{{map.showTrees}}"
+                load="treesLayerLoaded"
+                update-end="treesLayerUpdateEnd">
+            </esri-feature-layer>
+            <esri-dynamic-map-service-layer url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer" layer-options="{ id: 'demographicsLayer', opacity: 0.8, showAttribution: false }" visible-layers="1,2" load="demographicsLayerLoaded" update-end="demographicsLayerUpdateEnd" />
+        </esri-map>
+        <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
+        <div class="clearfix">
+            <div class="panel panel-default pull-left" style="width:49%; margin-right: 2%">
+              <div class="panel-heading">Trees feature layer info</div>
+                <ul class="list-group">
+                    <li id="treesLoadedInfo" class="list-group-item">
+                        is <strong ng-show="!map.treesLoaded">NOT</strong> loaded
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">{{map.treesUpdateEndCount}}</span>
+                        number of times updated
+                    </li>
+                    <li class="list-group-item" id="treesVisibleInfo">
+                        is <strong ng-show="!map.showTrees">NOT</strong> visible
+                    </li>
+                </ul>
+            </div>
+            <div class="panel panel-default pull-left" style="width:45%">
+              <div class="panel-heading">Demographics dynamic maps service layer info</div>
+                <ul class="list-group">
+                    <li id="demographicsLoadedInfo" class="list-group-item">
+                        is <strong ng-show="!map.demographicsLoaded">NOT</strong> loaded
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">{{map.demographicsLoadedUpdateEndCount}}</span>
+                        number of times updated
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function($scope) {
+                    $scope.map = {
+                        center: {
+                            lng: -122.676207,
+                            lat: 45.523452
+                        },
+                        zoom: 12,
+                        showTrees: false,
+                        treesLoaded: false,
+                        treesUpdateEndCount: 0,
+                        demographicsLoaded: false,
+                        demographicsLoadedUpdateEndCount: 0
+                    };
+                    $scope.treesLayerLoaded = function(layer) {
+                        // a 1-time reference to the layer is available
+                        console.log(layer);
+                        $scope.map.treesLoaded = true;
+                    };
+                    $scope.treesLayerUpdateEnd = function(e) {
+                        // reference to the layer's updateEnd event object is available
+                        // e.target will also provide reference to the layer
+                        console.log(e);
+                        $scope.map.treesUpdateEndCount += 1;
+                    };
+                    $scope.demographicsLayerLoaded = function(layer) {
+                        // a 1-time reference to the layer is available
+                        console.log(layer);
+                        $scope.map.demographicsLoaded = true;
+                    };
+                    $scope.demographicsLayerUpdateEnd = function(e) {
+                        // reference to the layer's updateEnd event object is available
+                        // e.target will also provide reference to the layer
+                        console.log(e);
+                        $scope.map.demographicsLoadedUpdateEndCount += 1;
+                    };
+                });
+        </script>
+    </body>
+</html>

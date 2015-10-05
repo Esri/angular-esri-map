@@ -1,0 +1,42 @@
+<h2>Layer Events</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+    <esri-feature-layer
+        url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
+        visible="{{map.showTrees}}"
+        load="treesLayerLoaded"
+        update-end="treesLayerUpdateEnd">
+    </esri-feature-layer>
+    <esri-dynamic-map-service-layer url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer" layer-options="{ id: 'demographicsLayer', opacity: 0.8, showAttribution: false }" visible-layers="1,2" load="demographicsLayerLoaded" update-end="demographicsLayerUpdateEnd" />
+</esri-map>
+<p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
+<div class="clearfix">
+    <div class="panel panel-default pull-left" style="width:49%; margin-right: 2%">
+      <div class="panel-heading">Trees feature layer info</div>
+        <ul class="list-group">
+            <li class="list-group-item" id="treesLoadedInfo">
+                is <strong ng-show="!map.treesLoaded">NOT</strong> loaded
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{map.treesUpdateEndCount}}</span>
+                number of times updated
+            </li>
+            <li class="list-group-item" id="treesVisibleInfo">
+                is <strong ng-show="!map.showTrees">NOT</strong> visible
+            </li>
+        </ul>
+    </div>
+    <div class="panel panel-default pull-left" style="width:45%">
+      <div class="panel-heading">Demographics dynamic maps service layer info</div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                is <strong ng-show="!map.demographicsLoaded">NOT</strong> loaded
+            </li>
+            <li class="list-group-item">
+                <span class="badge">{{map.demographicsLoadedUpdateEndCount}}</span>
+                number of times updated
+            </li>
+        </ul>
+    </div>
+</div>
+<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>

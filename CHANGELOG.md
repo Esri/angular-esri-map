@@ -13,6 +13,8 @@ Add or remove layers from the map programatically [#51](https://github.com/Esri/
 
 The feature layer directive now includes optional attributes for opacity, definition expression, and constructor options. Opacity and definition expression act just like the visible attribute, and are watched for changes and can be adjusted at any time. [#51](https://github.com/Esri/angular-esri-map/pull/51) [@eas604](https://github.com/eas604) [#97](https://github.com/Esri/angular-esri-map/issues/97) and [#100](https://github.com/Esri/angular-esri-map/issues/100)
 
+The feature layer directive also now includes optional attributes for the layer's load and update-end events. [#103](https://github.com/Esri/angular-esri-map/issues/103)
+
 Added a directive for dynamic map service layers. Like the feature layer directive, it has optional attributes for visibility, opacity and constructor options. [#52](https://github.com/Esri/angular-esri-map/issues/52) [@Kollibri](https://github.com/Kollibri)
 
 Added a directive to set the info template(s) for layers so that they show a popup when clicked. [#52](https://github.com/Esri/angular-esri-map/issues/52) [#118](https://github.com/Esri/angular-esri-map/issues/118) [@Kollibri](https://github.com/Kollibri)
@@ -35,6 +37,8 @@ Feature-layers example now includes adjustable layer opacity, definition express
 Added an example page for the new dynamic map service layer. [c69329b9](https://github.com/Esri/angular-esri-map/commit/c69329b97ec0cd29d7aeb02a60f6691b2a525842)
 
 Added an example page showing how to add/remove layers from a map. [061ed936](https://github.com/Esri/angular-esri-map/commit/061ed9368f9931bc3fc03b536366f0b53c294b5e)
+
+Added an example page (feature-layer-events) showing how to interact with the esriFeatureLayer directive's attributes for layer load and update-end events. [#103](https://github.com/Esri/angular-esri-map/issues/103)
 
 ### Tests
 

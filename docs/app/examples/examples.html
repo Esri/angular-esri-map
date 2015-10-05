@@ -4,14 +4,14 @@
 </div>
 <div class="row marketing">
     <div class="col-lg-6">
-        <h4 ng-repeat-start="example in examplePages|limitTo:6:0">
+        <h4 ng-repeat-start="example in examplePageColumns.left">
             <a href="{{example.toc.url}}">{{example.toc.title}}</a>
         </h4>
         <p ng-repeat-end>{{example.toc.description}}</p>
     </div>
 
     <div class="col-lg-6">
-        <h4 ng-repeat-start="example in examplePages|limitTo:6:6">
+        <h4 ng-repeat-start="example in examplePageColumns.right">
             <a href="{{example.toc.url}}">{{example.toc.title}}</a>
         </h4>
         <p ng-repeat-end>{{example.toc.description}}</p>

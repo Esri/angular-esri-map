@@ -36,6 +36,7 @@ gulp.task('build-js', function() {
   return gulp.src([
     'src/services/esriLoader.js',
     'src/services/esriRegistry.js',
+    'src/services/esriMapUtils.js',
     'src/directives/esriMap.js',
     'src/directives/esriFeatureLayer.js',
     'src/directives/esriDynamicMapServiceLayer.js',
