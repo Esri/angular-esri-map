@@ -108,14 +108,14 @@
             }
         }, {
             toc: {
-                title: 'Feature Layer Events',
-                description: 'Shows how to listen for feature layer events raised by the feature layer directive and get a direct reference to the layer object.',
-                url: urlPrefixes.templateHref + 'feature-layer-events'
+                title: 'Layer Events',
+                description: 'Shows how to listen for events raised by layer directives and get a direct reference to the layer object.',
+                url: urlPrefixes.templateHref + 'layer-events'
             },
             route: {
-                path: urlPrefixes.routePath + 'feature-layer-events',
-                templateUrl: urlPrefixes.routeTemplateUrl + 'feature-layer-events.html',
-                controller: 'FeatureLayerEventsCtrl'
+                path: urlPrefixes.routePath + 'layer-events',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'layer-events.html',
+                controller: 'LayerEventsCtrl'
             }
         }, {
             toc: {

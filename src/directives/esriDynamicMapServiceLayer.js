@@ -40,6 +40,9 @@
                 visible: '@?',
                 opacity: '@?',
                 visibleLayers: '@?',
+                // function binding for event handlers
+                load: '&',
+                updateEnd: '&',
                 // function binding for reading object hash from attribute string
                 // or from scope object property
                 // see Example 7 here: https://gist.github.com/CMCDragonkai/6282750
