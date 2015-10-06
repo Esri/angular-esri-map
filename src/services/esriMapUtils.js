@@ -3,13 +3,13 @@
 
   angular.module('esri.map').factory('esriMapUtils', function () {
 
-    // test if a string value (i.e. directive attribute value)
-    function isTrue(val) {
-        return val === true || val === 'true';
-    }
-
     // stateless utility service
     var service = {};
+
+    // test if a string value (i.e. directive attribute value)
+    service.isTrue = function (val) {
+        return val === true || val === 'true';
+    };
 
     // bind directive attributes to layer properties and events
     service.initLayerDirecive = function(scope, attrs, layerController, mapController) {
@@ -31,15 +31,15 @@
 
             // watch the scope's visible property for changes
             // set the visibility of the feature layer
-            scope.$watch('visible', function(newVal, oldVal) {
+            scope.$watch('vm.visible', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    layer.setVisibility(isTrue(newVal));
+                    layer.setVisibility(service.isTrue(newVal));
                 }
             });
 
             // watch the scope's opacity property for changes
             // set the opacity of the feature layer
-            scope.$watch('opacity', function(newVal, oldVal) {
+            scope.$watch('vm.opacity', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
                     layer.setOpacity(Number(newVal));
                 }
@@ -50,13 +50,13 @@
                 if (layer.loaded) {
                     // layer is already loaded
                     // make layer object available to caller immediately
-                    scope.load()(layer);
+                    scope.vm.load()(layer);
                 } else {
                     // layer is not yet loaded
                     // wait for load event, and then make layer object available
                     layer.on('load', function() {
                         scope.$apply(function() {
-                            scope.load()(layer);
+                            scope.vm.load()(layer);
                         });
                     });
                 }
@@ -66,7 +66,7 @@
             if (attrs.updateEnd) {
                 layer.on('update-end', function(e) {
                     scope.$apply(function() {
-                        scope.updateEnd()(e);
+                        scope.vm.updateEnd()(e);
                     });
                 });
             }

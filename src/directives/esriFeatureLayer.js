@@ -1,9 +1,9 @@
 (function(angular) {
     'use strict';
 
-    function isTrue(val) {
-        return val === true || val === 'true';
-    }
+    // function isTrue(val) {
+    //     return val === true || val === 'true';
+    // }
 
     angular.module('esri.map').directive('esriFeatureLayer', function($q, esriMapUtils) {
         // this object will tell angular how our directive behaves
@@ -34,8 +34,12 @@
                 layerOptions: '&'
             },
 
+            controllerAs: 'vm',
+
+            bindToController: true,
+
             // define an interface for working with this directive
-            controller: function($scope) {
+            controller: function() {
                 var self = this;
                 var layerDeferred = $q.defer();
 
@@ -63,21 +67,22 @@
                         }
                     }
 
-                    var layerOptions = $scope.layerOptions() || {};
+                    // var layerOptions = $scope.layerOptions() || {};
+                    var layerOptions = self.layerOptions() || {};
 
                     // $scope.visible takes precedence over $scope.layerOptions.visible
-                    if (angular.isDefined($scope.visible)) {
-                        layerOptions.visible = isTrue($scope.visible);
+                    if (angular.isDefined(self.visible)) {
+                        layerOptions.visible = esriMapUtils.isTrue(self.visible);
                     }
 
                     // $scope.opacity takes precedence over $scope.layerOptions.opacity
-                    if ($scope.opacity) {
-                        layerOptions.opacity = Number($scope.opacity);
+                    if (self.opacity) {
+                        layerOptions.opacity = Number(self.opacity);
                     }
 
                     // $scope.definitionExpression takes precedence over $scope.layerOptions.definitionExpression
-                    if ($scope.definitionExpression) {
-                        layerOptions.definitionExpression = $scope.definitionExpression;
+                    if (self.definitionExpression) {
+                        layerOptions.definitionExpression = self.definitionExpression;
                     }
 
                     // $scope.layerOptions.infoTemplate takes precedence over
@@ -101,7 +106,8 @@
                         layerOptions.mode = FeatureLayer[layerOptions.mode];
                     }
 
-                    var layer = new FeatureLayer($scope.url, layerOptions);
+                    // var layer = new FeatureLayer($scope.url, layerOptions);
+                    var layer = new FeatureLayer(self.url, layerOptions);
                     layerDeferred.resolve(layer);
                 });
 
@@ -128,7 +134,7 @@
 
                     // watch the scope's definitionExpression property for changes
                     // set the definitionExpression of the feature layer
-                    scope.$watch('definitionExpression', function(newVal, oldVal) {
+                    scope.$watch('vm.definitionExpression', function(newVal, oldVal) {
                         if (newVal !== oldVal) {
                             layer.setDefinitionExpression(newVal);
                         }
