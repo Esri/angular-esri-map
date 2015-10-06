@@ -150,6 +150,17 @@
                 templateUrl: urlPrefixes.routeTemplateUrl + 'no-basemap.html',
                 controller: 'NoBasemapCtrl'
             }
+        }, {
+            toc: {
+                title: 'Other Esri Modules',
+                description: 'Shows how to use other Esri modules that we have not included directives for (such as graphics, symbols, toolbars, etc.).',
+                url: urlPrefixes.templateHref + 'other-esri-modules'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'other-esri-modules',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'other-esri-modules.html',
+                controller: 'OtherEsriModulesController'
+            }
         }]
     };
 

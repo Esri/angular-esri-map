@@ -40,6 +40,8 @@ Added an example page showing how to add/remove layers from a map. [061ed936](ht
 
 Added an example page (feature-layer-events) showing how to interact with the esriFeatureLayer directive's attributes for layer load and update-end events. [#103](https://github.com/Esri/angular-esri-map/issues/103)
 
+Added an example page (other-esri-modules) showing how to use other Esri modules that we have not included directives for (such as graphics, symbols, toolbars, etc.). [#106](https://github.com/Esri/angular-esri-map/issues/106)
+
 ### Tests
 
 Added functional testing using [Protractor](https://angular.github.io/protractor/#/). [#82](https://github.com/Esri/angular-esri-map/pull/82), [#94](https://github.com/Esri/angular-esri-map/pull/94), [#112](https://github.com/Esri/angular-esri-map/pull/112)
