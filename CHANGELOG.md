@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+None.
+
+## [v1.0.0-beta.5]
+
 ### Added
 
 Geographic center coordinates are normalized prior to updating esriMap scope values [#93](https://github.com/Esri/angular-esri-map/issues/93)
@@ -124,7 +128,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.4...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.5...HEAD
+[v1.0.0-beta.4]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.4...v1.0.0-beta.4
 [v1.0.0-beta.4]: https://github.com/Esri/angular-esri-map/compare/v0.0.1-beta.3...v1.0.0-beta.4
 [v0.0.1-beta.3]: https://github.com/Esri/angular-esri-map/compare/v0.0.1-beta.2...v0.0.1-beta.3
 [v0.0.1-beta.2]: https://github.com/Esri/angular-esri-map/compare/v0.0.1-beta.1...v0.0.1-beta.2
