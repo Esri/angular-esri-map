@@ -56,6 +56,7 @@
             controller: function($scope, $element, $attrs) {
                 // get a reference to the controller
                 var self = this;
+                self.Basemaps = [];
 
                 // only do this once per directive
                 // this deferred will be resolved with the map
@@ -69,7 +70,22 @@
                     $scope.$on('$destroy', deregister);
                 }
 
-                require(['esri/map', 'esri/arcgis/utils', 'esri/geometry/Extent', 'esri/dijit/Popup'], function(Map, arcgisUtils, Extent, Popup) {
+                require(['esri/map', 'esri/arcgis/utils', 'esri/basemaps', 'esri/geometry/Extent', 'esri/dijit/Popup'], function(Map, arcgisUtils, esriBasemaps, Extent, Popup) {
+                    // add any custom basemaps
+                    angular.forEach(self.Basemaps, function (value, key) {
+                        var urlArray = [];
+                        angular.forEach(value.urls, function (url, urlKey) {
+                            var urlObject = {};
+                            urlObject.url = url;
+                            urlArray.push(urlObject);
+                        });
+                        esriBasemaps[value.name] = {
+                            baseMapLayers: urlArray,
+                            thumbnailUrl: value.thumbnailUrl,
+                            title: value.title
+                        };
+                    });
+                    
                     // setup our mapOptions based on object hash from attribute string
                     // or from scope object property
                     var mapOptions = $scope.mapOptions() || {};
