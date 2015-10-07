@@ -3,12 +3,12 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <title>Webmap Example</title>
+        <title>Web Map</title>
 
         <!-- dijit theme only needed for chart tooltip in popup in this web map -->
-        <link rel="stylesheet" href="http://js.arcgis.com/3.13/dijit/themes/claro/claro.css">
+        <link rel="stylesheet" href="http://js.arcgis.com/3.11/dijit/themes/claro/claro.css">
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
         <style>
         [ng-click]
         {
@@ -17,7 +17,7 @@
         </style>
     </head>
     <body ng-controller="MapController" class="claro">
-        <h2>Webmap Example: {{itemInfo.item.title}}
+        <h2>Web Map: {{itemInfo.item.title}}
             <small>
             <a ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">
                 <span ng-show="isCollapsed">+info</span>
@@ -26,42 +26,61 @@
             </small>
         </h2>
         <div ng-hide="isCollapsed" ng-bind-html="itemInfo.item.snippet"></div>
-        <!-- add map to page and bind to scope map parameters -->
-        <esri-map id="map" register-as="myMap" webmap-id="4778fee6371d4e83a22786029f30c7e1" center="map.center" zoom="map.zoom" item-info="itemInfo">
-        </esri-map>
-        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+        <div style="width: 800px">
+            <!-- add map to page and bind to scope map parameters -->
+            <div style="width: 600px; float:left;">
+                <esri-map id="map" webmap-id="4778fee6371d4e83a22786029f30c7e1" center="map.center" zoom="map.zoom" item-info="itemInfo" load="mapLoaded">
+                    <div esri-legend target-id="legend"></div>
+                </esri-map>
+            </div>
+            <div style="width: 200px; float: right; max-height: 400px; overflow: auto;">
+                <div id="legend"></div>
+            </div>
+        </div>
+        <p style="clear: both;">Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
         <div>
             <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
         </div>
         <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
         <!-- load Esri JavaScript API -->
-        <script type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular-sanitize.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
         <script type="text/javascript">
+            'use strict';
             angular.module('esri-webmap-example', ['esri.map', 'ngSanitize'])
-                .controller('MapController', function ($scope, esriRegistry, esriLoader) {
-                    $scope.map = {
-                        center: {
-                            lng: -122.45,
-                            lat:  37.75
-                        },
-                        zoom: 13
-                    };
-                    $scope.goToBookmark = function(bookmark)
-                    {
-                        esriRegistry.get('myMap').then(function(map){
-                            esriLoader('esri/geometry/Extent').then(function(Extent)
-                            {
-                                var extent = new Extent(bookmark.extent);
-                                map.setExtent(extent);
-                            });
-                        });
-                    };
+                .controller('MapController', function ($scope, esriLoader) {
+                    // we're about to enter callback purgatory,
+                    // so let's bring along a reference to the controller
+                    var self = this;
+                    // this example requires the extent module
+                    // so let's go ahead and load that now
+                    esriLoader.require('esri/geometry/Extent').then(function(Extent) {
+                        $scope.map = {
+                            center: {
+                                lng: -122.45,
+                                lat:  37.75
+                            },
+                            zoom: 13
+                        };
+                        // get a reference to the map object once it's loaded
+                        $scope.mapLoaded = function(map) {
+                            self.mapObj = map;
+                        };
+                        // click handler for bookmark buttons
+                        $scope.goToBookmark = function(bookmark)
+                        {
+                            if (!self.mapObj) {
+                                return;
+                            }
+                            var extent = new Extent(bookmark.extent);
+                            self.mapObj.setExtent(extent);
+                        };
+                    });
                 });
         </script>
     </body>

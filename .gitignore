@@ -1,6 +1,9 @@
 # built files under app folder
 docs/lib
 
+# distributable files - only included in releases
+dist
+
 # Logs
 logs
 *.log
@@ -29,3 +32,6 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# WebStorm IDE settings
+.idea

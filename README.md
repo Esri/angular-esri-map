@@ -10,15 +10,18 @@ Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how y
 
 ### Quick Start
 
-To use these directives in your own Angular application, first install the module as a dependency using bower:
+To use these directives in your own Angular application, first install the module as a dependency using any of the following methods.
 
 ```bash
+# install via bower
 bower install angular-esri-map
+
+# OR install via npm
+npm install angular-esri-map
 ```
+Alternatively, you can clone or [download](https://github.com/Esri/angular-esri-map/releases) this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
 
-Or clone or download this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
-
-Once you've added the module to your application, you can use the sample code below to use the map and feature layer directives. Just change the paths to point to the locations of the libraries in your environment and go.
+Once you've added the module to your application, you can use the sample code below to use the map and feature layer directives. Just change the "path/to/angular-esri-map.js" to point to the location of the file in your environment and load the page in a browser.
 
 ![App](https://raw.github.com/Esri/angular-esri-map/master/angular-esri-map.png)
 
@@ -29,16 +32,16 @@ Once you've added the module to your application, you can use the sample code be
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
     <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
+        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
@@ -58,6 +61,10 @@ Once you've added the module to your application, you can use the sample code be
 
 See the documentation for [examples](http://esri.github.io/angular-esri-map/#examples) of how to use the other directives.
 
+### Lazy Loading of the ArcGIS API for JavaScript
+
+If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Deferred Map Example page](http://esri.github.io/angular-esri-map/deferred-map.html) for an example of how to do this.
+
 ## Development Instructions
 
 Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
@@ -66,12 +73,12 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 2. `cd` into the `angular-esri-map` folder
 3. Install the dependencies with `npm install`
 4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
-5. Modify the directive source files (under `src`) or documentation (under `docs`) and your browser will automatically reload as you save your changes
+5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
 6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
 
 ## Dependencies
 
-These directives were built using Angular v1.2 (specifically 1.2.16) and the ArcGIS API for JavaScript v3.11+. They will likely work with other verstions of those frameworks, but have not been tested outside of the above versions.
+These directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.11. They have been tested on every minor release of each of those libraries since then.
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
@@ -90,7 +97,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/esri/contributing).
+Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/Esri/angular-esri-map/blob/master/CONTRIBUTING.md).
 
 ## Licensing
 Copyright 2014 Esri
@@ -107,7 +114,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-A copy of the license is available in the repository's [license.txt]( https://raw.github.com/Esri/angular-esri-map/master/license.txt) file.
+A copy of the license is available in the repository's [license.txt](https://raw.github.com/Esri/angular-esri-map/master/LICENSE) file.
 
 [](Esri Tags: ArcGIS Web Mapping Angular Framework)
 [](Esri Language: JavaScript)

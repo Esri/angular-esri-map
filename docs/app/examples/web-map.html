@@ -1,15 +1,18 @@
-<h2>Webmap Example: {{itemInfo.item.title}}</h2>
+<h2>Web Map: {{itemInfo.item.title}}</h2>
 <!-- add map to page and bind to scope map parameters -->
-<esri-map id="map" register-as="myMap" webmap-id="8e42e164d4174da09f61fe0d3f206641" center="map.center" zoom="map.zoom" item-info="itemInfo">
-</esri-map>
-<p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}
-    <a ng-init="isCollapsed=true" ng-click="isCollapsed = !isCollapsed">
-        <span ng-show="isCollapsed">+info</span>
-        <span ng-hide="isCollapsed">hide</span>
-    </a>
-</p>
-<div style="margin-bottom: 10px;" ng-hide="isCollapsed" ng-bind-html="itemInfo.item.snippet"></div>
-<p>
-    <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
-</p>
-<p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
+<p ng-bind-html="itemInfo.item.snippet"></p>
+<div class="row">
+    <div class="col-xs-8 col-sm-9 col-lg-10">
+        <esri-map id="map" webmap-id="8e42e164d4174da09f61fe0d3f206641" center="map.center" zoom="map.zoom" item-info="itemInfo" load="mapLoaded">
+            <div esri-legend target-id="legend"></div>
+        </esri-map>
+        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+        <p>
+            <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
+        </p>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/ags_createwebmapid.html">this sample</a>.</p>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-lg-2" style="overflow: auto; max-height: 400px;">
+        <div id="legend"></div>
+    </div>
+</div>

@@ -1,7 +1,10 @@
 ## Test Pages
 
-Many of the examples from the documentation site are included here as stand-alone pages with just the bare minimum code needed to demonstrate the specific features in each (i.e. no Bootstrap, no extra module dependencies like ngRouter, etc).
+The test pages in this folder serve two purposes:
 
-These pages were created before the docs site, and may not be up to date.
+1. Demonstrate a specific feature of the directives and services with the bare minimum code (i.e. no Bootstrap, no extra module dependencies like ngRouter, etc)
+2. To be run by the e2e test specs when you execute `gulp test`
 
-These pages are served when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
+These pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
+
+You may notice that most of these test pages have corresponding the examples in the docs site. Many of these pages were created before the docs site. You can expect test pages that have corresponding e2e test specs be up to date. Other test pages may not be as current as their corresponding example pages in the docs site.

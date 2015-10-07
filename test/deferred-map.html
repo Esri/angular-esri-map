@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Deferred Map</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Deferred Map</h2>
+        <p>Click the button to lazy load the Esri JSAPI. This can be used when you want to defer its inclusion until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
+        <button ng-click="lazyload()" ng-disabled="loaded">Load Esri JSAPI and Map</button>
+        <!-- add map to page only once the ESRI API has loaded -->
+        <div ng-if="loaded">
+          <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+          </esri-map>
+          <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+          <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_simple.html">this sample</a>.</p>
+        </div>
+
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function ($scope, esriLoader) {
+
+                    // Default loaded to be false
+                    $scope.loaded = false;
+
+                    // This function will be called when you click the button
+                    $scope.lazyload = function() {
+
+                        // Make a call to load Esri JSAPI resources at version 3.11.
+                        // A promise is provided for when the resources have finished loading.
+                        esriLoader.bootstrap({
+                            url: 'http://js.arcgis.com/3.11compact'
+                        }).then(function() {
+
+                            // Set Loaded to be true
+                            $scope.loaded = true;
+
+                            // Once the API is loaded set the map parameters
+                            $scope.map = {
+                              center: {
+                                  lng: -77.00,
+                                  lat: 38.88
+                              },
+                              zoom: 13
+                            };
+                        });
+                    };
+
+                });
+        </script>
+    </body>
+</html>

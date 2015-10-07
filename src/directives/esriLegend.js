@@ -42,7 +42,7 @@
                 }
                 legend = new Legend(opts, targetId);
                 legend.startup();
-                scope.$watchCollection(function () { return mapController.getLayerInfos(); }, function (newValue, oldValue, scope) {
+                scope.$watchCollection(function () { return mapController.getLayerInfos(); }, function (newValue/*, oldValue, scope*/) {
                     legend.refresh(newValue);
                 });
                 legendDeferred.resolve(legend);

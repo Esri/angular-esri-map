@@ -1,8 +1,36 @@
-<h2>Feature Layers Example</h2>
+<h2>Feature Layers</h2>
 <!-- add map to page and bind to scope map parameters -->
 <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-    <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
-    <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
+    <!-- a feature layer with optional visible and definition-expression attributes -->
+    <esri-feature-layer 
+        url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
+        visible="{{map.showTrees}}" 
+        definition-expression="{{map.treesDefExpression}}">
+    </esri-feature-layer>
+    <!-- a feature layer with an optional layer-options attribute -->
+    <esri-feature-layer 
+        url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/ArcGIS/rest/services/Portland_Light_Rail_Lines/FeatureServer/0"
+        layer-options="map.railLayerOptions">
+    </esri-feature-layer>
+    <!-- a feature layer with an optional opacity attribute -->
+    <esri-feature-layer 
+        url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
+        opacity="{{map.parksOpacity}}">
+    </esri-feature-layer>
 </esri-map>
+
+<p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
+<p><form ng-submit="submitTreesDefExpression()">
+  <input type="text" ng-model="treesDefExpressionInputText" />
+  <input type="submit" id="submit" value="Set trees definition expression" />
+</form></p>
+<p><label><input type="number" ng-model="map.parksOpacity" min="0" max="1" step="0.05"/> Set parks opacity</label></p>
 <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+
+<div class="well well-sm" style="max-width: 700px;">
+    <p>This example defines additional layer options in the parent contoller's <code>$scope.map.railLayerOptions</code>.</p>
+    <p>Alternatively, layer options can be <a href="./feature-layers.html">supplied as an inline object hash string</a> in the HTML template, such as <code>layer-options="{opacity: 0.75,...}"</code>.</p>
+    <p>If <code>visible</code>, <code>opacity</code>, or <code>definition-expression</code> are provided as standalone optional properties, they will override those same properties in the additional layer options.</p>
+</div>
+
 <p>Based on <a href="http://jsfiddle.net/patrickarlt/xy3nm1sq/1/">this JS Fiddle</a>.</p>

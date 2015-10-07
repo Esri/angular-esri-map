@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="esri-map-docs">
 
 <head>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
 
     <!-- load Esri CSS -->
-    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
     <!-- custom styles for this app -->
     <style type="text/css">
@@ -79,12 +79,12 @@
 
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
-    <script defer type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
+    <script defer type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
 
     <!-- load Angular -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-sanitize.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.js"></script>
 
     <!-- code snippet syntax highlighting -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
@@ -96,6 +96,7 @@
 
     <!-- load this app -->
     <script type="text/javascript" src="app/app.js"></script>
+    <script type="text/javascript" src="app/appConfig.js"></script>
     <script type="text/javascript" src="app/about/about.js"></script>
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
@@ -104,13 +105,17 @@
     <script type="text/javascript" src="app/examples/simple-map.js"></script>
     <script type="text/javascript" src="app/examples/web-map.js"></script>
     <script type="text/javascript" src="app/examples/feature-layers.js"></script>
-    <script type="text/javascript" src="app/examples/dynamic-map-service-layers.js"></script>
+    <script type="text/javascript" src="app/examples/dynamic-map-service-layer.js"></script>
     <script type="text/javascript" src="app/examples/legend.js"></script>
-    <script type="text/javascript" src="app/examples/basemap.js"></script>
-    <script type="text/javascript" src="app/examples/center-and-zoom.js"></script>
+    <script type="text/javascript" src="app/examples/add-remove-layers.js"></script>
+    <script type="text/javascript" src="app/examples/set-basemap.js"></script>
+    <script type="text/javascript" src="app/examples/set-center-zoom.js"></script>
     <script type="text/javascript" src="app/examples/map-events.js"></script>
+    <script type="text/javascript" src="app/examples/layer-events.js"></script>
     <script type="text/javascript" src="app/examples/registry-pattern.js"></script>
-    <script type="text/javascript" src="app/examples/additional-attributes.js"></script>
+    <script type="text/javascript" src="app/examples/additional-map-options.js"></script>
+    <script type="text/javascript" src="app/examples/no-basemap.js"></script>
+    <script type="text/javascript" src="app/examples/other-esri-modules.js"></script>
 
     <!-- google analytics -->
     <script>

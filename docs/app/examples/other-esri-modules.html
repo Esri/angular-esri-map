@@ -1,0 +1,19 @@
+<h2>Other Esri Modules</h2>
+<!-- add map to page and bind to scope map parameters -->
+<esri-map id="map" map-options="{ basemap: 'streets', center: [-25.312, 34.307], zoom: 3 }" load="initToolbar">
+</esri-map>
+<p>Select a shape then draw on map to add graphic</p>
+<div>
+    <button ng-click="activeTool = 'Point'">Point</button>
+    <button ng-click="activeTool = 'Multipoint'">Multipoint</button>
+    <button ng-click="activeTool = 'Line'">Line</button>
+    <button ng-click="activeTool = 'Polyline'">Polyline</button>
+    <button ng-click="activeTool = 'FreehandPolyline'">Freehand Polyline</button>
+    <button ng-click="activeTool = 'Triangle'">Triangle</button>
+    <button ng-click="activeTool = 'Extent'">Rectangle</button>
+    <button ng-click="activeTool = 'Circle'">Circle</button>
+    <button ng-click="activeTool = 'Ellipse'">Ellipse</button>
+    <button ng-click="activeTool = 'Polygon'">Polygon</button>
+    <button ng-click="activeTool = 'FreehandPolygon'">Freehand Polygon</button>
+</div>
+<p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/graphics_add.html">this sample.</a></p>
