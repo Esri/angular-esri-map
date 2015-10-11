@@ -1,10 +1,6 @@
 (function (angular) {
     'use strict';
 
-    function isTrue(val) {
-        return val === true || val === 'true';
-    }
-
     // TODO: refactor to shared factory/service?
     function parseVisibleLayers(val) {
         var visibleLayers;
@@ -102,7 +98,7 @@
 
                     // $scope.visible takes precedence over $scope.layerOptions.visible
                     if (angular.isDefined(self.visible)) {
-                        layerOptions.visible = isTrue(self.visible);
+                        layerOptions.visible = esriMapUtils.isTrue(self.visible);
                     }
 
                     // $scope.opacity takes precedence over $scope.layerOptions.opacity
@@ -188,7 +184,7 @@
                 var mapController = controllers[1];
 
                 // bind directive attributes to layer properties and events
-                esriMapUtils.initLayerDirecive(scope, attrs, layerController, mapController);
+                esriMapUtils.initLayerDirective(scope, attrs, layerController, mapController);
             }
         };
     });

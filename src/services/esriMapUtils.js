@@ -12,7 +12,7 @@
     };
 
     // bind directive attributes to layer properties and events
-    service.initLayerDirecive = function(scope, attrs, layerController, mapController) {
+    service.initLayerDirective = function(scope, attrs, layerController, mapController) {
         var layerIndex = layerController.layerType === 'FeatureLayer' ? 0 : undefined;
 
         return layerController.getLayer().then(function(layer) {

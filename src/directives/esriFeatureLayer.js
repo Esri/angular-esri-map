@@ -1,10 +1,6 @@
 (function(angular) {
     'use strict';
 
-    // function isTrue(val) {
-    //     return val === true || val === 'true';
-    // }
-
     angular.module('esri.map').directive('esriFeatureLayer', function($q, esriMapUtils) {
         // this object will tell angular how our directive behaves
         return {
@@ -128,7 +124,7 @@
                 var mapController = controllers[1];
 
                 // bind directive attributes to layer properties and events
-                esriMapUtils.initLayerDirecive(scope, attrs, layerController, mapController).then(function(layer) {
+                esriMapUtils.initLayerDirective(scope, attrs, layerController, mapController).then(function(layer) {
 
                     // additional directive attribute binding specific to this type of layer
 
