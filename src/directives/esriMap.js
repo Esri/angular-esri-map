@@ -66,7 +66,7 @@
                             updateScopeFromMap(controller, map);
                             // make map object available to caller
                             // by calling the load event handler
-                            if (controller.load) {
+                            if (attrs.load) {
                                 controller.load()(map);
                             }
                         } else {
@@ -92,17 +92,17 @@
                         });
 
                         // listen for changes to scope.center and scope.zoom and update map
-                        scope.inUpdateCycle = false;
-                        if (!angular.isUndefined(controller.center) || !angular.isUndefined(controller.zoom)) {
+                        controller.inUpdateCycle = false;
+                        if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
                             scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
-                                if (scope.inUpdateCycle) {
+                                if (controller.inUpdateCycle) {
                                     return;
                                 }
                                 if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
                                     // prevent circular updates between $watch and $apply
-                                    scope.inUpdateCycle = true;
+                                    controller.inUpdateCycle = true;
                                     map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
-                                        scope.inUpdateCycle = false;
+                                        controller.inUpdateCycle = false;
                                     });
                                 }
                             });
@@ -116,16 +116,16 @@
                                 controller.extentChange()(e);
                             }
                             // prevent circular updates between $watch and $apply
-                            if (scope.inUpdateCycle) {
+                            if (controller.inUpdateCycle) {
                                 return;
                             }
-                            scope.inUpdateCycle = true;
+                            controller.inUpdateCycle = true;
                             scope.$apply(function() {
                                 // update scope properties
                                 updateScopeFromMap(controller, map);
                                 $timeout(function() {
                                     // this will be executed after the $digest cycle
-                                    scope.inUpdateCycle = false;
+                                    controller.inUpdateCycle = false;
                                 }, 0);
                             });
                         });
@@ -142,7 +142,7 @@
             },
 
             // directive api
-            controller: function(/*$scope, $element, */$attrs) {
+            controller: function($attrs) {
                 // get a reference to the controller
                 var self = this;
 
