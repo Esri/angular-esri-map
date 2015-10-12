@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('esri.map').factory('esriMapUtils', function () {
+  angular.module('esri.map').factory('esriMapUtils', function ($q) {
 
     // stateless utility service
     var service = {};
@@ -9,6 +9,29 @@
     // test if a string value (i.e. directive attribute value)
     service.isTrue = function (val) {
         return val === true || val === 'true';
+    };
+
+    service.addCustomBasemap = function(name, basemapDefinition) {
+        var deferred = $q.defer();
+        require(['esri/basemaps'], function(esriBasemaps) {
+            var baseMapLayers = basemapDefinition.baseMapLayers;
+            if (!angular.isArray(baseMapLayers) && angular.isArray(basemapDefinition.urls)) {
+                baseMapLayers = basemapDefinition.urls.map(function (url) {
+                    return {
+                        url: url
+                    };
+                });
+            }
+            if (angular.isArray(baseMapLayers)) {
+                esriBasemaps[name] = {
+                    baseMapLayers: baseMapLayers,
+                    thumbnailUrl: basemapDefinition.thumbnailUrl,
+                    title: basemapDefinition.title
+                };
+            }
+            deferred.resolve(esriBasemaps);
+        });
+        return deferred.promise;
     };
 
     // bind directive attributes to layer properties and events

@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Added
+
+Added support for defining and using a custom basemap. [#121](https://github.com/Esri/angular-esri-map/pull/121)
+
+### Changed
+
 Update map and layer directives to use controllerAs and bindToController instead of injecting $socpe into controllers. [#123](https://github.com/Esri/angular-esri-map/pull/123)
 
 ## [v1.0.0-beta.5]
