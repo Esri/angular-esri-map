@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Custom Basemap</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Custom Basemap</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <esri-map id="map" map-options="map.options">
+            <esri-basemap urls="http://services.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer"
+                            name="delorme"
+                            title="DeLorme"
+                            thumbnailurl="http://servername.fqdn.suffix/images/thumbnail_2014-11-25_61051.png">
+            </esri-basemap>
+        </esri-map>
+        <p>Based on the example in <a href="https://developers.arcgis.com/javascript/jsapi/esri.basemaps-amd.html">this API reference page</a>.</p>
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.13compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function ($scope) {
+                    $scope.map = {
+                        options: {
+                          basemap: 'delorme',
+                          center: [-111.879655861, 40.571338776], // long, lat
+                          zoom: 13,
+                          sliderStyle: 'small'
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>
