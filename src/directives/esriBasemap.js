@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriBasemap', function (esriRegistry) {
+    angular.module('esri.map').directive('esriBasemap', function () {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriBasemap to be used as an element (<esri-identify-task>)
