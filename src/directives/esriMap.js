@@ -16,6 +16,9 @@
             scope.zoom = map.getZoom();
         }
 
+        // handle to deregister the map if registered w/ esriRegistry
+        var deregister;
+
         return {
             // element only
             restrict: 'E',
@@ -38,8 +41,13 @@
                 mapOptions: '&'
             },
 
+            controllerAs: 'mapCtrl',
+
+            bindToController: true,
+
             // replace tag with div with same id
             compile: function($element, $attrs) {
+
                 // remove the id attribute from the main element
                 $element.removeAttr('id');
 
@@ -48,12 +56,93 @@
 
                 // since we are using compile we need to return our linker function
                 // the 'link' function handles how our directive responds to changes in $scope
-                /*jshint unused: false*/
-                return function(scope, element, attrs, controller) {};
+                return function(scope, element, attrs, controller) {
+
+                    controller.getMap().then(function(map) {
+                        if (map.loaded) {
+                            // map already loaded, we need to
+                            // update two-way bound scope properties
+                            // updateScopeFromMap(scope, map);
+                            updateScopeFromMap(controller, map);
+                            // make map object available to caller
+                            // by calling the load event handler
+                            if (attrs.load) {
+                                controller.load()(map);
+                            }
+                        } else {
+                            // map is not yet loaded, this means that
+                            // two-way bound scope properties
+                            // will be updated by extent-change handler below
+                            // so don't need to update them here
+                            // just set up a handler for the map load event (if any)
+                            if (attrs.load) {
+                                map.on('load', function() {
+                                    scope.$apply(function() {
+                                        controller.load()(map);
+                                    });
+                                });
+                            }
+                        }
+
+                        // listen for changes to scope.basemap and update map
+                        scope.$watch('mapCtrl.basemap', function(newBasemap, oldBasemap) {
+                            if (map.loaded && newBasemap !== oldBasemap) {
+                                map.setBasemap(newBasemap);
+                            }
+                        });
+
+                        // listen for changes to scope.center and scope.zoom and update map
+                        controller.inUpdateCycle = false;
+                        if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
+                            scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
+                                if (controller.inUpdateCycle) {
+                                    return;
+                                }
+                                if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
+                                    // prevent circular updates between $watch and $apply
+                                    controller.inUpdateCycle = true;
+                                    map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
+                                        controller.inUpdateCycle = false;
+                                    });
+                                }
+                            });
+                        }
+
+                        // listen for changes to map extent and
+                        // call extent-change handler (if any)
+                        // also update scope.center and scope.zoom
+                        map.on('extent-change', function(e) {
+                            if (attrs.extentChange) {
+                                controller.extentChange()(e);
+                            }
+                            // prevent circular updates between $watch and $apply
+                            if (controller.inUpdateCycle) {
+                                return;
+                            }
+                            controller.inUpdateCycle = true;
+                            scope.$apply(function() {
+                                // update scope properties
+                                updateScopeFromMap(controller, map);
+                                $timeout(function() {
+                                    // this will be executed after the $digest cycle
+                                    controller.inUpdateCycle = false;
+                                }, 0);
+                            });
+                        });
+
+                        // clean up
+                        scope.$on('$destroy', function() {
+                            if (deregister) {
+                                deregister();
+                            }
+                            map.destroy();
+                        });
+                    });
+                };
             },
 
             // directive api
-            controller: function($scope, $element, $attrs) {
+            controller: function($attrs) {
                 // get a reference to the controller
                 var self = this;
                 self.Basemaps = [];
@@ -64,10 +153,7 @@
 
                 // add this map to the registry
                 if ($attrs.registerAs) {
-                    var deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
-
-                    // remove this from the registry when the scope is destroyed
-                    $scope.$on('$destroy', deregister);
+                    deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
                 }
 
                 require(['esri/map', 'esri/arcgis/utils', 'esri/basemaps', 'esri/geometry/Extent', 'esri/dijit/Popup'], function(Map, arcgisUtils, esriBasemaps, Extent, Popup) {
@@ -88,7 +174,7 @@
                     
                     // setup our mapOptions based on object hash from attribute string
                     // or from scope object property
-                    var mapOptions = $scope.mapOptions() || {};
+                    var mapOptions = self.mapOptions() || {};
 
                     // construct optional Extent for mapOptions
                     if (mapOptions.hasOwnProperty('extent')) {
@@ -111,23 +197,23 @@
 
                     // check for 1 way bound properties (basemap)
                     // $scope.basemap takes precedence over $scope.mapOptions.basemap
-                    if ($scope.basemap) {
-                        mapOptions.basemap = $scope.basemap;
+                    if (self.basemap) {
+                        mapOptions.basemap = self.basemap;
                     }
 
                     // check for 2 way bound properties (center and zoom)
                     // $scope.center takes precedence over $scope.mapOptions.center
-                    if ($scope.center) {
-                        if ($scope.center.lng && $scope.center.lat) {
-                            mapOptions.center = [$scope.center.lng, $scope.center.lat];
+                    if (self.center) {
+                        if (self.center.lng && self.center.lat) {
+                            mapOptions.center = [self.center.lng, self.center.lat];
                         } else {
-                            mapOptions.center = $scope.center;
+                            mapOptions.center = self.center;
                         }
                     }
 
                     // $scope.zoom takes precedence over $scope.mapOptions.zoom
-                    if ($scope.zoom) {
-                        mapOptions.zoom = $scope.zoom;
+                    if (self.zoom) {
+                        mapOptions.zoom = self.zoom;
                     }
 
                     // initialize map and resolve the deferred
@@ -139,7 +225,7 @@
                             // update layer infos for legend
                             self.layerInfos = arcgisUtils.getLegendLayers(response);
                             // add item info to scope
-                            $scope.itemInfo = response.itemInfo;
+                            self.itemInfo = response.itemInfo;
                             // resolve the promise with the map
                             mapDeferred.resolve(response.map);
                         });
@@ -149,83 +235,6 @@
                         // resolve the promise with the map
                         mapDeferred.resolve(map);
                     }
-
-                    mapDeferred.promise.then(function(map) {
-                        if (map.loaded) {
-                            // map already loaded, we need to
-                            // update two-way bound scope properties
-                            updateScopeFromMap($scope, map);
-                            // make map object available to caller
-                            // by calling the load event handler
-                            if ($attrs.load) {
-                                $scope.load()(map);
-                            }
-                        } else {
-                            // map is not yet loaded, this means that
-                            // two-way bound scope properties
-                            // will be updated by extent-change handler below
-                            // so don't need to update them here
-                            // just set up a handler for the map load event (if any)
-                            if ($attrs.load) {
-                                map.on('load', function() {
-                                    $scope.$apply(function() {
-                                        $scope.load()(map);
-                                    });
-                                });
-                            }
-                        }
-
-                        // listen for changes to $scope.basemap and update map
-                        $scope.$watch('basemap', function(newBasemap, oldBasemap) {
-                            if (map.loaded && newBasemap !== oldBasemap) {
-                                map.setBasemap(newBasemap);
-                            }
-                        });
-
-                        // listen for changes to $scope.center and $scope.zoom and update map
-                        $scope.inUpdateCycle = false;
-                        if (!angular.isUndefined($scope.center) || !angular.isUndefined($scope.zoom)) {
-                            $scope.$watchGroup(['center.lng', 'center.lat', 'zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
-                                if ($scope.inUpdateCycle) {
-                                    return;
-                                }
-                                if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
-                                    // prevent circular updates between $watch and $apply
-                                    $scope.inUpdateCycle = true;
-                                    map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
-                                        $scope.inUpdateCycle = false;
-                                    });
-                                }
-                            });
-                        }
-
-                        // listen for changes to map extent and
-                        // call extent-change handler (if any)
-                        // also update $scope.center and $scope.zoom
-                        map.on('extent-change', function(e) {
-                            if ($attrs.extentChange) {
-                                $scope.extentChange()(e);
-                            }
-                            // prevent circular updates between $watch and $apply
-                            if ($scope.inUpdateCycle) {
-                                return;
-                            }
-                            $scope.inUpdateCycle = true;
-                            $scope.$apply(function() {
-                                // update scope properties
-                                updateScopeFromMap($scope, map);
-                                $timeout(function() {
-                                    // this will be executed after the $digest cycle
-                                    $scope.inUpdateCycle = false;
-                                }, 0);
-                            });
-                        });
-
-                        // clean up
-                        $scope.$on('$destroy', function() {
-                            map.destroy();
-                        });
-                    });
                 });
 
                 // method returns the promise that will be resolved with the map

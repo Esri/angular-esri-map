@@ -1,10 +1,6 @@
 (function (angular) {
     'use strict';
 
-    function isTrue(val) {
-        return val === true || val === 'true';
-    }
-
     // TODO: refactor to shared factory/service?
     function parseVisibleLayers(val) {
         var visibleLayers;
@@ -49,8 +45,12 @@
                 layerOptions: '&'
             },
 
+            controllerAs: 'vm',
+
+            bindToController: true,
+
             // define an interface for working with this directive
-            controller: function ($scope, $element, $attrs) {
+            controller: function () {
                 var self = this;
                 var layerDeferred = $q.defer();
 
@@ -94,19 +94,19 @@
                         }
                     }
 
-                    var layerOptions = $scope.layerOptions() || {};
+                    var layerOptions = self.layerOptions() || {};
 
                     // $scope.visible takes precedence over $scope.layerOptions.visible
-                    if (angular.isDefined($scope.visible)) {
-                        layerOptions.visible = isTrue($scope.visible);
+                    if (angular.isDefined(self.visible)) {
+                        layerOptions.visible = esriMapUtils.isTrue(self.visible);
                     }
 
                     // $scope.opacity takes precedence over $scope.layerOptions.opacity
-                    if ($scope.opacity) {
-                        layerOptions.opacity = Number($scope.opacity);
+                    if (self.opacity) {
+                        layerOptions.opacity = Number(self.opacity);
                     }
 
-                    // $scope.layerOptions.infoTemplates takes precedence over
+                    // self.layerOptions.infoTemplates takes precedence over
                     // layer options defined in nested esriLayerOption directives
                     if (angular.isObject(layerOptions.infoTemplates)) {
                         for (var layerIndex in layerOptions.infoTemplates) {
@@ -145,11 +145,11 @@
                     }
 
                     // create the layer object
-                    var layer = new ArcGISDynamicMapServiceLayer($attrs.url, layerOptions);
+                    var layer = new ArcGISDynamicMapServiceLayer(self.url, layerOptions);
 
                     // set visible layers if passed as attribute
-                    if ($scope.visibleLayers) {
-                        layer.setVisibleLayers(parseVisibleLayers($scope.visibleLayers));
+                    if (self.visibleLayers) {
+                        layer.setVisibleLayers(parseVisibleLayers(self.visibleLayers));
                     }
 
                     // resolve deferred w/ layer
@@ -184,7 +184,7 @@
                 var mapController = controllers[1];
 
                 // bind directive attributes to layer properties and events
-                esriMapUtils.initLayerDirecive(scope, attrs, layerController, mapController);
+                esriMapUtils.initLayerDirective(scope, attrs, layerController, mapController);
             }
         };
     });
