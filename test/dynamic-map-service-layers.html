@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <title>Dynamic Map Service Layers Example</title>
+        <title>Dynamic Map Service Layers</title>
 
         <!-- load Esri CSS -->
         <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
@@ -37,11 +37,11 @@
         </style>
     </head>
     <body ng-controller="MapController">
-        <h2>Dynamic Map Service Layers Example</h2>
+        <h2>Dynamic Map Service Layers</h2>
         <!-- add map to page and bind to scope map parameters -->
         <!-- NOTE: using one-time binding (::) for all url and options parameters
         as they are only evaluated in the map/layer constructors -->
-        <esri-map id="map" map-options="::map.options">
+        <esri-map id="map" map-options="map.options">
             <!-- dynamic map service layer w/ inline url and options
             as well as info template defined in a directive -->
             <esri-dynamic-map-service-layer url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
@@ -68,30 +68,51 @@
             'use strict';
 
             angular.module('esri-map-example', ['esri.map'])
-                .controller('MapController', function ($scope) {
-
+                .controller('MapController', function($scope, esriLoader) {
                     var _censusInfoContent = '<div class="demographicInfoContent">' +
-                    '<div class="demographicNumericPadding">${AGE_5_17:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 5 - 17<br>' +
-                    '<div class="demographicNumericPadding">${AGE_40_49:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 40 - 49<br>' +
-                    '<div class="demographicNumericPadding">${AGE_65_UP:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 65 and older' +
-                    '</div>';
+                        '<div class="demographicNumericPadding">${AGE_5_17:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 5 - 17<br>' +
+                        '<div class="demographicNumericPadding">${AGE_40_49:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 40 - 49<br>' +
+                        '<div class="demographicNumericPadding">${AGE_65_UP:formatNumber}</div><div class="demographicInnerSpacing"></div>people ages 65 and older' +
+                        '</div>';
 
                     // functions used in popup templates must have a global scope :(
-                    window.formatNumber = function(value/*, key, data*/) {
+                    window.formatNumber = function(value /*, key, data*/ ) {
                         var searchText = '' + value;
                         var formattedString = searchText.replace(/(\d)(?=(\d\d\d)+(?!\d))/gm, '$1,');
                         return formattedString;
                     };
 
-                    $scope.map = {
-                        options: {
-                          basemap: 'topo',
-                          center: [-94.75290067627297, 39.034671990514816], // long, lat
-                          zoom: 12,
-                          sliderStyle: 'small'/*,
-                          infoWindow: popup*/
-                      }
-                    };
+                    esriLoader.require([
+                        'esri/Color',
+                        'esri/dijit/Popup',
+                        'esri/symbols/SimpleFillSymbol',
+                        'esri/symbols/SimpleLineSymbol'
+                    ]).then(function(modules) {
+                        var Color = modules[0];
+                        var Popup = modules[1];
+                        var SimpleFillSymbol = modules[2];
+                        var SimpleLineSymbol = modules[3];
+
+                        var sfs = new SimpleFillSymbol(
+                            'solid',
+                            new SimpleLineSymbol('solid', new Color('#444444'), 3),
+                            new Color([68, 68, 68, 0.25]));
+
+                        var popup = new Popup({
+                            fillSymbol: sfs
+                        }, angular.element('<div></div>')[0]);
+
+                        $scope.map = {
+                            options: {
+                                basemap: 'topo',
+                                center: [-94.75290067627297, 39.034671990514816], // long, lat
+                                zoom: 12,
+                                sliderStyle: 'small',
+                                infoWindow: popup
+                            }
+                        };
+                    });
+
                     $scope.demographicsLayer = {
                         url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
                         options: {
