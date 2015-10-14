@@ -155,7 +155,7 @@
                     deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
                 }
 
-                require(['esri/map', 'esri/arcgis/utils', 'esri/geometry/Extent', 'esri/dijit/Popup'], function(Map, arcgisUtils, Extent, Popup) {
+                require(['esri/map', 'esri/arcgis/utils', 'esri/geometry/Extent'], function(Map, arcgisUtils, Extent) {
                     // setup our mapOptions based on object hash from attribute string
                     // or from scope object property
                     var mapOptions = self.mapOptions() || {};
@@ -166,16 +166,6 @@
                         // e.g. if the controller or HTML view are only providing JSON
                         if (mapOptions.extent.declaredClass !== 'esri.geometry.Extent') {
                             mapOptions.extent = new Extent(mapOptions.extent);
-                        }
-                    }
-
-                    // construct optional infoWindow from mapOptions
-                    // default to a new Popup dijit for now
-                    // mapOptions.infoWindow expects:
-                    //  {options: <Object>, srcNodeRef: <Node | String>}
-                    if (mapOptions.hasOwnProperty('infoWindow')) {
-                        if (mapOptions.infoWindow.hasOwnProperty('srcNodeRef')) {
-                            mapOptions.infoWindow = new Popup(mapOptions.infoWindow.options || {}, mapOptions.infoWindow.srcNodeRef);
                         }
                     }
 
