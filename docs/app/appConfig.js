@@ -163,6 +163,17 @@
             }
         }, {
             toc: {
+                title: 'Custom Basemap',
+                description: 'Shows how to load a map with a custom basemap.',
+                url: urlPrefixes.templateHref + 'custom-basemap'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'custom-basemap',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'custom-basemap.html',
+                controller: 'CustomBasemapCtrl'
+            }
+        }, {
+            toc: {
                 title: 'Other Esri Modules',
                 description: 'Shows how to use other Esri modules that we have not included directives for (such as graphics, symbols, toolbars, etc.).',
                 url: urlPrefixes.templateHref + 'other-esri-modules'
