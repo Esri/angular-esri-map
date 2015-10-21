@@ -75,6 +75,17 @@
             }
         }, {
             toc: {
+                title: 'Multiple Dynamic Map Service Layers',
+                description: 'Loads several dynamic map service layers into the map and shows how to bind layer properties as well as setup custom popups.',
+                url: urlPrefixes.templateHref + 'dynamic-map-service-layers'
+            },
+            route: {
+                path: urlPrefixes.routePath + 'dynamic-map-service-layers',
+                templateUrl: urlPrefixes.routeTemplateUrl + 'dynamic-map-service-layers.html',
+                controller: 'DynamicMapServiceLayersCtrl'
+            }
+        }, {
+            toc: {
                 title: 'Legend',
                 description: 'Show a legend for the map.',
                 url: urlPrefixes.templateHref + 'legend'
@@ -142,7 +153,7 @@
         }, {
             toc: {
                 title: 'No Basemap',
-                description: 'Shows how to load a map without a basemap using more complex map options such as a custom Extent and Popup.',
+                description: 'Shows how to load a map without a basemap using more complex map options such as a custom Extent.',
                 url: urlPrefixes.templateHref + 'no-basemap'
             },
             route: {
