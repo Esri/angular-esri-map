@@ -6,6 +6,7 @@ dist
 
 # ngdoc generation build files - this is still in testing and evaluation
 ngdocs_test
+dgeni_test/build
 
 # Logs
 logs

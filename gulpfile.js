@@ -126,5 +126,11 @@ gulp.task('ngdocs', [], function () {
     .pipe(gulp.dest('./ngdocs_test'));
 });
 
+gulp.task('dgeni', function() {
+  var Dgeni = require('dgeni');
+  var dgeni = new Dgeni([require('./dgeni_test/dgeni-example')]);
+  return dgeni.generate();
+});
+
 // Default Task
 gulp.task('default', ['serve']);
