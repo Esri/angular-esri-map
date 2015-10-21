@@ -4,6 +4,9 @@ docs/lib
 # distributable files - only included in releases
 dist
 
+# ngdoc generation build files - this is still in testing and evaluation
+ngdocs_test
+
 # Logs
 logs
 *.log

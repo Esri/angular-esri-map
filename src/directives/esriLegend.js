@@ -3,9 +3,12 @@
 
     /**
      * @ngdoc directive
-     * @name esriApp.directive:esriLegend
+     * @name esri.map.directive:esriLegend
+     * @restrict EA
+     * @element
+     *
      * @description
-     * # esriLegend
+     * # esriLegend description goes here
      */
     angular.module('esri.map')
       .directive('esriLegend', function ($document, $q) {

@@ -119,5 +119,12 @@ gulp.task('test', ['serve-test'], function() {
     });
 });
 
+gulp.task('ngdocs', [], function () {
+  var gulpDocs = require('gulp-ngdocs');
+  return gulp.src('./src/**/*.js')
+    .pipe(gulpDocs.process())
+    .pipe(gulp.dest('./ngdocs_test'));
+});
+
 // Default Task
 gulp.task('default', ['serve']);

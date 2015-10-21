@@ -4,15 +4,21 @@
     angular.module('esri.map', []);
 
     /**
-     * @ngdoc provider
-     * @name esriLoader
+     * @ngdoc service
+     * @name esri.map.factory:esriLoader
+     *
      * @description
      * Use `esriLoader` to lazyload the ESRI ArcGIS API or to require API modules.
      */
     angular.module('esri.map').factory('esriLoader', function ($q) {
 
         /**
-         * Load the ESRI ArcGIS API
+         * @ngdoc function
+         * @name bootstrap
+         * @methodOf esri.map.factory:esriLoader
+         *
+         * @description
+         * Loads the Esri ArcGIS API for JavaScript
          *
          * @param {Object} options Send a list of options of how to load the API.
          * @param {String} options.url the url to load the ESRI API, defaults to http://js.arcgis.com/3.14compact
@@ -42,18 +48,30 @@
           return deferred.promise;
         }
 
-        /** Check if the ESRI ArcGIS API is loaded
-         * @return {Boolean} Returns a boolean if ESRI ArcGIS ASK is, in fact, loaded
+        /**
+         * @ngdoc function
+         * @name isLoaded
+         * @methodOf esri.map.factory:esriLoader
+         *
+         * @description
+         * Check if the ESRI ArcGIS API is loaded
+         *
+         * @return {Boolean} Returns a boolean if ESRI ArcGIS JavaScript API is, in fact, loaded
          */
         function isLoaded() {
           return angular.isDefined(window.esri);
         }
 
         /**
-         * Load ESRI Module, this will use dojo's AMD loader
+         * @ngdoc function
+         * @name require
+         * @methodOf esri.map.factory:esriLoader
+         *
+         * @description
+         * Load an Esri module, using the Dojo AMD loader
          *
          * @param {String|Array} modules A string of a module or an array of modules to be loaded.
-         * @param {Function} optional callback function used to support AMD style loading, promise and callback are both add to the event loop, possible race condition.
+         * @param {Function} [callback] An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.
          * @return {Promise} Returns a $q style promise which is resolved once modules are loaded
          */
         function requireModule(moduleName, callback){
