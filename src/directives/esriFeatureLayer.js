@@ -30,6 +30,7 @@
                 layerOptions: '&'
             },
 
+            // TODO: rename to layerCtrl?
             controllerAs: 'vm',
 
             bindToController: true,
@@ -42,6 +43,8 @@
 
                 this.createLayer = function() {
                     var self = this;
+
+                    // TODO: move to esriMapUtils.parseLayerOptions(attrs, mapController?)
                     var layerOptions = self.layerOptions() || {};
 
                     // $scope.visible takes precedence over $scope.layerOptions.visible
