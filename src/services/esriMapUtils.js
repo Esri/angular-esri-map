@@ -195,87 +195,85 @@
 
     // update scope in response to map events and
     // update map in response to changes in scope properties
-    service.bindMapEvents = function(scope, attrs, mapController) {
+    service.bindMapEvents = function(scope, attrs, mapController, map) {
 
-        mapController.getMap().then(function(map) {
-            if (map.loaded) {
-                // map already loaded, we need to
-                // update two-way bound scope properties
-                // updateCenterAndZoom(scope, map);
-                updateCenterAndZoom(mapController, map);
-                // make map object available to caller
-                // by calling the load event handler
-                if (attrs.load) {
-                    mapController.load()(map);
-                }
-            } else {
-                // map is not yet loaded, this means that
-                // two-way bound scope properties
-                // will be updated by extent-change handler below
-                // so don't need to update them here
-                // just set up a handler for the map load event (if any)
-                if (attrs.load) {
-                    map.on('load', function() {
-                        scope.$apply(function() {
-                            mapController.load()(map);
-                        });
-                    });
-                }
+        if (map.loaded) {
+            // map already loaded, we need to
+            // update two-way bound scope properties
+            // updateCenterAndZoom(scope, map);
+            updateCenterAndZoom(mapController, map);
+            // make map object available to caller
+            // by calling the load event handler
+            if (attrs.load) {
+                mapController.load()(map);
             }
+        } else {
+            // map is not yet loaded, this means that
+            // two-way bound scope properties
+            // will be updated by extent-change handler below
+            // so don't need to update them here
+            // just set up a handler for the map load event (if any)
+            if (attrs.load) {
+                map.on('load', function() {
+                    scope.$apply(function() {
+                        mapController.load()(map);
+                    });
+                });
+            }
+        }
 
-            // listen for changes to map extent and
-            // call extent-change handler (if any)
-            // also update scope.center and scope.zoom
-            map.on('extent-change', function(e) {
-                if (attrs.extentChange) {
-                    mapController.extentChange()(e);
-                }
-                // prevent circular updates between $watch and $apply
+        // listen for changes to map extent and
+        // call extent-change handler (if any)
+        // also update scope.center and scope.zoom
+        map.on('extent-change', function(e) {
+            if (attrs.extentChange) {
+                mapController.extentChange()(e);
+            }
+            // prevent circular updates between $watch and $apply
+            if (mapController.inUpdateCycle) {
+                return;
+            }
+            mapController.inUpdateCycle = true;
+            scope.$apply(function() {
+                // update scope properties
+                updateCenterAndZoom(mapController, map);
+                $timeout(function() {
+                    // this will be executed after the $digest cycle
+                    mapController.inUpdateCycle = false;
+                }, 0);
+            });
+        });
+
+        // listen for changes to scope.basemap and update map
+        scope.$watch('mapCtrl.basemap', function(newBasemap, oldBasemap) {
+            if (map.loaded && newBasemap !== oldBasemap) {
+                map.setBasemap(newBasemap);
+            }
+        });
+
+        // listen for changes to scope.center and scope.zoom and update map
+        mapController.inUpdateCycle = false;
+        if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
+            scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
                 if (mapController.inUpdateCycle) {
                     return;
                 }
-                mapController.inUpdateCycle = true;
-                scope.$apply(function() {
-                    // update scope properties
-                    updateCenterAndZoom(mapController, map);
-                    $timeout(function() {
-                        // this will be executed after the $digest cycle
+                if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
+                    // prevent circular updates between $watch and $apply
+                    mapController.inUpdateCycle = true;
+                    map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
                         mapController.inUpdateCycle = false;
-                    }, 0);
-                });
-            });
-
-            // listen for changes to scope.basemap and update map
-            scope.$watch('mapCtrl.basemap', function(newBasemap, oldBasemap) {
-                if (map.loaded && newBasemap !== oldBasemap) {
-                    map.setBasemap(newBasemap);
+                    });
                 }
             });
+        }
 
-            // listen for changes to scope.center and scope.zoom and update map
-            mapController.inUpdateCycle = false;
-            if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
-                scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
-                    if (mapController.inUpdateCycle) {
-                        return;
-                    }
-                    if (newCenterZoom[0] !== '' && newCenterZoom[1] !== '' && newCenterZoom[2] !== '') {
-                        // prevent circular updates between $watch and $apply
-                        mapController.inUpdateCycle = true;
-                        map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(function() {
-                            mapController.inUpdateCycle = false;
-                        });
-                    }
-                });
+        // clean up
+        scope.$on('$destroy', function() {
+            if (mapController.deregister) {
+                mapController.deregister();
             }
-
-            // clean up
-            scope.$on('$destroy', function() {
-                if (mapController.deregister) {
-                    mapController.deregister();
-                }
-                map.destroy();
-            });
+            map.destroy();
         });
     };
 

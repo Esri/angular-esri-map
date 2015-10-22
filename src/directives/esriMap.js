@@ -42,38 +42,52 @@
                 // the 'link' function handles how our directive responds to changes in $scope
                 return function(scope, element, attrs, controller) {
 
-                    // update scope in response to map events and
-                    // update map in response to changes in scope properties
-                    esriMapUtils.bindMapEvents(scope, attrs, controller);
+                    controller.createMap(attrs).then(function(map) {
+
+                        // update scope in response to map events and
+                        // update map in response to changes in scope properties
+                        esriMapUtils.bindMapEvents(scope, attrs, controller, map);
+
+                    });
 
                 };
             },
 
             // directive api
-            controller: function($attrs) {
+            controller: function() {
 
                 // this deferred will be resolved with the map
                 var mapDeferred;
 
-                // get map options form controller properties
-                var mapOptions = esriMapUtils.getMapOptions(this);
+                // create map from bound directive properties
+                this.createMap = function(attrs) {
 
-                if ($attrs.webmapId) {
-                    // load map object from web map
-                    mapDeferred = esriMapUtils.createWebMap($attrs.webmapId, $attrs.id, mapOptions, this);
-                } else {
-                    // create a new map object
-                    mapDeferred = esriMapUtils.createMap($attrs.id, mapOptions);
-                }
+                    // get map options form controller properties
+                    var mapOptions = esriMapUtils.getMapOptions(this);
 
-                // add this map to the registry and get a
-                // handle to deregister the map when it's destroyed
-                if ($attrs.registerAs) {
-                    this.deregister = esriRegistry._register($attrs.registerAs, mapDeferred);
-                }
+                    if (attrs.webmapId) {
+                        // load map object from web map
+                        mapDeferred = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, mapOptions, this);
+                    } else {
+                        // create a new map object
+                        mapDeferred = esriMapUtils.createMap(attrs.id, mapOptions);
+                    }
+
+                    // add this map to the registry and get a
+                    // handle to deregister the map when it's destroyed
+                    if (attrs.registerAs) {
+                        this.deregister = esriRegistry._register(attrs.registerAs, mapDeferred);
+                    }
+
+                    return mapDeferred.promise;
+                };
 
                 // method returns the promise that will be resolved with the map
                 this.getMap = function() {
+                    // throw error if createMap was not called
+                    if (!mapDeferred.promise) {
+                        throw Error('Map has not yet been created. Call createMap().');
+                    }
                     return mapDeferred.promise;
                 };
 

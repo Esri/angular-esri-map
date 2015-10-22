@@ -38,8 +38,6 @@
             controller: function() {
                 var layerDeferred;
 
-                this.layerType = 'FeatureLayer';
-
                 // create layer from bound controller properties
                 this.createLayer = function() {
 
@@ -53,6 +51,10 @@
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
+                    // throw error if createLayer was not called
+                    if (!layerDeferred.promise) {
+                        throw Error('Layer has not yet been created. Call createLayer().');
+                    }
                     return layerDeferred.promise;
                 };
 
