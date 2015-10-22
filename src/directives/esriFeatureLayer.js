@@ -30,8 +30,7 @@
                 layerOptions: '&'
             },
 
-            // TODO: rename to layerCtrl?
-            controllerAs: 'vm',
+            controllerAs: 'layerCtrl',
 
             bindToController: true,
 
@@ -69,20 +68,26 @@
                 var mapController = controllers[1];
 
                 // create the layer and it to the map and then
-                layerController.createLayer().then(function(){
+                layerController.createLayer().then(function(layer){
+                    // get layer info from layer and directive attributes
+                    var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
+
+                    // add the layer to the map
+                    esriMapUtils.addLayerToMap(mapController, layer, 0, layerInfo);
+
                     // bind directive attributes to layer properties and events
-                    esriMapUtils.initLayerDirective(scope, attrs, layerController, mapController).then(function(layer) {
+                    esriMapUtils.bindLayerEvents(scope, attrs, layer, mapController);
 
-                        // additional directive attribute binding specific to this type of layer
+                    // additional directive attribute binding specific to this type of layer
 
-                        // watch the scope's definitionExpression property for changes
-                        // set the definitionExpression of the feature layer
-                        scope.$watch('vm.definitionExpression', function(newVal, oldVal) {
-                            if (newVal !== oldVal) {
-                                layer.setDefinitionExpression(newVal);
-                            }
-                        });
+                    // watch the scope's definitionExpression property for changes
+                    // set the definitionExpression of the feature layer
+                    scope.$watch('layerCtrl.definitionExpression', function(newVal, oldVal) {
+                        if (newVal !== oldVal) {
+                            layer.setDefinitionExpression(newVal);
+                        }
                     });
+                    // });
                 });
             }
         };

@@ -144,77 +144,6 @@
         return mapOptions;
     };
 
-    // TODO: possibly split into bindLayerEvents and watchLayerScope?
-    // bind directive attributes to layer properties and events
-    service.initLayerDirective = function(scope, attrs, layerController, mapController) {
-        var layerIndex = layerController.layerType === 'FeatureLayer' ? 0 : undefined;
-
-        return layerController.getLayer().then(function(layer) {
-            // add layer at index position so that layers can be
-            // declaratively added to map in top-to-bottom order
-            mapController.addLayer(layer, layerIndex);
-
-            // Look for layerInfo related attributes. Add them to the map's layerInfos array for access in other components
-            mapController.addLayerInfo({
-                title: attrs.title || layer.name,
-                layer: layer,
-                // TODO: are these the right params to send
-                hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
-                defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
-            });
-
-            // watch the scope's visible property for changes
-            // set the visibility of the feature layer
-            scope.$watch('vm.visible', function(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    layer.setVisibility(isTrue(newVal));
-                }
-            });
-
-            // watch the scope's opacity property for changes
-            // set the opacity of the feature layer
-            scope.$watch('vm.opacity', function(newVal, oldVal) {
-                if (newVal !== oldVal) {
-                    layer.setOpacity(Number(newVal));
-                }
-            });
-
-            // call load handler (if any)
-            if (attrs.load) {
-                if (layer.loaded) {
-                    // layer is already loaded
-                    // make layer object available to caller immediately
-                    scope.vm.load()(layer);
-                } else {
-                    // layer is not yet loaded
-                    // wait for load event, and then make layer object available
-                    layer.on('load', function() {
-                        scope.$apply(function() {
-                            scope.vm.load()(layer);
-                        });
-                    });
-                }
-            }
-
-            // call updateEnd handler (if any)
-            if (attrs.updateEnd) {
-                layer.on('update-end', function(e) {
-                    scope.$apply(function() {
-                        scope.vm.updateEnd()(e);
-                    });
-                });
-            }
-
-            // remove the layer from the map when the layer scope is destroyed
-            scope.$on('$destroy', function() {
-                mapController.removeLayer(layer);
-            });
-
-            // return the layer
-            return layer;
-        });
-    };
-
     // create a new map at an element w/ the given id
     service.createMap = function(elementId, mapOptions) {
         // this deferred will be resolved with the map
@@ -264,9 +193,9 @@
         return mapDeferred;
     };
 
-    // TODO: pass controllerAs name to use w/ scope
-    // TODO: break into bindMapEvents and watchMapScope?
-    service.bindMapEvents = function(mapController, scope, attrs) {
+    // update scope in response to map events and
+    // update map in response to changes in scope properties
+    service.bindMapEvents = function(scope, attrs, mapController) {
 
         mapController.getMap().then(function(map) {
             if (map.loaded) {
@@ -294,6 +223,28 @@
                 }
             }
 
+            // listen for changes to map extent and
+            // call extent-change handler (if any)
+            // also update scope.center and scope.zoom
+            map.on('extent-change', function(e) {
+                if (attrs.extentChange) {
+                    mapController.extentChange()(e);
+                }
+                // prevent circular updates between $watch and $apply
+                if (mapController.inUpdateCycle) {
+                    return;
+                }
+                mapController.inUpdateCycle = true;
+                scope.$apply(function() {
+                    // update scope properties
+                    updateCenterAndZoom(mapController, map);
+                    $timeout(function() {
+                        // this will be executed after the $digest cycle
+                        mapController.inUpdateCycle = false;
+                    }, 0);
+                });
+            });
+
             // listen for changes to scope.basemap and update map
             scope.$watch('mapCtrl.basemap', function(newBasemap, oldBasemap) {
                 if (map.loaded && newBasemap !== oldBasemap) {
@@ -318,28 +269,6 @@
                 });
             }
 
-            // listen for changes to map extent and
-            // call extent-change handler (if any)
-            // also update scope.center and scope.zoom
-            map.on('extent-change', function(e) {
-                if (attrs.extentChange) {
-                    mapController.extentChange()(e);
-                }
-                // prevent circular updates between $watch and $apply
-                if (mapController.inUpdateCycle) {
-                    return;
-                }
-                mapController.inUpdateCycle = true;
-                scope.$apply(function() {
-                    // update scope properties
-                    updateCenterAndZoom(mapController, map);
-                    $timeout(function() {
-                        // this will be executed after the $digest cycle
-                        mapController.inUpdateCycle = false;
-                    }, 0);
-                });
-            });
-
             // clean up
             scope.$on('$destroy', function() {
                 if (mapController.deregister) {
@@ -349,7 +278,6 @@
             });
         });
     };
-
 
     // get feature layer options from layer controller properties
     service.getFeatureLayerOptions = function(layerController) {
@@ -465,6 +393,78 @@
         });
 
         return layerDeferred;
+    };
+
+    // get layer info from layer and directive attributes
+    service.getLayerInfo = function(layer, attrs) {
+        return {
+            title: attrs.title || layer.name,
+            layer: layer,
+            // TODO: are these the right params to send
+            hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
+            defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
+        };
+    };
+
+    // add layer to map and then add layer info
+    service.addLayerToMap = function(mapController, layer, layerIndex, layerInfo) {
+        // add layer at index position so that layers can be
+        // declaratively added to map in top-to-bottom order
+        mapController.addLayer(layer, layerIndex);
+
+        // add layer info to the map's layerInfos array for access in other components
+        mapController.addLayerInfo(layerInfo);
+    };
+
+    // bind directive attributes to layer properties and events
+    service.bindLayerEvents = function(scope, attrs, layer, mapController) {
+
+        // call load handler (if any)
+        if (attrs.load) {
+            if (layer.loaded) {
+                // layer is already loaded
+                // make layer object available to caller immediately
+                scope.layerCtrl.load()(layer);
+            } else {
+                // layer is not yet loaded
+                // wait for load event, and then make layer object available
+                layer.on('load', function() {
+                    scope.$apply(function() {
+                        scope.layerCtrl.load()(layer);
+                    });
+                });
+            }
+        }
+
+        // call updateEnd handler (if any)
+        if (attrs.updateEnd) {
+            layer.on('update-end', function(e) {
+                scope.$apply(function() {
+                    scope.layerCtrl.updateEnd()(e);
+                });
+            });
+        }
+
+        // watch the scope's visible property for changes
+        // set the visibility of the feature layer
+        scope.$watch('layerCtrl.visible', function(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                layer.setVisibility(isTrue(newVal));
+            }
+        });
+
+        // watch the scope's opacity property for changes
+        // set the opacity of the feature layer
+        scope.$watch('layerCtrl.opacity', function(newVal, oldVal) {
+            if (newVal !== oldVal) {
+                layer.setOpacity(Number(newVal));
+            }
+        });
+
+        // remove the layer from the map when the layer scope is destroyed
+        scope.$on('$destroy', function() {
+            mapController.removeLayer(layer);
+        });
     };
 
     return service;

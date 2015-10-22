@@ -30,8 +30,7 @@
                 layerOptions: '&'
             },
 
-            // TODO: rename to layerCtrl?
-            controllerAs: 'vm',
+            controllerAs: 'layerCtrl',
 
             bindToController: true,
 
@@ -80,9 +79,16 @@
                 var mapController = controllers[1];
 
                 // create the layer
-                layerController.createLayer().then(function(){
+                layerController.createLayer().then(function(layer){
+
+                    // get layer info from layer and directive attributes
+                    var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
+
+                    // add the layer to the map
+                    esriMapUtils.addLayerToMap(mapController, layer, undefined, layerInfo);
+
                     // bind directive attributes to layer properties and events
-                    esriMapUtils.initLayerDirective(scope, attrs, layerController, mapController);
+                    esriMapUtils.bindLayerEvents(scope, attrs, layer, mapController);
                 });
             }
         };

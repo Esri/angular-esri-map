@@ -43,8 +43,8 @@
                 return function(scope, element, attrs, controller) {
 
                     // update scope in response to map events and
-                    // update mpa in response to changes in scope properties
-                    esriMapUtils.bindMapEvents(controller, scope, attrs);
+                    // update map in response to changes in scope properties
+                    esriMapUtils.bindMapEvents(scope, attrs, controller);
 
                 };
             },
