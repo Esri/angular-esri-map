@@ -41,32 +41,11 @@
 
                 this.layerType = 'FeatureLayer';
 
+                // create layer from bound controller properties
                 this.createLayer = function() {
-                    var self = this;
 
-                    // TODO: move to esriMapUtils.parseLayerOptions(attrs, mapController?)
-                    var layerOptions = self.layerOptions() || {};
-
-                    // $scope.visible takes precedence over $scope.layerOptions.visible
-                    if (angular.isDefined(self.visible)) {
-                        layerOptions.visible = esriMapUtils.isTrue(self.visible);
-                    }
-
-                    // $scope.opacity takes precedence over $scope.layerOptions.opacity
-                    if (self.opacity) {
-                        layerOptions.opacity = Number(self.opacity);
-                    }
-
-                    // $scope.definitionExpression takes precedence over $scope.layerOptions.definitionExpression
-                    if (self.definitionExpression) {
-                        layerOptions.definitionExpression = self.definitionExpression;
-                    }
-
-                    // layerOptions.infoTemplate takes precedence over
-                    // info template defined in nested esriLayerOption directive
-                    if (!angular.isObject(layerOptions.infoTemplate) && angular.isObject(self._infoTemplate)) {
-                        layerOptions.infoTemplate = self._infoTemplate;
-                    }
+                    // get feature layer options from layer controller properties
+                    var layerOptions = esriMapUtils.getFeatureLayerOptions(this);
 
                     // create the layer
                     layerDeferred = esriMapUtils.createFeatureLayer(this.url, layerOptions);

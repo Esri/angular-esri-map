@@ -4,9 +4,23 @@
   // TODO: use esriLoader instead of dojo/require and $q?
   angular.module('esri.map').factory('esriMapUtils', function ($q, $timeout) {
 
-    // TODO: rename to updateCenterAndZoom?
+    // test if a string value (i.e. directive attribute value) is true
+    function isTrue(val) {
+        return val === true || val === 'true';
+    }
+
+    // construct Extent if object is not already an instance
+    // e.g. if the controller or HTML view are only providing JSON
+    function objectToExtent(extent, Extent) {
+        if (extent.declaredClass === 'esri.geometry.Extent') {
+            return extent;
+        } else {
+            return new Extent(extent);
+        }
+    }
+
     // update two-way bound scope properties based on map state
-    function updateScopeFromMap(scope, map) {
+    function updateCenterAndZoom(scope, map) {
         var geoCenter = map.geographicExtent && map.geographicExtent.getCenter();
         if (geoCenter) {
             geoCenter = geoCenter.normalize();
@@ -16,6 +30,26 @@
             };
         }
         scope.zoom = map.getZoom();
+    }
+
+    // get common layer options from layer controller properties
+    function getLayerOptions(layerController) {
+
+        // read options passed in as either a JSON string expression
+        // or as a function bound object
+        var layerOptions = layerController.layerOptions() || {};
+
+        // visible takes precedence over layerOptions.visible
+        if (angular.isDefined(layerController.visible)) {
+            layerOptions.visible = isTrue(layerController.visible);
+        }
+
+        // opacity takes precedence over layerOptions.opacity
+        if (layerController.opacity) {
+            layerOptions.opacity = Number(layerController.opacity);
+        }
+
+        return layerOptions;
     }
 
     // parse array of visible layer ids from a string
@@ -52,25 +86,10 @@
         }
     }
 
-    function objectToExtent(extent, Extent) {
-        // construct Extent if object is not already an instance
-        // e.g. if the controller or HTML view are only providing JSON
-        if (extent.declaredClass === 'esri.geometry.Extent') {
-            return extent;
-        } else {
-            return new Extent(extent);
-        }
-    }
-
     // stateless utility service
     var service = {};
 
-    // test if a string value (i.e. directive attribute value)
-    service.isTrue = function (val) {
-        return val === true || val === 'true';
-    };
-
-    // TODO: rename to addBasemapDefinition
+    // add a custom basemap definition to be used by maps
     service.addCustomBasemap = function(name, basemapDefinition) {
         var deferred = $q.defer();
         require(['esri/basemaps'], function(esriBasemaps) {
@@ -97,8 +116,8 @@
     // get map options from controller properties
     service.getMapOptions = function(mapController) {
 
-        // setup our mapOptions based on object hash from attribute string
-        // or from scope object property
+        // read options passed in as either a JSON string expression
+        // or as a function bound object
         var mapOptions = mapController.mapOptions() || {};
 
         // check for 1 way bound properties (basemap)
@@ -148,7 +167,7 @@
             // set the visibility of the feature layer
             scope.$watch('vm.visible', function(newVal, oldVal) {
                 if (newVal !== oldVal) {
-                    layer.setVisibility(service.isTrue(newVal));
+                    layer.setVisibility(isTrue(newVal));
                 }
             });
 
@@ -245,9 +264,7 @@
         return mapDeferred;
     };
 
-
-    // TODO: either pass mapController, or
-    // pass controllerAs name to use w/ scope
+    // TODO: pass controllerAs name to use w/ scope
     // TODO: break into bindMapEvents and watchMapScope?
     service.bindMapEvents = function(mapController, scope, attrs) {
 
@@ -255,8 +272,8 @@
             if (map.loaded) {
                 // map already loaded, we need to
                 // update two-way bound scope properties
-                // updateScopeFromMap(scope, map);
-                updateScopeFromMap(mapController, map);
+                // updateCenterAndZoom(scope, map);
+                updateCenterAndZoom(mapController, map);
                 // make map object available to caller
                 // by calling the load event handler
                 if (attrs.load) {
@@ -315,7 +332,7 @@
                 mapController.inUpdateCycle = true;
                 scope.$apply(function() {
                     // update scope properties
-                    updateScopeFromMap(mapController, map);
+                    updateCenterAndZoom(mapController, map);
                     $timeout(function() {
                         // this will be executed after the $digest cycle
                         mapController.inUpdateCycle = false;
@@ -333,11 +350,55 @@
         });
     };
 
+
+    // get feature layer options from layer controller properties
+    service.getFeatureLayerOptions = function(layerController) {
+
+        // read options passed in as either a JSON string expression
+        // or as a function bound object
+        var layerOptions = getLayerOptions(layerController);
+
+        // definitionExpression takes precedence over layerOptions.definitionExpression
+        if (layerController.definitionExpression) {
+            layerOptions.definitionExpression = layerController.definitionExpression;
+        }
+
+        // layerOptions.infoTemplate takes precedence over
+        // info template defined in nested esriLayerOption directive
+        if (!angular.isObject(layerOptions.infoTemplate) && angular.isObject(layerController._infoTemplate)) {
+            layerOptions.infoTemplate = layerController._infoTemplate;
+        }
+
+        return layerOptions;
+    };
+
+    // get dynamic service layer options from layer controller properties
+    service.getDynamicMapServiceLayerOptions = function(layerController) {
+
+        // read options passed in as either a JSON string expression
+        // or as a function bound object
+        var layerOptions = getLayerOptions(layerController);
+
+        // layerOptions.infoTemplates takes precedence over
+        // info templates defined in nested esriLayerOption directives
+        if (angular.isObject(layerOptions.infoTemplates)) {
+            for (var layerIndex in layerOptions.infoTemplates) {
+                if (layerOptions.infoTemplates.hasOwnProperty(layerIndex)) {
+                    layerController.setInfoTemplate(layerIndex, layerOptions.infoTemplates[layerIndex].infoTemplate);
+                }
+            }
+        }
+        layerOptions.infoTemplates = layerController._infoTemplates;
+
+        return layerOptions;
+    };
+
+    // create a feature layer
     service.createFeatureLayer = function(url, layerOptions) {
         var layerDeferred = $q.defer();
         require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
 
-            // normalize info template defined in $scope.layerOptions.infoTemplate
+            // normalize info template defined in layerOptions.infoTemplate
             // or nested esriLayerOption directive to be instance of esri/InfoTemplate
             // and pass to layer constructor in layerOptions
             if (layerOptions.infoTemplate) {
@@ -357,13 +418,14 @@
         return layerDeferred;
     };
 
+    // create a dynamic service layer
     service.createDynamicMapServiceLayer = function(url, layerOptions, visibleLayers) {
         var layerDeferred = $q.defer();
         var layer;
 
         require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters'], function (ArcGISDynamicMapServiceLayer, InfoTemplate, ImageParameters) {
 
-            // normalize info templates defined in $scope.layerOptions.infoTemplates
+            // normalize info templates defined in layerOptions.infoTemplates
             // or nested esriLayerOption directives to be instances of esri/InfoTemplate
             // and pass to layer constructor in layerOptions
             if (layerOptions.infoTemplates) {

@@ -43,34 +43,12 @@
 
                 // create layer from bound controller properties
                 this.createLayer = function() {
-                    var self = this;
 
-                    // TODO: move to esriMapUtils.parseLayerOptions(attrs, mapController?)
-                    var layerOptions = this.layerOptions() || {};
-
-                    // $scope.visible takes precedence over $scope.layerOptions.visible
-                    if (angular.isDefined(self.visible)) {
-                        layerOptions.visible = esriMapUtils.isTrue(self.visible);
-                    }
-
-                    // $scope.opacity takes precedence over $scope.layerOptions.opacity
-                    if (self.opacity) {
-                        layerOptions.opacity = Number(self.opacity);
-                    }
-
-                    // layerOptions.infoTemplates takes precedence over
-                    // info templates defined in nested esriLayerOption directives
-                    if (angular.isObject(layerOptions.infoTemplates)) {
-                        for (var layerIndex in layerOptions.infoTemplates) {
-                            if (layerOptions.infoTemplates.hasOwnProperty(layerIndex)) {
-                                self.setInfoTemplate(layerIndex, layerOptions.infoTemplates[layerIndex].infoTemplate);
-                            }
-                        }
-                    }
-                    layerOptions.infoTemplates = self._infoTemplates;
+                    // get dynamic service layer options from layer controller properties
+                    var layerOptions = esriMapUtils.getDynamicMapServiceLayerOptions(this);
 
                     // create the layer and return resolve the defered
-                    layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, self.visibleLayers);
+                    layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
                     return layerDeferred.promise;
                 };
 
