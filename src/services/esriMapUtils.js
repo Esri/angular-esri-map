@@ -1,8 +1,8 @@
 (function (angular) {
   'use strict';
 
-  // TODO: use esriLoader instead of dojo/require and $q?
-  angular.module('esri.map').factory('esriMapUtils', function ($q, $timeout) {
+  // TODO: use the esriLoader promise syntax instead of callback/deferred and remove $q?
+  angular.module('esri.map').factory('esriMapUtils', function ($q, $timeout, esriLoader) {
 
     // test if a string value (i.e. directive attribute value) is true
     function isTrue(val) {
@@ -92,7 +92,7 @@
     // add a custom basemap definition to be used by maps
     service.addCustomBasemap = function(name, basemapDefinition) {
         var deferred = $q.defer();
-        require(['esri/basemaps'], function(esriBasemaps) {
+        esriLoader.require(['esri/basemaps'], function(esriBasemaps) {
             var baseMapLayers = basemapDefinition.baseMapLayers;
             if (!angular.isArray(baseMapLayers) && angular.isArray(basemapDefinition.urls)) {
                 baseMapLayers = basemapDefinition.urls.map(function (url) {
@@ -149,7 +149,7 @@
         // this deferred will be resolved with the map
         var mapDeferred = $q.defer();
 
-        require(['esri/map', 'esri/geometry/Extent'], function(Map, Extent) {
+        esriLoader.require(['esri/map', 'esri/geometry/Extent'], function(Map, Extent) {
 
             // construct optional Extent for mapOptions
             if (mapOptions.hasOwnProperty('extent')) {
@@ -170,7 +170,7 @@
         // this deferred will be resolved with the map
         var mapDeferred = $q.defer();
 
-        require(['esri/arcgis/utils', 'esri/geometry/Extent'], function(arcgisUtils, Extent) {
+        esriLoader.require(['esri/arcgis/utils', 'esri/geometry/Extent'], function(arcgisUtils, Extent) {
 
             // construct optional Extent for mapOptions
             if (mapOptions.hasOwnProperty('extent')) {
@@ -322,7 +322,7 @@
     // create a feature layer
     service.createFeatureLayer = function(url, layerOptions) {
         var layerDeferred = $q.defer();
-        require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
+        esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
 
             // normalize info template defined in layerOptions.infoTemplate
             // or nested esriLayerOption directive to be instance of esri/InfoTemplate
@@ -349,7 +349,7 @@
         var layerDeferred = $q.defer();
         var layer;
 
-        require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters'], function (ArcGISDynamicMapServiceLayer, InfoTemplate, ImageParameters) {
+        esriLoader.require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters'], function (ArcGISDynamicMapServiceLayer, InfoTemplate, ImageParameters) {
 
             // normalize info templates defined in layerOptions.infoTemplates
             // or nested esriLayerOption directives to be instances of esri/InfoTemplate
