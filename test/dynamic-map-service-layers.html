@@ -41,7 +41,7 @@
         <!-- add map to page and bind to scope map parameters -->
         <!-- NOTE: using one-time binding (::) for all url and options parameters
         as they are only evaluated in the map/layer constructors -->
-        <esri-map id="map" map-options="map.options">
+        <esri-map id="map" map-options="::map.options" load="setInfoWindow">
             <!-- dynamic map service layer w/ inline url and options
             as well as info template defined in a directive -->
             <esri-dynamic-map-service-layer url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
@@ -82,36 +82,14 @@
                         return formattedString;
                     };
 
-                    esriLoader.require([
-                        'esri/Color',
-                        'esri/dijit/Popup',
-                        'esri/symbols/SimpleFillSymbol',
-                        'esri/symbols/SimpleLineSymbol'
-                    ]).then(function(modules) {
-                        var Color = modules[0];
-                        var Popup = modules[1];
-                        var SimpleFillSymbol = modules[2];
-                        var SimpleLineSymbol = modules[3];
-
-                        var sfs = new SimpleFillSymbol(
-                            'solid',
-                            new SimpleLineSymbol('solid', new Color('#444444'), 3),
-                            new Color([68, 68, 68, 0.25]));
-
-                        var popup = new Popup({
-                            fillSymbol: sfs
-                        }, angular.element('<div></div>')[0]);
-
-                        $scope.map = {
-                            options: {
-                                basemap: 'topo',
-                                center: [-94.75290067627297, 39.034671990514816], // long, lat
-                                zoom: 12,
-                                sliderStyle: 'small',
-                                infoWindow: popup
-                            }
-                        };
-                    });
+                    $scope.map = {
+                        options: {
+                            basemap: 'topo',
+                            center: [-94.75290067627297, 39.034671990514816], // long, lat
+                            zoom: 12,
+                            sliderStyle: 'small'
+                        }
+                    };
 
                     $scope.demographicsLayer = {
                         url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
@@ -134,6 +112,27 @@
                                 }
                             }
                         }
+                    };
+
+                    // this sample uses a custom info window
+                    $scope.setInfoWindow = function(map) {
+                        // load the popup and symbols needed
+                        esriLoader.require([
+                            'esri/Color',
+                            'esri/symbols/SimpleFillSymbol',
+                            'esri/symbols/SimpleLineSymbol'
+                        ]).then(function(modules) {
+                            var Color = modules[0];
+                            var SimpleFillSymbol = modules[1];
+                            var SimpleLineSymbol = modules[2];
+
+                            var sfs = new SimpleFillSymbol(
+                                'solid',
+                                new SimpleLineSymbol('solid', new Color('#444444'), 3),
+                                new Color([68, 68, 68, 0.25]));
+
+                            map.infoWindow.set('fillSymbol', sfs);
+                        });
                     };
                 });
         </script>
