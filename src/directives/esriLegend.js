@@ -1,55 +1,69 @@
 (function(angular) {
-    'use strict';
+  'use strict';
 
-    /**
-     * @ngdoc directive
-     * @name esriApp.directive:esriLegend
-     * @description
-     * # esriLegend
-     */
-    angular.module('esri.map')
-      .directive('esriLegend', function ($document, $q) {
-        return {
-          //run last
-          priority: -10,
-          scope:{},
-          replace: true,
-          // require the esriMap controller
-          // you can access these controllers in the link function
-          require: ['^esriMap'],
+  /**
+   * @ngdoc directive
+   * @name esriApp.directive:esriLegend
+   * @description
+   * # esriLegend
+   */
+  angular.module('esri.map')
+    .directive('esriLegend', function($q, esriLoader) {
+      return {
+        //run last
+        priority: -10,
+        restrict: 'EA',
+        // require the esriMap controller
+        // you can access these controllers in the link function
+        require: ['?esriLegend', '^esriMap'],
+        replace: true,
 
-          // now we can link our directive to the scope, but we can also add it to the map..
-          link: function(scope, element, attrs, controllers){
-            // controllers is now an array of the controllers from the 'require' option
-            var mapController = controllers[0];
-            var targetId = attrs.targetId || attrs.id;
-            var legendDeferred = $q.defer();
+        scope: {},
+        controllerAs: 'legendCtrl',
+        bindToController: true,
 
-            require(['esri/dijit/Legend', 'dijit/registry'], function (Legend, registry) {
-              mapController.getMap().then(function(map) {
-                var opts = {
-                    map: map
-                };
-                var layerInfos = mapController.getLayerInfos();
-                if (layerInfos) {
-                  opts.layerInfos = layerInfos;
-                }
-                // NOTE: need to come up w/ a way to that is not based on id
-                // or handle destroy at end of this view's lifecyle
-                var legend = registry.byId(targetId);
-                if (legend) {
-                  legend.destroyRecursive();
-                }
-                legend = new Legend(opts, targetId);
-                legend.startup();
-                scope.$watchCollection(function () { return mapController.getLayerInfos(); }, function (newValue/*, oldValue, scope*/) {
-                    legend.refresh(newValue);
-                });
-                legendDeferred.resolve(legend);
+        controller: function() {},
+
+        // now we can link our directive to the scope, but we can also add it to the map
+        link: function(scope, element, attrs, controllers) {
+
+          // controllers is now an array of the controllers from the 'require' option
+          // var legendController = controllers[0];
+          var mapController = controllers[1];
+          var targetId = attrs.targetId || attrs.id;
+          var legendDeferred = $q.defer();
+
+          esriLoader.require(['esri/dijit/Legend'], function(Legend) {
+            mapController.getMap().then(function(map) {
+              var legend;
+
+              var options = {
+                map: map
+              };
+
+              var layerInfos = mapController.getLayerInfos();
+              if (layerInfos) {
+                options.layerInfos = layerInfos;
+              }
+
+              legend = new Legend(options, targetId);
+              legend.startup();
+
+              scope.$watchCollection(function() {
+                return mapController.getLayerInfos();
+              }, function(newValue /*, oldValue, scope*/ ) {
+                legend.refresh(newValue);
+              });
+              
+              legendDeferred.resolve(legend);
+
+              scope.$on('$destroy', function() {
+                legend.destroy();
               });
             });
-          }
-        };
-      });
+          });
+        }
+      };
+    });
 
 })(angular);
