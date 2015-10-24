@@ -1,7 +1,7 @@
-(function (angular) {
+(function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function (esriMapUtils) {
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function(esriMapUtils) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriDynamicMapServiceLayer to be used as an element (<esri-dynamic-map-service-layer>)
@@ -35,7 +35,7 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: function () {
+            controller: function() {
                 var layerDeferred;
 
                 // create layer from bound controller properties
@@ -44,13 +44,13 @@
                     // get dynamic service layer options from layer controller properties
                     var layerOptions = esriMapUtils.getDynamicMapServiceLayerOptions(this);
 
-                    // create the layer and return resolve the defered
+                    // create the layer and return resolve the deferred
                     layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
                     return layerDeferred.promise;
                 };
 
-                // return the defered that will be resolved with the dynamic layer
-                this.getLayer = function () {
+                // return the deferred that will be resolved with the dynamic layer
+                this.getLayer = function() {
                     // throw error if createLayer was not called
                     if (!layerDeferred.promise) {
                         throw Error('Layer has not yet been created. Call createLayer().');
@@ -74,14 +74,14 @@
                 };
             },
 
-            // now we can link our directive to the scope, but we can also add it to the map..
-            link: function (scope, element, attrs, controllers) {
+            // now we can link our directive to the scope, but we can also add it to the map
+            link: function(scope, element, attrs, controllers) {
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
                 // create the layer
-                layerController.createLayer().then(function(layer){
+                layerController.createLayer().then(function(layer) {
 
                     // get layer info from layer and directive attributes
                     var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
