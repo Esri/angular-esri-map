@@ -36,17 +36,17 @@
 
             // define an interface for working with this directive
             controller: function () {
-                var layerDeferred;
+                var layerPromise;
 
                 // get dynamic service layer options from layer controller properties
                 var layerOptions = esriLayerUtils.getLayerOptions(this);
 
                 // create the layer and return resolve the defered
-                layerDeferred = esriLayerUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
+                layerPromise = esriLayerUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
 
                 // return the defered that will be resolved with the dynamic layer
                 this.getLayer = function () {
-                    return layerDeferred.promise;
+                    return layerPromise;
                 };
 
                 // set the info template for a layer

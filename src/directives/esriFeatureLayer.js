@@ -36,17 +36,17 @@
 
             // define an interface for working with this directive
             controller: function() {
-                var layerDeferred;
+                var layerPromise;
 
                 // get feature layer options from layer controller properties
                 var layerOptions = esriLayerUtils.getFeatureLayerOptions(this);
 
                 // create the layer
-                layerDeferred = esriLayerUtils.createFeatureLayer(this.url, layerOptions);
+                layerPromise = esriLayerUtils.createFeatureLayer(this.url, layerOptions);
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
-                    return layerDeferred.promise;
+                    return layerPromise;
                 };
 
                 // set info template once layer has been loaded

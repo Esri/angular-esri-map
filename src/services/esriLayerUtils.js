@@ -1,8 +1,7 @@
 (function (angular) {
   'use strict';
 
-  // TODO: use the esriLoader promise syntax instead of callback/deferred and remove $q?
-  angular.module('esri.map').factory('esriLayerUtils', function ($q, $timeout, esriLoader) {
+  angular.module('esri.map').factory('esriLayerUtils', function (esriLoader) {
 
     // test if a string value (i.e. directive attribute value) is true
     function isTrue(val) {
@@ -83,8 +82,9 @@
 
     // create a feature layer
     service.createFeatureLayer = function(url, layerOptions) {
-        var layerDeferred = $q.defer();
-        esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate'], function(FeatureLayer, InfoTemplate) {
+        return esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate']).then(function(esriModules) {
+            var FeatureLayer = esriModules[0];
+            var InfoTemplate = esriModules[1];
 
             // normalize info template defined in layerOptions.infoTemplate
             // or nested esriLayerOption directive to be instance of esri/InfoTemplate
@@ -100,18 +100,17 @@
                 layerOptions.mode = FeatureLayer[layerOptions.mode];
             }
 
-            layerDeferred.resolve(new FeatureLayer(url, layerOptions));
+            return new FeatureLayer(url, layerOptions);
         });
-
-        return layerDeferred;
     };
 
     // create a dynamic service layer
     service.createDynamicMapServiceLayer = function(url, layerOptions, visibleLayers) {
-        var layerDeferred = $q.defer();
-        var layer;
-
-        esriLoader.require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters'], function (ArcGISDynamicMapServiceLayer, InfoTemplate, ImageParameters) {
+        return esriLoader.require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters']).then(function (esriModules) {
+            var ArcGISDynamicMapServiceLayer = esriModules[0];
+            var InfoTemplate = esriModules[1];
+            var ImageParameters = esriModules[2];
+            var layer;
 
             // normalize info templates defined in layerOptions.infoTemplates
             // or nested esriLayerOption directives to be instances of esri/InfoTemplate
@@ -148,11 +147,8 @@
                 layer.setVisibleLayers(parseVisibleLayers(visibleLayers));
             }
 
-            // resolve deferred w/ layer
-            layerDeferred.resolve(layer);
+            return layer;
         });
-
-        return layerDeferred;
     };
 
     // create an InfoTemplate object from JSON

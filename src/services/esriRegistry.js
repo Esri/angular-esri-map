@@ -5,7 +5,7 @@
     var registry = {};
 
     return {
-      _register: function(name, deferred){
+      _register: function(name, promise){
         // if there isn't a promise in the registry yet make one...
         // this is the case where a directive is nested higher then the controller
         // needing the instance
@@ -15,9 +15,9 @@
 
         var instance = registry[name];
 
-        // when the deferred from the directive is rejected/resolved
+        // when the promise from the directive is rejected/resolved
         // reject/resolve the promise in the registry with the appropriate value
-        deferred.promise.then(function(arg){
+        promise.then(function(arg){
           instance.resolve(arg);
           return arg;
         }, function(arg){
@@ -25,6 +25,8 @@
           return arg;
         });
 
+        // return a function to "deregister" the promise
+        // by deleting it from the registry
         return function(){
           delete registry[name];
         };

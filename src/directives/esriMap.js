@@ -60,28 +60,28 @@
                 var attrs = $attrs;
 
                 // this deferred will be resolved with the map
-                var mapDeferred;
+                var mapPromise;
 
                 // get map options from controller properties
                 var mapOptions = esriMapUtils.getMapOptions(this);
 
                 if (attrs.webmapId) {
                     // load map object from web map
-                    mapDeferred = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, mapOptions, this);
+                    mapPromise = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, mapOptions, this);
                 } else {
                     // create a new map object
-                    mapDeferred = esriMapUtils.createMap(attrs.id, mapOptions);
+                    mapPromise = esriMapUtils.createMap(attrs.id, mapOptions);
                 }
 
                 // add this map to the registry and get a
                 // handle to deregister the map when it's destroyed
                 if (attrs.registerAs) {
-                    this.deregister = esriRegistry._register(attrs.registerAs, mapDeferred);
+                    this.deregister = esriRegistry._register(attrs.registerAs, mapPromise);
                 }
 
                 // method returns the promise that will be resolved with the map
                 this.getMap = function() {
-                    return mapDeferred.promise;
+                    return mapPromise;
                 };
 
                 // adds the layer, returns the promise that will be resolved with the result of map.addLayer

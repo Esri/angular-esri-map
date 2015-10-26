@@ -1,7 +1,6 @@
 (function (angular) {
   'use strict';
 
-  // TODO: use the esriLoader promise syntax instead of callback/deferred and remove $q?
   angular.module('esri.map').factory('esriMapUtils', function ($q, $timeout, esriLoader) {
 
     // construct Extent if object is not already an instance
@@ -32,8 +31,7 @@
 
     // add a custom basemap definition to be used by maps
     service.addCustomBasemap = function(name, basemapDefinition) {
-        var deferred = $q.defer();
-        esriLoader.require(['esri/basemaps'], function(esriBasemaps) {
+        return esriLoader.require('esri/basemaps').then(function(esriBasemaps) {
             var baseMapLayers = basemapDefinition.baseMapLayers;
             if (!angular.isArray(baseMapLayers) && angular.isArray(basemapDefinition.urls)) {
                 baseMapLayers = basemapDefinition.urls.map(function (url) {
@@ -49,9 +47,8 @@
                     title: basemapDefinition.title
                 };
             }
-            deferred.resolve(esriBasemaps);
+            return esriBasemaps;
         });
-        return deferred.promise;
     };
 
     // get map options from controller properties
@@ -87,10 +84,9 @@
 
     // create a new map at an element w/ the given id
     service.createMap = function(elementId, mapOptions) {
-        // this deferred will be resolved with the map
-        var mapDeferred = $q.defer();
-
-        esriLoader.require(['esri/map', 'esri/geometry/Extent'], function(Map, Extent) {
+        return esriLoader.require(['esri/map', 'esri/geometry/Extent']).then(function(esriModules) {
+            var Map = esriModules[0];
+            var Extent = esriModules[1];
 
             // construct optional Extent for mapOptions
             if (mapOptions.hasOwnProperty('extent')) {
@@ -99,16 +95,16 @@
 
             // create a new map object and
             // resolve the promise with the map
-            mapDeferred.resolve(new Map(elementId, mapOptions));
+            return new Map(elementId, mapOptions);
         });
-
-        return mapDeferred;
     };
 
     // TODO: would be better if we didn't have to pass mapController
     // create a new map from a web map at an element w/ the given id
     service.createWebMap = function(webmapId, elementId, mapOptions, mapController) {
         // this deferred will be resolved with the map
+        // NOTE: wrapping in $q deferred to avoid injecting
+        // dojo/Deferred into promise chain by returning argisUtils.createMap()
         var mapDeferred = $q.defer();
 
         esriLoader.require(['esri/arcgis/utils', 'esri/geometry/Extent'], function(arcgisUtils, Extent) {
@@ -131,7 +127,8 @@
             });
         });
 
-        return mapDeferred;
+        // return the map deferred's promise
+        return mapDeferred.promise;
     };
 
     // update scope in response to map events and
