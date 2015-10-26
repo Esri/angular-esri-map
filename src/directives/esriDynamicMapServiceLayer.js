@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function (esriMapUtils) {
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function (esriLayerUtils) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriDynamicMapServiceLayer to be used as an element (<esri-dynamic-map-service-layer>)
@@ -39,10 +39,10 @@
                 var layerDeferred;
 
                 // get dynamic service layer options from layer controller properties
-                var layerOptions = esriMapUtils.getLayerOptions(this);
+                var layerOptions = esriLayerUtils.getLayerOptions(this);
 
                 // create the layer and return resolve the defered
-                layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
+                layerDeferred = esriLayerUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
 
                 // return the defered that will be resolved with the dynamic layer
                 this.getLayer = function () {
@@ -52,7 +52,7 @@
                 // set the info template for a layer
                 this.setInfoTemplate = function(layerId, infoTemplate) {
                     return this.getLayer().then(function(layer) {
-                        return esriMapUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
+                        return esriLayerUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
                             // check if layer has info templates defined
                             var infoTemplates = layer.infoTemplates;
                             if (!angular.isObject(infoTemplates)) {
@@ -78,17 +78,18 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                // get the layer
+                // get the layer object
                 layerController.getLayer().then(function(layer){
 
-                    // get layer info from layer and directive attributes
-                    var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
+                    // get layer info from layer object and directive attributes
+                    var layerInfo = esriLayerUtils.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
-                    esriMapUtils.addLayerToMap(mapController, layer, undefined, layerInfo);
+                    mapController.addLayer(layer);
+                    mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events
-                    esriMapUtils.bindLayerEvents(scope, attrs, layer, mapController);
+                    esriLayerUtils.bindLayerEvents(scope, attrs, layer, mapController);
                 });
             }
         };

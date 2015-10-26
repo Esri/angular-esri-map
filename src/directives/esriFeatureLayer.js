@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriFeatureLayer', function($q, esriMapUtils) {
+    angular.module('esri.map').directive('esriFeatureLayer', function(esriLayerUtils) {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
@@ -39,10 +39,10 @@
                 var layerDeferred;
 
                 // get feature layer options from layer controller properties
-                var layerOptions = esriMapUtils.getFeatureLayerOptions(this);
+                var layerOptions = esriLayerUtils.getFeatureLayerOptions(this);
 
                 // create the layer
-                layerDeferred = esriMapUtils.createFeatureLayer(this.url, layerOptions);
+                layerDeferred = esriLayerUtils.createFeatureLayer(this.url, layerOptions);
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
@@ -52,7 +52,7 @@
                 // set info template once layer has been loaded
                 this.setInfoTemplate = function(infoTemplate) {
                     return this.getLayer().then(function(layer) {
-                        return esriMapUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
+                        return esriLayerUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
                             layer.setInfoTemplate(infoTemplateObject);
                             return infoTemplateObject;
                         });
@@ -69,13 +69,14 @@
                 // get the layer object
                 layerController.getLayer().then(function(layer){
                     // get layer info from layer object and directive attributes
-                    var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
+                    var layerInfo = esriLayerUtils.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
-                    esriMapUtils.addLayerToMap(mapController, layer, 0, layerInfo);
+                    mapController.addLayer(layer, 0);
+                    mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events
-                    esriMapUtils.bindLayerEvents(scope, attrs, layer, mapController);
+                    esriLayerUtils.bindLayerEvents(scope, attrs, layer, mapController);
 
                     // additional directive attribute binding specific to this type of layer
 
@@ -86,7 +87,6 @@
                             layer.setDefinitionExpression(newVal);
                         }
                     });
-                    // });
                 });
             }
         };
