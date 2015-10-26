@@ -32,26 +32,6 @@
         scope.zoom = map.getZoom();
     }
 
-    // get common layer options from layer controller properties
-    function getLayerOptions(layerController) {
-
-        // read options passed in as either a JSON string expression
-        // or as a function bound object
-        var layerOptions = layerController.layerOptions() || {};
-
-        // visible takes precedence over layerOptions.visible
-        if (angular.isDefined(layerController.visible)) {
-            layerOptions.visible = isTrue(layerController.visible);
-        }
-
-        // opacity takes precedence over layerOptions.opacity
-        if (layerController.opacity) {
-            layerOptions.opacity = Number(layerController.opacity);
-        }
-
-        return layerOptions;
-    }
-
     // parse array of visible layer ids from a string
     function parseVisibleLayers(val) {
         var visibleLayers;
@@ -277,44 +257,37 @@
         });
     };
 
-    // get feature layer options from layer controller properties
-    service.getFeatureLayerOptions = function(layerController) {
+    // get common layer options from layer controller properties
+    service.getLayerOptions = function (layerController) {
 
         // read options passed in as either a JSON string expression
         // or as a function bound object
-        var layerOptions = getLayerOptions(layerController);
+        var layerOptions = layerController.layerOptions() || {};
 
-        // definitionExpression takes precedence over layerOptions.definitionExpression
-        if (layerController.definitionExpression) {
-            layerOptions.definitionExpression = layerController.definitionExpression;
+        // visible takes precedence over layerOptions.visible
+        if (angular.isDefined(layerController.visible)) {
+            layerOptions.visible = isTrue(layerController.visible);
         }
 
-        // layerOptions.infoTemplate takes precedence over
-        // info template defined in nested esriLayerOption directive
-        if (!angular.isObject(layerOptions.infoTemplate) && angular.isObject(layerController._infoTemplate)) {
-            layerOptions.infoTemplate = layerController._infoTemplate;
+        // opacity takes precedence over layerOptions.opacity
+        if (layerController.opacity) {
+            layerOptions.opacity = Number(layerController.opacity);
         }
 
         return layerOptions;
     };
 
-    // get dynamic service layer options from layer controller properties
-    service.getDynamicMapServiceLayerOptions = function(layerController) {
+    // get feature layer options from layer controller properties
+    service.getFeatureLayerOptions = function(layerController) {
 
         // read options passed in as either a JSON string expression
         // or as a function bound object
-        var layerOptions = getLayerOptions(layerController);
+        var layerOptions = service.getLayerOptions(layerController);
 
-        // layerOptions.infoTemplates takes precedence over
-        // info templates defined in nested esriLayerOption directives
-        if (angular.isObject(layerOptions.infoTemplates)) {
-            for (var layerIndex in layerOptions.infoTemplates) {
-                if (layerOptions.infoTemplates.hasOwnProperty(layerIndex)) {
-                    layerController.setInfoTemplate(layerIndex, layerOptions.infoTemplates[layerIndex].infoTemplate);
-                }
-            }
+        // definitionExpression takes precedence over layerOptions.definitionExpression
+        if (layerController.definitionExpression) {
+            layerOptions.definitionExpression = layerController.definitionExpression;
         }
-        layerOptions.infoTemplates = layerController._infoTemplates;
 
         return layerOptions;
     };
@@ -391,6 +364,13 @@
         });
 
         return layerDeferred;
+    };
+
+    // create an InfoTemplate object from JSON
+    service.createInfoTemplate = function(infoTemplate) {
+        return esriLoader.require('esri/InfoTemplate').then(function(InfoTemplate) {
+            return objectToInfoTemplate(infoTemplate, InfoTemplate);
+        });
     };
 
     // get layer info from layer and directive attributes

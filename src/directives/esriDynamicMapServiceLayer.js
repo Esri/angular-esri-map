@@ -38,39 +38,37 @@
             controller: function () {
                 var layerDeferred;
 
-                // create layer from bound controller properties
-                this.createLayer = function() {
+                // get dynamic service layer options from layer controller properties
+                var layerOptions = esriMapUtils.getLayerOptions(this);
 
-                    // get dynamic service layer options from layer controller properties
-                    var layerOptions = esriMapUtils.getDynamicMapServiceLayerOptions(this);
-
-                    // create the layer and return resolve the defered
-                    layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
-                    return layerDeferred.promise;
-                };
+                // create the layer and return resolve the defered
+                layerDeferred = esriMapUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
 
                 // return the defered that will be resolved with the dynamic layer
                 this.getLayer = function () {
-                    // throw error if createLayer was not called
-                    if (!layerDeferred.promise) {
-                        throw Error('Layer has not yet been created. Call createLayer().');
-                    }
                     return layerDeferred.promise;
                 };
 
                 // set the info template for a layer
                 this.setInfoTemplate = function(layerId, infoTemplate) {
-                    // initialize info templates hash if needed
-                    if (!angular.isObject(this._infoTemplates)) {
-                        this._infoTemplates = {};
-                    }
-
-                    // add the infotemplate for this layer to the hash
-                    // NOTE: ignoring layerUrl and resourceInfo for now
-                    // https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1
-                    this._infoTemplates[layerId] = {
-                        infoTemplate: infoTemplate
-                    };
+                    return this.getLayer().then(function(layer) {
+                        return esriMapUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
+                            // check if layer has info templates defined
+                            var infoTemplates = layer.infoTemplates;
+                            if (!angular.isObject(infoTemplates)) {
+                                // create a new info templates hash
+                                infoTemplates = {};
+                            }
+                            // set the info template for sublayer
+                            // NOTE: ignoring layerUrl and resourceInfo for now
+                            // https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1
+                            infoTemplates[layerId] = {
+                                infoTemplate: infoTemplateObject
+                            };
+                            layer.setInfoTemplates(infoTemplates);
+                            return infoTemplates;
+                        });
+                    });
                 };
             },
 
@@ -80,8 +78,8 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                // create the layer
-                layerController.createLayer().then(function(layer){
+                // get the layer
+                layerController.getLayer().then(function(layer){
 
                     // get layer info from layer and directive attributes
                     var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);

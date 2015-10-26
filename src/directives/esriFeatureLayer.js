@@ -38,28 +38,25 @@
             controller: function() {
                 var layerDeferred;
 
-                // create layer from bound controller properties
-                this.createLayer = function() {
+                // get feature layer options from layer controller properties
+                var layerOptions = esriMapUtils.getFeatureLayerOptions(this);
 
-                    // get feature layer options from layer controller properties
-                    var layerOptions = esriMapUtils.getFeatureLayerOptions(this);
-
-                    // create the layer
-                    layerDeferred = esriMapUtils.createFeatureLayer(this.url, layerOptions);
-                    return layerDeferred.promise;
-                };
+                // create the layer
+                layerDeferred = esriMapUtils.createFeatureLayer(this.url, layerOptions);
 
                 // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
-                    // throw error if createLayer was not called
-                    if (!layerDeferred.promise) {
-                        throw Error('Layer has not yet been created. Call createLayer().');
-                    }
                     return layerDeferred.promise;
                 };
 
+                // set info template once layer has been loaded
                 this.setInfoTemplate = function(infoTemplate) {
-                    this._infoTemplate = infoTemplate;
+                    return this.getLayer().then(function(layer) {
+                        return esriMapUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
+                            layer.setInfoTemplate(infoTemplateObject);
+                            return infoTemplateObject;
+                        });
+                    });
                 };
             },
 
@@ -69,9 +66,9 @@
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
-                // create the layer and it to the map and then
-                layerController.createLayer().then(function(layer){
-                    // get layer info from layer and directive attributes
+                // get the layer object
+                layerController.getLayer().then(function(layer){
+                    // get layer info from layer object and directive attributes
                     var layerInfo = esriMapUtils.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
