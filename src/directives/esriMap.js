@@ -62,7 +62,7 @@
                 // create map from bound directive properties
                 this.createMap = function(attrs) {
 
-                    // get map options from controller properties
+                    // get map options form controller properties
                     var mapOptions = esriMapUtils.getMapOptions(this);
 
                     if (attrs.webmapId) {
@@ -101,8 +101,8 @@
                 };
 
                 // support removing layers, e.g. when esriFeatureLayer goes out of scope
-                this.removeLayer = function(layer) {
-                    return this.getMap().then(function(map) {
+                this.removeLayer = function (layer) {
+                    return this.getMap().then(function (map) {
                         return map.removeLayer(layer);
                     });
                 };

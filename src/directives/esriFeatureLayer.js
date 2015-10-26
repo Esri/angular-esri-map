@@ -49,7 +49,7 @@
                     return layerDeferred.promise;
                 };
 
-                // return the deferred that will be resolved with the feature layer
+                // return the defered that will be resolved with the feature layer
                 this.getLayer = function() {
                     // throw error if createLayer was not called
                     if (!layerDeferred.promise) {
@@ -89,6 +89,7 @@
                             layer.setDefinitionExpression(newVal);
                         }
                     });
+                    // });
                 });
             }
         };

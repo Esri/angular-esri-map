@@ -55,7 +55,7 @@
     // parse array of visible layer ids from a string
     function parseVisibleLayers(val) {
         var visibleLayers;
-        if (angular.isString(val)) {
+        if (typeof val === 'string') {
             visibleLayers = [];
             val.split(',').forEach(function(layerId) {
                 var n = parseInt(layerId);
@@ -308,9 +308,11 @@
         // layerOptions.infoTemplates takes precedence over
         // info templates defined in nested esriLayerOption directives
         if (angular.isObject(layerOptions.infoTemplates)) {
-            angular.forEach(layerOptions.infoTemplates, function(value, layerId) {
-                layerController.setInfoTemplate(layerId, value.infoTemplate);
-            });
+            for (var layerIndex in layerOptions.infoTemplates) {
+                if (layerOptions.infoTemplates.hasOwnProperty(layerIndex)) {
+                    layerController.setInfoTemplate(layerIndex, layerOptions.infoTemplates[layerIndex].infoTemplate);
+                }
+            }
         }
         layerOptions.infoTemplates = layerController._infoTemplates;
 
@@ -353,9 +355,11 @@
             // or nested esriLayerOption directives to be instances of esri/InfoTemplate
             // and pass to layer constructor in layerOptions
             if (layerOptions.infoTemplates) {
-                angular.forEach(layerOptions.infoTemplates, function(value) {
-                    value.infoTemplate = objectToInfoTemplate(value.infoTemplate, InfoTemplate);
-                });
+                for (var layerId in layerOptions.infoTemplates) {
+                    if (layerOptions.infoTemplates.hasOwnProperty(layerId)) {
+                        layerOptions.infoTemplates[layerId].infoTemplate = objectToInfoTemplate(layerOptions.infoTemplates[layerId].infoTemplate, InfoTemplate);
+                    }
+                }
             }
 
             // check for imageParameters property and
@@ -363,11 +367,13 @@
             if (angular.isObject(layerOptions.imageParameters)) {
                 if (layerOptions.imageParameters.declaredClass !== 'esri.layers.ImageParameters') {
                     var imageParameters = new ImageParameters();
-                    angular.forEach(layerOptions.imageParameters, function(value, key) {
-                        // TODO: may want to convert timeExent to new TimeExtent()
-                        // also not handling conversion for bbox, imageSpatialReference, nor layerTimeOptions
-                        imageParameters[key] = value;
-                    });
+                    for (var key in layerOptions.imageParameters) {
+                        if (layerOptions.imageParameters.hasOwnProperty(key)) {
+                            // TODO: may want to conver timeExent to new TimeExtent()
+                            // also not handling conversion for bbox, imageSpatialReference, nor layerTimeOptions
+                            imageParameters[key] = layerOptions.imageParameters[key];
+                        }
+                    }
                     layerOptions.imageParameters = imageParameters;
                 }
             }
