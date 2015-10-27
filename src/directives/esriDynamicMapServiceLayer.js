@@ -35,42 +35,7 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: function () {
-                var layerPromise;
-
-                // get dynamic service layer options from layer controller properties
-                var layerOptions = esriLayerUtils.getLayerOptions(this);
-
-                // create the layer and return resolve the defered
-                layerPromise = esriLayerUtils.createDynamicMapServiceLayer(this.url, layerOptions, this.visibleLayers);
-
-                // return the defered that will be resolved with the dynamic layer
-                this.getLayer = function () {
-                    return layerPromise;
-                };
-
-                // set the info template for a layer
-                this.setInfoTemplate = function(layerId, infoTemplate) {
-                    return this.getLayer().then(function(layer) {
-                        return esriLayerUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
-                            // check if layer has info templates defined
-                            var infoTemplates = layer.infoTemplates;
-                            if (!angular.isObject(infoTemplates)) {
-                                // create a new info templates hash
-                                infoTemplates = {};
-                            }
-                            // set the info template for sublayer
-                            // NOTE: ignoring layerUrl and resourceInfo for now
-                            // https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1
-                            infoTemplates[layerId] = {
-                                infoTemplate: infoTemplateObject
-                            };
-                            layer.setInfoTemplates(infoTemplates);
-                            return infoTemplates;
-                        });
-                    });
-                };
-            },
+            controller: 'esriDynamicMapServiceLayerController',
 
             // now we can link our directive to the scope, but we can also add it to the map..
             link: function (scope, element, attrs, controllers) {

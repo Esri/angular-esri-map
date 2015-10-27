@@ -65,21 +65,6 @@
         return layerOptions;
     };
 
-    // get feature layer options from layer controller properties
-    service.getFeatureLayerOptions = function(layerController) {
-
-        // read options passed in as either a JSON string expression
-        // or as a function bound object
-        var layerOptions = service.getLayerOptions(layerController);
-
-        // definitionExpression takes precedence over layerOptions.definitionExpression
-        if (layerController.definitionExpression) {
-            layerOptions.definitionExpression = layerController.definitionExpression;
-        }
-
-        return layerOptions;
-    };
-
     // create a feature layer
     service.createFeatureLayer = function(url, layerOptions) {
         return esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate']).then(function(esriModules) {

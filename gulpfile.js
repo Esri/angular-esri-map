@@ -40,10 +40,11 @@ gulp.task('build-js', function() {
     'src/services/esriLayerUtils.js',
     'src/directives/esriMap.controller.js',
     'src/directives/esriMap.js',
+    'src/directives/esriFeatureLayer.controller.js',
     'src/directives/esriFeatureLayer.js',
+    'src/directives/esriDynamicMapServiceLayer.controller.js',
     'src/directives/esriDynamicMapServiceLayer.js',
     'src/directives/esriInfoTemplate.js',
-    'src/directives/esriBasemap.js',
     'src/directives/esriLegend.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))

@@ -35,30 +35,7 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: function() {
-                var layerPromise;
-
-                // get feature layer options from layer controller properties
-                var layerOptions = esriLayerUtils.getFeatureLayerOptions(this);
-
-                // create the layer
-                layerPromise = esriLayerUtils.createFeatureLayer(this.url, layerOptions);
-
-                // return the defered that will be resolved with the feature layer
-                this.getLayer = function() {
-                    return layerPromise;
-                };
-
-                // set info template once layer has been loaded
-                this.setInfoTemplate = function(infoTemplate) {
-                    return this.getLayer().then(function(layer) {
-                        return esriLayerUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
-                            layer.setInfoTemplate(infoTemplateObject);
-                            return infoTemplateObject;
-                        });
-                    });
-                };
-            },
+            controller: 'esriFeatureLayerController',
 
             // now we can link our directive to the scope, but we can also add it to the map
             link: function(scope, element, attrs, controllers) {
