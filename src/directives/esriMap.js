@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriMap', function(esriMapUtils, esriRegistry) {
+    angular.module('esri.map').directive('esriMap', function() {
 
         return {
             // element only
@@ -42,76 +42,15 @@
                 // the 'link' function handles how our directive responds to changes in $scope
                 return function(scope, element, attrs, controller) {
 
-                    // get the map once it's loaded
-                    controller.getMap().then(function(map) {
-
-                        // update scope in response to map events and
-                        // update map in response to changes in scope properties
-                        esriMapUtils.bindMapEvents(scope, attrs, controller, map);
-
-                    });
+                    // update scope in response to map events and
+                    // update map in response to changes in scope properties
+                    controller.bindMapEvents(scope, attrs);
 
                 };
             },
 
             // directive api
-            controller: function($attrs) {
-
-                var attrs = $attrs;
-
-                // this deferred will be resolved with the map
-                var mapPromise;
-
-                // get map options from controller properties
-                var mapOptions = esriMapUtils.getMapOptions(this);
-
-                if (attrs.webmapId) {
-                    // load map object from web map
-                    mapPromise = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, mapOptions, this);
-                } else {
-                    // create a new map object
-                    mapPromise = esriMapUtils.createMap(attrs.id, mapOptions);
-                }
-
-                // add this map to the registry and get a
-                // handle to deregister the map when it's destroyed
-                if (attrs.registerAs) {
-                    this.deregister = esriRegistry._register(attrs.registerAs, mapPromise);
-                }
-
-                // method returns the promise that will be resolved with the map
-                this.getMap = function() {
-                    return mapPromise;
-                };
-
-                // adds the layer, returns the promise that will be resolved with the result of map.addLayer
-                this.addLayer = function(layer, index) {
-                    // layer: valid JSAPI layer
-                    // index: optional <Number>; likely only used internally by, for example, esriFeatureLayer
-                    return this.getMap().then(function(map) {
-                        return map.addLayer(layer, index);
-                    });
-                };
-
-                // support removing layers, e.g. when esriFeatureLayer goes out of scope
-                this.removeLayer = function (layer) {
-                    return this.getMap().then(function (map) {
-                        return map.removeLayer(layer);
-                    });
-                };
-
-                // array to store layer info, needed for legend
-                this.addLayerInfo = function(lyrInfo) {
-                    if (!this.layerInfos) {
-                        this.layerInfos = [lyrInfo];
-                    } else {
-                        this.layerInfos.unshift(lyrInfo);
-                    }
-                };
-                this.getLayerInfos = function() {
-                    return this.layerInfos;
-                };
-            }
+            controller: 'esriMapController'
         };
     });
 
