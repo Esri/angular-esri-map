@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriFeatureLayer', function(esriLayerUtils) {
+    angular.module('esri.map').directive('esriFeatureLayer', function() {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
@@ -35,7 +35,7 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: 'esriFeatureLayerController',
+            controller: 'EsriFeatureLayerController',
 
             // now we can link our directive to the scope, but we can also add it to the map
             link: function(scope, element, attrs, controllers) {
@@ -46,14 +46,14 @@
                 // get the layer object
                 layerController.getLayer().then(function(layer){
                     // get layer info from layer object and directive attributes
-                    var layerInfo = esriLayerUtils.getLayerInfo(layer, attrs);
+                    var layerInfo = layerController.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
                     mapController.addLayer(layer, 0);
                     mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events
-                    esriLayerUtils.bindLayerEvents(scope, attrs, layer, mapController);
+                    layerController.bindLayerEvents(scope, attrs, layer, mapController);
 
                     // additional directive attribute binding specific to this type of layer
 

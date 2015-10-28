@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('esri.map').factory('esriMapUtils', function ($q, esriLoader) {
+  angular.module('esri.core').factory('esriMapUtils', function ($q, esriLoader) {
 
     // construct Extent if object is not already an instance
     // e.g. if the controller or HTML view are only providing JSON

@@ -29,6 +29,9 @@
 
             bindToController: true,
 
+            // directive api
+            controller: 'EsriMapController',
+
             // replace tag with div with same id
             compile: function($element, $attrs) {
 
@@ -47,10 +50,7 @@
                     controller.bindMapEvents(scope, attrs);
 
                 };
-            },
-
-            // directive api
-            controller: 'esriMapController'
+            }
         };
     });
 

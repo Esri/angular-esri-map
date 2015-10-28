@@ -1,13 +1,16 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').controller('esriFeatureLayerController', function EsriFeatureLayerController(esriLayerUtils) {
+    angular.module('esri.map').controller('EsriFeatureLayerController', function EsriFeatureLayerController($controller, esriLayerUtils) {
 
         var layerPromise;
 
+        // extends layer controller base class
+        angular.extend(this, $controller('EsriLayerControllerBase'));
+
         // get feature layer options from layer controller properties
-        this.getLayerOptions = function() {
-            var layerOptions = esriLayerUtils.getLayerOptions(this);
+        this.getFeatureLayerOptions = function() {
+            var layerOptions = this.getLayerOptions();
             // definitionExpression takes precedence over layerOptions.definitionExpression
             if (this.definitionExpression) {
                 layerOptions.definitionExpression = this.definitionExpression;
@@ -32,7 +35,7 @@
         };
 
         // create the layer
-        layerPromise = esriLayerUtils.createFeatureLayer(this.url, this.getLayerOptions());
+        layerPromise = esriLayerUtils.createFeatureLayer(this.url, this.getFeatureLayerOptions());
     });
 
 })(angular);

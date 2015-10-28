@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function (esriLayerUtils) {
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function () {
         // this object will tell angular how our directive behaves
         return {
             // only allow esriDynamicMapServiceLayer to be used as an element (<esri-dynamic-map-service-layer>)
@@ -35,7 +35,7 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: 'esriDynamicMapServiceLayerController',
+            controller: 'EsriDynamicMapServiceLayerController',
 
             // now we can link our directive to the scope, but we can also add it to the map..
             link: function (scope, element, attrs, controllers) {
@@ -47,14 +47,14 @@
                 layerController.getLayer().then(function(layer){
 
                     // get layer info from layer object and directive attributes
-                    var layerInfo = esriLayerUtils.getLayerInfo(layer, attrs);
+                    var layerInfo = layerController.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
                     mapController.addLayer(layer);
                     mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events
-                    esriLayerUtils.bindLayerEvents(scope, attrs, layer, mapController);
+                    layerController.bindLayerEvents(scope, attrs, layer, mapController);
                 });
             }
         };
