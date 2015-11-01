@@ -63,13 +63,15 @@ angular.module('esri-map-docs')
                     });
 
                     // set the active tool once a button is clicked
-                    $scope.$watch('activeTool', function(newVal, oldVal) {
-                        // if (newVal !== oldVal) {
-                            var tool = newVal.toLowerCase();
-                            map.disableMapNavigation();
-                            tb.activate(tool);
-                        // }
+                    // apply this function binding to scope since it is outside of the digest cycle
+                    $scope.$apply(function() {
+                        $scope.activateDrawTool = activateDrawTool;
                     });
+                }
+
+                function activateDrawTool(tool) {
+                    map.disableMapNavigation();
+                    tb.activate(tool.toLowerCase());
                 }
 
                 function addGraphic(evt) {
