@@ -1,14 +1,12 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').controller('esriDynamicMapServiceLayerController', function EsriDynamicMapServiceLayerController(esriLayerUtils) {
+    angular.module('esri.map').controller('EsriDynamicMapServiceLayerController', function EsriDynamicMapServiceLayerController($controller, esriLayerUtils) {
 
         var layerPromise;
 
-        // get feature layer options from layer controller properties
-        this.getLayerOptions = function() {
-            return esriLayerUtils.getLayerOptions(this);
-        };
+        // extends layer controller base class
+        angular.extend(this, $controller('EsriLayerControllerBase'));
 
         // return the defered that will be resolved with the dynamic layer
         this.getLayer = function () {
@@ -35,6 +33,11 @@
                     return infoTemplates;
                 });
             });
+        };
+
+        this.bindLayerEvents = function(scope, attrs, layer, mapController) {
+            // bind directive attributes to layer properties and events
+            this._bindLayerEvents(scope, attrs, layer, mapController);
         };
 
         // create the layer

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Custom Directive</title>
+
+        <!-- load Esri CSS  -->
+        <!-- NOTE: BlendRenderer requires v3.14 -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+        <style>
+          /* NOTE: this is need b/c we are using a custom element
+            and/or this is not a full screen app like the sample page */
+          housing-map {
+             position: relative;
+          }
+
+          .meta {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            width: 20em;
+            height: 17em;
+            z-index: 40;
+            background: #ffffff;
+            color: #777777;
+            padding: 5px;
+            border: 2px solid #666666;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            font-family: arial;
+            font-size: 0.9em;
+          }
+
+          .meta h3 {
+            color: #666666;
+            font-size: 1.1em;
+            padding: 0px;
+            margin: 0px;
+            display: inline-block;
+          }
+        </style>
+    </head>
+    <body>
+        <h2>Custom Directive</h2>
+        <!-- add map to page only once the ESRI API has loaded -->
+        <housing-map basemap="gray" show-layer="true"></housing-map>
+        <p>This is an example of how to use the <code>esri.core</code> module
+        to create your own custom map directive that you can reuse throughout
+        your application.</p>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/renderer_blendrenderer_housing.html">this sample</a>.</p>
+        <!-- load Esri JavaScript API -->
+        <!-- NOTE: BlendRenderer requires v3.14 -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load just the angular-esri-map core services -->
+        <script src="lib/angular-esri-core.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+
+            // NOTE: we're making our own directive so
+            // we only need to load the core services
+            angular.module('esri-map-example', ['esri.core'])
+                .controller('HousingMapController', function HousingMapController($element, esriLoader) {
+                    var self = this;
+                    // get a ref to the map div in the template
+                    var mapDiv = $element.children()[0];
+
+                    var layer;
+                    self.toggleLayer = function(visible) {
+                      layer.setVisibility(visible);
+                    };
+
+                    // load esri modules
+                    esriLoader.require([
+                      'esri/Color',
+                      'esri/dijit/PopupTemplate',
+                      'esri/layers/FeatureLayer',
+                      'esri/map',
+                      'esri/renderers/BlendRenderer',
+                      'esri/symbols/SimpleFillSymbol',
+                      'esri/symbols/SimpleLineSymbol'
+                    ], function(Color, PopupTemplate, FeatureLayer, Map, BlendRenderer, SimpleFillSymbol, SimpleLineSymbol) {
+
+                        // create the map
+                        var map = new Map(mapDiv, {
+                          basemap: self.basemap,
+                          center: [-118.40, 34.06],
+                          zoom: 12
+                        });
+
+                        //Set the blendRenderer's parameters
+                        var blendRendererParams = {
+                          //blendMode:'overlay' //By default, it uses 'source-over', uncomment to display different mode
+                          //See: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+                          symbol: new SimpleFillSymbol().setOutline(new SimpleLineSymbol().setWidth(0)),
+                          fields: [
+                            {
+                              field: 'OWNER_CY',
+                              color: new Color([0, 0, 255])
+                            }, {
+                              field: 'RENTER_CY',
+                              color: new Color([255, 0, 0])
+                            }, {
+                              field: 'VACANT_CY',
+                              color: new Color([0, 255, 0])
+                            }
+                          ],
+                          opacityStops: [
+                            {
+                              value: 0.1,
+                              opacity: 0
+                            },
+                            {
+                              value: 1,
+                              opacity: 0.7
+                            }
+                          ],
+                          normalizationField: 'TOTHU_CY'
+                        };
+
+                        //Create the PopupTemplate to be used to display demographic info
+                        var template = new PopupTemplate({
+                          'title': 'Housing Status by Census Block',
+                          'fieldInfos': [
+                            {
+                              'fieldName': 'OWNER_CY',
+                              'label': 'Number of Owner Occupied Houses',
+                              'visible': true,
+                              'format': {
+                                'places': 0,
+                                'digitSeparator': true
+                              }
+                            }, {
+                              'fieldName': 'RENTER_CY',
+                              'label': 'Number of Renter Occupied Houses',
+                              'visible': true,
+                              'format': {
+                                'places': 0,
+                                'digitSeparator': true
+                              }
+                            }, {
+                              'fieldName': 'VACANT_CY',
+                              'label': 'Number of Vacant Houses',
+                              'visible': true,
+                              'format': {
+                                'places': 0,
+                                'digitSeparator': true
+                              }
+                            }, {
+                              'fieldName': 'TOTHU_CY',
+                              'label': 'Total Housing Units',
+                              'visible': true,
+                              'format': {
+                                'places': 0,
+                                'digitSeparator': true
+                              }
+                            }
+                          ]
+                        });
+
+                        var layerUrl = 'http://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Blocks%20near%20Wilshire%20enriched%20with%20Key%20Facts/FeatureServer/0';
+
+                        var renderer = new BlendRenderer(blendRendererParams);
+
+                        layer = new FeatureLayer(layerUrl, {
+                          id: 'blendedLayer',
+                          outFields: ['TOTHU_CY', 'RENTER_CY', 'OWNER_CY', 'VACANT_CY'],
+                          opacity: 1,
+                          definitionExpression: 'TOTHU_CY > 0',
+                          infoTemplate: template,
+                          visible: self.showLayer
+                        });
+
+                        layer.setRenderer(renderer);
+                        map.addLayer(layer);
+                    });
+                })
+                .directive('housingMap', function () {
+                    return {
+                        // element only
+                        restrict: 'E',
+
+                        // isolate scope
+                        scope: {
+                          basemap: '@',
+                          showLayer: '='
+                        },
+
+                        // could also have used templateUrl to load this from a file
+                        template: ['<div class="map">',
+                          '<div class="meta">',
+                             '<h3>Los Angeles housing status displayed using a BlendRenderer</h3>',
+                             '<br>',
+                             '<br>This sample displays housing status concentrations throughout the Greater Los Angeles area.',
+                             '<ul>',
+                                '<li>Red: Renter occupied</li>',
+                                '<li>Blue: Owner occupied</li>',
+                                '<li>Green: Vacant</li>',
+                             '</ul>',
+                             'The more opaque the color, the higher the concentration for that housing status.',
+                             '<p><label><input type="checkbox" ng-model="mapCtrl.showLayer" ng-change="mapCtrl.toggleLayer(mapCtrl.showLayer)" /> Show Housing Data</label></p>',
+                          '</div>',
+                        '</div>'].join(''),
+
+                        controllerAs: 'mapCtrl',
+
+                        bindToController: true,
+
+                        // directive api
+                        controller: 'HousingMapController'
+                    };
+                });
+        </script>
+    </body>
+</html>

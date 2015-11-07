@@ -1,15 +1,13 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map', []);
-
     /**
      * @ngdoc provider
      * @name esriLoader
      * @description
      * Use `esriLoader` to lazyload the ESRI ArcGIS API or to require API modules.
      */
-    angular.module('esri.map').factory('esriLoader', function ($q) {
+    angular.module('esri.core').factory('esriLoader', function ($q) {
 
         /**
          * Load the ESRI ArcGIS API

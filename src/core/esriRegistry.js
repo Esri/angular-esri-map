@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('esri.map').service('esriRegistry', function ($q) {
+  angular.module('esri.core').service('esriRegistry', function ($q) {
     var registry = {};
 
     return {

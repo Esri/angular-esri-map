@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
 
-    angular.module('esri.map').controller('esriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
+    angular.module('esri.map').controller('EsriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
 
         // update two-way bound scope properties based on map state
         function updateCenterAndZoom(scope, map) {

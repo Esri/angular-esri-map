@@ -30,22 +30,45 @@ gulp.task('clean', function() {
     .pipe(clean({force: true}));
 });
 
+// concatenate and minify core javascript files
+// and copy into dist folder and docs
+gulp.task('build-core-js', function() {
+  return gulp.src([
+    'src/core/esri.core.module.js',
+    'src/core/esriLoader.js',
+    'src/core/esriRegistry.js',
+    'src/core/esriMapUtils.js',
+    'src/core/esriLayerUtils.js'])
+    .pipe(concat('angular-esri-core.js'))
+    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('docs/lib'))
+    .pipe(stripDebug())
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(rename('angular-esri-core.min.js'))
+    .pipe(gulp.dest('dist'))
+    .on('error', gutil.log);
+});
+
 // concatenate and minify source javascript files
 // and copy into dist folder and docs
 gulp.task('build-js', function() {
   return gulp.src([
-    'src/services/esriLoader.js',
-    'src/services/esriRegistry.js',
-    'src/services/esriMapUtils.js',
-    'src/services/esriLayerUtils.js',
-    'src/directives/esriMap.controller.js',
-    'src/directives/esriMap.js',
-    'src/directives/esriFeatureLayer.controller.js',
-    'src/directives/esriFeatureLayer.js',
-    'src/directives/esriDynamicMapServiceLayer.controller.js',
-    'src/directives/esriDynamicMapServiceLayer.js',
-    'src/directives/esriInfoTemplate.js',
-    'src/directives/esriLegend.js'])
+    'src/core/esri.core.module.js',
+    'src/core/esriLoader.js',
+    'src/core/esriRegistry.js',
+    'src/core/esriMapUtils.js',
+    'src/core/esriLayerUtils.js',
+    'src/esri.map.module.js',
+    'src/map/EsriMapController.js',
+    'src/map/esriMap.js',
+    'src/map/esriLegend.js',
+    'src/layers/EsriLayerControllerBase.js',
+    'src/layers/EsriFeatureLayerController.js',
+    'src/layers/esriFeatureLayer.js',
+    'src/layers/EsriDynamicMapServiceLayerController.js',
+    'src/layers/esriDynamicMapServiceLayer.js',
+    'src/layers/esriInfoTemplate.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('docs/lib'))
@@ -59,7 +82,7 @@ gulp.task('build-js', function() {
 
 // lint then clean and build javascript
 gulp.task('build', function(callback) {
-  runSequence('lint', 'clean', 'build-js', callback);
+  runSequence('lint', 'clean', 'build-core-js', 'build-js', callback);
 });
 
 // serve docs and tests on local web server

@@ -1,26 +1,26 @@
-(function(angular) {
+(function (angular) {
     'use strict';
 
-    angular.module('esri.map').directive('esriFeatureLayer', function(esriLayerUtils) {
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', function () {
         // this object will tell angular how our directive behaves
         return {
-            // only allow esriFeatureLayer to be used as an element (<esri-feature-layer>)
+            // only allow esriDynamicMapServiceLayer to be used as an element (<esri-dynamic-map-service-layer>)
             restrict: 'E',
 
-            // require the esriFeatureLayer to have its own controller as well an esriMap controller
+            // require the esriDynamicMapServiceLayer to have its own controller as well an esriMap controller
             // you can access these controllers in the link function
-            require: ['esriFeatureLayer', '^esriMap'],
+            require: ['esriDynamicMapServiceLayer', '^esriMap'],
 
             // replace this element with our template.
             // since we aren't declaring a template this essentially destroys the element
             replace: true,
 
-            // isolate scope for feature layer so it can be added/removed dynamically
+            // isolate scope for dynamic layer so it can be added/removed dynamically
             scope: {
                 url: '@',
                 visible: '@?',
                 opacity: '@?',
-                definitionExpression: '@?',
+                visibleLayers: '@?',
                 // function binding for event handlers
                 load: '&',
                 updateEnd: '&',
@@ -35,35 +35,26 @@
             bindToController: true,
 
             // define an interface for working with this directive
-            controller: 'esriFeatureLayerController',
+            controller: 'EsriDynamicMapServiceLayerController',
 
-            // now we can link our directive to the scope, but we can also add it to the map
-            link: function(scope, element, attrs, controllers) {
+            // now we can link our directive to the scope, but we can also add it to the map..
+            link: function (scope, element, attrs, controllers) {
                 // controllers is now an array of the controllers from the 'require' option
                 var layerController = controllers[0];
                 var mapController = controllers[1];
 
                 // get the layer object
                 layerController.getLayer().then(function(layer){
+
                     // get layer info from layer object and directive attributes
-                    var layerInfo = esriLayerUtils.getLayerInfo(layer, attrs);
+                    var layerInfo = layerController.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
-                    mapController.addLayer(layer, 0);
+                    mapController.addLayer(layer);
                     mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events
-                    esriLayerUtils.bindLayerEvents(scope, attrs, layer, mapController);
-
-                    // additional directive attribute binding specific to this type of layer
-
-                    // watch the scope's definitionExpression property for changes
-                    // set the definitionExpression of the feature layer
-                    scope.$watch('layerCtrl.definitionExpression', function(newVal, oldVal) {
-                        if (newVal !== oldVal) {
-                            layer.setDefinitionExpression(newVal);
-                        }
-                    });
+                    layerController.bindLayerEvents(scope, attrs, layer, mapController);
                 });
             }
         };
