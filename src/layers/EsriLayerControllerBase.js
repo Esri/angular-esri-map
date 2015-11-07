@@ -40,7 +40,7 @@
         };
 
         // bind directive attributes to layer properties and events
-        this.bindLayerEventsBase = function(scope, attrs, layer, mapController) {
+        this._bindLayerEvents = function(scope, attrs, layer, mapController) {
 
             // call load handler (if any)
             if (attrs.load) {

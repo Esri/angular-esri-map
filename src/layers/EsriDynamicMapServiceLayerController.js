@@ -37,7 +37,7 @@
 
         this.bindLayerEvents = function(scope, attrs, layer, mapController) {
             // bind directive attributes to layer properties and events
-            this.bindLayerEventsBase(scope, attrs, layer, mapController);
+            this._bindLayerEvents(scope, attrs, layer, mapController);
         };
 
         // create the layer

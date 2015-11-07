@@ -68,7 +68,7 @@
                     var self = this;
                     // get a ref to the map div in the template
                     var mapDiv = $element.children()[0];
-                    
+
                     var layer;
                     self.toggleLayer = function(visible) {
                       layer.setVisibility(visible);
@@ -202,12 +202,12 @@
                                 '<li>Green: Vacant</li>',
                              '</ul>',
                              'The more opaque the color, the higher the concentration for that housing status.',
-                             '<p><label><input type="checkbox" ng-model="mapCtrl.showLayer" ng-change="mapCtrl.toggleLayer(mapCtrl.showLayer)" /> Show Layer</label></p>',
+                             '<p><label><input type="checkbox" ng-model="mapCtrl.showLayer" ng-change="mapCtrl.toggleLayer(mapCtrl.showLayer)" /> Show Housing Data</label></p>',
                           '</div>',
                         '</div>'].join(''),
 
                         controllerAs: 'mapCtrl',
-                        
+
                         bindToController: true,
 
                         // directive api
