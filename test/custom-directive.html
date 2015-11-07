@@ -20,7 +20,7 @@
             left: 20px;
             bottom: 20px;
             width: 20em;
-            height: 16em;
+            height: 17em;
             z-index: 40;
             background: #ffffff;
             color: #777777;
@@ -45,7 +45,7 @@
     <body>
         <h2>Custom Directive</h2>
         <!-- add map to page only once the ESRI API has loaded -->
-        <housing-map></housing-map>
+        <housing-map basemap="gray" show-layer="true"></housing-map>
         <p>This is an example of how to use the <code>esri.core</code> module
         to create your own custom map directive that you can reuse throughout
         your application.</p>
@@ -65,8 +65,14 @@
             // we only need to load the core services
             angular.module('esri-map-example', ['esri.core'])
                 .controller('HousingMapController', function HousingMapController($element, esriLoader) {
+                    var self = this;
                     // get a ref to the map div in the template
                     var mapDiv = $element.children()[0];
+                    
+                    var layer;
+                    self.toggleLayer = function(visible) {
+                      layer.setVisibility(visible);
+                    };
 
                     // load esri modules
                     esriLoader.require([
@@ -81,7 +87,7 @@
 
                         // create the map
                         var map = new Map(mapDiv, {
-                          basemap: 'gray', //'topo'
+                          basemap: self.basemap,
                           center: [-118.40, 34.06],
                           zoom: 12
                         });
@@ -160,12 +166,13 @@
 
                         var renderer = new BlendRenderer(blendRendererParams);
 
-                        var layer = new FeatureLayer(layerUrl, {
+                        layer = new FeatureLayer(layerUrl, {
                           id: 'blendedLayer',
                           outFields: ['TOTHU_CY', 'RENTER_CY', 'OWNER_CY', 'VACANT_CY'],
                           opacity: 1,
                           definitionExpression: 'TOTHU_CY > 0',
-                          infoTemplate: template
+                          infoTemplate: template,
+                          visible: self.showLayer
                         });
 
                         layer.setRenderer(renderer);
@@ -179,6 +186,8 @@
 
                         // isolate scope
                         scope: {
+                          basemap: '@',
+                          showLayer: '='
                         },
 
                         // could also have used templateUrl to load this from a file
@@ -193,12 +202,13 @@
                                 '<li>Green: Vacant</li>',
                              '</ul>',
                              'The more opaque the color, the higher the concentration for that housing status.',
+                             '<p><label><input type="checkbox" ng-model="mapCtrl.showLayer" ng-change="mapCtrl.toggleLayer(mapCtrl.showLayer)" /> Show Layer</label></p>',
                           '</div>',
                         '</div>'].join(''),
 
-                        // controllerAs: 'mapCtrl',
-                        //
-                        // bindToController: true,
+                        controllerAs: 'mapCtrl',
+                        
+                        bindToController: true,
 
                         // directive api
                         controller: 'HousingMapController'

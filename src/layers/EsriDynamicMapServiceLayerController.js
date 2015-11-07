@@ -35,6 +35,11 @@
             });
         };
 
+        this.bindLayerEvents = function(scope, attrs, layer, mapController) {
+            // bind directive attributes to layer properties and events
+            this.bindLayerEventsBase(scope, attrs, layer, mapController);
+        };
+
         // create the layer
         layerPromise = esriLayerUtils.createDynamicMapServiceLayer(this.url, this.getLayerOptions(), this.visibleLayers);
     });

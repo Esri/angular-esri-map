@@ -90,7 +90,7 @@
                     var imageParameters = new ImageParameters();
                     for (var key in layerOptions.imageParameters) {
                         if (layerOptions.imageParameters.hasOwnProperty(key)) {
-                            // TODO: may want to conver timeExent to new TimeExtent()
+                            // TODO: may want to convert timeExent to new TimeExtent()
                             // also not handling conversion for bbox, imageSpatialReference, nor layerTimeOptions
                             imageParameters[key] = layerOptions.imageParameters[key];
                         }

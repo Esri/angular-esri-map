@@ -34,6 +34,21 @@
             });
         };
 
+        this.bindLayerEvents = function(scope, attrs, layer, mapController) {
+            // bind directive attributes to layer properties and events
+            this.bindLayerEventsBase(scope, attrs, layer, mapController);
+
+            // additional directive attribute binding specific to this type of layer
+
+            // watch the scope's definitionExpression property for changes
+            // set the definitionExpression of the feature layer
+            scope.$watch('layerCtrl.definitionExpression', function(newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    layer.setDefinitionExpression(newVal);
+                }
+            });
+        };
+
         // create the layer
         layerPromise = esriLayerUtils.createFeatureLayer(this.url, this.getFeatureLayerOptions());
     });

@@ -34,14 +34,13 @@
             return {
                 title: attrs.title || layer.name,
                 layer: layer,
-                // TODO: are these the right params to send
-                hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',') : undefined,
+                hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',').map(Number) : undefined,
                 defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
             };
         };
 
         // bind directive attributes to layer properties and events
-        this.bindLayerEvents = function(scope, attrs, layer, mapController) {
+        this.bindLayerEventsBase = function(scope, attrs, layer, mapController) {
 
             // call load handler (if any)
             if (attrs.load) {
