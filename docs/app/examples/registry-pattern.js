@@ -8,7 +8,7 @@ angular.module('esri-map-docs')
                 lat: 37.75
             },
             zoom: 13,
-            point: null,
+            point: null
         };
         // another way to get a reference to the map is to
         // set the register-as attribute on the directive

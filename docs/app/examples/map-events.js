@@ -8,7 +8,7 @@ angular.module('esri-map-docs')
                 lat: 37.75
             },
             zoom: 13,
-            loaded: false,
+            loaded: false
         };
         // one way to get a reference to the map is to
         // set a handler for the map directive's load attribute

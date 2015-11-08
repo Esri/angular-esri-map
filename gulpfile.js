@@ -1,6 +1,8 @@
+/*eslint-env node*/
+/*eslint indent:0*/
 'use strict';
 var gulp = require('gulp');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -15,12 +17,20 @@ var angularProtractor = require('gulp-angular-protractor');
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
+var docsJsFiles = 'docs/app/**/*.js';
 
 // lint source javascript files
 gulp.task('lint', function() {
-  return gulp.src(srcJsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+  return gulp.src([srcJsFiles, docsJsFiles])
+    // eslint() attaches the lint output to the eslint property
+    // of the file object so it can be used by other modules.
+    .pipe(eslint())
+    // eslint.format() outputs the lint results to the console.
+    // Alternatively use eslint.formatEach() (see Docs).
+    .pipe(eslint.format())
+    // To have the process exit with an error code (1) on
+    // lint error, return the stream and pipe to failOnError last.
+    .pipe(eslint.failOnError());
 });
 
 // clean built copies of javascript files
@@ -97,7 +107,7 @@ gulp.task('serve', ['build'], function() {
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./docs/**.*.html', './docs/app/**/*.js', './docs/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./docs/**.*.html', docsJsFiles, './docs/styles/*.css'], ['build', browserSync.reload ]);
 });
 
 // serve tests on local web server

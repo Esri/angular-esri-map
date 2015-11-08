@@ -100,12 +100,10 @@
                                 });
 
                                 // set the active tool once a button is clicked
-                                $scope.$watch('activeTool', function(newVal, oldVal) {
-                                    // if (newVal !== oldVal) {
-                                        var tool = newVal.toLowerCase();
-                                        map.disableMapNavigation();
-                                        tb.activate(tool);
-                                    // }
+                                $scope.$watch('activeTool', function(newVal) {
+                                    var tool = newVal.toLowerCase();
+                                    map.disableMapNavigation();
+                                    tb.activate(tool);
                                 });
                             }
 
