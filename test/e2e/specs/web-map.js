@@ -15,8 +15,8 @@ describe('Web Map', function() {
         var legend = element(by.id('legend'));
         helper.waitUntilElementIsReady(legend);
         // should be an instance of the legend dijit
-        helper.getAsyncAttributeValue(legend, 'widgetid').then(function(newValue) {
-            expect(newValue).toEqual('legend');
+        helper.getAsyncAttributeValue(legend, 'widgetid').then(function(value) {
+            expect(value).toEqual('legend');
         });
     });
 
