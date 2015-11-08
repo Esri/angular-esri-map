@@ -1,0 +1,20 @@
+<h2>Multiple Dynamic Map Service Layers</h2>
+<!-- add map to page and bind to scope map parameters -->
+<!-- NOTE: using one-time binding (::) for all url and options parameters
+as they are only evaluated in the map/layer constructors -->
+<esri-map id="map" map-options="::map.options" load="setInfoWindow">
+    <!-- dynamic map service layer w/ inline url and options
+    as well as info template defined in a directive -->
+    <esri-dynamic-map-service-layer url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
+        <esri-info-template layer-id="0" title="<b>Oil and Gas data</b>">
+            ${FIELD_NAME} production field<br>
+            <div class="demographicInfoContent">
+                Gas production: ${PROD_GAS}
+                <br>Oil production: ${PROD_OIL}
+            </div>
+        </esri-info-template>
+    </esri-dynamic-map-service-layer>
+    <!-- dynamic map service layer w/ url and options bound to scope properties -->
+    <esri-dynamic-map-service-layer url="{{ ::demographicsLayer.url }}" layer-options="::demographicsLayer.options" visible-layers="1,2" />
+</esri-map>
+<p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_twodynamic.html">this sample</a></p>

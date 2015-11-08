@@ -1,6 +1,8 @@
+/*eslint-env node*/
+/*eslint indent:0*/
 'use strict';
 var gulp = require('gulp');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -15,12 +17,20 @@ var angularProtractor = require('gulp-angular-protractor');
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
+var docsJsFiles = 'docs/app/**/*.js';
 
 // lint source javascript files
 gulp.task('lint', function() {
-  return gulp.src(srcJsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+  return gulp.src([srcJsFiles, docsJsFiles])
+    // eslint() attaches the lint output to the eslint property
+    // of the file object so it can be used by other modules.
+    .pipe(eslint())
+    // eslint.format() outputs the lint results to the console.
+    // Alternatively use eslint.formatEach() (see Docs).
+    .pipe(eslint.format())
+    // To have the process exit with an error code (1) on
+    // lint error, return the stream and pipe to failOnError last.
+    .pipe(eslint.failOnError());
 });
 
 // clean built copies of javascript files
@@ -30,19 +40,45 @@ gulp.task('clean', function() {
     .pipe(clean({force: true}));
 });
 
+// concatenate and minify core javascript files
+// and copy into dist folder and docs
+gulp.task('build-core-js', function() {
+  return gulp.src([
+    'src/core/esri.core.module.js',
+    'src/core/esriLoader.js',
+    'src/core/esriRegistry.js',
+    'src/core/esriMapUtils.js',
+    'src/core/esriLayerUtils.js'])
+    .pipe(concat('angular-esri-core.js'))
+    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('docs/lib'))
+    .pipe(stripDebug())
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(rename('angular-esri-core.min.js'))
+    .pipe(gulp.dest('dist'))
+    .on('error', gutil.log);
+});
+
 // concatenate and minify source javascript files
 // and copy into dist folder and docs
 gulp.task('build-js', function() {
   return gulp.src([
-    'src/services/esriLoader.js',
-    'src/services/esriRegistry.js',
-    'src/services/esriMapUtils.js',
-    'src/directives/esriMap.js',
-    'src/directives/esriFeatureLayer.js',
-    'src/directives/esriDynamicMapServiceLayer.js',
-    'src/directives/esriInfoTemplate.js',
-    'src/directives/esriBasemap.js',
-    'src/directives/esriLegend.js'])
+    'src/core/esri.core.module.js',
+    'src/core/esriLoader.js',
+    'src/core/esriRegistry.js',
+    'src/core/esriMapUtils.js',
+    'src/core/esriLayerUtils.js',
+    'src/esri.map.module.js',
+    'src/map/EsriMapController.js',
+    'src/map/esriMap.js',
+    'src/map/esriLegend.js',
+    'src/layers/EsriLayerControllerBase.js',
+    'src/layers/EsriFeatureLayerController.js',
+    'src/layers/esriFeatureLayer.js',
+    'src/layers/EsriDynamicMapServiceLayerController.js',
+    'src/layers/esriDynamicMapServiceLayer.js',
+    'src/layers/esriInfoTemplate.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('docs/lib'))
@@ -56,7 +92,7 @@ gulp.task('build-js', function() {
 
 // lint then clean and build javascript
 gulp.task('build', function(callback) {
-  runSequence('lint', 'clean', 'build-js', callback);
+  runSequence('lint', 'clean', 'build-core-js', 'build-js', callback);
 });
 
 // serve docs and tests on local web server
@@ -71,7 +107,7 @@ gulp.task('serve', ['build'], function() {
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./docs/**.*.html', './docs/app/**/*.js', './docs/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./docs/**.*.html', docsJsFiles, './docs/styles/*.css'], ['build', browserSync.reload ]);
 });
 
 // serve tests on local web server
