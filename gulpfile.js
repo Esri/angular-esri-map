@@ -1,3 +1,5 @@
+/*eslint-env node*/
+/*eslint indent:0*/
 'use strict';
 var gulp = require('gulp');
 var eslint = require('gulp-eslint');
@@ -15,10 +17,11 @@ var angularProtractor = require('gulp-angular-protractor');
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
+var docsJsFiles = 'docs/app/**/*.js';
 
 // lint source javascript files
 gulp.task('lint', function() {
-  return gulp.src(srcJsFiles)
+  return gulp.src([srcJsFiles, docsJsFiles])
     // eslint() attaches the lint output to the eslint property
     // of the file object so it can be used by other modules.
     .pipe(eslint())
@@ -104,7 +107,7 @@ gulp.task('serve', ['build'], function() {
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./docs/**.*.html', './docs/app/**/*.js', './docs/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./docs/**.*.html', docsJsFiles, './docs/styles/*.css'], ['build', browserSync.reload ]);
 });
 
 // serve tests on local web server
