@@ -6,20 +6,21 @@
   "dependencies": {},
   "devDependencies": {
     "browser-sync": "~1.6.1",
+    "eslint": "^1.9.0",
     "gh-release": "^2.0.1",
     "gulp": "^3.8.9",
+    "gulp-angular-protractor": "~0.0.2",
     "gulp-clean": "~0.3.0",
     "gulp-concat": "~2.2.0",
+    "gulp-eslint": "^1.0.0",
     "gulp-gh-pages": "^0.4.0",
-    "gulp-jshint": "^1.8.5",
     "gulp-ng-annotate": "^0.3.3",
     "gulp-rename": "~1.2.0",
     "gulp-strip-debug": "~0.3.0",
     "gulp-uglify": "~0.3.0",
     "gulp-util": "~2.2.16",
-    "run-sequence": "~0.3.6",
     "protractor": "~2.2.0",
-    "gulp-angular-protractor": "~0.0.2"
+    "run-sequence": "~0.3.6"
   },
   "repository": {
     "type": "git",

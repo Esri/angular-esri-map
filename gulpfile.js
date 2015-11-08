@@ -1,6 +1,6 @@
 'use strict';
 var gulp = require('gulp');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
@@ -19,8 +19,15 @@ var srcJsFiles = 'src/**/*.js';
 // lint source javascript files
 gulp.task('lint', function() {
   return gulp.src(srcJsFiles)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    // eslint() attaches the lint output to the eslint property
+    // of the file object so it can be used by other modules.
+    .pipe(eslint())
+    // eslint.format() outputs the lint results to the console.
+    // Alternatively use eslint.formatEach() (see Docs).
+    .pipe(eslint.format())
+    // To have the process exit with an error code (1) on
+    // lint error, return the stream and pipe to failOnError last.
+    .pipe(eslint.failOnError());
 });
 
 // clean built copies of javascript files
