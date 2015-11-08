@@ -4,7 +4,7 @@
 
     /**
      * @ngdoc service
-     * @name esri.map.factory:esriLoader
+     * @name esri.core.factory:esriLoader
      *
      * @description
      * Use `esriLoader` to lazyload the ESRI ArcGIS API or to require API modules.
@@ -14,7 +14,7 @@
         /**
          * @ngdoc function
          * @name bootstrap
-         * @methodOf esri.map.factory:esriLoader
+         * @methodOf esri.core.factory:esriLoader
          *
          * @description
          * Loads the Esri ArcGIS API for JavaScript
@@ -50,7 +50,7 @@
         /**
          * @ngdoc function
          * @name isLoaded
-         * @methodOf esri.map.factory:esriLoader
+         * @methodOf esri.core.factory:esriLoader
          *
          * @description
          * Check if the ESRI ArcGIS API is loaded
@@ -64,7 +64,7 @@
         /**
          * @ngdoc function
          * @name require
-         * @methodOf esri.map.factory:esriLoader
+         * @methodOf esri.core.factory:esriLoader
          *
          * @description
          * Load an Esri module, using the Dojo AMD loader
