@@ -17,7 +17,10 @@ describe('Web Map', function() {
         // should have 1 section for each of the map's 2 layers
         helper.getAsyncAttributeValue(legend, 'widgetid').then(function(value) {
             expect(value).toEqual('legend');
-            expect(legend.all(by.css('.esriLegendService')).count()).toEqual(2);
+            legend.all(by.css('.esriLegendServiceLabel')).then(function(elements) {
+                expect(elements[0].getText()).toEqual('Water Bodies');
+                expect(elements[1].getText()).toEqual('Rivers');
+            });
         });
     });
 });
