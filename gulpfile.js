@@ -158,7 +158,9 @@ gulp.task('test', ['serve-test'], function() {
 gulp.task('ngdocs', [], function () {
   var gulpDocs = require('gulp-ngdocs');
   return gulp.src('./src/**/*.js')
-    .pipe(gulpDocs.process())
+    .pipe(gulpDocs.process({
+      title: 'angular-esri-map'
+    }))
     .pipe(gulp.dest('./ngdocs_test'));
 });
 
