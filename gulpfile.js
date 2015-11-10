@@ -92,7 +92,7 @@ gulp.task('build-js', function() {
 
 // lint then clean and build javascript
 gulp.task('build', function(callback) {
-  runSequence('lint', 'clean', 'build-core-js', 'build-js', callback);
+  runSequence('lint', 'clean', 'build-core-js', 'build-js', 'ngdocs', callback);
 });
 
 // serve docs and tests on local web server
@@ -100,7 +100,7 @@ gulp.task('build', function(callback) {
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: ['docs', 'test']
+      baseDir: ['docs', 'test', 'ngdocs']
     },
     open: true,
     port: 9002,
@@ -157,17 +157,19 @@ gulp.task('test', ['serve-test'], function() {
 
 gulp.task('ngdocs', [], function () {
   var gulpDocs = require('gulp-ngdocs');
-  return gulp.src('./src/**/*.js')
+  return gulpDocs.sections({
+      api: {
+        glob: ['src/**/*.js'],
+        api: true,
+        title: 'Documentation'
+      }
+    })
     .pipe(gulpDocs.process({
-      title: 'angular-esri-map'
+      title: 'angular-esri-map',
+      titleLink: 'http://esri.github.io/angular-esri-map/',
+      html5Mode: false
     }))
-    .pipe(gulp.dest('./ngdocs_test'));
-});
-
-gulp.task('dgeni', function() {
-  var Dgeni = require('dgeni');
-  var dgeni = new Dgeni([require('./dgeni_test/dgeni-example')]);
-  return dgeni.generate();
+    .pipe(gulp.dest('ngdocs/documentation'));
 });
 
 // Default Task

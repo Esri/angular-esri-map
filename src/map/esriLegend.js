@@ -12,6 +12,8 @@
      * The legend directive **must** be placed within an esri-map directive,
      * but the target element (that will contain the legend) can be anywhere
      * on the page.
+     * 
+     * {@link ../#/examples/legend Legend Example}
      *
      * @param {string} target-id The id of the element where you want to place the legend
      */
