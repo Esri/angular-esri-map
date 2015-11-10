@@ -1,10 +1,10 @@
-# built files under app folder
-docs/lib
+# built files under site folder
+site/lib
 
 # distributable files - only included in releases
 dist
 
-# ngdocs generation build files - this is still in testing and evaluation
+# ngdocs generated files
 ngdocs
 
 # Logs

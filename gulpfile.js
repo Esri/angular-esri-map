@@ -17,11 +17,11 @@ var angularProtractor = require('gulp-angular-protractor');
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
-var docsJsFiles = 'docs/app/**/*.js';
+var siteJsFiles = 'site/app/**/*.js';
 
 // lint source javascript files
 gulp.task('lint', function() {
-  return gulp.src([srcJsFiles, docsJsFiles])
+  return gulp.src([srcJsFiles, siteJsFiles])
     // eslint() attaches the lint output to the eslint property
     // of the file object so it can be used by other modules.
     .pipe(eslint())
@@ -34,14 +34,14 @@ gulp.task('lint', function() {
 });
 
 // clean built copies of javascript files
-// from dist folder and docs
+// from dist folder and site
 gulp.task('clean', function() {
-  return gulp.src(['dist', 'docs/lib'])
+  return gulp.src(['dist', 'site/lib'])
     .pipe(clean({force: true}));
 });
 
 // concatenate and minify core javascript files
-// and copy into dist folder and docs
+// and copy into dist folder and site
 gulp.task('build-core-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
@@ -51,7 +51,7 @@ gulp.task('build-core-js', function() {
     'src/core/esriLayerUtils.js'])
     .pipe(concat('angular-esri-core.js'))
     .pipe(gulp.dest('dist'))
-    .pipe(gulp.dest('docs/lib'))
+    .pipe(gulp.dest('site/lib'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(uglify())
@@ -61,7 +61,7 @@ gulp.task('build-core-js', function() {
 });
 
 // concatenate and minify source javascript files
-// and copy into dist folder and docs
+// and copy into dist folder and site
 gulp.task('build-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
@@ -81,7 +81,7 @@ gulp.task('build-js', function() {
     'src/layers/esriInfoTemplate.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
-    .pipe(gulp.dest('docs/lib'))
+    .pipe(gulp.dest('site/lib'))
     .pipe(stripDebug())
     .pipe(ngAnnotate())
     .pipe(uglify())
@@ -95,19 +95,19 @@ gulp.task('build', function(callback) {
   runSequence('lint', 'clean', 'build-core-js', 'build-js', 'ngdocs', callback);
 });
 
-// serve docs and tests on local web server
-// and reload anytime source code or docs are modified
+// serve site and tests on local web server
+// and reload anytime source code or site are modified
 gulp.task('serve', ['build'], function() {
   browserSync({
     server: {
-      baseDir: ['docs', 'test', 'ngdocs']
+      baseDir: ['site', 'test', 'ngdocs']
     },
     open: true,
     port: 9002,
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./docs/**.*.html', docsJsFiles, './docs/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles,'./site/**.*.html', siteJsFiles, './site/styles/*.css'], ['build', browserSync.reload ]);
 });
 
 // serve tests on local web server
@@ -116,7 +116,7 @@ gulp.task('serve-test', ['build'], function() {
     server: {
       baseDir: 'test',
       routes: {
-        '/lib': 'docs/lib'
+        '/lib': 'site/lib'
       }
     },
     open: false,
@@ -127,13 +127,13 @@ gulp.task('serve-test', ['build'], function() {
 
 // deploy to github pages
 gulp.task('deploy', ['build'], function () {
-  return gulp.src(['./docs/**/*', './test/**/*'])
+  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*'])
     .pipe(deploy());
 });
 
 // deploy to Esri's github pages
 gulp.task('deploy-prod', ['build'], function () {
-  return gulp.src(['./docs/**/*', './test/**/*'])
+  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*'])
     .pipe(deploy({
       remoteUrl: 'https://github.com/Esri/angular-esri-map.git'
     }));
@@ -169,7 +169,7 @@ gulp.task('ngdocs', [], function () {
       titleLink: 'http://esri.github.io/angular-esri-map/',
       html5Mode: false
     }))
-    .pipe(gulp.dest('ngdocs/documentation'));
+    .pipe(gulp.dest('ngdocs/docs'));
 });
 
 // Default Task
