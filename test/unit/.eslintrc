@@ -1,0 +1,9 @@
+{
+  "env": {
+    "jasmine": true
+  },
+  "globals": {
+    "module": false,
+    "inject": false
+  }
+}

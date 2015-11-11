@@ -46,20 +46,21 @@
                 var FeatureLayer = esriModules[0];
                 var InfoTemplate = esriModules[1];
 
-                // normalize info template defined in layerOptions.infoTemplate
-                // or nested esriLayerOption directive to be instance of esri/InfoTemplate
-                // and pass to layer constructor in layerOptions
-                if (layerOptions.infoTemplate) {
-                    layerOptions.infoTemplate = objectToInfoTemplate(layerOptions.infoTemplate, InfoTemplate);
-                }
+                if (layerOptions) {
+                    // normalize info template defined in layerOptions.infoTemplate
+                    // or nested esriLayerOption directive to be instance of esri/InfoTemplate
+                    // and pass to layer constructor in layerOptions
+                    if (layerOptions.infoTemplate) {
+                        layerOptions.infoTemplate = objectToInfoTemplate(layerOptions.infoTemplate, InfoTemplate);
+                    }
 
-                // layerOptions.mode expects a FeatureLayer constant name as a <String>
-                // https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#constants
-                if (layerOptions.hasOwnProperty('mode')) {
-                    // look up and convert to the appropriate <Number> value
-                    layerOptions.mode = FeatureLayer[layerOptions.mode];
+                    // layerOptions.mode expects a FeatureLayer constant name as a <String>
+                    // https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#constants
+                    if (layerOptions.hasOwnProperty('mode')) {
+                        // look up and convert to the appropriate <Number> value
+                        layerOptions.mode = FeatureLayer[layerOptions.mode];
+                    }
                 }
-
                 return new FeatureLayer(url, layerOptions);
             });
         };
@@ -72,30 +73,32 @@
                 var ImageParameters = esriModules[2];
                 var layer;
 
-                // normalize info templates defined in layerOptions.infoTemplates
-                // or nested esriLayerOption directives to be instances of esri/InfoTemplate
-                // and pass to layer constructor in layerOptions
-                if (layerOptions.infoTemplates) {
-                    for (var layerId in layerOptions.infoTemplates) {
-                        if (layerOptions.infoTemplates.hasOwnProperty(layerId)) {
-                            layerOptions.infoTemplates[layerId].infoTemplate = objectToInfoTemplate(layerOptions.infoTemplates[layerId].infoTemplate, InfoTemplate);
-                        }
-                    }
-                }
-
-                // check for imageParameters property and
-                // convert into ImageParameters() if needed
-                if (angular.isObject(layerOptions.imageParameters)) {
-                    if (layerOptions.imageParameters.declaredClass !== 'esri.layers.ImageParameters') {
-                        var imageParameters = new ImageParameters();
-                        for (var key in layerOptions.imageParameters) {
-                            if (layerOptions.imageParameters.hasOwnProperty(key)) {
-                                // TODO: may want to convert timeExent to new TimeExtent()
-                                // also not handling conversion for bbox, imageSpatialReference, nor layerTimeOptions
-                                imageParameters[key] = layerOptions.imageParameters[key];
+                if (layerOptions) {
+                    // normalize info templates defined in layerOptions.infoTemplates
+                    // or nested esriLayerOption directives to be instances of esri/InfoTemplate
+                    // and pass to layer constructor in layerOptions
+                    if (layerOptions.infoTemplates) {
+                        for (var layerId in layerOptions.infoTemplates) {
+                            if (layerOptions.infoTemplates.hasOwnProperty(layerId)) {
+                                layerOptions.infoTemplates[layerId].infoTemplate = objectToInfoTemplate(layerOptions.infoTemplates[layerId].infoTemplate, InfoTemplate);
                             }
                         }
-                        layerOptions.imageParameters = imageParameters;
+                    }
+
+                    // check for imageParameters property and
+                    // convert into ImageParameters() if needed
+                    if (angular.isObject(layerOptions.imageParameters)) {
+                        if (layerOptions.imageParameters.declaredClass !== 'esri.layers.ImageParameters') {
+                            var imageParameters = new ImageParameters();
+                            for (var key in layerOptions.imageParameters) {
+                                if (layerOptions.imageParameters.hasOwnProperty(key)) {
+                                    // TODO: may want to convert timeExent to new TimeExtent()
+                                    // also not handling conversion for bbox, imageSpatialReference, nor layerTimeOptions
+                                    imageParameters[key] = layerOptions.imageParameters[key];
+                                }
+                            }
+                            layerOptions.imageParameters = imageParameters;
+                        }
                     }
                 }
 
