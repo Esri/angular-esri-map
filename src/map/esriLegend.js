@@ -13,7 +13,10 @@
      * but the target element (that will contain the legend) can be anywhere
      * on the page.
      * 
-     * {@link ../#/examples/legend Legend Example}
+     * ## Examples
+     * - {@link ../#/examples/legend Legend}
+     * - {@link ../#/examples/web-map Web Map}
+     * - {@link ../#/examples/additional-map-options Additional Map Options}
      *
      * @param {string} target-id The id of the element where you want to place the legend
      */

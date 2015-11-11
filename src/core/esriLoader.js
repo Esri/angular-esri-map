@@ -19,9 +19,8 @@
          * @description
          * Loads the Esri ArcGIS API for JavaScript
          *
-         * @param {Object} options Send a list of options of how to load the API.
-         * @param {String} options.url the url to load the ESRI API, defaults to http://js.arcgis.com/3.14compact
-         * @return {Promise} Returns a $q style which is resolved once the ESRI API has loaded.
+         * @param {Object=} options Send a list of options of how to load theEsri ArcGIS API for JavaScript. Defaults to `{url: 'http://js.arcgis.com/3.14compact'}`
+         * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
         function bootstrap(options) {
             var deferred = $q.defer();
@@ -70,7 +69,7 @@
          * Load an Esri module, using the Dojo AMD loader
          *
          * @param {String|Array} modules A string of a module or an array of modules to be loaded.
-         * @param {Function} [callback] An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.
+         * @param {Function=} [callback] An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.
          * @return {Promise} Returns a $q style promise which is resolved once modules are loaded
          */
         function requireModule(moduleName, callback){
