@@ -1,6 +1,33 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriFeatureLayer
+     * @restrict E
+     * @element
+     * @scope
+     *
+     * @description
+     * This directive creates a {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html FeatureLayer}
+     * and adds it to the map.
+     * This directive **must** be placed within an esri-map directive.
+     * 
+     * ## Examples
+     * - {@link ../#/examples/feature-layers Feature Layers}
+     * - {@link ../#/examples/add-remove-layers Add/Remove Layers}
+     * - {@link ../#/examples/layer-events Layer Events}
+     * - {@link ../#/examples/no-basemap No Basemap}
+     * - and more...
+     *
+     * @param {String} url The url to the ArcGIS Server REST layer resource.
+     * @param {Boolean=} visible The initial visibility of the layer.
+     * @param {Number=} opacity The initial opacity of the layer.
+     * @param {String=} definition-expression The definition expression where clause.
+     * @param {Expression=} load Expression to evaluate upon layer `load` event.
+     * @param {Expression=} update-end Expression to evaluate upon layer `update-end` event.
+     * @param {Object | Expression=} layer-options An object or inline object hash string defining additional layer constructor options.
+     */
     angular.module('esri.map').directive('esriFeatureLayer', function() {
         // this object will tell angular how our directive behaves
         return {

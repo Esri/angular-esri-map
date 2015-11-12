@@ -10,9 +10,9 @@
      * @requires esri.core.factory:esriRegistry
      *
      * @description
-     * The controller used by the esriMap directive constructs the map,
-     * provides several supporting methods,
-     * and adds it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern},
+     * This controller is used by the esri-map directive to construct the map,
+     * provide it with several supporting methods,
+     * and also add it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern},
      */
     angular.module('esri.map').controller('EsriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
 
@@ -110,7 +110,7 @@
          * @methodOf esri.map.controller:EsriMapController
          *
          * @description
-         * Removes the layer from the map, for example when esriFeatureLayer goes out of scope.
+         * Removes the layer from the map, for example when a esri-feature-layer directive goes out of scope.
          *
          * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to remove from the map
          *
@@ -128,7 +128,7 @@
          * @methodOf esri.map.controller:EsriMapController
          *
          * @description
-         * Adds to the array to store layer info, which is needed for esriLegend.
+         * Adds to the array to store layer info, which is needed for the esri-legend directive.
          *
          * @param {Object} layerInfo Information about the layer.
          */
@@ -145,7 +145,7 @@
          * @name getLayerInfos
          * @methodOf esri.map.controller:EsriMapController
          *
-         * @return {Array} The array of layer info objects that are used by esriLegend.
+         * @return {Array} The array of layer info objects that are used by the esri-legend directive.
          */
         this.getLayerInfos = function() {
             return this.layerInfos;
@@ -160,8 +160,8 @@
          * Updates scope in response to map events,
          * and updates the map in response to scope properties.
          *
-         * @param {Object} scope Information about the layer.
-         * @param {Object} attrs Information about the layer.
+         * @param {Object} scope $scope
+         * @param {Object} attrs $attrs
          */
         this.bindMapEvents = function(scope, attrs) {
             var self = this;
