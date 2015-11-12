@@ -145,13 +145,18 @@ gulp.task('deploy-prod', ['build'], function () {
 gulp.task('karma-once', function(done) {
   new KarmaServer({
     configFile: __dirname + '/test/unit/karma.conf.js',
-    singleRun: true
+    singleRun: true,
+    // if phantom doesn't start, change this port
+    // there's always some live reload listening on 9876
+    // so we're defaulting to 6789
+    port: 6789,
+    browsers: ['PhantomJS']
   }, done).start();
 });
 
 gulp.task('karma', function(done) {
   new KarmaServer({
-    configFile: __dirname + '/test/unit/karma.conf.js',
+    configFile: __dirname + '/test/unit/karma.conf.js'
   }, done).start();
 });
 
