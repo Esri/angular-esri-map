@@ -1,6 +1,19 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc controller
+     * @name esri.map.controller:EsriMapController
+     * @requires $attrs
+     * @requires $timeout
+     * @requires esri.core.factory:esriMapUtils
+     * @requires esri.core.factory:esriRegistry
+     *
+     * @description
+     * The controller used by the esriMap directive constructs the map,
+     * provides several supporting methods,
+     * and adds it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern},
+     */
     angular.module('esri.map').controller('EsriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
 
         // update two-way bound scope properties based on map state
@@ -20,8 +33,17 @@
 
         // this deferred will be resolved with the map
         var mapPromise;
-
-        // get map options from controller properties
+        
+        /**
+         * @ngdoc function
+         * @name getMapProperties
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Formats and prepares map options from controller properties.
+         *
+         * @returns {Object} A map options object for map construction.
+         */
         this.getMapOptions = function() {
 
             // read options passed in as either a JSON string expression
@@ -52,41 +74,95 @@
             return mapOptions;
         };
 
-        // method returns the promise that will be resolved with the map
+        /**
+         * @ngdoc function
+         * @name getMap
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @return {Promise} The promise that will be resolved with the loaded map.
+         */
         this.getMap = function() {
             return mapPromise;
         };
 
-        // adds the layer, returns the promise that will be resolved with the result of map.addLayer
+        /**
+         * @ngdoc function
+         * @name addLayer
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Adds the layer to the map.
+         *
+         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to add to the map
+         * @param {Number=} index Layer ordering position on the map
+         *
+         * @return {Promise} The promise that will be resolved with the result of `map.addLayer`.
+         */
         this.addLayer = function(layer, index) {
-            // layer: valid JSAPI layer
-            // index: optional <Number>; likely only used internally by, for example, esriFeatureLayer
             return this.getMap().then(function(map) {
                 return map.addLayer(layer, index);
             });
         };
 
-        // support removing layers, e.g. when esriFeatureLayer goes out of scope
+        /**
+         * @ngdoc function
+         * @name removeLayer
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Removes the layer from the map, for example when esriFeatureLayer goes out of scope.
+         *
+         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to remove from the map
+         *
+         * @return {Promise} The promise that will be resolved with the result of `map.removeLayer`.
+         */
         this.removeLayer = function (layer) {
             return this.getMap().then(function (map) {
                 return map.removeLayer(layer);
             });
         };
 
-        // array to store layer info, needed for legend
-        this.addLayerInfo = function(lyrInfo) {
+        /**
+         * @ngdoc function
+         * @name addLayerInfo
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Adds to the array to store layer info, which is needed for esriLegend.
+         *
+         * @param {Object} layerInfo Information about the layer.
+         */
+        this.addLayerInfo = function(layerInfo) {
             if (!this.layerInfos) {
-                this.layerInfos = [lyrInfo];
+                this.layerInfos = [layerInfo];
             } else {
-                this.layerInfos.unshift(lyrInfo);
+                this.layerInfos.unshift(layerInfo);
             }
         };
+
+        /**
+         * @ngdoc function
+         * @name getLayerInfos
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @return {Array} The array of layer info objects that are used by esriLegend.
+         */
         this.getLayerInfos = function() {
             return this.layerInfos;
         };
 
-        // update scope in response to map events and
-        // update map in response to changes in scope properties
+        /**
+         * @ngdoc function
+         * @name bindMapEvents
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Updates scope in response to map events,
+         * and updates the map in response to scope properties.
+         *
+         * @param {Object} scope Information about the layer.
+         * @param {Object} attrs Information about the layer.
+         */
         this.bindMapEvents = function(scope, attrs) {
             var self = this;
 
@@ -149,7 +225,7 @@
                 // listen for changes to scope.center and scope.zoom and update map
                 self.inUpdateCycle = false;
                 if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
-                    scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom/*, oldCenterZoom*/) {
+                    scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom) {
                         if (self.inUpdateCycle) {
                             return;
                         }
