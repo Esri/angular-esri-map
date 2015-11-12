@@ -1,6 +1,15 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc service
+     * @name esri.core.factory:esriLayerUtils
+     *
+     * @description
+     * Functions to create instances of layers and related classes (such as InfoTemplate).
+     *
+     * @requires esri.core.factory:esriLoader
+     */
     angular.module('esri.core').factory('esriLayerUtils', function(esriLoader) {
 
         // parse array of visible layer ids from a string
@@ -40,7 +49,14 @@
         // stateless utility service
         var service = {};
 
-        // create a feature layer
+        /**
+         * @ngdoc function
+         * @name createFeatureLayer
+         * @methodOf esri.core.factory:esriLayerUtils
+         * @param {String} url The url of the map or feature service layer
+         * @param {Object=} options FeatureLayer options
+         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1 FeatureLayer}
+         */
         service.createFeatureLayer = function(url, layerOptions) {
             return esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate']).then(function(esriModules) {
                 var FeatureLayer = esriModules[0];
@@ -65,7 +81,14 @@
             });
         };
 
-        // create a dynamic service layer
+        /**
+         * @ngdoc function
+         * @name createDynamicMapServiceLayer
+         * @methodOf esri.core.factory:esriLayerUtils
+         * @param {String} url The url of the map service
+         * @param {Object=} options ArcGISDynamicMapServiceLayer options
+         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1 ArcGISDynamicMapServiceLayer}
+         */
         service.createDynamicMapServiceLayer = function(url, layerOptions, visibleLayers) {
             return esriLoader.require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters']).then(function(esriModules) {
                 var ArcGISDynamicMapServiceLayer = esriModules[0];
@@ -115,6 +138,13 @@
         };
 
         // create an InfoTemplate object from JSON
+        /**
+         * @ngdoc function
+         * @name createInfoTemplate
+         * @methodOf esri.core.factory:esriLayerUtils
+         * @param {Object|Array} infoTemplate Either an array with `['title', 'content']` or an object with `{title: 'title', content: 'content'}`
+         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html InfoTemplate}
+         */
         service.createInfoTemplate = function(infoTemplate) {
             return esriLoader.require('esri/InfoTemplate').then(function(InfoTemplate) {
                 return objectToInfoTemplate(infoTemplate, InfoTemplate);
