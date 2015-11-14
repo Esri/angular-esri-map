@@ -14,10 +14,12 @@ var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var deploy = require('gulp-gh-pages');
 var angularProtractor = require('gulp-angular-protractor');
+var KarmaServer = require('karma').Server;
 
 // source directives and services
 var srcJsFiles = 'src/**/*.js';
 var siteJsFiles = 'site/app/**/*.js';
+var unitTestSpecFiles = 'test/unit/**/*.spec.js';
 
 // lint source javascript files
 gulp.task('lint', function() {
@@ -97,7 +99,7 @@ gulp.task('build', function(callback) {
 
 // serve site and tests on local web server
 // and reload anytime source code or site are modified
-gulp.task('serve', ['build'], function() {
+gulp.task('serve', ['karma-once', 'build'], function() {
   browserSync({
     server: {
       baseDir: ['site', 'test', 'ngdocs']
@@ -108,6 +110,7 @@ gulp.task('serve', ['build'], function() {
   });
 
   gulp.watch([srcJsFiles,'./site/**.*.html', siteJsFiles, './site/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles, unitTestSpecFiles ], [ 'karma-once' ]);
 });
 
 // serve tests on local web server
@@ -139,7 +142,25 @@ gulp.task('deploy-prod', ['build'], function () {
     }));
 });
 
-gulp.task('test', ['serve-test'], function() {
+gulp.task('karma-once', function(done) {
+  new KarmaServer({
+    configFile: __dirname + '/test/unit/karma.conf.js',
+    singleRun: true,
+    // if phantom doesn't start, change this port
+    // there's always some live reload listening on 9876
+    // so we're defaulting to 6789
+    port: 6789,
+    browsers: ['PhantomJS']
+  }, done).start();
+});
+
+gulp.task('karma', function(done) {
+  new KarmaServer({
+    configFile: __dirname + '/test/unit/karma.conf.js'
+  }, done).start();
+});
+
+gulp.task('test', ['karma-once', 'serve-test'], function() {
   return gulp.src(['./test/e2e/specs/*.js'])
     .pipe(angularProtractor({
       'configFile': 'test/e2e/conf.js',
