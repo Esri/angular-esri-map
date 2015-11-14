@@ -1,6 +1,35 @@
 (function (angular) {
     'use strict';
 
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriDynamicMapServiceLayer
+     * @restrict E
+     * @element
+     * @scope
+     *
+     * @description
+     * This directive creates an
+     * {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html ArcGISDynamicMapServiceLayer}
+     * and adds it to the map.
+     * This directive **must** be placed within an esri-map directive.
+     * 
+     * ## Examples
+     * - {@link ../#/examples/dynamic-map-service-layer Dynamic Map Service Layer}
+     * - {@link ../#/examples/dynamic-map-service-layers Multiple Dynamic Map Service Layers}
+     * - {@link ../#/examples/layer-events Layer Events}
+     *
+     * @param {String} url The url to the ArcGIS Server REST map service resource.
+     * @param {Boolean=} visible The initial visibility of the layer.
+     * @param {Number=} opacity The initial opacity of the layer.
+     * @param {Array|String=} visible-layers The visible sublayer ids of the map service,
+     *  provided as an array of integers or string of comma-separated integers.
+     * @param {Expression=} load Expression to evaluate upon layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#event-load load event}.
+     * @param {Expression=} update-end Expression to evaluate upon layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#event-update-end update-end event}.
+     * @param {Object | Expression=} layer-options An object or inline object hash string defining additional layer constructor options.
+     */
     angular.module('esri.map').directive('esriDynamicMapServiceLayer', function () {
         // this object will tell angular how our directive behaves
         return {

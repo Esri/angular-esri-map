@@ -24,8 +24,10 @@
      * @param {Boolean=} visible The initial visibility of the layer.
      * @param {Number=} opacity The initial opacity of the layer.
      * @param {String=} definition-expression The definition expression where clause.
-     * @param {Expression=} load Expression to evaluate upon layer `load` event.
-     * @param {Expression=} update-end Expression to evaluate upon layer `update-end` event.
+     * @param {Expression=} load Expression to evaluate upon layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-load load event}.
+     * @param {Expression=} update-end Expression to evaluate upon layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-update-end update-end event}.
      * @param {Object | Expression=} layer-options An object or inline object hash string defining additional layer constructor options.
      */
     angular.module('esri.map').directive('esriFeatureLayer', function() {
