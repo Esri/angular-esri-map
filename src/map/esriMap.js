@@ -1,6 +1,32 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriMap
+     * @restrict E
+     * @element
+     * @scope
+     *
+     * @description
+     * This is the directive which will create a map using the Esri ArcGIS API for JavaScript.
+     * There are plenty of examples showing how to use this directive and its bound parameters.
+     * For additional information, we recommend the 
+     * {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html Esri Map documentation}.
+     * 
+     * ## Examples
+     * - Choose from a {@link ../#/examples number of examples} making use of this directive
+     *
+     * @param {String} id The id of the element where to construct the map.
+     * @param {Array | Object=} center The initial location of the map.
+     * @param {Number=} zoom The initial zoom level of the map.
+     * @param {??=} item-info **??**
+     * @param {String=} basemap The basemap of the map, which can be a valid string from the ArcGIS API for JavaScript, or a custom basemap.
+     * @param {Expression=} load Expression to evaluate upon map `load` event.
+     * @param {Expression=} extent-change Expression to evaluate upon map `extent-change` event.
+     * @param {Object | Expression=} map-options An object or inline object hash string defining additional map constructor options.
+     *  See {@link ../#/examples/additional-map-options Additional Map Options} example.
+     */
     angular.module('esri.map').directive('esriMap', function() {
 
         return {

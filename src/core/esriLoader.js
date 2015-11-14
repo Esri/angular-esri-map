@@ -7,7 +7,7 @@
      * @name esri.core.factory:esriLoader
      *
      * @description
-     * Use `esriLoader` to lazyload the ESRI ArcGIS API or to require API modules.
+     * Use `esriLoader` to lazyload the Esri ArcGIS API or to require API modules.
      */
     angular.module('esri.core').factory('esriLoader', function ($q) {
 
@@ -17,11 +17,12 @@
          * @methodOf esri.core.factory:esriLoader
          *
          * @description
-         * Loads the Esri ArcGIS API for JavaScript
+         * Loads the Esri ArcGIS API for JavaScript.
          *
-         * @param {Object} options Send a list of options of how to load the API.
-         * @param {String} options.url the url to load the ESRI API, defaults to http://js.arcgis.com/3.14compact
-         * @return {Promise} Returns a $q style which is resolved once the ESRI API has loaded.
+         * @param {Object=} options Send a list of options of how to load theEsri ArcGIS API for JavaScript.
+         *  Defaults to `{url: 'http://js.arcgis.com/3.14compact'}`
+         *
+         * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
         function bootstrap(options) {
             var deferred = $q.defer();
@@ -52,10 +53,7 @@
          * @name isLoaded
          * @methodOf esri.core.factory:esriLoader
          *
-         * @description
-         * Check if the ESRI ArcGIS API is loaded
-         *
-         * @return {Boolean} Returns a boolean if ESRI ArcGIS JavaScript API is, in fact, loaded
+         * @return {Boolean} Returns a boolean if the Esri ArcGIS API for JavaScript is already loaded.
          */
         function isLoaded() {
             return angular.isDefined(window.esri);
@@ -67,16 +65,16 @@
          * @methodOf esri.core.factory:esriLoader
          *
          * @description
-         * Load an Esri module, using the Dojo AMD loader
+         * Load an Esri module using the Dojo AMD loader.
          *
          * @param {String|Array} modules A string of a module or an array of modules to be loaded.
-         * @param {Function} [callback] An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.
+         * @param {Function=} callback An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.
          * @return {Promise} Returns a $q style promise which is resolved once modules are loaded
          */
         function requireModule(moduleName, callback){
             var deferred = $q.defer();
 
-            // Throw Error if ESRI is not loaded yet
+            // Throw Error if Esri is not loaded yet
             if ( !isLoaded() ) {
                 deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
                 return deferred.promise;
