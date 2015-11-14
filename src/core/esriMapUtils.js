@@ -1,6 +1,15 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc service
+     * @name esri.core.factory:esriMapUtils
+     *
+     * @description
+     * Functions to help create map instances.
+     *
+     * @requires esri.core.factory:esriLoader
+     */
     angular.module('esri.core').factory('esriMapUtils', function($q, esriLoader) {
 
         // construct Extent if object is not already an instance
@@ -16,7 +25,19 @@
         // stateless utility service
         var service = {};
 
-        // add a custom basemap definition to be used by maps
+        /**
+         * @ngdoc function
+         * @name addCustomBasemap
+         * @description Add a custom basemap definition to {@link https://developers.arcgis.com/javascript/jsapi/esri.basemaps-amd.html esriBasemaps}
+         * @methodOf esri.core.factory:esriMapUtils
+         * @param {String} name Name to be used when setting the basemap
+         * @param {Object} basemapDefinition Basemap layer urls and other options (either basemapDefinition.baseMapLayers or basemapDefinition.urls is required)
+         * @param {Array=} basemapDefinition.baseMapLayers Array of basemap layer objects
+         * @param {Array=} basemapDefinition.urls Array of basemap layer urls
+         * @param {String=} basemapDefinition.thumbnailUrl Basemap thumbnail URL
+         * @param {String=} basemapDefinition.title Basemap Title
+         * @returns {Promise} Returns a $q style promise resolved with esriBasemaps
+         */
         service.addCustomBasemap = function(name, basemapDefinition) {
             return esriLoader.require('esri/basemaps').then(function(esriBasemaps) {
                 var baseMapLayers = basemapDefinition.baseMapLayers;
@@ -38,14 +59,22 @@
             });
         };
 
-        // create a new map at an element w/ the given id
+        /**
+         * @ngdoc function
+         * @name createMap
+         * @description Create a new {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html Map} instance at an element w/ the given id
+         * @methodOf esri.core.factory:esriMapUtils
+         * @param {String} elementId Id of the element for the map
+         * @param {Object} options {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1 Optional parameters}
+         * @returns {Promise} Returns a $q style promise resolved with the Map instance
+         */
         service.createMap = function(elementId, mapOptions) {
             return esriLoader.require(['esri/map', 'esri/geometry/Extent']).then(function(esriModules) {
                 var Map = esriModules[0];
                 var Extent = esriModules[1];
 
                 // construct optional Extent for mapOptions
-                if (mapOptions.hasOwnProperty('extent')) {
+                if (mapOptions && mapOptions.hasOwnProperty('extent')) {
                     mapOptions.extent = objectToExtent(mapOptions.extent, Extent);
                 }
 
@@ -55,8 +84,17 @@
             });
         };
 
+        /**
+         * @ngdoc function
+         * @name createWebMap
+         * @description Create a new {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html Map} instance from a web map at an element w/ the given id
+         * @methodOf esri.core.factory:esriMapUtils
+         * @param {String} webmapId Item id of the web map
+         * @param {String} elementId Id of the element for the map
+         * @param {Object} options {@link https://developers.arcgis.com/javascript/jsapi/esri.arcgis.utils-amd.html#createmap Optional parameters}
+         * @returns {Promise} Returns a $q style promise resolved with the Map instance
+         */
         // TODO: would be better if we didn't have to pass mapController
-        // create a new map from a web map at an element w/ the given id
         service.createWebMap = function(webmapId, elementId, mapOptions, mapController) {
             // this deferred will be resolved with the map
             // NOTE: wrapping in $q deferred to avoid injecting
