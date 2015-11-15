@@ -38,3 +38,6 @@ node_modules
 
 # WebStorm IDE settings
 .idea
+
+# istanbull test coverage reports
+test/unit/coverage
