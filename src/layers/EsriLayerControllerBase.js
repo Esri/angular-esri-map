@@ -7,8 +7,7 @@
      *
      * @description
      * This controller is used by the controllers of the esri-feature-layer and
-     * esri-dynamic-map-service-layer directives to provide several supporting methods
-     * and help bind layer events and other properties such as layer visibility.
+     * esri-dynamic-map-service-layer directives to provide several shared supporting methods.
      */
     angular.module('esri.map').controller('EsriLayerControllerBase', function EsriLayerControllerBase() {
 
@@ -69,21 +68,7 @@
             };
         };
 
-        /**
-         * @ngdoc function
-         * @name _bindLayerEvents
-         * @methodOf esri.map.controller:EsriLayerControllerBase
-         * @access private
-         *
-         * @description
-         * Binds directive attributes to layer properties and events.
-         *
-         * @param {Object} scope Isolate scope for layer directive controller
-         * @param {Object} attrs Attribute properties
-         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer The layer to bind properties and events to.
-         * @param {EsriMapController} mapController The map controller is also required to help remove the layer
-         *  from the map when the layer scope is destroyed.
-         */
+        // get common layer options from layer controller properties
         this._bindLayerEvents = function(scope, attrs, layer, mapController) {
 
             // call load handler (if any)
