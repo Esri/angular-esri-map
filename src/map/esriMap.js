@@ -26,6 +26,8 @@
      * @param {Function=} extent-change Callback for map `extent-change` event.
      * @param {Object | String=} map-options An object or inline object hash string defining additional map constructor options.
      *  See {@link ../#/examples/additional-map-options Additional Map Options} example.
+     * @param {String=} register-as A name to use when registering the map so that it can be used by parent controllers.
+     *  See {@link esri.core.factory:esriRegistry esriRegistry}.
      */
     angular.module('esri.map').directive('esriMap', function() {
 
