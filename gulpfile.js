@@ -187,7 +187,6 @@ gulp.task('ngdocs', [], function () {
     })
     .pipe(gulpDocs.process({
       title: 'angular-esri-map',
-      titleLink: 'http://esri.github.io/angular-esri-map/',
       html5Mode: false,
       navTemplate: 'site/docs-resources/docs-nav-template.html',
       styles: ['site/docs-resources/docs-main.css']
