@@ -119,7 +119,7 @@ describe('esriMapUtils', function() {
             $rootScope.$digest();
         });
 
-        it('should normalize extent option', function() {
+        it('should normalize extent option without already declared Extent', function() {
             var options = {
                 extent: {
                     'xmin': -1556394,
@@ -142,6 +142,26 @@ describe('esriMapUtils', function() {
                         'wkid': 102003
                     }
                 }]);
+            });
+            $rootScope.$digest();
+        });
+        
+        it('should normalize extent option with already declared Extent', function() {
+            var options = {
+                extent: {
+                    'xmin': -1556394,
+                    'ymin': -2051901,
+                    'xmax': 1224513,
+                    'ymax': 2130408,
+                    'spatialReference': {
+                        'wkid': 102003
+                    },
+                    'declaredClass': 'esri.geometry.Extent'
+                }
+            };
+            esriMapUtils.createMap('notARealNodeId', options).then(function(/*map*/) {
+                expect(Map.calls.argsFor(0)).toEqual(['notARealNodeId', options]);
+                expect(Extent.calls.count()).toEqual(0);
             });
             $rootScope.$digest();
         });
