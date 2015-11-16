@@ -52,10 +52,11 @@
         /**
          * @ngdoc function
          * @name createFeatureLayer
+         * @description Create an instance of a {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html FeatureLayer}
          * @methodOf esri.core.factory:esriLayerUtils
          * @param {String} url The url of the map or feature service layer
          * @param {Object=} options FeatureLayer options
-         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1 FeatureLayer}
+         * @returns {Promise} Returns a $q style promise resolved with an instance of a FeatureLayer
          */
         service.createFeatureLayer = function(url, layerOptions) {
             return esriLoader.require(['esri/layers/FeatureLayer', 'esri/InfoTemplate']).then(function(esriModules) {
@@ -84,10 +85,11 @@
         /**
          * @ngdoc function
          * @name createDynamicMapServiceLayer
+         * @description Create an instance of an {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1 ArcGISDynamicMapServiceLayer}
          * @methodOf esri.core.factory:esriLayerUtils
          * @param {String} url The url of the map service
          * @param {Object=} options ArcGISDynamicMapServiceLayer options
-         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1 ArcGISDynamicMapServiceLayer}
+         * @returns {Promise} Returns a $q style promise resolved with an instance of ArcGISDynamicMapServiceLayer
          */
         service.createDynamicMapServiceLayer = function(url, layerOptions, visibleLayers) {
             return esriLoader.require(['esri/layers/ArcGISDynamicMapServiceLayer', 'esri/InfoTemplate', 'esri/layers/ImageParameters']).then(function(esriModules) {
@@ -141,9 +143,10 @@
         /**
          * @ngdoc function
          * @name createInfoTemplate
+         * @description Create an instance of an {@link https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html InfoTemplate}
          * @methodOf esri.core.factory:esriLayerUtils
          * @param {Object|Array} infoTemplate Either an array with `['title', 'content']` or an object with `{title: 'title', content: 'content'}`
-         * @returns {Promise} Returns a $q style promise resolved with an instance of {@link https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html InfoTemplate}
+         * @returns {Promise} Returns a $q style promise resolved with an instance of InfoTemplate
          */
         service.createInfoTemplate = function(infoTemplate) {
             return esriLoader.require('esri/InfoTemplate').then(function(InfoTemplate) {

@@ -154,13 +154,24 @@ gulp.task('karma-once', function(done) {
   }, done).start();
 });
 
+gulp.task('karma-coverage', function(done) {
+  new KarmaServer({
+    configFile: __dirname + '/test/unit/karma.conf.js',
+    singleRun: true,
+    reporters: ['progress', 'coverage'],
+    preprocessors: {
+      '../../src/**/*.js': ['coverage']
+    }
+  }, done).start();
+});
+
 gulp.task('karma', function(done) {
   new KarmaServer({
     configFile: __dirname + '/test/unit/karma.conf.js'
   }, done).start();
 });
 
-gulp.task('test', ['karma-once', 'serve-test'], function() {
+gulp.task('test', ['karma-coverage', 'serve-test'], function() {
   return gulp.src(['./test/e2e/specs/*.js'])
     .pipe(angularProtractor({
       'configFile': 'test/e2e/conf.js',

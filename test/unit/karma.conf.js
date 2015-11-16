@@ -42,7 +42,6 @@ module.exports = function(config) {
         // - PhantomJS
         // - IE (only Windows)
         browsers: [
-            // TODO: unable to get PhantomJS working for some reason
             'Chrome'
         ],
 
@@ -50,7 +49,8 @@ module.exports = function(config) {
         plugins: [
             'karma-chrome-launcher',
             'karma-phantomjs-launcher',
-            'karma-jasmine'
+            'karma-jasmine',
+            'karma-coverage'
         ],
 
         // Continuous Integration mode
