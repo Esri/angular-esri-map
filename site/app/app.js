@@ -7,6 +7,11 @@
         .module('esri-map-docs', ['ngRoute', 'ngSanitize', 'ngSelect', 'hljs', 'esri.map'])
         .config(function($routeProvider, appConfig) {
             $routeProvider
+                // TODO: add home page
+                .when('/home', {
+                    templateUrl: 'app/home/home.html',
+                    controller: 'HomeCtrl'
+                })
                 .when('/examples', {
                     templateUrl: 'app/examples/examples.html',
                     controller: 'ExamplesCtrl'
@@ -15,8 +20,12 @@
                     templateUrl: 'app/about/about.html',
                     controller: 'AboutCtrl'
                 })
+                .when('/patterns', {
+                    // TODO: new template/controller
+                    redirectTo: '/about'
+                })
                 .otherwise({
-                    redirectTo: '/examples'
+                    redirectTo: '/home'
                 });
             // set routes of examples pages from appConfig
             angular.forEach(appConfig.examplePages, function(example) {

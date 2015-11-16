@@ -8,23 +8,26 @@
           <div esri-legend target-id="legend"></div>
         </esri-map>
         <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{ map.zoom }}</p>
-        <p>Min Zoom: {{ map.mapOptions.minZoom }}, Max Zoom: {{ map.mapOptions.maxZoom }}, 
+        <p>Min Zoom: {{ map.mapOptions.minZoom }}, Max Zoom: {{ map.mapOptions.maxZoom }},
         Resize Delay: {{ map.mapOptions.resizeDelay }}ms,
         Navigation Mode: {{ map.mapOptions.navigationMode }}</p>
-        <p>Slider Orientation: {{ map.mapOptions.sliderOrientation }}, 
-        Slider Position: {{ map.mapOptions.sliderPosition }}, 
+        <p>Slider Orientation: {{ map.mapOptions.sliderOrientation }},
+        Slider Position: {{ map.mapOptions.sliderPosition }},
         Display Graphics on Pan: {{ map.mapOptions.displayGraphicsOnPan }}</p>
-        <p>Fade on Zoom: {{ map.mapOptions.fadeOnZoom }}, Logo: {{ map.mapOptions.logo }}, 
+        <p>Fade on Zoom: {{ map.mapOptions.fadeOnZoom }}, Logo: {{ map.mapOptions.logo }},
         Wrap Around 180: {{ map.mapOptions.wrapAround180 }}</p>
         <div class="well well-sm">
             <p>This example defines additional map options in the parent contoller's <code>$scope.mapOptions</code>.</p>
             <p>Alternatively, map options can be <a href="./additional-map-options.html">supplied as an inline object hash string</a> in the HTML template, such as <code>map-options="{maxZoom: 10,...}"</code>.</p>
             <p>These map options will also work alongside a <code>webmap-id</code> inline attribute.</p>
         </div>
-        
+
     </div>
     <div style="width: 200px; float: right;">
         <div id="legend"></div>
     </div>
     <div style="clear: both;"></div>
 </div>
+<p>Documentation:
+    <a href="./docs/#/api/esri.map.directive:esriMap">esri-map</a>
+</p>

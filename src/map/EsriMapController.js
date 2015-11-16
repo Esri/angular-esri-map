@@ -12,7 +12,7 @@
      * @description
      * This controller is used by the esri-map directive to construct the map,
      * provide it with several supporting methods,
-     * and also add it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern},
+     * and also add it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern}.
      */
     angular.module('esri.map').controller('EsriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
 
@@ -130,7 +130,8 @@
          * @description
          * Adds to the array to store layer info, which is needed for the esri-legend directive.
          *
-         * @param {Object} layerInfo Information about the layer.
+         * @param {Object} layerInfo Information about the layer, see
+         *  {@link https://developers.arcgis.com/javascript/jsapi/legend-amd.html#legend1 layerInfo} for object specification.
          */
         this.addLayerInfo = function(layerInfo) {
             if (!this.layerInfos) {

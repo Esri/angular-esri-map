@@ -1,6 +1,16 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc service
+     * @name esri.core.factory:esriRegistry
+     *
+     * @description
+     * Use `esriRegistry` to store and retrieve map instances for use in parent controllers.
+     *
+     * ## Examples
+     * - {@link ../#/examples/registry-pattern Registry Pattern}
+     */
     angular.module('esri.core').service('esriRegistry', function($q) {
         var registry = {};
 
@@ -32,6 +42,19 @@
                 };
             },
 
+            /**
+             * @ngdoc function
+             * @name get
+             * @methodOf esri.core.factory:esriRegistry
+             *
+             * @description
+             * Get the map instance registered with the given name.
+             * See {@link esri.map.directive:esriMap esriMap} for info on how to register a map using the `resgister-as` attribute.
+             *
+             * @param {String} name Name that the map was registered with.
+             *
+             * @return {Promise} Returns a $q style promise which is resolved with the map once it has been loaded.
+             */
             get: function(name) {
                 // is something is already in the registry return its promise ASAP
                 // this is the case where you might want to get a registry item in an

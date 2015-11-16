@@ -1,6 +1,14 @@
 (function(angular) {
     'use strict';
 
+    /**
+     * @ngdoc controller
+     * @name esri.map.controller:EsriLayerControllerBase
+     *
+     * @description
+     * This controller is used by the controllers of the esri-feature-layer and
+     * esri-dynamic-map-service-layer directives to provide several shared supporting methods.
+     */
     angular.module('esri.map').controller('EsriLayerControllerBase', function EsriLayerControllerBase() {
 
         // test if a string value (i.e. directive attribute value) is true
@@ -8,7 +16,16 @@
             return val === true || val === 'true';
         }
 
-        // get common layer options from layer controller properties
+        /**
+         * @ngdoc function
+         * @name getLayerOptions
+         * @methodOf esri.map.controller:EsriLayerControllerBase
+         *
+         * @description
+         * Formats and prepares common layer options from layer controller properties.
+         *
+         * @returns {Object} A layer options object for layer construction.
+         */
         this.getLayerOptions = function () {
 
             // read options passed in as either a JSON string expression
@@ -28,8 +45,20 @@
             return layerOptions;
         };
 
-
-        // get layer info from layer and directive attributes
+        /**
+         * @ngdoc function
+         * @name getLayerInfo
+         * @methodOf esri.map.controller:EsriLayerControllerBase
+         *
+         * @description
+         * Gets layer info from layer and directive attributes.
+         *
+         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to get layerInfo for.
+         * @param {Object} attrs Bound attribute properties such as `title`, `hideLayers`, or `defaultSymbol`.
+         *
+         * @returns {Object} A layerInfo object, which is needed for the esri-legend directive.
+         *  See {@link https://developers.arcgis.com/javascript/jsapi/legend-amd.html#legend1 layerInfo} for object specification.
+         */
         this.getLayerInfo = function(layer, attrs) {
             return {
                 title: attrs.title || layer.name,
@@ -39,7 +68,7 @@
             };
         };
 
-        // bind directive attributes to layer properties and events
+        // get common layer options from layer controller properties
         this._bindLayerEvents = function(scope, attrs, layer, mapController) {
 
             // call load handler (if any)
