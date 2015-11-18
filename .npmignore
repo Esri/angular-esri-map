@@ -38,7 +38,3 @@ node_modules
 
 # istanbull test coverage reports
 test/unit/coverage
-
-# distributable files - only included in releases
-# NOTE: make sure this is not included in .npmignore
-dist
