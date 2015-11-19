@@ -191,7 +191,10 @@ gulp.task('ngdocs', [], function () {
   var gulpDocs = require('gulp-ngdocs');
   return gulpDocs.sections({
       api: {
-        glob: ['src/**/*.js'],
+        glob: [
+          'src/**/*.js', // source files
+          'site/docs-resources/index.ngdoc' // documentation landing page
+        ],
         api: true,
         title: 'API'
       }

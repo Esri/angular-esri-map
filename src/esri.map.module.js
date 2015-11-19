@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
     
-    /* @ngdoc object
+    /* @ngdoc overview
      * @name esri.map
      * @requires esri.core
      * @description

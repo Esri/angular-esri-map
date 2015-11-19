@@ -1,7 +1,7 @@
 (function(angular) {
     'use strict';
     
-    /* @ngdoc object
+    /* @ngdoc overview
      * @name esri.core
      * @description
      * THE ESRI.CORE MODULE DESCRIPTION GOES HERE
