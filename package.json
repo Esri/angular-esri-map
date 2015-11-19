@@ -27,6 +27,7 @@
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.1",
     "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
     "phantomjs": "^1.9.18",
@@ -57,7 +58,7 @@
   "homepage": "https://github.com/Esri/angular-esri-map",
   "scripts": {
     "build": "gulp build",
-    "test": "gulp test",
+    "test": "karma start test/unit/karma.conf.js --browsers Firefox --single-run",
     "release": "./scripts/release.sh",
     "start": "gulp"
   }
