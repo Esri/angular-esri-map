@@ -1,0 +1,15 @@
+@ngdoc overview
+@id index
+@name index
+
+@description
+
+## API Documentation
+
+### `esri.map` Module
+
+The {@link esri.map esri.map} module includes reusable directives for {@link esri.map.directive:esriMap maps}, {@link esri.map.directive:esriFeatureLayer layers}, and related UI elements such as {@link esri.map.directive:esriLegend legend} and {@link esri.map.directive:esriInfoTemplate info template}.
+
+### `esri.core` Module
+
+The {@link esri.core esri.core} module includes services used by the directives in the {@link esri.map esri.map} module. These services can also be used directly by your own custom directives.

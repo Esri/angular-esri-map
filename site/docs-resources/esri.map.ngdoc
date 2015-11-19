@@ -1,0 +1,17 @@
+@ngdoc overview
+@id esri.map
+@name esri.map
+
+@description
+
+## `esri.map` Module
+
+The `esri.map` module includes reusable directives for {@link esri.map.directive:esriMap maps}, {@link esri.map.directive:esriFeatureLayer layers}, and related UI elements such as {@link esri.map.directive:esriLegend legend} and {@link esri.map.directive:esriInfoTemplate info template}.
+
+### Working with Maps
+
+Use the {@link esri.map.directive:esriMap esriMap} directive allows you to place a map on the page. Use the {@link esri.map.directive:esriLegend esriLegend} directive to place show a legend for the map.
+
+### Adding Layers to a Map
+
+Use the {@link esri.map.directive:esriFeatureLayer esriFeatureLayer} and {@link esri.map.directive:esriDynamicMapServiceLayer esriDynamicMapServiceLayer} directives to add layers to a map. Use the {@link esri.map.directive:infoTemplate infoTemplate} directive to format layer pop ups.
