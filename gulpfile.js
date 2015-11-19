@@ -109,8 +109,9 @@ gulp.task('serve', ['karma-once', 'build'], function() {
     notify: false
   });
 
-  gulp.watch([srcJsFiles,'./site/**.*.html', siteJsFiles, './site/styles/*.css'], ['build', browserSync.reload ]);
+  gulp.watch([srcJsFiles, './site/**.*.html', siteJsFiles, './site/styles/*.css'], ['build', browserSync.reload ]);
   gulp.watch([srcJsFiles, unitTestSpecFiles ], [ 'karma-once' ]);
+  gulp.watch(['./site/docs-resources/**'], ['ngdocs', browserSync.reload ]);
 });
 
 // serve tests on local web server
@@ -193,7 +194,7 @@ gulp.task('ngdocs', [], function () {
       api: {
         glob: [
           'src/**/*.js', // source files
-          'site/docs-resources/index.ngdoc' // documentation landing page
+          'site/docs-resources/**/*.ngdoc' // documentation landing page
         ],
         api: true,
         title: 'API'
