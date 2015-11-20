@@ -6,10 +6,8 @@
     <meta charset="utf-8">
     <title>Angular Esri Map</title>
 
-    <!-- load bootstrap css -->
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- load calcite-bootstrap css -->
     <link href="//esri.github.io/calcite-bootstrap/assets/css/calcite-bootstrap-open.min.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="styles/narrow.css"> -->
 
     <!-- code snippet syntax highlighting -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
@@ -17,47 +15,8 @@
     <!-- load Esri CSS -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
-    <!-- custom styles for this app -->
-    <style type="text/css">
-        .jumbotron {
-            background: #091926 url('images/jumbotron-background.jpg') no-repeat right;
-            color: #fff;
-        }
-        .map {
-            margin-bottom: 10px;
-        }
-        .map .tooltip {
-            opacity: 1;
-        }
-        /*.tab-container {
-            padding-top: 1em;
-        }*/
-
-        /*.marketing h2 a {
-            color: inherit;
-        }
-        .marketing h2 a:hover {
-            text-decoration: none;
-        }*/
-
-        /* overrides for narrow theme */
-        /*@media (min-width: 768px) {
-          .container {
-            max-width: 950px;
-          }
-        }*/
-
-        /* Custom page footer */
-        .footer {
-          position: relative;
-          margin-top: 19px;
-          padding-top: 19px;
-          color: #777;
-          border-top: 1px solid #e5e5e5;
-          background-color: inherit;
-        }
-
-    </style>
+    <!-- load custom styles for this app -->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
 <body>
@@ -101,7 +60,7 @@
         <div class="footer">
             <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
         </div>
-    </div><!-- /container -->
+    </div>
 
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->

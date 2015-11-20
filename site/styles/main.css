@@ -1,0 +1,39 @@
+.jumbotron {
+  background: #091926 url('images/jumbotron-background.jpg') no-repeat right;
+  color: #fff;
+}
+
+/* Custom page footer */
+.footer {
+  position: relative;
+  margin-top: 19px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  background-color: inherit;
+}
+
+/* Supporting marketing content */
+/*.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+.marketing h2 a {
+  color: inherit;
+}
+.marketing h2 a:hover {
+    text-decoration: none;
+}*/
+.marketing h4 + p {
+  margin-bottom: 28px;
+}
+
+/* Esri JSAPI */
+.map {
+  margin-bottom: 10px;
+}
+.map .tooltip {
+  opacity: 1;
+}
