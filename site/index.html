@@ -9,7 +9,7 @@
     <!-- load bootstrap css -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="//esri.github.io/calcite-bootstrap/assets/css/calcite-bootstrap-open.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/narrow.css">
+    <!-- <link rel="stylesheet" type="text/css" href="styles/narrow.css"> -->
 
     <!-- code snippet syntax highlighting -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
@@ -29,22 +29,32 @@
         .map .tooltip {
             opacity: 1;
         }
-        .tab-container {
+        /*.tab-container {
             padding-top: 1em;
-        }
+        }*/
 
-        .marketing h2 a {
+        /*.marketing h2 a {
             color: inherit;
         }
         .marketing h2 a:hover {
             text-decoration: none;
-        }
+        }*/
 
         /* overrides for narrow theme */
-        @media (min-width: 768px) {
+        /*@media (min-width: 768px) {
           .container {
             max-width: 950px;
           }
+        }*/
+
+        /* Custom page footer */
+        .footer {
+          position: relative;
+          margin-top: 19px;
+          padding-top: 19px;
+          color: #777;
+          border-top: 1px solid #e5e5e5;
+          background-color: inherit;
         }
 
     </style>
@@ -53,7 +63,7 @@
 <body>
     <div class="container">
         <!-- page header -->
-        <div class="header">
+        <div class="page-header">
             <ul class="nav nav-pills pull-right" role="tablist" ng-controller="NavCtrl">
                 <!-- TODO: add icons ? -->
                 <li role="presentation" ng-class="{ active: page === 'home' }"><a ng-href="#/home">Home</a>
