@@ -33,16 +33,8 @@
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
 }
 
-/* angular colors for calcite-bootstrap (red highlight, white background, black font/header) */
-/*.angular-js-black {
-  background-color: #000000;
-}
-.angularjs-red {
-  color: #b52e31;
-}*/
-
-/* toggle commenting of the following section */
-/*body {
+/* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
+body {
   background-color: #ffffff;
   color: #000000;
 }
@@ -65,11 +57,11 @@ a:hover {
 .nav>li>a:focus,
 .nav>li>a:hover {
   text-decoration: none;
-  background-color: #fbe4e4;
+  background-color: #f8f8f8;
 }
 .nav-tabs>li>a:hover {
   border-top: 3px solid #b52e31;
 }
 .badge {
   background-color: #b52e31;
-}*/
+}
