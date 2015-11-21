@@ -26,7 +26,14 @@
   opacity: 1;
 }
 
-/* angular colors to calcite (red highlight, white background, black font/header) */
+/* highlightjs */
+.hljs.javascript,
+.hljs.xml {
+  font-size: 13px;
+  background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
+}
+
+/* angular colors for calcite-bootstrap (red highlight, white background, black font/header) */
 /*.angular-js-black {
   background-color: #000000;
 }
@@ -34,6 +41,7 @@
   color: #b52e31;
 }*/
 
+/* toggle commenting of the following section */
 /*body {
   background-color: #ffffff;
   color: #000000;

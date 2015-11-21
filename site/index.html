@@ -10,7 +10,7 @@
     <link href="//esri.github.io/calcite-bootstrap/assets/css/calcite-bootstrap-open.min.css" rel="stylesheet">
 
     <!-- code snippet syntax highlighting -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
 
     <!-- load Esri CSS -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
@@ -24,7 +24,6 @@
         <!-- page header -->
         <div class="page-header">
             <ul class="nav nav-pills pull-right" role="tablist" ng-controller="NavCtrl">
-                <!-- TODO: add icons ? -->
                 <li role="presentation" ng-class="{ active: page === 'home' }"><a ng-href="#/home">Home</a>
                 </li>
                 <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
@@ -51,7 +50,7 @@
             </ul>
             <div class="tab-container">
                 <div ng-repeat="tab in tabs">
-                  <div ng-if="tab == currentTab" hljs="" include="currentTab"></div>
+                  <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.js"></script>
 
     <!-- code snippet syntax highlighting -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
     <script src="http://pc035860.github.io/ngSelect/ngSelect.min.js"></script>
     <script src="http://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
 
