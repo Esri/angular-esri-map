@@ -6,6 +6,8 @@
      * @ngdoc service
      * @name esri.core.factory:esriLoader
      *
+     * @requires $q
+     *
      * @description
      * Use `esriLoader` to lazyload the Esri ArcGIS API or to require API modules.
      */
@@ -28,8 +30,9 @@
             var deferred = $q.defer();
 
             // Don't reload API if it is already loaded
-            if ( angular.isDefined(window.esri) ) {
+            if (isLoaded()) {
                 deferred.reject('ESRI API is already loaded.');
+                return deferred.promise;
             }
 
             // Default options object to empty hash
@@ -41,7 +44,7 @@
             script.src    = options.url || 'http://js.arcgis.com/3.14compact';
 
             // Set onload callback to resolve promise
-            script.onload = function() { deferred.resolve( window.esri ); };
+            script.onload = function() { deferred.resolve( window.require ); };
 
             document.body.appendChild(script);
 
@@ -56,7 +59,7 @@
          * @return {Boolean} Returns a boolean if the Esri ArcGIS API for JavaScript is already loaded.
          */
         function isLoaded() {
-            return angular.isDefined(window.esri);
+            return typeof window.require !== 'undefined';
         }
 
         /**

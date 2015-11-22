@@ -25,6 +25,59 @@ describe('esriLoader', function() {
 
     });
 
+    describe('bootstrap', function() {
+
+        describe('when not loaded', function() {
+
+            // watch for appending a script
+            beforeEach(function() {
+                spyOn(document.body, 'appendChild');
+            });
+
+            describe('when not passing url in options', function() {
+                it('should default to 3.14compact', function() {
+                    var url = 'http://js.arcgis.com/3.14compact';
+                    esriLoader.bootstrap();
+                    expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
+                });
+            });
+
+            describe('when passing url in options', function() {
+                it('should have same url', function() {
+                    var url = 'http://js.arcgis.com/3.14';
+                    esriLoader.bootstrap({
+                        url: url
+                    });
+                    expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
+                });
+            });
+        });
+
+        describe('when loaded', function() {
+
+            // fake that JSAPI is loaded and mock dojo/require
+            // and watch for appending a script
+            beforeEach(function() {
+                window.require = function() {
+                    console.log(arguments);
+                };
+            });
+
+            // clean up mocked requied
+            afterEach(function() {
+                delete window.require;
+            });
+
+            it('should reject the promise', function() {
+                esriLoader.bootstrap().catch(function(err) {
+                    expect(typeof err).toEqual('string');
+                });
+                $rootScope.$digest();
+            });
+        });
+
+    });
+
     describe('require', function() {
 
         describe('when not loaded', function() {
@@ -40,7 +93,6 @@ describe('esriLoader', function() {
 
             // fake that JSAPI is loaded and mock dojo/require
             beforeEach(function() {
-                window.esri = true;
                 window.require = function(moduleNames, callback) {
                     var fakeModules = moduleNames.map(function(moduleName) {
                         return {
@@ -50,6 +102,11 @@ describe('esriLoader', function() {
                     callback.apply(window, fakeModules);
                 };
                 spyOn(window, 'require').and.callThrough();
+            });
+
+            // clean up mocked requied
+            afterEach(function() {
+                delete window.require;
             });
 
             describe('when passed a single module name as string', function() {
