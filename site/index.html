@@ -38,26 +38,43 @@
             <h3 class="text-muted">angular-esri-map</h3>
         </div>
 
-        <!-- page content -->
-        <div ng-view=""></div>
-
-        <!-- source code snippets -->
-        <div ng-controller="SnippetsCtrl">
-            <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
-                <li ng-repeat="tab in tabs" ng-select-option="tab">
-                    <a href="">{{ tab }}</a>
-                </li>
-            </ul>
-            <div class="tab-container">
-                <div ng-repeat="tab in tabs">
-                  <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
+        <!-- shared left nav for example toc and individual examples -->
+        <div ng-controller="ExamplesLeftNavCtrl">
+            <div class="col-md-3" ng-if="leftNavShow">
+                <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
+                    <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
+                    <div class="list-group">
+                        <a href="{{example.toc.url}}"
+                            class="list-group-item"
+                            ng-class="{'active': example.route.controller === activeExample}"
+                            ng-repeat="example in examplesArray">
+                            {{example.toc.title}}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- page footer -->
-        <div class="footer">
-            <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
+            <!-- page content for ngRoute; apply a column size if the left nav is visible -->
+            <div ng-view="" ng-class="{'col-md-9': leftNavShow}"></div>
+
+            <!-- source code snippets -->
+            <div ng-controller="SnippetsCtrl">
+                <ul ng-show="tabs" class="nav nav-tabs col-md-9" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+                    <li ng-repeat="tab in tabs" ng-select-option="tab">
+                        <a href="">{{ tab }}</a>
+                    </li>
+                </ul>
+                <div class="tab-container">
+                    <div ng-repeat="tab in tabs">
+                      <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- page footer -->
+            <div class="footer" ng-class="{'col-md-12': leftNavShow}">
+                <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
+            </div>
         </div>
     </div>
 
@@ -86,6 +103,7 @@
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
+    <script type="text/javascript" src="app/examples/examples-left-nav.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
     <script type="text/javascript" src="app/examples/simple-map.js"></script>
     <script type="text/javascript" src="app/examples/web-map.js"></script>

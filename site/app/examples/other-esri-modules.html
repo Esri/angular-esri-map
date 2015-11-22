@@ -3,19 +3,21 @@
 <esri-map id="map" map-options="{ basemap: 'streets', center: [-25.312, 34.307], zoom: 3 }" load="onMapLoad">
 </esri-map>
 <p>Select a shape then draw on map to add graphic</p>
-<div>
+<p>
     <button ng-click="activateDrawTool('Point')">Point</button>
     <button ng-click="activateDrawTool('Multipoint')">Multipoint</button>
     <button ng-click="activateDrawTool('Line')">Line</button>
     <button ng-click="activateDrawTool('Polyline')">Polyline</button>
     <button ng-click="activateDrawTool('FreehandPolyline')">Freehand Polyline</button>
+</p>
+<p>
     <button ng-click="activateDrawTool('Triangle')">Triangle</button>
     <button ng-click="activateDrawTool('Extent')">Rectangle</button>
     <button ng-click="activateDrawTool('Circle')">Circle</button>
     <button ng-click="activateDrawTool('Ellipse')">Ellipse</button>
     <button ng-click="activateDrawTool('Polygon')">Polygon</button>
     <button ng-click="activateDrawTool('FreehandPolygon')">Freehand Polygon</button>
-</div>
+</p>
 <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/graphics_add.html">this sample.</a></p>
 <p>Documentation:
     <a href="./docs/#/api/esri.core.factory:esriLoader">esriLoader</a>,

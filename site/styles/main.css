@@ -18,6 +18,10 @@
   margin-bottom: 28px;
 }
 
+.page-header.list-group-category {
+  margin: 0 0 10px 0;
+}
+
 /* Esri JSAPI */
 .map {
   margin-bottom: 10px;
@@ -64,4 +68,17 @@ a:hover {
 }
 .badge {
   background-color: #b52e31;
+}
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+  background-color: #b52e31;
+  border-color: #b52e31;
+}
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+  /*color: #000000;*/
+  background-color: #f8f8f8;
 }
