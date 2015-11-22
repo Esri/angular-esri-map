@@ -54,17 +54,6 @@
                 }
             }, {
                 toc: {
-                    title: 'Registry Pattern',
-                    description: 'Shows how to get a reference to the map object by using the registry.',
-                    url: urlPrefixes.templateHref + 'registry-pattern'
-                },
-                route: {
-                    path: urlPrefixes.routePath + 'registry-pattern',
-                    templateUrl: urlPrefixes.routeTemplateUrl + 'registry-pattern.html',
-                    controller: 'RegistryPatternCtrl'
-                }
-            }, {
-                toc: {
                     title: 'Additional Map Options',
                     description: 'Shows how to load a map with additional map options.',
                     url: urlPrefixes.templateHref + 'additional-map-options'
@@ -186,6 +175,17 @@
                     path: urlPrefixes.routePath + 'other-esri-modules',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'other-esri-modules.html',
                     controller: 'OtherEsriModulesController'
+                }
+            }, {
+                toc: {
+                    title: 'Registry Pattern',
+                    description: 'Shows how to get a reference to the map object by using the registry.',
+                    url: urlPrefixes.templateHref + 'registry-pattern'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'registry-pattern',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'registry-pattern.html',
+                    controller: 'RegistryPatternCtrl'
                 }
             }]
         }
