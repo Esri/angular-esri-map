@@ -5,6 +5,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+## [v1.0.0-rc.2]
+
+### Changed
+
+Replaced unnecessary references to Angular helper functions in services and controllers with vanilla JavaScript. [#164](https://github.com/Esri/angular-esri-map/pull/164)
+
+esriLoader tests for existence of global `require()` function instead of global `esri` namespace to determine if the JSAPI has been loaded. [#163](https://github.com/Esri/angular-esri-map/pull/163)
+
+Added .npmignore so that dist files would be added when publishing to NPM. [#154](https://github.com/Esri/angular-esri-map/issues/154)
+
+### Tests
+
+Added config and hooks for Travis CI so tests will be run for pull requests. [#157](https://github.com/Esri/angular-esri-map/pull/157)
+
+### Documentation
+
+Added a home page and index pages for each module to the API docs [#159](https://github.com/Esri/angular-esri-map/pull/159)
+
 ## [v1.0.0-rc.1]
 
 ### Added
@@ -158,7 +176,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.1...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.2...HEAD
+[v1.0.0-rc.2]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [v1.0.0-rc.1]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.5...v1.0.0-rc.1
 [v1.0.0-beta.5]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.4...v1.0.0-beta.5
 [v1.0.0-beta.4]: https://github.com/Esri/angular-esri-map/compare/v0.0.1-beta.3...v1.0.0-beta.4
