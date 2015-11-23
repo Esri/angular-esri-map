@@ -16,6 +16,11 @@
      */
     angular.module('esri.map').controller('EsriMapController', function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {
 
+        // check if a variable is undefined
+        function isUndefined(v) {
+            return typeof v === 'undefined';
+        }
+
         // update two-way bound scope properties based on map state
         function updateCenterAndZoom(scope, map) {
             var geoCenter = map.geographicExtent && map.geographicExtent.getCenter();
@@ -33,7 +38,7 @@
 
         // this deferred will be resolved with the map
         var mapPromise;
-        
+
         /**
          * @ngdoc function
          * @name getMapProperties
@@ -225,7 +230,7 @@
 
                 // listen for changes to scope.center and scope.zoom and update map
                 self.inUpdateCycle = false;
-                if (!angular.isUndefined(attrs.center) || !angular.isUndefined(attrs.zoom)) {
+                if (!isUndefined(attrs.center) || !isUndefined(attrs.zoom)) {
                     scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], function(newCenterZoom) {
                         if (self.inUpdateCycle) {
                             return;

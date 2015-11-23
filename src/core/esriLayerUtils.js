@@ -38,7 +38,7 @@
             } else {
                 // construct infoTemplate from object, using 2 args style:
                 //  https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html#infotemplate2
-                if (angular.isArray(infoTemplate) && infoTemplate.length === 2) {
+                if (infoTemplate instanceof Array && infoTemplate.length === 2) {
                     return new InfoTemplate(infoTemplate[0], infoTemplate[1]);
                 } else {
                     return new InfoTemplate(infoTemplate.title, infoTemplate.content);
@@ -112,7 +112,7 @@
 
                     // check for imageParameters property and
                     // convert into ImageParameters() if needed
-                    if (angular.isObject(layerOptions.imageParameters)) {
+                    if (typeof layerOptions.imageParameters === 'object') {
                         if (layerOptions.imageParameters.declaredClass !== 'esri.layers.ImageParameters') {
                             var imageParameters = new ImageParameters();
                             for (var key in layerOptions.imageParameters) {

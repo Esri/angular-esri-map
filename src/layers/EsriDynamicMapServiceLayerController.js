@@ -49,7 +49,7 @@
                 return esriLayerUtils.createInfoTemplate(infoTemplate).then(function(infoTemplateObject) {
                     // check if layer has info templates defined
                     var infoTemplates = layer.infoTemplates;
-                    if (!angular.isObject(infoTemplates)) {
+                    if (!infoTemplates) {
                         // create a new info templates hash
                         infoTemplates = {};
                     }
