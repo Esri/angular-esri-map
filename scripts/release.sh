@@ -23,7 +23,7 @@ git commit -m "build $VERSION"
 git push origin gh-release
 
 # create a ZIP archive of the dist files
-7z a -r $NAME-v$VERSION.zip dist
+7z a $NAME-v$VERSION.zip dist
 
 # run gh-release to create the tag and push release to github
 gh-release --assets $NAME-v$VERSION.zip
@@ -34,4 +34,6 @@ git branch -D gh-release
 git push origin :gh-release
 
 # publish release on NPM
-npm publish
+# TODO: only publish if gh-release was successful, currently
+# this fails often enough that we should do this manually
+# npm publish
