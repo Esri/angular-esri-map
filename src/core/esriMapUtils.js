@@ -12,6 +12,11 @@
      */
     angular.module('esri.core').factory('esriMapUtils', function($q, esriLoader) {
 
+        // check if a variable is an array
+        function isArray(v) {
+            return v instanceof Array;
+        }
+
         // construct Extent if object is not already an instance
         // e.g. if the controller or HTML view are only providing JSON
         function objectToExtent(extent, Extent) {
@@ -41,14 +46,14 @@
         service.addCustomBasemap = function(name, basemapDefinition) {
             return esriLoader.require('esri/basemaps').then(function(esriBasemaps) {
                 var baseMapLayers = basemapDefinition.baseMapLayers;
-                if (!angular.isArray(baseMapLayers) && angular.isArray(basemapDefinition.urls)) {
+                if (!isArray(baseMapLayers) && isArray(basemapDefinition.urls)) {
                     baseMapLayers = basemapDefinition.urls.map(function(url) {
                         return {
                             url: url
                         };
                     });
                 }
-                if (angular.isArray(baseMapLayers)) {
+                if (isArray(baseMapLayers)) {
                     esriBasemaps[name] = {
                         baseMapLayers: baseMapLayers,
                         thumbnailUrl: basemapDefinition.thumbnailUrl,

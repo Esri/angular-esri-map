@@ -29,19 +29,19 @@
         function bootstrap(options) {
             var deferred = $q.defer();
 
+            // Default options object to empty hash
+            var opts = options || {};
+
             // Don't reload API if it is already loaded
             if (isLoaded()) {
                 deferred.reject('ESRI API is already loaded.');
                 return deferred.promise;
             }
 
-            // Default options object to empty hash
-            options = angular.isDefined(options) ? options : {};
-
             // Create Script Object to be loaded
             var script    = document.createElement('script');
             script.type   = 'text/javascript';
-            script.src    = options.url || 'http://js.arcgis.com/3.14compact';
+            script.src    = opts.url || 'http://js.arcgis.com/3.14compact';
 
             // Set onload callback to resolve promise
             script.onload = function() { deferred.resolve( window.require ); };
@@ -82,23 +82,23 @@
                 deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
                 return deferred.promise;
             }
-            if (angular.isString(moduleName)) {
+            if (typeof moduleName === 'string') {
                 require([moduleName], function (module) {
 
                     // Check if callback exists, and execute if it does
-                    if ( callback && angular.isFunction(callback) ) {
+                    if (callback && typeof callback === 'function') {
                         callback(module);
                     }
                     deferred.resolve(module);
                 });
             }
-            else if (angular.isArray(moduleName)) {
+            else if (moduleName instanceof Array) {
                 require(moduleName, function () {
 
                     var args = Array.prototype.slice.call(arguments);
 
                     // callback check, sends modules loaded as arguments
-                    if ( callback && angular.isFunction(callback) ) {
+                    if (callback && typeof callback === 'function') {
                         callback.apply(this, args);
                     }
 

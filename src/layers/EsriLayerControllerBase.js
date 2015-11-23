@@ -33,7 +33,7 @@
             var layerOptions = this.layerOptions() || {};
 
             // visible takes precedence over layerOptions.visible
-            if (angular.isDefined(this.visible)) {
+            if (typeof this.visible !== 'undefined') {
                 layerOptions.visible = isTrue(this.visible);
             }
 
