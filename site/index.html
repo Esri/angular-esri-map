@@ -38,9 +38,9 @@
             <h3 class="text-muted">angular-esri-map</h3>
         </div>
 
-        <!-- shared left nav for example toc and individual examples -->
+        <!-- shared left nav controller for example toc page and individual example pages -->
         <div ng-controller="ExamplesLeftNavCtrl">
-            <div class="col-md-3" ng-if="leftNavShow">
+            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}"> 
                 <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
                     <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
                     <div class="list-group">
@@ -54,12 +54,12 @@
                 </div>
             </div>
 
-            <!-- page content for ngRoute; apply a column size if the left nav is visible -->
-            <div ng-view="" ng-class="{'col-md-9': leftNavShow}"></div>
+            <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
+            <div ng-view="" ng-class="{'col-sm-9': leftNavShow}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl">
-                <ul ng-show="tabs" class="nav nav-tabs col-md-9" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+            <div ng-controller="SnippetsCtrl"  style="display:none;" ng-style="{display: leftNavStyle}">
+                <ul ng-show="tabs" class="nav nav-tabs col-sm-9" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                     <li ng-repeat="tab in tabs" ng-select-option="tab">
                         <a href="">{{ tab }}</a>
                     </li>
@@ -72,7 +72,7 @@
             </div>
 
             <!-- page footer -->
-            <div class="footer" ng-class="{'col-md-12': leftNavShow}">
+            <div class="footer" ng-class="{'col-xs-12': leftNavShow}">
                 <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
             </div>
         </div>

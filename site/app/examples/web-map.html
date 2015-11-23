@@ -2,7 +2,7 @@
 <!-- add map to page and bind to scope map parameters -->
 <p ng-bind-html="itemInfo.item.snippet"></p>
 <div class="row">
-    <div class="col-xs-8 col-sm-9 col-lg-10">
+    <div class="col-xs-8 col-sm-9">
         <esri-map id="map" webmap-id="8e42e164d4174da09f61fe0d3f206641" center="map.center" zoom="map.zoom" item-info="itemInfo" load="mapLoaded">
             <div esri-legend target-id="legend"></div>
         </esri-map>
@@ -17,7 +17,7 @@
             <a href="./docs/#/api/esri.core.factory:esriLoader">esriLoader</a>
         </p>
     </div>
-    <div class="col-xs-4 col-sm-3 col-lg-2" style="overflow: auto; max-height: 400px;">
+    <div class="col-xs-4 col-sm-3" style="overflow: auto; max-height: 400px;">
         <div id="legend"></div>
     </div>
 </div>

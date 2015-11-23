@@ -3,6 +3,10 @@
   color: #fff;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Custom page footer */
 .footer {
   position: relative;
