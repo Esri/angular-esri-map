@@ -14,4 +14,4 @@ Use the {@link esri.map.directive:esriMap esriMap} directive allows you to place
 
 ### Adding Layers to a Map
 
-Use the {@link esri.map.directive:esriFeatureLayer esriFeatureLayer} and {@link esri.map.directive:esriDynamicMapServiceLayer esriDynamicMapServiceLayer} directives to add layers to a map. Use the {@link esri.map.directive:infoTemplate infoTemplate} directive to format layer pop ups.
+Use the {@link esri.map.directive:esriFeatureLayer esriFeatureLayer} and {@link esri.map.directive:esriDynamicMapServiceLayer esriDynamicMapServiceLayer} directives to add layers to a map. Use the {@link esri.map.directive:esriInfoTemplate infoTemplate} directive to format layer pop ups.

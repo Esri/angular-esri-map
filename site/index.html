@@ -6,55 +6,24 @@
     <meta charset="utf-8">
     <title>Angular Esri Map</title>
 
-    <!-- load bootstrap css -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles/narrow.css">
+    <!-- load calcite-bootstrap css -->
+    <link href="//esri.github.io/calcite-bootstrap/assets/css/calcite-bootstrap-open.min.css" rel="stylesheet">
 
     <!-- code snippet syntax highlighting -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
 
     <!-- load Esri CSS -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
 
-    <!-- custom styles for this app -->
-    <style type="text/css">
-        .jumbotron {
-            background: #091926 url('images/jumbotron-background.jpg') no-repeat right;
-            color: #fff;
-        }
-        .map {
-            margin-bottom: 10px;
-        }
-        .map .tooltip {
-            opacity: 1;
-        }
-        .tab-container {
-            padding-top: 1em;
-        }
-
-        .marketing h2 a {
-            color: inherit;
-        }
-        .marketing h2 a:hover {
-            text-decoration: none;
-        }
-
-        /* overrides for narrow theme */
-        @media (min-width: 768px) {
-          .container {
-            max-width: 950px;
-          }
-        }
-
-    </style>
+    <!-- load custom styles for this app -->
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 
 <body>
     <div class="container">
         <!-- page header -->
-        <div class="header">
+        <div class="page-header">
             <ul class="nav nav-pills pull-right" role="tablist" ng-controller="NavCtrl">
-                <!-- TODO: add icons ? -->
                 <li role="presentation" ng-class="{ active: page === 'home' }"><a ng-href="#/home">Home</a>
                 </li>
                 <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
@@ -69,28 +38,45 @@
             <h3 class="text-muted">angular-esri-map</h3>
         </div>
 
-        <!-- page content -->
-        <div ng-view=""></div>
-
-        <!-- source code snippets -->
-        <div ng-controller="SnippetsCtrl">
-            <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
-                <li ng-repeat="tab in tabs" ng-select-option="tab">
-                    <a href="">{{ tab }}</a>
-                </li>
-            </ul>
-            <div class="tab-container">
-                <div ng-repeat="tab in tabs">
-                  <div ng-if="tab == currentTab" hljs="" include="currentTab"></div>
+        <!-- shared left nav controller for example toc page and individual example pages -->
+        <div ng-controller="ExamplesLeftNavCtrl">
+            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}"> 
+                <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
+                    <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
+                    <div class="list-group">
+                        <a href="{{example.toc.url}}"
+                            class="list-group-item"
+                            ng-class="{'active': example.route.controller === activeExample}"
+                            ng-repeat="example in examplesArray">
+                            {{example.toc.title}}
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- page footer -->
-        <div class="footer">
-            <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
+            <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
+            <div ng-view="" ng-class="{'col-sm-9': leftNavShow}"></div>
+
+            <!-- source code snippets -->
+            <div ng-controller="SnippetsCtrl"  style="display:none;" ng-style="{display: leftNavStyle}">
+                <ul ng-show="tabs" class="nav nav-tabs col-sm-9" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+                    <li ng-repeat="tab in tabs" ng-select-option="tab">
+                        <a href="">{{ tab }}</a>
+                    </li>
+                </ul>
+                <div class="tab-container">
+                    <div ng-repeat="tab in tabs">
+                      <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- page footer -->
+            <div class="footer" ng-class="{'col-xs-12': leftNavShow}">
+                <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
+            </div>
         </div>
-    </div><!-- /container -->
+    </div>
 
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
@@ -102,7 +88,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-sanitize.js"></script>
 
     <!-- code snippet syntax highlighting -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
     <script src="http://pc035860.github.io/ngSelect/ngSelect.min.js"></script>
     <script src="http://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
 
@@ -117,6 +103,7 @@
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
+    <script type="text/javascript" src="app/examples/examples-left-nav.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
     <script type="text/javascript" src="app/examples/simple-map.js"></script>
     <script type="text/javascript" src="app/examples/web-map.js"></script>

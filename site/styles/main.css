@@ -1,0 +1,84 @@
+.jumbotron {
+  background: #091926 url('../images/jumbotron-background.jpg') no-repeat right;
+  color: #fff;
+}
+
+/* Custom page footer */
+.footer {
+  position: relative;
+  margin-top: 19px;
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  background-color: inherit;
+}
+
+/* Examples title and summary spacing */
+.marketing h4 + p {
+  margin-bottom: 28px;
+}
+
+.page-header.list-group-category {
+  margin: 0 0 10px 0;
+}
+
+/* Esri JSAPI */
+.map {
+  margin-bottom: 10px;
+}
+.map .tooltip {
+  opacity: 1;
+}
+
+/* highlightjs */
+.hljs.javascript,
+.hljs.xml {
+  font-size: 13px;
+  background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
+}
+
+/* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  color: #000000;
+}
+a {
+  color: #b52e31;
+}
+a:focus,
+a:hover {
+  color: #b52e31;
+}
+.nav-pills>li.active>a,
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover {
+  color: #fff;
+  background-color: #b52e31;
+}
+.nav>li>a:focus,
+.nav>li>a:hover {
+  text-decoration: none;
+  background-color: #f8f8f8;
+}
+.nav-tabs>li>a:hover {
+  border-top: 3px solid #b52e31;
+}
+.badge {
+  background-color: #b52e31;
+}
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+  background-color: #b52e31;
+  border-color: #b52e31;
+}
+a.list-group-item:focus,
+a.list-group-item:hover,
+button.list-group-item:focus,
+button.list-group-item:hover {
+  /*color: #000000;*/
+  background-color: #f8f8f8;
+}

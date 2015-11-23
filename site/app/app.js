@@ -28,12 +28,14 @@
                     redirectTo: '/home'
                 });
             // set routes of examples pages from appConfig
-            angular.forEach(appConfig.examplePages, function(example) {
-                $routeProvider
-                    .when(example.route.path, {
-                        templateUrl: example.route.templateUrl,
-                        controller: example.route.controller
-                    });
+            angular.forEach(appConfig.examplePageCategories, function(examplesArray) {
+                angular.forEach(examplesArray, function(example) {
+                    $routeProvider
+                        .when(example.route.path, {
+                            templateUrl: example.route.templateUrl,
+                            controller: example.route.controller
+                        });
+                });
             });
         });
 })(angular);
