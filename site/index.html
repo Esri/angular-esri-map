@@ -58,8 +58,8 @@
             <div ng-view="" ng-class="{'col-sm-9': leftNavShow}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl"  style="display:none;" ng-style="{display: leftNavStyle}">
-                <ul ng-show="tabs" class="nav nav-tabs col-sm-9" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: leftNavStyle}">
+                <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                     <li ng-repeat="tab in tabs" ng-select-option="tab">
                         <a href="">{{ tab }}</a>
                     </li>

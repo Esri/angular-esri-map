@@ -1,10 +1,11 @@
 <h2>Add/Remove Layers</h2>
 <!-- add map to page -->
-<esri-map id="map" map-options="{
-                center: [-122.676207, 45.523452],
-                zoom: 12,
-                basemap: 'topo'
-            }">
+<esri-map id="map" 
+    map-options="{
+        center: [-122.676207, 45.523452],
+        zoom: 12,
+        basemap: 'topo'
+    }">
     <!-- watch list of selected layers and add/remove each to/from the map -->
     <esri-feature-layer ng-repeat="url in selectedLayers" url="{{url}}"></esri-feature-layer>
 </esri-map>

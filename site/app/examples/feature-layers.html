@@ -21,8 +21,8 @@
 
 <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
 <p><form ng-submit="submitTreesDefExpression()">
-  <input type="text" ng-model="treesDefExpressionInputText" />
-  <input type="submit" id="submit" value="Set trees definition expression" />
+    <input type="text" ng-model="treesDefExpressionInputText" />
+    <input type="submit" id="submit" value="Set trees definition expression" />
 </form></p>
 <p><label><input type="number" ng-model="map.parksOpacity" min="0" max="1" step="0.1"/> Set parks opacity</label></p>
 <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
