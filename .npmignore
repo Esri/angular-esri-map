@@ -38,3 +38,6 @@ node_modules
 
 # istanbull test coverage reports
 test/unit/coverage
+
+# zip files
+*.zip
