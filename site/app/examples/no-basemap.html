@@ -2,12 +2,12 @@
 <h4>Providing an Optional Extent and Adding a Feature Layer</h4>
 <!-- add map to page and bind to scope map parameters -->
 <esri-map id="map" center="map.center" zoom="map.zoom" map-options="map.mapOptions" extent-change="extentChanged">
-  <esri-feature-layer title="States" url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3"></esri-feature-layer>
+    <esri-feature-layer title="States" url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3"></esri-feature-layer>
 </esri-map>
 
 <p>
-    <span style="float: left; margin-right: 15px;">Extent: </span>
-    <span style="float: right;"><pre style="display: inline-block;">{{ map.extent.toJson() | json }}</pre></span>
+    <span class="pull-left" style="margin-right: 15px;">Extent: </span>
+    <span class="pull-right"><pre style="display: inline-block; min-width: 290px;">{{ map.extent.toJson() | json }}</pre></span>
 </p>
 <p>Current Scale: {{ map.scale | number:0 }}</p>
 <p>Min Scale: {{ map.mapOptions.minScale | number:0 }}, Max Scale: {{ map.mapOptions.maxScale | number:0 }}</p>

@@ -13,6 +13,10 @@
   background-color: inherit;
 }
 
+.break-word {
+  overflow-wrap: break-word;
+}
+
 /* Examples title and summary spacing */
 .marketing h4 + p {
   margin-bottom: 28px;
@@ -33,6 +37,9 @@
 /* highlightjs */
 .hljs.javascript,
 .hljs.xml {
+  display: inline-block;
+  overflow-x: auto;
+  white-space: pre;
   font-size: 13px;
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
 }

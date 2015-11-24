@@ -1,13 +1,19 @@
 <h2>Layer Events</h2>
 <!-- add map to page and bind to scope map parameters -->
 <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-    <esri-feature-layer
+    <esri-feature-layer 
         url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
         visible="{{map.showTrees}}"
         load="treesLayerLoaded"
         update-end="treesLayerUpdateEnd">
     </esri-feature-layer>
-    <esri-dynamic-map-service-layer url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer" layer-options="{ id: 'demographicsLayer', opacity: 0.8, showAttribution: false }" visible-layers="1,2" load="demographicsLayerLoaded" update-end="demographicsLayerUpdateEnd" />
+    <esri-dynamic-map-service-layer 
+        url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer"
+        layer-options="{ id: 'demographicsLayer', opacity: 0.8, showAttribution: false }"
+        visible-layers="1,2"
+        load="demographicsLayerLoaded"
+        update-end="demographicsLayerUpdateEnd">
+    </esri-dynamic-map-service-layer>
 </esri-map>
 <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
 <div class="clearfix">
