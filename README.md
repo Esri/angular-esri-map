@@ -34,7 +34,7 @@ Once you've added the module to your application, you can use the sample code be
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.14/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.15/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
     <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
@@ -42,8 +42,8 @@ Once you've added the module to your application, you can use the sample code be
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.14compact"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.15amd"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])

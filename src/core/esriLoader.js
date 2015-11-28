@@ -21,8 +21,8 @@
          * @description
          * Loads the Esri ArcGIS API for JavaScript.
          *
-         * @param {Object=} options Send a list of options of how to load theEsri ArcGIS API for JavaScript.
-         *  Defaults to `{url: 'http://js.arcgis.com/3.14compact'}`
+         * @param {Object=} options Send a list of options of how to load the Esri ArcGIS API for JavaScript.
+         *  Defaults to `{url: 'http://js.arcgis.com/3.15amd'}`
          *
          * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
@@ -41,7 +41,7 @@
             // Create Script Object to be loaded
             var script    = document.createElement('script');
             script.type   = 'text/javascript';
-            script.src    = opts.url || 'http://js.arcgis.com/3.14compact';
+            script.src    = opts.url || 'http://js.arcgis.com/3.15amd';
 
             // Set onload callback to resolve promise
             script.onload = function() { deferred.resolve( window.require ); };

@@ -35,8 +35,8 @@ describe('esriLoader', function() {
             });
 
             describe('when not passing url in options', function() {
-                it('should default to 3.14compact', function() {
-                    var url = 'http://js.arcgis.com/3.14compact';
+                it('should default to 3.15amd', function() {
+                    var url = 'http://js.arcgis.com/3.15amd';
                     esriLoader.bootstrap();
                     expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
                 });
@@ -44,7 +44,7 @@ describe('esriLoader', function() {
 
             describe('when passing url in options', function() {
                 it('should have same url', function() {
-                    var url = 'http://js.arcgis.com/3.14';
+                    var url = 'http://js.arcgis.com/3.15amd';
                     esriLoader.bootstrap({
                         url: url
                     });
