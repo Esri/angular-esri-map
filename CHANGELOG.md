@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Changed
+esriLoader defaults to loading JSAPI v3.15. Docs site uses JSAPI v3.15 and Angular v1.4.8. [#166](https://github.com/Esri/angular-esri-map/pull/166)
+
 ## [v1.0.0-rc.2]
 
 ### Changed
@@ -134,7 +137,7 @@ Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 ### Changed
 
 * Directives and services now support the following minimum dependency versions: JSAPI v3.11 and Angular v1.3.0. The test pages will be maintained at these versions.
-* Docs site uses JSAPI v.3.14 (#66) and Angular v1.4.4. https://github.com/Esri/angular-esri-map/pull/67
+* Docs site uses JSAPI v3.14 (#66) and Angular v1.4.4. https://github.com/Esri/angular-esri-map/pull/67
 
 ### Fixed
 
