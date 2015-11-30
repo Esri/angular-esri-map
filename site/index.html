@@ -40,7 +40,7 @@
 
         <!-- shared left nav controller for example toc page and individual example pages -->
         <div ng-controller="ExamplesLeftNavCtrl">
-            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}"> 
+            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}">
                 <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
                     <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
                     <div class="list-group">
@@ -80,7 +80,7 @@
 
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
-    <script defer type="text/javascript" src="http://js.arcgis.com/3.15amd"></script>
+    <script defer type="text/javascript" src="http://js.arcgis.com/3.15compact"></script>
 
     <!-- load Angular -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>

@@ -42,7 +42,7 @@ Once you've added the module to your application, you can use the sample code be
         <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
     </esri-map>
     <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.15amd"></script>
+        <script type="text/javascript" src="http://js.arcgis.com/3.15compact"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
