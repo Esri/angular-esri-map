@@ -16,13 +16,28 @@
                     templateUrl: 'app/examples/examples.html',
                     controller: 'ExamplesCtrl'
                 })
-                .when('/about', {
-                    templateUrl: 'app/about/about.html',
-                    controller: 'AboutCtrl'
-                })
                 .when('/patterns', {
-                    // TODO: new template/controller
-                    redirectTo: '/about'
+                    templateUrl: 'app/patterns/patterns.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/patterns/lazy-load', {
+                    templateUrl: 'app/patterns/lazy-load.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/patterns/references-to-map-and-layers', {
+                    templateUrl: 'app/patterns/references-to-map-and-layers.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/patterns/other-esri-modules', {
+                    templateUrl: 'app/patterns/other-esri-modules.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/patterns/create-your-own-directives', {
+                    templateUrl: 'app/patterns/create-your-own-directives.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/about', {
+                    redirectTo: '/patterns'
                 })
                 .otherwise({
                     redirectTo: '/home'

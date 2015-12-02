@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Patterns</h2>
+        <p>You have probably noticed that these are very, very simple directives. For example - there is no way to apply symbols to the layers, nor is there support for any of the 20+ other layer types supported by the ArcGIS API for JavaScript. This is not an oversight, it is by design. Attempting to encapsulate all the layers, renderers, symbols and events of the JavaScript API in a set of directives would simply add more bulk to the code, and create another complex API for you to learn and us to support.
+        </p>
+        <p>Instead, we are providing a small set of re-usable directives. If your application has modest mapping needs, these directives may be useful as-is.</p>
+        <p>If your application makes use of some of the more advanced capabilities of the ArcGIS API for JavaScript, then the directives and examples in this repository will also demonstrate the following patterns that will help you extend what we've provided to meet the needs of your application.</p>
+        <ul>
+        <li><a href="#/patterns/references-to-map-and-layers">Getting a Reference to the Map and Layers</a></li>
+        <li><a href="#/patterns/other-esri-modules">Loading Other Esri modules</a></li>
+        <li><a href="#/patterns/create-your-own-directives">Create Your Own Directives</a></li>
+        <li><a href="#/patterns/lazy-load">Lazy Load the ArcGIS API for JavaScript</a></li>
+        </ul>
+        <h3>Some Thoughts on Angular...</h3>
+        <p>The purpose of this repository is to make it easy to use Esri maps and services in Angular applications. At Esri we use a number of different JavaScript application frameworks, including Angular. Where we have seen the greatest benefit of Angular is in situations where the majority of the application functionality is "forms-over-data", with a few maps added in. When we have tried to use Angular on complex, single-page, full-screen mapping applications, we have found ourselves working against the framework.
+        </p>
+        <p>When you are starting work on a new application and you have a choice of what framework you implement it with, keep the above considerations in mind. As the old saying goes
+            <em>use the right tool for the job!</em>
+        </p>
+    </div>
+</div>
