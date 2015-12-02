@@ -20,22 +20,6 @@
                     templateUrl: 'app/patterns/patterns.html',
                     controller: 'PatternsCtrl'
                 })
-                .when('/patterns/lazy-load', {
-                    templateUrl: 'app/patterns/lazy-load.html',
-                    controller: 'PatternsCtrl'
-                })
-                .when('/patterns/references-to-map-and-layers', {
-                    templateUrl: 'app/patterns/references-to-map-and-layers.html',
-                    controller: 'PatternsCtrl'
-                })
-                .when('/patterns/other-esri-modules', {
-                    templateUrl: 'app/patterns/other-esri-modules.html',
-                    controller: 'PatternsCtrl'
-                })
-                .when('/patterns/create-your-own-directives', {
-                    templateUrl: 'app/patterns/create-your-own-directives.html',
-                    controller: 'PatternsCtrl'
-                })
                 .when('/about', {
                     redirectTo: '/patterns'
                 })
@@ -51,6 +35,15 @@
                             controller: example.route.controller
                         });
                 });
+            });
+
+            // set routes of patterns pages from appConfig
+            angular.forEach(appConfig.patternsPages, function(page) {
+                $routeProvider
+                    .when(page.path, {
+                        templateUrl: page.templateUrl,
+                        controller: 'PatternsCtrl'
+                    });
             });
         });
 })(angular);

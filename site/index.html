@@ -54,6 +54,20 @@
                 </div>
             </div>
 
+        <!-- shared left nav controller for patterns pages -->
+        <div ng-controller="PatternsCtrl">
+            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}">
+                <h4 class="page-header list-group-category">Patterns</h4>
+                <div class="list-group">
+                    <a ng-href="{{'#' + page.path}}"
+                        class="list-group-item"
+                        ng-class="{'active': page.path === activePath}",
+                        ng-repeat="page in patternsPages">
+                        {{page.shortTitle}}
+                    </a>
+                </div>
+            </div>
+
             <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
             <div ng-view="" ng-class="{'col-sm-9': leftNavShow}"></div>
 
