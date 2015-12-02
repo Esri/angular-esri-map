@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Getting a Reference to the Map and Layers</h2>
+        <p>We've provided a couple of ways for you to get direct references to the map and layer objects from a parent controller. This will allow you to manipulate those objects in ways beyond what is allowed by the directive API.
+        <h3>Load Events</h3>
+        <p>The map and layer directives each include a <code>load</code> event that passes a reference to the underlying map or layer object to a callback function. See these examples:</p>
+        <ul>
+            <li><a href="#/examples/map-events">Map Events</a></li>
+            <li><a href="#/examples/layer-events">Layer Events</a></li>
+        </ul>
+        <h3>Registry</h3>
+        <p>We've also included a <a href="/docs/#/api/esri.core.factory:esriRegistry">registry service</a> that you can use to get a direct reference to a map object by setting the <code>register-as</code> attribute on the map directive. See the <a href="#/examples/registry-pattern">Registry Pattern</a> example.</p>
+    </div>
+</div>

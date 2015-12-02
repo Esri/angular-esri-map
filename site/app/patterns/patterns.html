@@ -1,0 +1,11 @@
+<h2>Patterns</h2>
+<p>You have probably noticed that these are very, very simple directives. For example - there is no way to apply symbols to the layers, nor is there support for any of the 20+ other layer types supported by the ArcGIS API for JavaScript. This is not an oversight, it is by design. Attempting to encapsulate all the layers, renderers, symbols and events of the JavaScript API in a set of directives would simply add more bulk to the code, and create another complex API for you to learn and us to support.
+</p>
+<p>Instead, we are providing a small set of re-usable directives. If your application has modest mapping needs, these directives may be useful as-is.</p>
+<p>If your application makes use of some of the more advanced capabilities of the ArcGIS API for JavaScript, then the directives and examples in this repository will also demonstrate the following patterns that will help you extend what we've provided to meet the needs of your application.</p>
+<ul>
+    <li ng-repeat="page in patternsPages"><a ng-href="{{'#' + page.path}}">{{ page.title }}</a></li>
+</ul>
+<h3>How to Successfully Use this Library</h3>
+<p>The purpose of this repository is to make it easy to use Esri maps and services in Angular applications. It works best in situations where the majority of the application functionality is "forms-over-data" (where Angular really shines), with a few maps added in. Of course you can also use Angular and this library to build a completely custom, complex, full-screen mapping application. In this case, you should be prepared to leverage the above patterns to fill any gaps between the capabilities of the included directives and your application's requirements.</p>
+<p>The above patterns demonstrate how you can extend what we've provided in this library to meet the needs of any application.</p>

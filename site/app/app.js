@@ -16,13 +16,12 @@
                     templateUrl: 'app/examples/examples.html',
                     controller: 'ExamplesCtrl'
                 })
-                .when('/about', {
-                    templateUrl: 'app/about/about.html',
-                    controller: 'AboutCtrl'
-                })
                 .when('/patterns', {
-                    // TODO: new template/controller
-                    redirectTo: '/about'
+                    templateUrl: 'app/patterns/patterns.html',
+                    controller: 'PatternsCtrl'
+                })
+                .when('/about', {
+                    redirectTo: '/patterns'
                 })
                 .otherwise({
                     redirectTo: '/home'
@@ -36,6 +35,15 @@
                             controller: example.route.controller
                         });
                 });
+            });
+
+            // set routes of patterns pages from appConfig
+            angular.forEach(appConfig.patternsPages, function(page) {
+                $routeProvider
+                    .when(page.path, {
+                        templateUrl: page.templateUrl,
+                        controller: 'PatternsCtrl'
+                    });
             });
         });
 })(angular);

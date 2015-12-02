@@ -28,9 +28,9 @@
                 </li>
                 <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
                 </li>
-                <li role="presentation"><a href="./docs">API</a>
+                <li role="presentation" ng-class="{ active: page === 'patterns' }"><a ng-href="#/patterns">Patterns</a>
                 </li>
-                <li role="presentation" ng-class="{ active: page === 'about' }"><a ng-href="#/about">About</a>
+                <li role="presentation"><a href="./docs">API</a>
                 </li>
                 <li role="presentation"><a href="http://github.com/esri/angular-esri-map">GitHub</a>
                 </li>
@@ -51,6 +51,20 @@
                             {{example.toc.title}}
                         </a>
                     </div>
+                </div>
+            </div>
+
+        <!-- shared left nav controller for patterns pages -->
+        <div ng-controller="PatternsCtrl">
+            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}">
+                <h4 class="page-header list-group-category">Patterns</h4>
+                <div class="list-group">
+                    <a ng-href="{{'#' + page.path}}"
+                        class="list-group-item"
+                        ng-class="{'active': page.path === activePath}",
+                        ng-repeat="page in patternsPages">
+                        {{page.shortTitle}}
+                    </a>
                 </div>
             </div>
 
@@ -99,7 +113,7 @@
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="app/appConfig.js"></script>
     <script type="text/javascript" src="app/home/home.js"></script>
-    <script type="text/javascript" src="app/about/about.js"></script>
+    <script type="text/javascript" src="app/patterns/patterns.js"></script>
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
