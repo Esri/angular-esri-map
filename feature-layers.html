@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Feature Layers</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Feature Layers</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"
+                visible="{{map.showTrees}}"
+                definition-expression="{{map.treesDefExpression}}">
+            </esri-feature-layer>
+            <!-- a standalone definition-expression will take precedence over one provided within the layer-options -->
+            <!-- see an example of this in the following <esri-feature-layer> -->
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/ArcGIS/rest/services/Portland_Light_Rail_Lines/FeatureServer/0"
+                definition-expression="1=1"
+                opacity="0.85"
+                layer-options="{
+                    autoGeneralize: true,
+                    className: 'portland-light-rail',
+                    definitionExpression: 'TYPE = \'SC\'',
+                    displayOnPan: true,
+                    gdbVersion: '10.3',
+                    id: 'PortlandLightRail',
+                    infoTemplate: {
+                        title: 'Portland Light Rail',
+                        content: '${*}'
+                    },
+                    maxAllowableOffset: 500,
+                    mode: 'MODE_SNAPSHOT',
+                    opacity: 1.0,
+                    orderByFields: ['TYPE ASC', 'STATUS DESC'],
+                    outFields: ['*'],
+                    refreshInterval: 0,
+                    showAttribution: true,
+                    showLabels: true,
+                    tileWidth: 512,
+                    tileHeight: 512,
+                    trackIdField: 'FID',
+                    useMapTime: true,
+                    visible: true
+                }">
+            </esri-feature-layer>
+            <esri-feature-layer
+                url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
+                opacity="{{map.parksOpacity}}"
+                layer-options="{
+                    outFields:['NAME', 'ACRES']
+                }">
+                <esri-info-template title="Portland Parks">
+                    <div>Name: ${NAME}</div>
+                    <div>Size: ${ACRES:NumberFormat(places:1)} acres</div>
+                </esri-info-template>
+            </esri-feature-layer>
+        </esri-map>
+        <p><label><input type="checkbox" ng-model="map.showTrees" /> Show trees</label></p>
+        
+        <hr>
+
+        <p>Set trees definition expression, for example:
+        <ul style="font-style: italic;">
+            <li>HEIGHT > 100</li>
+            <li>COMMON_NAM LIKE '%pine%'</li>
+        </ul>
+        <p>Continuous model change:</p>
+        <input type="text" ng-model="map.treesDefExpression" />
+        <p>On form submit model change:</p>
+        <form ng-submit="submitTreesDefExpression()">
+          <input type="text" ng-model="treesDefExpressionInputText" />
+          <input type="submit" id="submit" value="Submit" />
+        </form>
+        
+        <hr>
+
+        <p><label><input type="number" ng-model="map.parksOpacity" min="0" max="1" step="0.05"/> Set parks opacity</label></p>
+        <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
+        <p>Based on <a href="http://jsfiddle.net/patrickarlt/xy3nm1sq/1/">this JS Fiddle</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function($scope) {
+                    $scope.map = {
+                        center: {
+                            lng: -122.676207,
+                            lat: 45.523452
+                        },
+                        zoom: 12,
+                        parksOpacity: 0.8,
+                        showTrees: false,
+                        treesDefExpression: 'HEIGHT > 70'
+                    };
+                    $scope.submitTreesDefExpression = function() {
+                        if ($scope.treesDefExpressionInputText) {
+                            $scope.map.treesDefExpression = $scope.treesDefExpressionInputText;
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>

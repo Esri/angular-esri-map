@@ -1,0 +1,42 @@
+<h1><code ng:non-bindable="">esriMapUtils</code>
+<div><span class="hint">service in module <code ng:non-bindable="">esri.core</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-core-factory-page esri-core-factory-esrimaputils-page"><p>Functions to help create map instances.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/esri.core.factory:esriLoader">esriLoader</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_addcustombasemap">addCustomBasemap(name, basemapDefinition)</h3>
+<div class="addcustombasemap"><div class="addcustombasemap-page"><p>Add a custom basemap definition to <a href="https://developers.arcgis.com/javascript/jsapi/esri.basemaps-amd.html">esriBasemaps</a></p>
+</div><h5 id="methods_addcustombasemap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>name</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="addcustombasemap-page"><p>Name to be used when setting the basemap</p>
+</div></td></tr><tr><td>basemapDefinition</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="addcustombasemap-page"><p>Basemap layer urls and other options (either basemapDefinition.baseMapLayers or basemapDefinition.urls is required)</p>
+</div></td></tr><tr><td>basemapDefinition.baseMapLayers <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="addcustombasemap-page"><p>Array of basemap layer objects</p>
+</div></td></tr><tr><td>basemapDefinition.urls <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="addcustombasemap-page"><p>Array of basemap layer urls</p>
+</div></td></tr><tr><td>basemapDefinition.thumbnailUrl <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="addcustombasemap-page"><p>Basemap thumbnail URL</p>
+</div></td></tr><tr><td>basemapDefinition.title <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="addcustombasemap-page"><p>Basemap Title</p>
+</div></td></tr></tbody></table><h5 id="methods_addcustombasemap_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="addcustombasemap-page"><p>Returns a $q style promise resolved with esriBasemaps</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createmap">createMap(elementId, options)</h3>
+<div class="createmap"><div class="createmap-page"><p>Create a new <a href="https://developers.arcgis.com/javascript/jsapi/map-amd.html">Map</a> instance at an element w/ the given id</p>
+</div><h5 id="methods_createmap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>elementId</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createmap-page"><p>Id of the element for the map</p>
+</div></td></tr><tr><td>options</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="createmap-page"><p><a href="https://developers.arcgis.com/javascript/jsapi/map-amd.html#map1">Optional parameters</a></p>
+</div></td></tr></tbody></table><h5 id="methods_createmap_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createmap-page"><p>Returns a $q style promise resolved with the Map instance</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createwebmap">createWebMap(webmapId, elementId, options)</h3>
+<div class="createwebmap"><div class="createwebmap-page"><p>Create a new <a href="https://developers.arcgis.com/javascript/jsapi/map-amd.html">Map</a> instance from a web map at an element w/ the given id</p>
+</div><h5 id="methods_createwebmap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>webmapId</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createwebmap-page"><p>Item id of the web map</p>
+</div></td></tr><tr><td>elementId</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createwebmap-page"><p>Id of the element for the map</p>
+</div></td></tr><tr><td>options</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="createwebmap-page"><p><a href="https://developers.arcgis.com/javascript/jsapi/esri.arcgis.utils-amd.html#createmap">Optional parameters</a></p>
+</div></td></tr></tbody></table><h5 id="methods_createwebmap_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createwebmap-page"><p>Returns a $q style promise resolved with the Map instance</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

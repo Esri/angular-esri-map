@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>ArcGIS API for JavaScript v4</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="https://js.arcgis.com/4.0beta2/esri/css/main.css">
+    </head>
+    <body>
+        <h2>ArcGIS API for JavaScript v4</h2>
+        <esri-map-view basemap="hybrid"></esri-map-view>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/renderer_blendrenderer_housing.html">this sample</a>.</p>
+        <!-- load Esri JavaScript API -->
+        <script src="https://js.arcgis.com/4.0beta2/"></script>
+        <!-- load Angular -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load just the angular-esri-map core services -->
+        <script src="lib/angular-esri-core.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            'use strict';
+
+            // NOTE: we're making our own directive so
+            // we only need to load the core services
+            angular.module('esri-map-example', ['esri.core'])
+                // .factory('esriMapViewUtils', function esriMapViewUtils(esriLoader) {
+                //     var service = {};
+                //     service.createMapView = function(options) {
+                //         return esriLoader.require('esri/views/MapView').then(function(MapView) {
+                //             return new MapView(options);
+                //         });
+                //     };
+                //     return service;
+                // })
+                // .factory('esriMapLayerUtils', function esriMapLayerUtils(esriLoader) {
+                //     var service = {};
+                //     service.createMap = function(options) {
+                //         return esriLoader.require('esri/Map').then(function(Map) {
+                //             // TODO: normalize options? May not be needed thanks to autocast
+                //             return new Map(options);
+                //         });
+                //     };
+                //     service.createFeatureLayer = function(options) {
+                //         return esriLoader.require('esri/layers/FeatureLayer').then(function(FeatureLayer) {
+                //             // TODO: normalize options? May not be needed thanks to autocast
+                //             return new FeatureLayer(options);
+                //         });
+                //     };
+                //     return service;
+                // })
+                .controller('EsriMapViewController', function EsriMapViewController($element, esriLoader) {
+                    var self = this;
+                    // get a ref to the map div in the template
+                    var viewDiv = $element.children()[0];
+
+                    // esriMapLayerUtils.createMap({
+                    //     basemap: self.basemap
+                    // }).then(function(map) {
+                    //     return esriMapLayerUtils.createFeatureLayer({
+                    //         url: 'https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0'
+                    //     }).then(function(featureLayer) {
+                    //         map.add(featureLayer);
+                    //         return esriMapViewUtils.createMapView({
+                    //             container: viewDiv,
+                    //             map: map,
+                    //             extent: {
+                    //                 xmin: -9177811,
+                    //                 ymin: 4247000,
+                    //                 xmax: -9176791,
+                    //                 ymax: 4247784,
+                    //                 spatialReference: 102100
+                    //             }
+                    //         });
+                    //     });
+                    // });
+
+                    // // load esri modules
+                    esriLoader.require([
+                      'esri/Map',
+                      'esri/views/MapView',
+
+                      'esri/layers/FeatureLayer'
+                    ], function(Map, MapView, FeatureLayer) {
+
+                        // create the map
+                        // and add a feature layer
+                        var map = new Map({
+                          basemap: self.basemap,
+                          layers: [
+                              new FeatureLayer({
+                                  url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0"
+                              })
+                          ]
+                        });
+
+                        // add a feature layer
+                        // var featureLayer = new FeatureLayer({
+                        //     url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0"
+                        // });
+                        // map.add(featureLayer);
+
+                        // create the map view
+                        var view = new MapView({
+                            container: viewDiv,
+                            map: map,
+                            extent: {
+                                xmin: -9177811,
+                                ymin: 4247000,
+                                xmax: -9176791,
+                                ymax: 4247784,
+                                spatialReference: 102100
+                            }
+                        });
+                    });
+                })
+                .directive('esriMapView', function () {
+                    return {
+                        // element only
+                        restrict: 'E',
+
+                        // isolate scope
+                        scope: {
+                          basemap: '@'/*,
+                          showLayer: '='*/
+                        },
+
+                        // could also have used templateUrl to load this from a file
+                        template: '<div></div>',
+
+                        controllerAs: 'mapViewCtrl',
+
+                        bindToController: true,
+
+                        // directive api
+                        controller: 'EsriMapViewController'
+                    };
+                });
+        </script>
+    </body>
+</html>

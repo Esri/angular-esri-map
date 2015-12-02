@@ -1,0 +1,44 @@
+<h1><code ng:non-bindable="">esriMap</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>This is the directive which will create a map using the Esri ArcGIS API for JavaScript.
+There are plenty of examples showing how to use this directive and its bound parameters.
+For additional information, we recommend the
+<a href="https://developers.arcgis.com/javascript/jsapi/map-amd.html">Esri Map documentation</a>.</p>
+<h4 id="examples" id="description_examples">Examples</h4>
+<ul>
+<li>Choose from a <a href="../#/examples">number of examples</a> making use of this directive</li>
+</ul>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as element:<pre class="prettyprint linenums">&lt;esri-map
+       id="{String}"
+       [center="{Array | Object}"]
+       [zoom="{Number}"]
+       [item-info="{Object}"]
+       [basemap="{String}"]
+       [load="{Function}"]
+       [extent-change="{Function}"]
+       [map-options="{Object | String}"]
+       [register-as="{String}"]&gt;
+&lt;/esri-map&gt;</pre>
+<h3 id="usage_directive-info">Directive info</h3>
+<div class="directive-info"><ul><li>This directive creates new scope.</li>
+</ul>
+</div>
+<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>id</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>The id of the element where to construct the map.</p>
+</div></td></tr><tr><td>center <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-array">Array </a><a href="" class="label type-hint type-hint-object"> Object</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>The initial location of the map.</p>
+</div></td></tr><tr><td>zoom <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>The initial zoom level of the map.</p>
+</div></td></tr><tr><td>item-info <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>When loading a web map from an item id, this object will be populated with the item&#39;s info.</p>
+</div></td></tr><tr><td>basemap <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>The basemap of the map, which can be a valid string from the ArcGIS API for JavaScript, or a custom basemap.</p>
+</div></td></tr><tr><td>load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>Callback for map <code>load</code> event.</p>
+</div></td></tr><tr><td>extent-change <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>Callback for map <code>extent-change</code> event.</p>
+</div></td></tr><tr><td>map-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>An object or inline object hash string defining additional map constructor options.
+See <a href="../#/examples/additional-map-options">Additional Map Options</a> example.</p>
+</div></td></tr><tr><td>register-as <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimap-page"><p>A name to use when registering the map so that it can be used by parent controllers.
+See <a href="#/api/esri.core.factory:esriRegistry">esriRegistry</a>.</p>
+</div></td></tr></tbody></table></div>
+</div>
