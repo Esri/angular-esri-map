@@ -38,9 +38,10 @@
             <h3 class="text-muted">angular-esri-map</h3>
         </div>
 
-        <!-- shared left nav controller for example toc page and individual example pages -->
-        <div ng-controller="ExamplesLeftNavCtrl">
-            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}">
+        <!-- shared left nav controller for examples and patterns; also modifies styling of snippets and footer -->
+        <div ng-controller="LeftNavCtrl">
+            <!-- left nav list group for example toc page and individual example pages -->
+            <div class="col-sm-3" ng-if="examplesLeftNavShow" style="display:none;" ng-style="{display: examplesLeftNavStyle}">
                 <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
                     <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
                     <div class="list-group">
@@ -54,9 +55,8 @@
                 </div>
             </div>
 
-        <!-- shared left nav controller for patterns pages -->
-        <div ng-controller="PatternsCtrl">
-            <div class="col-sm-3" ng-if="leftNavShow" style="display:none;" ng-style="{display: leftNavStyle}">
+            <!-- left nav list group for patterns pages -->
+            <div class="col-sm-3" ng-if="patternsLeftNavShow" style="display:none;" ng-style="{display: patternsLeftNavStyle}">
                 <h4 class="page-header list-group-category">Patterns</h4>
                 <div class="list-group">
                     <a ng-href="{{'#' + page.path}}"
@@ -69,10 +69,10 @@
             </div>
 
             <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
-            <div ng-view="" ng-class="{'col-sm-9': leftNavShow}"></div>
+            <div ng-view="" ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: leftNavStyle}">
+            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
                 <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                     <li ng-repeat="tab in tabs" ng-select-option="tab">
                         <a href="">{{ tab }}</a>
@@ -86,7 +86,7 @@
             </div>
 
             <!-- page footer -->
-            <div class="footer" ng-class="{'col-xs-12': leftNavShow}">
+            <div class="footer" ng-class="{'col-xs-12': (examplesLeftNavShow || patternsLeftNavShow)}">
                 <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
             </div>
         </div>
@@ -116,8 +116,8 @@
     <script type="text/javascript" src="app/patterns/patterns.js"></script>
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
+    <script type="text/javascript" src="app/common/leftNavController.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
-    <script type="text/javascript" src="app/examples/examples-left-nav.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
     <script type="text/javascript" src="app/examples/simple-map.js"></script>
     <script type="text/javascript" src="app/examples/web-map.js"></script>
