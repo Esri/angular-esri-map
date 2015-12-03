@@ -6,8 +6,8 @@
      * @name esri.map.controller:EsriLayerControllerBase
      *
      * @description
-     * This controller is used by the controllers of the esri-feature-layer and
-     * esri-dynamic-map-service-layer directives to provide several shared supporting methods.
+     * This controller is used by the controllers of the esri-feature-layer, esri-dynamic-map-service-layer
+     * and esri-vector-tile-layer directives to provide several shared supporting methods.
      */
     angular.module('esri.map').controller('EsriLayerControllerBase', function EsriLayerControllerBase() {
 

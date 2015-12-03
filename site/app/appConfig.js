@@ -97,6 +97,17 @@
                     templateUrl: urlPrefixes.routeTemplateUrl + 'custom-basemap.html',
                     controller: 'CustomBasemapCtrl'
                 }
+            }, {
+                toc: {
+                    title: 'Vector Basemap',
+                    description: 'Shows how to load a map with a vector basemap.',
+                    url: urlPrefixes.templateHref + 'vector-tile-basemap'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'vector-tile-basemap',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'vector-tile-basemap.html',
+                    controller: 'VectorBasemapCtrl'
+                }
             }],
             Layers: [{
                 toc: {

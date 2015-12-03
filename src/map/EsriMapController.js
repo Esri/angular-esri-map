@@ -98,7 +98,7 @@
          * @description
          * Adds the layer to the map.
          *
-         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to add to the map
+         * @param {FeatureLayer | VectorTileLayer | ArcGISDynamicMapServiceLayer} layer Layer to add to the map
          * @param {Number=} index Layer ordering position on the map
          *
          * @return {Promise} The promise that will be resolved with the result of `map.addLayer`.
@@ -117,7 +117,7 @@
          * @description
          * Removes the layer from the map, for example when a esri-feature-layer directive goes out of scope.
          *
-         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to remove from the map
+         * @param {FeatureLayer | VectorTileLayer | ArcGISDynamicMapServiceLayer} layer Layer to remove from the map
          *
          * @return {Promise} The promise that will be resolved with the result of `map.removeLayer`.
          */
