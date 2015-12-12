@@ -5,8 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+## [v1.0.0]
+
 ### Changed
 esriLoader defaults to loading JSAPI v3.15. Docs site uses JSAPI v3.15 and Angular v1.4.8. [#166](https://github.com/Esri/angular-esri-map/pull/166)
+
+### Documentation
+
+Use calcite for docs pages [#77](https://github.com/Esri/angular-esri-map/issues/77), [#170](https://github.com/Esri/angular-esri-map/issues/170)
+
+Added a left nave to examples page [#98](https://github.com/Esri/angular-esri-map/issues/98)
+
+Replaced About page with a Patterns section [#155](https://github.com/Esri/angular-esri-map/issues/155)
 
 ## [v1.0.0-rc.2]
 
@@ -179,7 +189,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.2...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0...HEAD
+[v1.0.0]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.2...v1.0.0
 [v1.0.0-rc.2]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [v1.0.0-rc.1]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.5...v1.0.0-rc.1
 [v1.0.0-beta.5]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.4...v1.0.0-beta.5
