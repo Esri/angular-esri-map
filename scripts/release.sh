@@ -5,7 +5,7 @@ VERSION=$(node --eval "console.log(require('./package.json').version);")
 NAME=$(node --eval "console.log(require('./package.json').name);")
 
 # build and test
-npm test || exit 1
+gulp test || exit 1
 
 # checkout temp branch for release
 git checkout -b gh-release
@@ -23,7 +23,7 @@ git commit -m "build $VERSION"
 git push origin gh-release
 
 # create a ZIP archive of the dist files
-7z a $NAME-v$VERSION.zip dist
+zip -r $NAME-v$VERSION.zip dist
 
 # run gh-release to create the tag and push release to github
 gh-release --assets $NAME-v$VERSION.zip
@@ -32,6 +32,9 @@ gh-release --assets $NAME-v$VERSION.zip
 git checkout master
 git branch -D gh-release
 git push origin :gh-release
+
+# re-run build in master branch before publishing
+npm run build
 
 # publish release on NPM
 # TODO: only publish if gh-release was successful, currently
