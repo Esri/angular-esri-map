@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Home Button</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .esri-home {
+                position: absolute;
+                top: 196px;
+                left: 22px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Home Button</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated">
+                <my-home-button view-model="exampleCtrl.homeVM"></my-home-button>
+            </esri-scene-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/widgets-home/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/Map',
+                        'esri/widgets/Home/HomeViewModel'
+                    ],
+                    function(
+                        Map, HomeVM
+                    ) {
+
+                        self.map = new Map({
+                            basemap: "streets"
+                        });
+
+                        self.onViewCreated = function(view) {
+                            self.homeVM = new HomeVM({
+                                view: view
+                            });
+                        };
+
+                        self.goHome = function() {
+                            if (self.viewModel) {
+                                self.viewModel.goHome();
+                            }
+                        }
+
+                    });
+                }).directive('myHomeButton', function myHomeButton() {
+                    return {
+                        // element only
+                        restrict: 'E',
+
+                        // isolate scope
+                        scope: {
+                            viewModel: '=?'
+                        },
+
+                        template: [
+                            '<div class="esri-home" role="presentation">',
+                            '  <div role="button" tabindex="0" class="esri-container">',
+                            '    <span aria-hidden="true" class="esri-icon esri-icon-home"></span>',
+                            '    <span class="esri-icon-font-fallback-text">Home</span>',
+                            '  </div>',
+                            '</div>'
+                        ].join(''),
+
+                        controllerAs: 'homeButtonCtrl',
+
+                        bindToController: true,
+
+                        // directive api
+                        controller: function MyHomeButtonController() {
+                            this.goHome = function() {
+                                if (!this.viewModel) {
+                                    return;
+                                }
+
+                                this.viewModel.goHome();
+                            }
+                        },
+
+                        link: function myHomeButtonLink(scope, element, attrs, controller) {
+                            element.on('click', function() {
+                                controller.goHome();
+                            });
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>

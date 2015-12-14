@@ -8,7 +8,7 @@
 
 ### `esri.map` Module
 
-The {@link esri.map esri.map} module includes reusable directives for {@link esri.map.directive:esriMap maps}, {@link esri.map.directive:esriFeatureLayer layers}, and related UI elements such as {@link esri.map.directive:esriLegend legend} and {@link esri.map.directive:esriInfoTemplate info template}.
+The {@link esri.map esri.map} module includes reusable directives for map view, scene view, and related UI elements such as a home button.
 
 ### `esri.core` Module
 

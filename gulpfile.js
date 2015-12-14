@@ -49,8 +49,8 @@ gulp.task('build-core-js', function() {
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
     'src/core/esriRegistry.js',
-    'src/core/esriMapUtils.js',
-    'src/core/esriLayerUtils.js'])
+    'src/core/esriMapViewUtils.js',
+    'src/core/esriSceneViewUtils.js'])
     .pipe(concat('angular-esri-core.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
@@ -69,20 +69,13 @@ gulp.task('build-js', function() {
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
     'src/core/esriRegistry.js',
-    'src/core/esriMapUtils.js',
-    'src/core/esriLayerUtils.js',
+    'src/core/esriMapViewUtils.js',
+    'src/core/esriSceneViewUtils.js',
     'src/esri.map.module.js',
-    'src/map/EsriMapController.js',
-    'src/map/esriMap.js',
-    'src/map/esriLegend.js',
-    'src/layers/EsriLayerControllerBase.js',
-    'src/layers/EsriFeatureLayerController.js',
-    'src/layers/esriFeatureLayer.js',
-    'src/layers/EsriDynamicMapServiceLayerController.js',
-    'src/layers/esriDynamicMapServiceLayer.js',
-    'src/layers/EsriVectorTileLayerController.js',
-    'src/layers/esriVectorTileLayer.js',
-    'src/layers/esriInfoTemplate.js'])
+    'src/map/EsriMapViewController.js',
+    'src/map/EsriSceneViewController.js',
+    'src/map/esriMapView.js',
+    'src/map/esriSceneView.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
@@ -171,21 +164,25 @@ gulp.task('karma', function(done) {
   }, done).start();
 });
 
-gulp.task('test', ['karma-coverage', 'serve-test'], function() {
-  return gulp.src(['./test/e2e/specs/*.js'])
-    .pipe(angularProtractor({
-      'configFile': 'test/e2e/conf.js',
-      'args': ['--baseUrl', 'http://localhost:9002'],
-      'autoStartStopServer': true
-      // 'debug': true
-    }))
-    .on('end', function() {
-      browserSync.exit();
-    })
-    .on('error', function(e) {
-      throw e;
-    });
-});
+
+// TODO: run functional tests once we've written some
+// for now just running karma coverage
+gulp.task('test', ['karma-coverage']);
+// gulp.task('test', ['karma-coverage', 'serve-test'], function() {
+//   return gulp.src(['./test/e2e/specs/*.js'])
+//     .pipe(angularProtractor({
+//       'configFile': 'test/e2e/conf.js',
+//       'args': ['--baseUrl', 'http://localhost:9002'],
+//       'autoStartStopServer': true
+//       // 'debug': true
+//     }))
+//     .on('end', function() {
+//       browserSync.exit();
+//     })
+//     .on('error', function(e) {
+//       throw e;
+//     });
+// });
 
 gulp.task('ngdocs', [], function () {
   var gulpDocs = require('gulp-ngdocs');
