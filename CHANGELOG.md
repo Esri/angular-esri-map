@@ -5,6 +5,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+## [v1.0.1]
+
+### Changed
+
+esriLoader defaults to loading JSAPI using the same protocol (HTTP or HTTPS) as the page. [#179](https://github.com/Esri/angular-esri-map/issues/179)
+
+### Documentation
+
+Use protocol agnostic links to resouces [#179](https://github.com/Esri/angular-esri-map/issues/179) [@JamesMilnerUK](https://github.com/JamesMilnerUK)
+
+### Tests
+
+Use protocol agnostic links to resouces in test pages [#179](https://github.com/Esri/angular-esri-map/issues/179)
+
 ## [v1.0.0]
 
 ### Changed
@@ -189,7 +203,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.1...HEAD
+[v1.0.1]: https://github.com/Esri/angular-esri-map/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.2...v1.0.0
 [v1.0.0-rc.2]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [v1.0.0-rc.1]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-beta.5...v1.0.0-rc.1

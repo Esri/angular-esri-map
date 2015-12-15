@@ -6,11 +6,11 @@ angular.module('esri-map-docs')
         $scope.layers = [
             {
                 name: 'Heritage Trees',
-                url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
+                url: '//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
             },
             {
                 name: 'Parks',
-                url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
+                url: '//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
             }
         ];
 

@@ -5,8 +5,8 @@ as they are only evaluated in the map/layer constructors -->
 <esri-map id="map" map-options="::map.options" load="setInfoWindow">
     <!-- dynamic map service layer w/ inline url and options
     as well as info template defined in a directive -->
-    <esri-dynamic-map-service-layer 
-        url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer"
+    <esri-dynamic-map-service-layer
+        url="//sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer"
         layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
         <esri-info-template layer-id="0" title="<b>Oil and Gas data</b>">
             ${FIELD_NAME} production field<br>
@@ -17,7 +17,7 @@ as they are only evaluated in the map/layer constructors -->
         </esri-info-template>
     </esri-dynamic-map-service-layer>
     <!-- dynamic map service layer w/ url and options bound to scope properties -->
-    <esri-dynamic-map-service-layer 
+    <esri-dynamic-map-service-layer
         url="{{ ::demographicsLayer.url }}"
         layer-options="::demographicsLayer.options"
         visible-layers="1,2">
