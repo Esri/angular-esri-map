@@ -6,7 +6,7 @@
         <title>Add/Remove Layers</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.11/esri/css/esri.css">
     </head>
     <body ng-controller="MapController">
         <h2>Add/Remove Layers</h2>
@@ -24,9 +24,9 @@
             <input type="checkbox" ng-model="selected" ng-change="toggleLayer(layer.url)" /> {{layer.name}} <br />
         </div>
         <!-- load Esri JavaScript API -->
-        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <script type="text/javascript" src="//js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
@@ -38,11 +38,11 @@
                     $scope.layers = [
                         {
                             name: 'Heritage Trees',
-                            url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
+                            url: '//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0'
                         },
                         {
                             name: 'Parks',
-                            url: 'http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
+                            url: '//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0'
                         }
                     ];
 

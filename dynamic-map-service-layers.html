@@ -6,7 +6,7 @@
         <title>Dynamic Map Service Layers</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.11/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.11/esri/css/esri.css">
         <style>
             .esriPopup .titlePane {
                 text-shadow: none;
@@ -44,7 +44,7 @@
         <esri-map id="map" map-options="::map.options" load="setInfoWindow">
             <!-- dynamic map service layer w/ inline url and options
             as well as info template defined in a directive -->
-            <esri-dynamic-map-service-layer url="http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
+            <esri-dynamic-map-service-layer url="//sampleserver1.arcgisonline.com/ArcGIS/rest/services/Petroleum/KGS_OilGasFields_Kansas/MapServer" layer-options="{ id: 'oilAndGasLayer', opacity: 0.75 }">
                 <esri-info-template layer-id="0" title="<b>Oil and Gas data</b>">
                     ${FIELD_NAME} production field<br>
                     <div class="demographicInfoContent">
@@ -58,9 +58,9 @@
         </esri-map>
         <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_twodynamic.html">this sample</a></p>
         <!-- load Esri JavaScript API -->
-        <script type="text/javascript" src="http://js.arcgis.com/3.11compact"></script>
+        <script type="text/javascript" src="//js.arcgis.com/3.11compact"></script>
         <!-- load Angular -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
         <!-- load angular-esri-map directives -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
@@ -92,7 +92,7 @@
                     };
 
                     $scope.demographicsLayer = {
-                        url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+                        url: '//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
                         options: {
                             id: 'demographicsLayer',
                             opacity: 0.8,
