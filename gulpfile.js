@@ -106,6 +106,7 @@ gulp.task('serve', ['karma-once', 'build'], function() {
     },
     open: true,
     port: 9002,
+    https: true,
     notify: false
   });
 

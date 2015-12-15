@@ -2,7 +2,7 @@
 <h4>Providing an Optional Extent and Adding a Feature Layer</h4>
 <!-- add map to page and bind to scope map parameters -->
 <esri-map id="map" center="map.center" zoom="map.zoom" map-options="map.mapOptions" extent-change="extentChanged">
-    <esri-feature-layer title="States" url="http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3"></esri-feature-layer>
+    <esri-feature-layer title="States" url="//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3"></esri-feature-layer>
 </esri-map>
 
 <p>
@@ -11,8 +11,8 @@
 </p>
 <p>Current Scale: {{ map.scale | number:0 }}</p>
 <p>Min Scale: {{ map.mapOptions.minScale | number:0 }}, Max Scale: {{ map.mapOptions.maxScale | number:0 }}</p>
-<p>Slider Orientation: {{ map.mapOptions.sliderOrientation }}, 
-Slider Position: {{ map.mapOptions.sliderPosition }}, 
+<p>Slider Orientation: {{ map.mapOptions.sliderOrientation }},
+Slider Position: {{ map.mapOptions.sliderPosition }},
 Display Graphics on Pan: {{ map.mapOptions.displayGraphicsOnPan }}</p>
 
 <p>Inspired by <a href="https://developers.arcgis.com/javascript/jssamples/fl_any_projection.html">this sample</a>.</p>

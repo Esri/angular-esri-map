@@ -6,9 +6,9 @@ angular.module('esri-map-docs')
         // that way we could just use the basemap name in either
         // the map directive's basemap or map-options attributes
         esriMapUtils.addCustomBasemap('delorme', {
-            urls: ['http://services.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer'],
+            urls: ['//services.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer'],
             title: 'DeLorme',
-            thumbnailUrl: 'http://servername.fqdn.suffix/images/thumbnail_2014-11-25_61051.png'
+            thumbnailUrl: '//servername.fqdn.suffix/images/thumbnail_2014-11-25_61051.png'
         }).then(function(esriBasemaps) {
             console.log(esriBasemaps);
             // because we are adding the basemap in the controller,

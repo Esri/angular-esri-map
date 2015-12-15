@@ -24,7 +24,7 @@ angular.module('esri-map-docs')
 
                 var tb;
 
-                // markerSymbol is used for point and multipoint, see http://raphaeljs.com/icons/#talkq for more examples
+                // markerSymbol is used for point and multipoint, see //raphaeljs.com/icons/#talkq for more examples
                 var markerSymbol = new SimpleMarkerSymbol();
                 markerSymbol.setPath('M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z');
                 markerSymbol.setColor(new Color('#00FFFF'));
@@ -41,7 +41,7 @@ angular.module('esri-map-docs')
                 // the images folder contains additional fill images, other options: sand.png, swamp.png or stiple.png
                 var fillSymbol = new PictureFillSymbol(
                     // 'images/mangrove.png',
-                    'http://developers.arcgis.com/javascript/samples/graphics_add/images/mangrove.png',
+                    '//developers.arcgis.com/javascript/samples/graphics_add/images/mangrove.png',
                     new SimpleLineSymbol(
                         SimpleLineSymbol.STYLE_SOLID,
                         new Color('#000'),

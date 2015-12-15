@@ -25,7 +25,7 @@ angular.module('esri-map-docs')
         };
 
         $scope.demographicsLayer = {
-            url: 'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+            url: '//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
             options: {
                 id: 'demographicsLayer',
                 opacity: 0.8,
