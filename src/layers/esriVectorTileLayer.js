@@ -15,14 +15,10 @@
      *
      * ## Examples
      * - {@link ../#/examples/vector-tile-basemap Vector Tile Basemap}
-     * - {@link ../#/examples/add-remove-layers Add/Remove Layers}
-     * - {@link ../#/examples/layer-events Layer Events}
-     * - and more...
      *
      * @param {String} url The url to the ArcGIS Server REST layer resource.
      * @param {Boolean=} visible The visibility of the layer. Two-way bound.
      * @param {Number=} opacity The opacity of the layer. Two-way bound.
-     * @param {String=} definition-expression The definition expression where clause. Two-way bound.
      * @param {Function=} load Callback for layer
      *  {@link https://developers.arcgis.com/javascript/jsapi/vectortilelayer-amd.html#event-load load event}.
      * @param {Object | String=} layer-options An object or inline object hash string defining additional layer constructor options.
@@ -46,7 +42,6 @@
                 url: '@',
                 visible: '@?',
                 opacity: '@?',
-                definitionExpression: '@?',
                 // function binding for event handlers
                 load: '&',
                 // function binding for reading object hash from attribute string
@@ -74,7 +69,7 @@
                     var layerInfo = layerController.getLayerInfo(layer, attrs);
 
                     // add the layer to the map
-                    mapController.addLayer(layer, 0);
+                    mapController.addLayer(layer);
                     mapController.addLayerInfo(layerInfo);
 
                     // bind directive attributes to layer properties and events

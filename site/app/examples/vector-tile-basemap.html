@@ -1,17 +1,17 @@
 <h2>Vector Basemap</h2>
 <!-- add map to page and bind to scope map parameters -->
-<esri-map id="map" map-options="map.options">
-    <esri-vector-tile-layer
-        url="http://basemaps.arcgis.com/arcgis/rest/services/World_Basemap/VectorTileServer"
-        opacity="0.9">
-    </esri-vector-tile-layer>
-    <esri-feature-layer
-        url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
+<esri-map id="map" basemap="satellite" map-options="map.options">
+    <esri-feature-layer 
+        url="//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
         opacity="0.6">
     </esri-feature-layer>
+    <esri-vector-tile-layer 
+        url="//basemaps.arcgis.com/arcgis/rest/services/World_Basemap/VectorTileServer"
+        opacity="1.0">
+    </esri-vector-tile-layer>
 </esri-map>
 <p>Based on the example in <a href="https://developers.arcgis.com/javascript/jsapi/vectortilelayer-amd.html">this API reference page</a>.</p>
 <p>Documentation:
-    <a href="./docs/#/api/esri.map.directive:esriVectorTileLayer">esriVectorTileLayer</a>,
+    <a href="./docs/#/api/esri.map.directive:esriVectorTileLayer">esri-vector-tile-layer</a>,
     <a href="./docs/#/api/esri.map.directive:esriMap">esri-map</a>
 </p>
