@@ -82,6 +82,13 @@
             });
         };
 
+        service.createVectorTileLayer = function(url, layerOptions) {
+            return esriLoader.require(['esri/layers/VectorTileLayer']).then(function(esriModules) {
+                var VectorTileLayer = esriModules[0];
+                return new VectorTileLayer(url, layerOptions);
+            });
+        };
+
         /**
          * @ngdoc function
          * @name createDynamicMapServiceLayer
