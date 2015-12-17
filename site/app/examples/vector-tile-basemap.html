@@ -1,16 +1,11 @@
-<h2>Vector Basemap</h2>
+<h2>Vector Tile Layer</h2>
 <!-- add map to page and bind to scope map parameters -->
-<esri-map id="map" basemap="satellite" map-options="map.options">
-    <esri-feature-layer 
-        url="//services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"
-        opacity="0.6">
-    </esri-feature-layer>
+<esri-map id="map" map-options="map.options">
     <esri-vector-tile-layer 
-        url="//basemaps.arcgis.com/arcgis/rest/services/World_Basemap/VectorTileServer"
-        opacity="1.0">
+        url="//www.arcgis.com/sharing/rest/content/items/f96366254a564adda1dc468b447ed956/resources/styles/root.json">
     </esri-vector-tile-layer>
 </esri-map>
-<p>Based on the example in <a href="https://developers.arcgis.com/javascript/jsapi/vectortilelayer-amd.html">this API reference page</a>.</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/layers_vector.html">this sample</a>.</p>
 <p>Documentation:
     <a href="./docs/#/api/esri.map.directive:esriVectorTileLayer">esri-vector-tile-layer</a>,
     <a href="./docs/#/api/esri.map.directive:esriMap">esri-map</a>

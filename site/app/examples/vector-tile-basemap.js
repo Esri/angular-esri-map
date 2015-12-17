@@ -3,7 +3,7 @@ angular.module('esri-map-docs')
     .controller('VectorBasemapCtrl', function($scope) {
         $scope.map = {
             options: {
-                center: [-122.70, 45.52],
+                center: [2.3508, 48.8567],
                 zoom: 10
             }
         };
