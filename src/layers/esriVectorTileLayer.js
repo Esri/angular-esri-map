@@ -14,7 +14,7 @@
      * This directive **must** be placed within an esri-map directive.
      *
      * ## Examples
-     * - {@link ../#/examples/vector-tile-basemap Vector Tile Basemap}
+     * - {@link ../#/examples/vector-tile-layer Vector Tile Layer}
      *
      * @param {String} url The url to the ArcGIS Server REST layer resource.
      * @param {Boolean=} visible The visibility of the layer. Two-way bound.

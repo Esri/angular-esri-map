@@ -97,17 +97,6 @@
                     templateUrl: urlPrefixes.routeTemplateUrl + 'custom-basemap.html',
                     controller: 'CustomBasemapCtrl'
                 }
-            }, {
-                toc: {
-                    title: 'Vector Basemap',
-                    description: 'Shows how to load a map with a vector basemap.',
-                    url: urlPrefixes.templateHref + 'vector-tile-basemap'
-                },
-                route: {
-                    path: urlPrefixes.routePath + 'vector-tile-basemap',
-                    templateUrl: urlPrefixes.routeTemplateUrl + 'vector-tile-basemap.html',
-                    controller: 'VectorBasemapCtrl'
-                }
             }],
             Layers: [{
                 toc: {
@@ -141,6 +130,17 @@
                     path: urlPrefixes.routePath + 'dynamic-map-service-layers',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'dynamic-map-service-layers.html',
                     controller: 'DynamicMapServiceLayersCtrl'
+                }
+            }, {
+                toc: {
+                    title: 'Vector Tile Layer',
+                    description: 'Shows how to load a map with a vector tile layer.',
+                    url: urlPrefixes.templateHref + 'vector-tile-layer'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'vector-tile-layer',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'vector-tile-layer.html',
+                    controller: 'VectorTileLayerCtrl'
                 }
             }, {
                 toc: {
