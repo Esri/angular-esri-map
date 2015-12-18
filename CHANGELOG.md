@@ -7,11 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-Added new esriVectorTileLayer directive. [#182](https://github.com/Esri/angular-esri-map/pull/182) [#173](https://github.com/Esri/angular-esri-map/pull/173) [@snodnipper](https://github.com/snodnipper)
+Added new esriVectorTileLayer directive along with associated documentation and example page. [#182](https://github.com/Esri/angular-esri-map/pull/182) [#173](https://github.com/Esri/angular-esri-map/pull/173) [@snodnipper](https://github.com/snodnipper)
 
 ### Documentation
 
-Added example page for the esriVectorTileLayer directive. [#177](https://github.com/Esri/angular-esri-map/issues/177)
+Modified/updated example page for the esriVectorTileLayer directive. [#177](https://github.com/Esri/angular-esri-map/issues/177)
 
 ## [v1.0.1]
 
