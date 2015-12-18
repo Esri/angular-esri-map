@@ -45,7 +45,7 @@
 
         /**
          * @ngdoc function
-         * @name getFeatureLayerOptions
+         * @name getLayer
          * @methodOf esri.map.controller:EsriFeatureLayerController
          *
          * @returns {Promise} Returns a $q style promise resolved with an instance of
