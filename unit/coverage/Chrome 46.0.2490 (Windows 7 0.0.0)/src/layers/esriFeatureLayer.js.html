@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for src/map/esriMap.js</title>
+    <title>Code coverage report for src\layers\esriFeatureLayer.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">src/map/</a> esriMap.js
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> esriFeatureLayer.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">28.57% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>2/7</span>
+        <span class='fraction'>2/10</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">28.57% </span>
+        <span class="strong">20% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>2/7</span>
+        <span class='fraction'>2/10</span>
       </div>
     </div>
   </div>
@@ -128,7 +128,14 @@
 83
 84
 85
-86</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+86
+87
+88
+89
+90
+91
+92</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -194,19 +201,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -218,81 +230,87 @@
 &nbsp;
     /**
      * @ngdoc directive
-     * @name esri.map.directive:esriMap
+     * @name esri.map.directive:esriFeatureLayer
      * @restrict E
      * @element
      * @scope
      *
      * @description
-     * This is the directive which will create a map using the Esri ArcGIS API for JavaScript.
-     * There are plenty of examples showing how to use this directive and its bound parameters.
-     * For additional information, we recommend the
-     * {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html Esri Map documentation}.
+     * This directive creates a {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html FeatureLayer}
+     * and adds it to the map.
+     * This directive **must** be placed within an esri-map directive.
      *
      * ## Examples
-     * - Choose from a {@link ../#/examples number of examples} making use of this directive
+     * - {@link ../#/examples/feature-layers Feature Layers}
+     * - {@link ../#/examples/add-remove-layers Add/Remove Layers}
+     * - {@link ../#/examples/layer-events Layer Events}
+     * - {@link ../#/examples/no-basemap No Basemap}
+     * - and more...
      *
-     * @param {String} id The id of the element where to construct the map.
-     * @param {Array | Object=} center The initial location of the map.
-     * @param {Number=} zoom The initial zoom level of the map.
-     * @param {Object=} item-info When loading a web map from an item id, this object will be populated with the item's info.
-     * @param {String=} basemap The basemap of the map, which can be a valid string from the ArcGIS API for JavaScript, or a custom basemap.
-     * @param {Function=} load Callback for map `load` event.
-     * @param {Function=} extent-change Callback for map `extent-change` event.
-     * @param {Object | String=} map-options An object or inline object hash string defining additional map constructor options.
-     *  See {@link ../#/examples/additional-map-options Additional Map Options} example.
-     * @param {String=} register-as A name to use when registering the map so that it can be used by parent controllers.
-     *  See {@link esri.core.factory:esriRegistry esriRegistry}.
+     * @param {String} url The url to the ArcGIS Server REST layer resource.
+     * @param {Boolean=} visible The visibility of the layer. Two-way bound.
+     * @param {Number=} opacity The opacity of the layer. Two-way bound.
+     * @param {String=} definition-expression The definition expression where clause. Two-way bound.
+     * @param {Function=} load Callback for layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-load load event}.
+     * @param {Function=} update-end Callback for layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-update-end update-end event}.
+     * @param {Object | String=} layer-options An object or inline object hash string defining additional layer constructor options.
      */
-    angular.module('esri.map').directive('esriMap', <span class="fstat-no" title="function not covered" >function() {</span>
-&nbsp;
+    angular.module('esri.map').directive('esriFeatureLayer', <span class="fstat-no" title="function not covered" >function() {</span>
+        // this object will tell angular how our directive behaves
 <span class="cstat-no" title="statement not covered" >        return {</span>
-            // element only
+            // only allow esriFeatureLayer to be used as an element (&lt;esri-feature-layer&gt;)
             restrict: 'E',
 &nbsp;
-            // isolate scope
+            // require the esriFeatureLayer to have its own controller as well an esriMap controller
+            // you can access these controllers in the link function
+            require: ['esriFeatureLayer', '^esriMap'],
+&nbsp;
+            // replace this element with our template.
+            // since we aren't declaring a template this essentially destroys the element
+            replace: true,
+&nbsp;
+            // isolate scope for feature layer so it can be added/removed dynamically
             scope: {
-                // two-way binding for center/zoom
-                // because map pan/zoom can change these
-                center: '=?',
-                zoom: '=?',
-                itemInfo: '=?',
-                // one-way binding for other properties
-                basemap: '@',
+                url: '@',
+                visible: '@?',
+                opacity: '@?',
+                definitionExpression: '@?',
                 // function binding for event handlers
                 load: '&amp;',
-                extentChange: '&amp;',
+                updateEnd: '&amp;',
                 // function binding for reading object hash from attribute string
                 // or from scope object property
                 // see Example 7 here: https://gist.github.com/CMCDragonkai/6282750
-                mapOptions: '&amp;'
+                layerOptions: '&amp;'
             },
 &nbsp;
-            controllerAs: 'mapCtrl',
+            controllerAs: 'layerCtrl',
 &nbsp;
             bindToController: true,
 &nbsp;
-            // directive api
-            controller: 'EsriMapController',
+            // define an interface for working with this directive
+            controller: 'EsriFeatureLayerController',
 &nbsp;
-            // replace tag with div with same id
-            compile: <span class="fstat-no" title="function not covered" >function($element, $attrs) {</span>
+            // now we can link our directive to the scope, but we can also add it to the map
+            link: <span class="fstat-no" title="function not covered" >function(scope, element, attrs, controllers) {</span>
+                // controllers is now an array of the controllers from the 'require' option
+<span class="cstat-no" title="statement not covered" >                var layerController = controllers[0];</span>
+<span class="cstat-no" title="statement not covered" >                var mapController = controllers[1];</span>
 &nbsp;
-                // remove the id attribute from the main element
-<span class="cstat-no" title="statement not covered" >                $element.removeAttr('id');</span>
+                // get the layer object
+<span class="cstat-no" title="statement not covered" >                layerController.getLayer().then(<span class="fstat-no" title="function not covered" >function(layer){</span></span>
+                    // get layer info from layer object and directive attributes
+<span class="cstat-no" title="statement not covered" >                    var layerInfo = layerController.getLayerInfo(layer, attrs);</span>
 &nbsp;
-                // append a new div inside this element, this is where we will create our map
-<span class="cstat-no" title="statement not covered" >                $element.append('&lt;div id=' + $attrs.id + '&gt;&lt;/div&gt;');</span>
+                    // add the layer to the map
+<span class="cstat-no" title="statement not covered" >                    mapController.addLayer(layer, 0);</span>
+<span class="cstat-no" title="statement not covered" >                    mapController.addLayerInfo(layerInfo);</span>
 &nbsp;
-                // since we are using compile we need to return our linker function
-                // the 'link' function handles how our directive responds to changes in $scope
-<span class="cstat-no" title="statement not covered" >                return <span class="fstat-no" title="function not covered" >function(scope, element, attrs, controller) {</span></span>
-&nbsp;
-                    // update scope in response to map events and
-                    // update map in response to changes in scope properties
-<span class="cstat-no" title="statement not covered" >                    controller.bindMapEvents(scope, attrs);</span>
-&nbsp;
-                };
+                    // bind directive attributes to layer properties and events
+<span class="cstat-no" title="statement not covered" >                    layerController.bindLayerEvents(scope, attrs, layer, mapController);</span>
+                });
             }
         };
     });
@@ -304,7 +322,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Dec 15 2015 06:29:28 GMT-0800 (PST)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 05 2015 09:12:17 GMT-0600 (Central Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "esri.core",
       "shortDescription": "Functions to create instances of layers and related classes (such as InfoTemplate).",
-      "keywords": "$q api arcgis arcgisdynamicmapservicelayer arcgisdynamicmapservicelayer1 array classes content core create createdynamicmapservicelayer createfeaturelayer createinfotemplate esri factory feature featurelayer function functions html https infotemplate instance instances layer layers map object options promise resolved returns service style title url"
+      "keywords": "$q api arcgis arcgisdynamicmapservicelayer arcgisdynamicmapservicelayer1 array classes content core create createdynamicmapservicelayer createfeaturelayer createinfotemplate createvectortilelayer esri factory feature featurelayer function functions html https infotemplate instance instances json layer layers map object options promise resolved returns service style tile title url vector vectortilelayer vectortilelayer1"
     },
     {
       "section": "api",
@@ -82,7 +82,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "This controller is used by the esri-feature-layer directive to construct the layer,",
-      "keywords": "$controller $q addition api arcgis array attribute attributes attrs bind bindlayerevents binds construct construction content controller core definitionexpression destroyed directive esri esri-feature-layer esrilayercontrollerbase events factory feature featurelayer featurelayer1 formats function getfeaturelayeroptions getlayeroptions help html https infotemplate instance isolate layer loaded map mapcontroller methods methods_getlayeroptions object options prepares promise properties provide remove required resolved returned returns scope setinfotemplate sets style supporting title visibility"
+      "keywords": "$controller $q addition api arcgis array attribute attributes attrs bind bindlayerevents binds construct construction content controller core definitionexpression destroyed directive esri esri-feature-layer esrilayercontrollerbase events factory feature featurelayer featurelayer1 formats function getfeaturelayeroptions getlayer getlayeroptions help html https infotemplate instance isolate layer loaded map mapcontroller methods methods_getlayeroptions object options prepares promise properties provide remove required resolved returned returns scope setinfotemplate sets style supporting title visibility"
     },
     {
       "section": "api",
@@ -90,8 +90,8 @@ NG_DOCS={
       "shortName": "EsriLayerControllerBase",
       "type": "controller",
       "moduleName": "esri.map",
-      "shortDescription": "This controller is used by the controllers of the esri-feature-layer and",
-      "keywords": "api arcgis arcgisdynamicmapservicelayer attribute attributes attrs bound common construction controller controllers defaultsymbol directive directives esri esri-dynamic-map-service-layer esri-feature-layer esri-legend formats function getlayerinfo getlayeroptions hidelayers html https info layer layerinfo legend1 map methods needed object options prepares properties provide shared specification supporting title"
+      "shortDescription": "This controller is used by the controllers of the esri-feature-layer, esri-dynamic-map-service-layer",
+      "keywords": "api arcgis arcgisdynamicmapservicelayer attribute attributes attrs bound common construction controller controllers defaultsymbol directive directives esri esri-dynamic-map-service-layer esri-feature-layer esri-legend esri-vector-tile-layer formats function getlayerinfo getlayeroptions hidelayers html https info layer layerinfo legend1 map methods needed object options prepares properties provide shared specification supporting title"
     },
     {
       "section": "api",
@@ -100,7 +100,16 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "This controller is used by the esri-map directive to construct the map,",
-      "keywords": "$attrs $scope $timeout add addlayer addlayerinfo adds api arcgis arcgisdynamicmapservicelayer array attrs bindmapevents construct construction controller core directive esri esri-feature-layer esri-legend esri-map events example factory formats function getlayerinfos getmap getmapproperties html https info layer layerinfo legend1 loaded map methods needed object objects options ordering pattern position prepares promise properties provide registry remove removelayer removes resolved response result scope specification store supporting updates"
+      "keywords": "$attrs $scope $timeout add addlayer addlayerinfo adds api arcgis arcgisdynamicmapservicelayer array attrs bindmapevents construct construction controller core directive esri esri-feature-layer esri-legend esri-map events example factory formats function getlayerinfos getmap getmapproperties html https info layer layerinfo legend1 loaded map methods needed object objects options ordering pattern position prepares promise properties provide registry remove removelayer removes resolved response result scope specification store supporting updates vectortilelayer"
+    },
+    {
+      "section": "api",
+      "id": "esri.map.controller:EsriVectorTileLayerController",
+      "shortName": "EsriVectorTileLayerController",
+      "type": "controller",
+      "moduleName": "esri.map",
+      "shortDescription": "This controller is used by the esri-vector-tile-layer directive to construct the layer,",
+      "keywords": "$controller $q api arcgis attribute attributes attrs bind bindlayerevents binds construct controller core destroyed directive esri esri-vector-tile-layer events factory function getlayer help html https instance isolate layer map mapcontroller methods opacity promise properties provide remove required resolved returns scope style supporting vectortilelayer vectortilelayer1 visibility"
     },
     {
       "section": "api",
@@ -146,6 +155,15 @@ NG_DOCS={
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a map using the Esri ArcGIS API for JavaScript.",
       "keywords": "additional api arcgis basemap bound callback center choose construct controllers core create custom defining directive documentation element esri esriregistry event example examples extent-change factory hash html https info initial inline item item-info javascript level load loading location making map map-options number object options parameters parent plenty populated recommend register-as registering showing string valid web zoom"
+    },
+    {
+      "section": "api",
+      "id": "esri.map.directive:esriVectorTileLayer",
+      "shortName": "esriVectorTileLayer",
+      "type": "directive",
+      "moduleName": "esri.map",
+      "shortDescription": "This directive creates a VectorTileLayer",
+      "keywords": "additional adds api arcgis bound callback creates defining directive esri esri-map event event-load examples hash html https inline layer layer-options load map object opacity options resource rest server string tile two-way url vector vectortilelayer visibility visible"
     }
   ],
   "apis": {
@@ -166,7 +184,7 @@ NG_DOCS={
     "html5Mode": false,
     "editExample": true,
     "navTemplate": "site/docs-resources/docs-nav-template.html",
-    "navContent": "<ul class=\"nav pull-right\">\n    <li><a href=\"../\">Home</a></li>\n    <li><a href=\"../#/examples\">Examples</a></li>\n    <li><a href=\"../#/patterns\">Patterns</a></li>\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\n</ul>\n",
+    "navContent": "<ul class=\"nav pull-right\">\r\n    <li><a href=\"../\">Home</a></li>\r\n    <li><a href=\"../#/examples\">Examples</a></li>\r\n    <li><a href=\"../#/patterns\">Patterns</a></li>\r\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\r\n</ul>\r\n",
     "navTemplateData": {},
     "loadDefaults": {
       "angular": true,

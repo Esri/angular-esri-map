@@ -133,6 +133,17 @@
                 }
             }, {
                 toc: {
+                    title: 'Vector Tile Layer',
+                    description: 'Shows how to load a map with a vector tile layer.',
+                    url: urlPrefixes.templateHref + 'vector-tile-layer'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'vector-tile-layer',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'vector-tile-layer.html',
+                    controller: 'VectorTileLayerCtrl'
+                }
+            }, {
+                toc: {
                     title: 'Add / Remove Layers',
                     description: 'Shows how to add/remove layers to/from the map.',
                     url: urlPrefixes.templateHref + 'add-remove-layers'
