@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Simple Map</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.15/esri/css/esri.css">
+    </head>
+    <body ng-controller="MapController">
+        <h2>Vector Tile Layer</h2>
+        <!-- add map to page and bind to scope map parameters -->
+        <esri-map id="map" map-options="map.options">
+            <esri-vector-tile-layer 
+                url="//www.arcgis.com/sharing/rest/content/items/f96366254a564adda1dc468b447ed956/resources/styles/root.json
+                "
+                layer-options="{ id: 'vtl-dark-style', opacity: 0.75 }">
+            </esri-vector-tile-layer>
+        </esri-map>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/layers_vector.html">this sample</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="//js.arcgis.com/3.15compact"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('MapController', function ($scope) {
+                    $scope.map = {
+                        options: {
+                            center: [2.3508, 48.8567],
+                            zoom: 10
+                        }
+                    };
+                });
+        </script>
+    </body>
+</html>
