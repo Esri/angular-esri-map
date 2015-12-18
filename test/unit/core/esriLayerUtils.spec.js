@@ -108,7 +108,32 @@ describe('esriLayerUtils', function() {
             });
             $rootScope.$digest();
         });
+    });
 
+    describe('createVectorTileLayer', function() {
+        var VectorTileLayer;
+
+        beforeEach(function(){
+            VectorTileLayer = jasmine.createSpy();
+            deferred.resolve([VectorTileLayer]);
+        });
+
+        it('should pass just url to layer constructor if no options', function() {
+            esriLayerUtils.createVectorTileLayer('notARealUrl').then(function() {
+                expect(VectorTileLayer.calls.argsFor(0)).toEqual(['notARealUrl', undefined]);
+            });
+            $rootScope.$digest();
+        });
+
+        it('should pass url and options to layer constructor', function() {
+            var options = {
+                id: 'test'
+            };
+            esriLayerUtils.createVectorTileLayer('notARealUrl', options).then(function() {
+                expect(VectorTileLayer.calls.argsFor(0)).toEqual(['notARealUrl', options]);
+            });
+            $rootScope.$digest();
+        });
     });
 
     describe('createDynamicMapServiceLayer', function() {
@@ -193,7 +218,6 @@ describe('esriLayerUtils', function() {
             });
             $rootScope.$digest();
         });
-
     });
 
 });
