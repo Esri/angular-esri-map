@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Added
+
+Added new esriVectorTileLayer directive. [#182](https://github.com/Esri/angular-esri-map/pull/182) [#173](https://github.com/Esri/angular-esri-map/pull/173) [@snodnipper](https://github.com/snodnipper)
+
+### Documentation
+
+Added example page for the esriVectorTileLayer directive. [#177](https://github.com/Esri/angular-esri-map/issues/177)
+
 ## [v1.0.1]
 
 ### Changed
@@ -28,7 +36,7 @@ esriLoader defaults to loading JSAPI v3.15. Docs site uses JSAPI v3.15 and Angul
 
 Use calcite for docs pages [#77](https://github.com/Esri/angular-esri-map/issues/77), [#170](https://github.com/Esri/angular-esri-map/issues/170)
 
-Added a left nave to examples page [#98](https://github.com/Esri/angular-esri-map/issues/98)
+Added a left nav to examples page [#98](https://github.com/Esri/angular-esri-map/issues/98)
 
 Replaced About page with a Patterns section [#155](https://github.com/Esri/angular-esri-map/issues/155)
 
