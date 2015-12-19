@@ -65,7 +65,7 @@ See the documentation for [examples](http://esri.github.io/angular-esri-map/#exa
 
 ### Lazy Loading of the ArcGIS API for JavaScript
 
-If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Deferred Map Example page](http://esri.github.io/angular-esri-map/deferred-map.html) for an example of how to do this.
+If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Lazy Load Patterns page](http://esri.github.io/angular-esri-map/#/patterns/lazy-load) for an example of how to do this.
 
 ## Development Instructions
 
@@ -80,7 +80,12 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-These directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.11. They have been tested on every minor release of each of those libraries since then.
+These directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
+
+angular-esri-map | Angular | ArcGIS API for JavaScript
+--- | --- | ---
+v1.0 | v1.3+ | v3.12+ 
+v1.1 | v1.3+ | v3.15+
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 

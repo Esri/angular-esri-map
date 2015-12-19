@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+## [v1.0.1]
+
 ### Added
 
 Added new esriVectorTileLayer directive along with associated documentation and example page. [#182](https://github.com/Esri/angular-esri-map/pull/182) [#173](https://github.com/Esri/angular-esri-map/pull/173) [@snodnipper](https://github.com/snodnipper)
@@ -12,6 +14,10 @@ Added new esriVectorTileLayer directive along with associated documentation and 
 ### Documentation
 
 Modified/updated example page for the esriVectorTileLayer directive. [#177](https://github.com/Esri/angular-esri-map/issues/177)
+
+### Tests
+
+Added unit and functional tests for new vector tile layer directive [#183](https://github.com/Esri/angular-esri-map/issues/183), [#184](https://github.com/Esri/angular-esri-map/issues/184)
 
 ## [v1.0.1]
 
@@ -211,7 +217,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their cont
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.0.1...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/Esri/angular-esri-map/compare/v1.0.1...v1.1.0
 [v1.0.1]: https://github.com/Esri/angular-esri-map/compare/v1.0.0...v1.0.1
 [v1.0.0]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.2...v1.0.0
 [v1.0.0-rc.2]: https://github.com/Esri/angular-esri-map/compare/v1.0.0-rc.1...v1.0.0-rc.2
