@@ -1,6 +1,15 @@
 <h2>Scene View</h2>
 <div ng-controller="SceneViewCtrl as exampleCtrl">
-    <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"></esri-scene-view>
+    <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
+        view-options="{
+            environment: {
+                stars: 'none'
+            },
+            ui: {
+                components: ['logo']
+            }
+        }">
+    </esri-scene-view>
     <div><label><input type="checkbox" checked ng-click="exampleCtrl.onStreetsToggle($event)" /> Transportation</label></div>
 
     <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-layers/index.html">this sample</a>.</p>

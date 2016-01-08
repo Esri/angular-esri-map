@@ -47,10 +47,7 @@ gulp.task('clean', function() {
 gulp.task('build-core-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
-    'src/core/esriLoader.js',
-    'src/core/esriRegistry.js',
-    'src/core/esriMapViewUtils.js',
-    'src/core/esriSceneViewUtils.js'])
+    'src/core/esriLoader.js'])
     .pipe(concat('angular-esri-core.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
@@ -68,8 +65,6 @@ gulp.task('build-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
-    'src/core/esriMapViewUtils.js',
-    'src/core/esriSceneViewUtils.js',
     'src/esri.map.module.js',
     'src/map/EsriMapViewController.js',
     'src/map/EsriSceneViewController.js',

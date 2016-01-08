@@ -1,5 +1,23 @@
 (function(angular) {
 
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriSceneView
+     * @restrict E
+     * @element
+     * @scope
+     *
+     * @description
+     * This is the directive which will create a scene view using the Esri ArcGIS API for JavaScript.
+     * There are plenty of examples showing how to use this directive and its bound parameters.
+     *
+     * ## Examples
+     * - Choose from a {@link ../#/examples number of examples} making use of this directive
+     *
+     * @param {Object} map Instance of a map.
+     * @param {Function=} on-create Callback for successful creation of the scene view.
+     * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
+     */
     angular.module('esri.map')
         .directive('esriSceneView', function esriSceneView() {
             return {
@@ -10,9 +28,13 @@
 
                 // isolate scope
                 scope: {
+                    // to-way binding
                     map: '=?',
-                    basemap: '@',
-                    onCreate: '&'
+                    // function binding for event handlers
+                    onCreate: '&',
+                    // function binding for reading object hash from attribute string
+                    // or from scope object property
+                    viewOptions: '&'
                 },
 
                 template: '<div ng-transclude></div>',

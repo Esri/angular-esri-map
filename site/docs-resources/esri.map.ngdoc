@@ -10,8 +10,8 @@ The `esri.map` module includes reusable directives for map view, scene view, and
 
 ### Working with 2D Maps
 
-Use the esriMapView directive allows you to place a 2D map on the page.
+Using the {@link esri.map.directive:esriMapView esriMapView} directive allows you to place a 2D map on the page.
 
-### Working with 2D Maps
+### Working with 3D Maps
 
-Use the esriSceneView directive allows you to place a 3D map on the page.
+Using the {@link esri.map.directive:esriSceneView esriSceneView} directive allows you to place a 3D map on the page.
