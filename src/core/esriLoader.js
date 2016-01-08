@@ -22,7 +22,7 @@
          * Loads the Esri ArcGIS API for JavaScript.
          *
          * @param {Object=} options Send a list of options of how to load the Esri ArcGIS API for JavaScript.
-         *  Defaults to `{url: 'http://js.arcgis.com/3.15compact'}`
+         *  Defaults to `{url: '//js.arcgis.com/4.0beta3'}`
          *
          * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
@@ -79,7 +79,7 @@
 
             // Throw Error if Esri is not loaded yet
             if ( !isLoaded() ) {
-                deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
+                deferred.reject('Trying to call esriLoader.require(), but Esri ArcGIS API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading Esri ArcGIS API.');
                 return deferred.promise;
             }
             if (typeof moduleName === 'string') {

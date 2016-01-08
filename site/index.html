@@ -72,7 +72,7 @@
             <div ng-view="" ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
+            <div ng-controller="SnippetsCtrl" class="col-sm-9 pull-right" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
                 <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                     <li ng-repeat="tab in tabs" ng-select-option="tab">
                         <a href="">{{ tab }}</a>
