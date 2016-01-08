@@ -68,7 +68,6 @@ gulp.task('build-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
-    'src/core/esriRegistry.js',
     'src/core/esriMapViewUtils.js',
     'src/core/esriSceneViewUtils.js',
     'src/esri.map.module.js',
