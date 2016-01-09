@@ -1,0 +1,17 @@
+@ngdoc overview
+@id esri.directives
+@name esri.directives
+
+@description
+
+## `esri.directives` Module
+
+The `esri.directives` module includes reusable directives for map view, scene view, and related UI elements such as a home button.
+
+### Working with 2D Maps
+
+Using the {@link esri.directives.directive:esriMapView esriMapView} directive allows you to place a 2D map on the page.
+
+### Working with 3D Maps
+
+Using the {@link esri.directives.directive:esriSceneView esriSceneView} directive allows you to place a 3D map on the page.

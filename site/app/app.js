@@ -4,7 +4,7 @@
     // tabs that dynamically load code and highlight syntax
     // see: https://github.com/pc035860/angular-highlightjs#demos
     angular
-        .module('esri-map-docs', ['ngRoute', 'ngSanitize', 'ngSelect', 'hljs', 'esri.map'])
+        .module('esri-map-docs', ['ngRoute', 'ngSanitize', 'ngSelect', 'hljs', 'esri.directives'])
         .config(function($routeProvider, appConfig) {
             $routeProvider
                 // TODO: add home page

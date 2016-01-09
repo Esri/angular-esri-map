@@ -65,11 +65,11 @@ gulp.task('build-js', function() {
   return gulp.src([
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
-    'src/esri.map.module.js',
-    'src/map/EsriMapViewController.js',
-    'src/map/EsriSceneViewController.js',
-    'src/map/esriMapView.js',
-    'src/map/esriSceneView.js'])
+    'src/esri.directives.module.js',
+    'src/directives/EsriMapViewController.js',
+    'src/directives/EsriSceneViewController.js',
+    'src/directives/esriMapView.js',
+    'src/directives/esriSceneView.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))

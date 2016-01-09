@@ -3,14 +3,14 @@
 
     /**
      * @ngdoc controller
-     * @name esri.map.controller:EsriMapViewController
+     * @name esri.directives.controller:EsriMapViewController
      *
      * @description
      * Functions to help create map view instances.
      *
      * @requires esri.core.factory:esriLoader
      */
-    angular.module('esri.map')
+    angular.module('esri.directives')
         .controller('EsriMapViewController', function EsriMapViewController($element, esriLoader) {
             var self = this;
 
@@ -23,7 +23,7 @@
             /**
              * @ngdoc function
              * @name createMapView
-             * @methodOf esri.map.controller:EsriMapViewController
+             * @methodOf esri.directives.controller:EsriMapViewController
              *
              * @description
              * Create a map view instance
@@ -52,7 +52,7 @@
             /**
              * @ngdoc function
              * @name setMap
-             * @methodOf esri.map.controller:EsriMapViewController
+             * @methodOf esri.directives.controller:EsriMapViewController
              *
              * @description
              * Set a map on the map view

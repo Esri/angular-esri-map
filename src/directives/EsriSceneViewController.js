@@ -2,14 +2,14 @@
 
     /**
      * @ngdoc controller
-     * @name esri.map.controller:EsriSceneViewController
+     * @name esri.directives.controller:EsriSceneViewController
      *
      * @description
      * Functions to help create scene view instances.
      *
      * @requires esri.core.factory:esriLoader
      */
-    angular.module('esri.map')
+    angular.module('esri.directives')
         .controller('EsriSceneViewController', function EsriSceneViewController($element, esriLoader) {
             var self = this;
 
@@ -22,7 +22,7 @@
             /**
              * @ngdoc function
              * @name createSceneView
-             * @methodOf esri.map.controller:EsriSceneViewController
+             * @methodOf esri.directives.controller:EsriSceneViewController
              *
              * @description
              * Create a scene view instance
@@ -51,7 +51,7 @@
             /**
              * @ngdoc function
              * @name setMap
-             * @methodOf esri.map.controller:EsriSceneViewController
+             * @methodOf esri.directives.controller:EsriSceneViewController
              *
              * @description
              * Set a map on the scene view

@@ -2,3 +2,6 @@
 li.api-list-item {
 	overflow-wrap: break-word;
 }
+.nav-header.module a.code {
+    overflow: hidden;
+}

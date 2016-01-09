@@ -2,24 +2,24 @@
 
     /**
      * @ngdoc directive
-     * @name esri.map.directive:esriMapView
+     * @name esri.directives.directive:esriSceneView
      * @restrict E
      * @element
      * @scope
      *
      * @description
-     * This is the directive which will create a map view using the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create a scene view using the Esri ArcGIS API for JavaScript.
      * There are plenty of examples showing how to use this directive and its bound parameters.
      *
      * ## Examples
      * - Choose from a {@link ../#/examples number of examples} making use of this directive
      *
      * @param {Object} map Instance of a map.
-     * @param {Function=} on-create Callback for successful creation of the map view.
-     * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
+     * @param {Function=} on-create Callback for successful creation of the scene view.
+     * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
      */
-    angular.module('esri.map')
-        .directive('esriMapView', function esriMapView() {
+    angular.module('esri.directives')
+        .directive('esriSceneView', function esriSceneView() {
             return {
                 // element only
                 restrict: 'E',
@@ -28,7 +28,7 @@
 
                 // isolate scope
                 scope: {
-                    // two-way binding
+                    // to-way binding
                     map: '=?',
                     // function binding for event handlers
                     onCreate: '&',
@@ -39,14 +39,14 @@
 
                 template: '<div ng-transclude></div>',
 
-                controllerAs: 'mapViewCtrl',
+                controllerAs: 'sceneViewCtrl',
 
                 bindToController: true,
 
                 // directive api
-                controller: 'EsriMapViewController',
-                link: function esriMapViewLink(scope, element, attrs, controller) {
-                    scope.$watch('mapViewCtrl.map', function(newVal) {
+                controller: 'EsriSceneViewController',
+                link: function esriSceneViewLink(scope, element, attrs, controller) {
+                    scope.$watch('sceneViewCtrl.map', function(newVal) {
                         controller.setMap(newVal);
                     });
                 }
