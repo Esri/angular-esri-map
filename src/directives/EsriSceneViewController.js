@@ -1,11 +1,12 @@
 (function(angular) {
+    'use strict';
 
     /**
      * @ngdoc controller
      * @name esri.directives.controller:EsriSceneViewController
      *
      * @description
-     * Functions to help create scene view instances.
+     * Functions to help create SceneView instances.
      *
      * @requires esri.core.factory:esriLoader
      */
@@ -25,12 +26,12 @@
              * @methodOf esri.directives.controller:EsriSceneViewController
              *
              * @description
-             * Create a scene view instance
+             * Create a SceneView instance
              *
-             * @param {Object} options scene view options
+             * @param {Object} options SceneView options
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the scene view
+             * resolved with an object with a `view` property that refers to the SceneView
              */
             this.createSceneView = function(options) {
                 return esriLoader.require('esri/views/SceneView').then(function(SceneView) {
@@ -54,14 +55,17 @@
              * @methodOf esri.directives.controller:EsriSceneViewController
              *
              * @description
-             * Set a map on the scene view
+             * Set a map on the SceneView
              *
-             * @param {Object} map map instance
+             * @param {Object} map Map instance
              *
-             * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the scene view
+             * @return {Promise} Returns a $q style promise and then
+             * sets the map property and other options on the SceneView.
              */
             this.setMap = function(map) {
+                if (!map) {
+                    return;
+                }
                 self.options.map = map;
                 return this.createViewPromise.then(function(result) {
                     result.view.set(self.options);

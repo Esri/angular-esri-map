@@ -7,11 +7,18 @@
 
         <!-- load Esri CSS  -->
         <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .esri-home {
+                position: absolute;
+                top: 160px;
+                left: 23px;
+            }
+        </style>
     </head>
     <body>
         <h2>Feature Layer</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <esri-map-view map="exampleCtrl.map" 
+            <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated" 
                 view-options="{
                     extent: {
                         xmin: -9177811,
@@ -21,6 +28,7 @@
                         spatialReference: 102100
                     }
                 }">
+                <esri-home-button view="exampleCtrl.mapView"></esri-home-button>
             </esri-map-view>
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-featurelayer/index.html">this sample</a>.</p>
         </div>
@@ -56,6 +64,10 @@
                               })
                           ]
                         });
+
+                        self.onViewCreated = function(view) {
+                            self.mapView = view;
+                        };
                     });
                 });
         </script>

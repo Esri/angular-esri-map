@@ -1,4 +1,5 @@
 (function(angular) {
+    'use strict';
 
     /**
      * @ngdoc directive

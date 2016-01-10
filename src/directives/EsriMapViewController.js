@@ -6,7 +6,7 @@
      * @name esri.directives.controller:EsriMapViewController
      *
      * @description
-     * Functions to help create map view instances.
+     * Functions to help create MapView instances.
      *
      * @requires esri.core.factory:esriLoader
      */
@@ -26,12 +26,12 @@
              * @methodOf esri.directives.controller:EsriMapViewController
              *
              * @description
-             * Create a map view instance
+             * Create a MapView instance
              *
-             * @param {Object} options map view options
+             * @param {Object} options MapView options
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the map view
+             * resolved with an object with a `view` property that refers to the MapView
              */
             this.createMapView = function(options) {
                 return esriLoader.require('esri/views/MapView').then(function(MapView) {
@@ -55,16 +55,19 @@
              * @methodOf esri.directives.controller:EsriMapViewController
              *
              * @description
-             * Set a map on the map view
+             * Set a map on the MapView
              *
-             * @param {Object} map map instance
+             * @param {Object} map Map instance
              *
-             * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the map view
+             * @return {Promise} Returns a $q style promise and then
+             * sets the map property and other options property on the MapView.
              */
             this.setMap = function(map) {
+                if (!map) {
+                    return;
+                }
                 // preserve extent
-                if (self.options.extent && map && !map.initialExtent) {
+                if (self.options.extent && !map.initialExtent) {
                     map.initialExtent = self.options.extent;
                 }
                 self.options.map = map;
