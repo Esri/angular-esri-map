@@ -14,4 +14,4 @@ Using the {@link esri.map.directive:esriMapView esriMapView} directive allows yo
 
 ### Working with 3D Maps
 
-Using the {@link esri.map.directive:esriSceneView esriSceneView} directive allows you to place a 3D map on the page.
+Using the {@link esri.map.directive:esriSceneView esriSceneView} directive allows you to place a 3D scene on the page.

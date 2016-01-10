@@ -13,7 +13,7 @@
      * There are plenty of examples showing how to use this directive and its bound parameters.
      *
      * ## Examples
-     * - Choose from a {@link ../#/examples number of examples} making use of this directive
+     * - {@link ../#/examples/feature-layer Feature Layer}
      *
      * @param {Object} map Instance of a map.
      * @param {Function=} on-create Callback for successful creation of the map view.
