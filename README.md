@@ -46,7 +46,7 @@ Once you've added the module to your application, you can use the sample code be
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
         <script type="text/javascript">
-            angular.module('esri-map-example', ['esri.directives'])
+            angular.module('esri-map-example', ['esri.map'])
                 .controller('MapController', function ($scope) {
                     $scope.map = {
                         center: {

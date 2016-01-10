@@ -3,15 +3,15 @@
 
     /**
      * @ngdoc controller
-     * @name esri.directives.controller:EsriMapViewController
+     * @name esri.map.controller:EsriSceneViewController
      *
      * @description
-     * Functions to help create MapView instances.
+     * Functions to help create SceneView instances.
      *
      * @requires esri.core.factory:esriLoader
      */
-    angular.module('esri.directives')
-        .controller('EsriMapViewController', function EsriMapViewController($element, esriLoader) {
+    angular.module('esri.map')
+        .controller('EsriSceneViewController', function EsriSceneViewController($element, esriLoader) {
             var self = this;
 
             // read options passed in as either a JSON string expression
@@ -22,27 +22,27 @@
 
             /**
              * @ngdoc function
-             * @name createMapView
-             * @methodOf esri.directives.controller:EsriMapViewController
+             * @name createSceneView
+             * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Create a MapView instance
+             * Create a SceneView instance
              *
-             * @param {Object} options MapView options
+             * @param {Object} options SceneView options
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the MapView
+             * resolved with an object with a `view` property that refers to the SceneView
              */
-            this.createMapView = function(options) {
-                return esriLoader.require('esri/views/MapView').then(function(MapView) {
+            this.createSceneView = function(options) {
+                return esriLoader.require('esri/views/SceneView').then(function(SceneView) {
                     return {
-                        view: new MapView(options)
+                        view: new SceneView(options)
                     };
                 });
             };
-            
+
             // create the view, get a ref to the promise
-            this.createViewPromise = this.createMapView(self.options).then(function(result) {
+            this.createViewPromise = this.createSceneView(self.options).then(function(result) {
                 if (typeof self.onCreate() === 'function') {
                     self.onCreate()(result.view);
                 }
@@ -52,23 +52,19 @@
             /**
              * @ngdoc function
              * @name setMap
-             * @methodOf esri.directives.controller:EsriMapViewController
+             * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Set a map on the MapView
+             * Set a map on the SceneView
              *
              * @param {Object} map Map instance
              *
              * @return {Promise} Returns a $q style promise and then
-             * sets the map property and other options property on the MapView.
+             * sets the map property and other options on the SceneView.
              */
             this.setMap = function(map) {
                 if (!map) {
                     return;
-                }
-                // preserve extent
-                if (self.options.extent && !map.initialExtent) {
-                    map.initialExtent = self.options.extent;
                 }
                 self.options.map = map;
                 return this.createViewPromise.then(function(result) {

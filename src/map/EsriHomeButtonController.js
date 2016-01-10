@@ -3,14 +3,14 @@
 
     /**
      * @ngdoc controller
-     * @name esri.directives.controller:EsriHomeButtonController
+     * @name esri.map.controller:EsriHomeButtonController
      *
      * @description
      * Functions to help create HomeViewModel instances.
      *
      * @requires esri.core.factory:esriLoader
      */
-    angular.module('esri.directives')
+    angular.module('esri.map')
         .controller('EsriHomeButtonController', function EsriHomeButtonController(esriLoader) {
             var self = this;
 
@@ -22,7 +22,7 @@
             /**
              * @ngdoc function
              * @name createViewModel
-             * @methodOf esri.directives.controller:EsriHomeButtonController
+             * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
              * Create a HomeViewModel instance
@@ -49,7 +49,7 @@
             /**
              * @ngdoc function
              * @name setView
-             * @methodOf esri.directives.controller:EsriHomeButtonController
+             * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
              * Set a view on the HomeViewModel
@@ -71,7 +71,7 @@
             /**
              * @ngdoc function
              * @name goHome
-             * @methodOf esri.directives.controller:EsriHomeButtonController
+             * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
              * A wrapper around the Esri JSAPI HomeViewModel.goHome() method,

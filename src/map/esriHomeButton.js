@@ -3,7 +3,7 @@
 
     /**
      * @ngdoc directive
-     * @name esri.directives.directive:esriHomeButton
+     * @name esri.map.directive:esriHomeButton
      * @restrict E
      * @element
      * @scope
@@ -17,7 +17,7 @@
      *
      * @param {Object} view Instance of a MapView or SceneView.
      */
-    angular.module('esri.directives')
+    angular.module('esri.map')
         .directive('esriHomeButton', function esriHomeButton() {
             return {
                 // element only

@@ -3,7 +3,7 @@
 
     /**
      * @ngdoc directive
-     * @name esri.directives.directive:esriMapView
+     * @name esri.map.directive:esriMapView
      * @restrict E
      * @element
      * @scope
@@ -19,7 +19,7 @@
      * @param {Function=} on-create Callback for successful creation of the map view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
      */
-    angular.module('esri.directives')
+    angular.module('esri.map')
         .directive('esriMapView', function esriMapView() {
             return {
                 // element only

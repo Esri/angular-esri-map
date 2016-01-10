@@ -6,7 +6,7 @@
 
 ## `esri.core` Module
 
-The `esri.core` module includes services used by the directives in the {@link esri.directives esri.directives} module. These services can also be used directly by your own custom directives.
+The `esri.core` module includes services used by the directives in the {@link esri.map esri.map} module. These services can also be used directly by your own custom directives.
 
 ### Loading Esri Modules
 

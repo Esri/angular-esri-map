@@ -3,7 +3,7 @@
 
     /**
      * @ngdoc directive
-     * @name esri.directives.directive:esriSceneView
+     * @name esri.map.directive:esriSceneView
      * @restrict E
      * @element
      * @scope
@@ -19,7 +19,7 @@
      * @param {Function=} on-create Callback for successful creation of the scene view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
      */
-    angular.module('esri.directives')
+    angular.module('esri.map')
         .directive('esriSceneView', function esriSceneView() {
             return {
                 // element only
