@@ -27,11 +27,8 @@
 }
 
 /* Esri JSAPI */
-.map {
-  margin-bottom: 10px;
-}
-.map .tooltip {
-  opacity: 1;
+.esri-view {
+  height: 400px;
 }
 
 /* highlightjs */

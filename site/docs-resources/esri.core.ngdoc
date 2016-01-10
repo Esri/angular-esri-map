@@ -11,11 +11,3 @@ The `esri.core` module includes services used by the directives in the {@link es
 ### Loading Esri Modules
 
 Use {@link esri.core.factory:esriLoader esriLoader} to lazy load the Esri ArcGIS API or to load API modules.
-
-### Creating Map and Layer Instances
-
-Use the {@link esri.core.factory:esriMapUtils esriMapUtils} and {@link esri.core.factory:esriLayerUtils esriLayerUtils} services to help create instances of maps and layers.
-
-### Getting a Reference to the Map
-
-Use the {@link esri.core.factory:esriRegistry esriRegistry} to store and retrieve map instances for use in parent controllers.

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
 
     <!-- load Esri CSS -->
-    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.15/esri/css/esri.css">
+    <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
 
     <!-- load custom styles for this app -->
     <link rel="stylesheet" type="text/css" href="styles/main.css">
@@ -72,7 +72,7 @@
             <div ng-view="" ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
+            <div ng-controller="SnippetsCtrl" class="col-sm-9 pull-right" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
                 <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                     <li ng-repeat="tab in tabs" ng-select-option="tab">
                         <a href="">{{ tab }}</a>
@@ -94,7 +94,7 @@
 
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
-    <script defer type="text/javascript" src="//js.arcgis.com/3.15compact"></script>
+    <script defer type="text/javascript" src="//js.arcgis.com/4.0beta3/"></script>
 
     <!-- load Angular -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
@@ -119,23 +119,9 @@
     <script type="text/javascript" src="app/common/leftNavController.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
-    <script type="text/javascript" src="app/examples/simple-map.js"></script>
-    <script type="text/javascript" src="app/examples/web-map.js"></script>
-    <script type="text/javascript" src="app/examples/feature-layers.js"></script>
-    <script type="text/javascript" src="app/examples/dynamic-map-service-layer.js"></script>
-    <script type="text/javascript" src="app/examples/dynamic-map-service-layers.js"></script>
-    <script type="text/javascript" src="app/examples/legend.js"></script>
-    <script type="text/javascript" src="app/examples/add-remove-layers.js"></script>
-    <script type="text/javascript" src="app/examples/set-basemap.js"></script>
-    <script type="text/javascript" src="app/examples/set-center-zoom.js"></script>
-    <script type="text/javascript" src="app/examples/map-events.js"></script>
-    <script type="text/javascript" src="app/examples/layer-events.js"></script>
-    <script type="text/javascript" src="app/examples/registry-pattern.js"></script>
-    <script type="text/javascript" src="app/examples/additional-map-options.js"></script>
-    <script type="text/javascript" src="app/examples/no-basemap.js"></script>
-    <script type="text/javascript" src="app/examples/custom-basemap.js"></script>
-    <script type="text/javascript" src="app/examples/vector-tile-layer.js"></script>
-    <script type="text/javascript" src="app/examples/other-esri-modules.js"></script>
+    <script type="text/javascript" src="app/examples/feature-layer.js"></script>
+    <script type="text/javascript" src="app/examples/scene-view.js"></script>
+    <script type="text/javascript" src="app/examples/home-button.js"></script>
 
     <!-- google analytics -->
     <script>
