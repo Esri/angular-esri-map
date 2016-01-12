@@ -6,9 +6,7 @@
         left: 30px;
     }
 </style>
-<div ng-controller="HomeButtonCtrl as exampleCtrl">
-    <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated">
-        <esri-home-button view="exampleCtrl.sceneView"></esri-home-button>
-    </esri-scene-view>
-    <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/widgets-home/index.html">this sample</a>.</p>
-</div>
+<esri-scene-view map="HomeButtonCtrl.map" on-create="HomeButtonCtrl.onViewCreated">
+    <esri-home-button view="HomeButtonCtrl.sceneView"></esri-home-button>
+</esri-scene-view>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/widgets-home/index.html">this sample</a>.</p>
