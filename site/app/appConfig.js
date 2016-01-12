@@ -18,7 +18,7 @@
                     path: urlPrefixes.routePath + 'feature-layer',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'feature-layer.html',
                     controller: 'FeatureLayerCtrl',
-                    controllerAs: 'FeatureLayerCtrl'
+                    controllerAs: 'vm'
                 }
             }],
             '3D': [{
@@ -31,7 +31,7 @@
                     path: urlPrefixes.routePath + 'scene-view',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'scene-view.html',
                     controller: 'SceneViewCtrl',
-                    controllerAs: 'SceneViewCtrl'
+                    controllerAs: 'vm'
                 }
             }],
             Controls: [{
@@ -44,7 +44,7 @@
                     path: urlPrefixes.routePath + 'home-button',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'home-button.html',
                     controller: 'HomeButtonCtrl',
-                    controllerAs: 'HomeButtonCtrl'
+                    controllerAs: 'vm'
                 }
             }]
         },
