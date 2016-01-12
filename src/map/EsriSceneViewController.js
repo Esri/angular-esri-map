@@ -41,35 +41,34 @@
                 });
             };
 
-            // create the view, get a ref to the promise
-            this.createViewPromise = this.createSceneView(self.options).then(function(result) {
-                if (typeof self.onCreate() === 'function') {
-                    self.onCreate()(result.view);
-                }
-                return result;
-            });
-
             /**
              * @ngdoc function
              * @name setMap
              * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Set a map on the SceneView
+             * Set a map on the SceneView. A new SceneView will be constructed
+             * if it does not already exist.
              *
              * @param {Object} map Map instance
-             *
-             * @return {Promise} Returns a $q style promise and then
-             * sets the map property and other options on the SceneView.
              */
             this.setMap = function(map) {
                 if (!map) {
                     return;
                 }
-                self.options.map = map;
-                return this.createViewPromise.then(function(result) {
-                    result.view.set(self.options);
-                });
+
+                if (!self.view) {
+                    self.options.map = map;
+                    this.createSceneView(self.options).then(function(result) {
+                        self.view = result.view;
+
+                        if (typeof self.onCreate() === 'function') {
+                            self.onCreate()(result.view);
+                        }
+                    });
+                } else {
+                    self.view.map = map;
+                }
             };
         });
 })(angular);

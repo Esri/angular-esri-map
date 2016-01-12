@@ -40,14 +40,6 @@
                     };
                 });
             };
-            
-            // create the view, get a ref to the promise
-            this.createViewPromise = this.createMapView(self.options).then(function(result) {
-                if (typeof self.onCreate() === 'function') {
-                    self.onCreate()(result.view);
-                }
-                return result;
-            });
 
             /**
              * @ngdoc function
@@ -55,25 +47,28 @@
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Set a map on the MapView
+             * Set a map on the MapView. A new MapView will be constructed
+             * if it does not already exist.
              *
              * @param {Object} map Map instance
-             *
-             * @return {Promise} Returns a $q style promise and then
-             * sets the map property and other options property on the MapView.
              */
             this.setMap = function(map) {
                 if (!map) {
                     return;
                 }
-                // preserve extent
-                if (self.options.extent && !map.initialExtent) {
-                    map.initialExtent = self.options.extent;
+
+                if (!self.view) {
+                    self.options.map = map;
+                    this.createMapView(self.options).then(function(result) {
+                        self.view = result.view;
+                        
+                        if (typeof self.onCreate() === 'function') {
+                            self.onCreate()(result.view);
+                        }
+                    });
+                } else {
+                    self.view.map = map;
                 }
-                self.options.map = map;
-                return this.createViewPromise.then(function(result) {
-                    result.view.set(self.options);
-                });
             };
         });
 })(angular);

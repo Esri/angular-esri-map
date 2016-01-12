@@ -26,10 +26,12 @@
                         xmax: -9176791,
                         ymax: 4247784,
                         spatialReference: 102100
-                    }
+                    },
+                    rotation: 90
                 }">
                 <esri-home-button view="exampleCtrl.mapView"></esri-home-button>
             </esri-map-view>
+            <button ng-click="exampleCtrl.changeMap()">Change map for this esri-map-view</button>
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-featurelayer/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -67,6 +69,19 @@
 
                         self.onViewCreated = function(view) {
                             self.mapView = view;
+                        };
+
+                        self.changeMap = function() {
+                            esriLoader.require([
+                                'esri/Map'
+                            ], function(Map) {
+
+                                // create the map
+                                // and add a feature layer
+                                self.map = new Map({
+                                    basemap: 'gray'
+                                });
+                            });
                         };
                     });
                 });
