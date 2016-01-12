@@ -32,7 +32,8 @@
                     $routeProvider
                         .when(example.route.path, {
                             templateUrl: example.route.templateUrl,
-                            controller: example.route.controller
+                            controller: example.route.controller,
+                            controllerAs: example.route.controllerAs
                         });
                 });
             });

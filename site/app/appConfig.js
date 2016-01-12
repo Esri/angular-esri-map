@@ -17,7 +17,8 @@
                 route: {
                     path: urlPrefixes.routePath + 'feature-layer',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'feature-layer.html',
-                    controller: 'FeatureLayerCtrl'
+                    controller: 'FeatureLayerCtrl',
+                    controllerAs: 'vm'
                 }
             }],
             '3D': [{
@@ -29,7 +30,8 @@
                 route: {
                     path: urlPrefixes.routePath + 'scene-view',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'scene-view.html',
-                    controller: 'SceneViewCtrl'
+                    controller: 'SceneViewCtrl',
+                    controllerAs: 'vm'
                 }
             }],
             Controls: [{
@@ -41,7 +43,8 @@
                 route: {
                     path: urlPrefixes.routePath + 'home-button',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'home-button.html',
-                    controller: 'HomeButtonCtrl'
+                    controller: 'HomeButtonCtrl',
+                    controllerAs: 'vm'
                 }
             }]
         },
