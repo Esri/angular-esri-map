@@ -14,6 +14,8 @@
             <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"></esri-scene-view>
             <div><label><input type="checkbox" checked ng-click="exampleCtrl.onStreetsToggle($event)" /> Transportation</label></div>
 
+            <button ng-click="exampleCtrl.changeMap()">Change map for this esri-scene-view</button>
+
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-layers/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -95,7 +97,20 @@
                             transportationLyr.visible = !!e.currentTarget.checked;
                          }
                     });
-                });
+
+                    self.changeMap = function() {
+                        esriLoader.require([
+                            'esri/Map'
+                        ], function(Map) {
+
+                            // create the map
+                            // and add a feature layer
+                            self.map = new Map({
+                                basemap: 'gray'
+                            });
+                        });
+                    };
+                    });
         </script>
     </body>
 </html>

@@ -22,24 +22,27 @@
 
             /**
              * @ngdoc function
-             * @name createMapView
+             * @name getMapView
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Create a MapView instance
-             *
-             * @param {Object} options MapView options
+             * Load and get a reference to a MapView module
              *
              * @return {Promise} Returns a $q style promise which is
              * resolved with an object with a `view` property that refers to the MapView
              */
-            this.createMapView = function(options) {
+            this.getMapView = function() {
                 return esriLoader.require('esri/views/MapView').then(function(MapView) {
                     return {
-                        view: new MapView(options)
+                        view: MapView
                     };
                 });
             };
+
+            // load the view module, get a ref to the promise
+            this.createViewPromise = this.getMapView().then(function(result) {
+                return result;
+            });
 
             /**
              * @ngdoc function
@@ -58,15 +61,17 @@
                 }
 
                 if (!self.view) {
+                    // construct a new MapView with the supplied map and options
                     self.options.map = map;
-                    this.createMapView(self.options).then(function(result) {
-                        self.view = result.view;
-                        
+                    return this.createViewPromise.then(function(result) {
+                        self.view = new result.view(self.options);
+
                         if (typeof self.onCreate() === 'function') {
-                            self.onCreate()(result.view);
+                            self.onCreate()(self.view);
                         }
                     });
                 } else {
+                    // MapView already constructed; only set the map property
                     self.view.map = map;
                 }
             };

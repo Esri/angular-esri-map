@@ -22,24 +22,27 @@
 
             /**
              * @ngdoc function
-             * @name createSceneView
+             * @name getSceneView
              * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Create a SceneView instance
-             *
-             * @param {Object} options SceneView options
+             * Load and get a reference to a SceneView module
              *
              * @return {Promise} Returns a $q style promise which is
              * resolved with an object with a `view` property that refers to the SceneView
              */
-            this.createSceneView = function(options) {
+            this.getSceneView = function() {
                 return esriLoader.require('esri/views/SceneView').then(function(SceneView) {
                     return {
-                        view: new SceneView(options)
+                        view: SceneView
                     };
                 });
             };
+
+            // load the view module, get a ref to the promise
+            this.createViewPromise = this.getSceneView().then(function(result) {
+                return result;
+            });
 
             /**
              * @ngdoc function
@@ -51,6 +54,9 @@
              * if it does not already exist.
              *
              * @param {Object} map Map instance
+             *
+             * @return {Promise} Returns a $q style promise and then
+             * sets the map property and other options on the SceneView.
              */
             this.setMap = function(map) {
                 if (!map) {
@@ -58,15 +64,17 @@
                 }
 
                 if (!self.view) {
+                    // construct a new SceneView with the supplied map and options
                     self.options.map = map;
-                    this.createSceneView(self.options).then(function(result) {
-                        self.view = result.view;
+                    return this.createViewPromise.then(function(result) {
+                        self.view = new result.view(self.options);
 
                         if (typeof self.onCreate() === 'function') {
-                            self.onCreate()(result.view);
+                            self.onCreate()(self.view);
                         }
                     });
                 } else {
+                    // SceneView already constructed; only set the map property
                     self.view.map = map;
                 }
             };
