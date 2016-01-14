@@ -22,30 +22,25 @@
 
             /**
              * @ngdoc function
-             * @name createMapView
+             * @name getMapView
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Create a MapView instance
-             *
-             * @param {Object} options MapView options
+             * Load and get a reference to a MapView module
              *
              * @return {Promise} Returns a $q style promise which is
              * resolved with an object with a `view` property that refers to the MapView
              */
-            this.createMapView = function(options) {
+            this.getMapView = function() {
                 return esriLoader.require('esri/views/MapView').then(function(MapView) {
                     return {
-                        view: new MapView(options)
+                        view: MapView
                     };
                 });
             };
-            
-            // create the view, get a ref to the promise
-            this.createViewPromise = this.createMapView(self.options).then(function(result) {
-                if (typeof self.onCreate() === 'function') {
-                    self.onCreate()(result.view);
-                }
+
+            // load the view module, get a ref to the promise
+            this.createViewPromise = this.getMapView().then(function(result) {
                 return result;
             });
 
@@ -55,25 +50,30 @@
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Set a map on the MapView
+             * Set a map on the MapView. A new MapView will be constructed
+             * if it does not already exist.
              *
              * @param {Object} map Map instance
-             *
-             * @return {Promise} Returns a $q style promise and then
-             * sets the map property and other options property on the MapView.
              */
             this.setMap = function(map) {
                 if (!map) {
                     return;
                 }
-                // preserve extent
-                if (self.options.extent && !map.initialExtent) {
-                    map.initialExtent = self.options.extent;
+
+                if (!self.view) {
+                    // construct a new MapView with the supplied map and options
+                    self.options.map = map;
+                    return this.createViewPromise.then(function(result) {
+                        self.view = new result.view(self.options);
+
+                        if (typeof self.onCreate() === 'function') {
+                            self.onCreate()(self.view);
+                        }
+                    });
+                } else {
+                    // MapView already constructed; only set the map property
+                    self.view.map = map;
                 }
-                self.options.map = map;
-                return this.createViewPromise.then(function(result) {
-                    result.view.set(self.options);
-                });
             };
         });
 })(angular);

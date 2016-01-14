@@ -14,6 +14,8 @@
             <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"></esri-scene-view>
             <div><label><input type="checkbox" checked ng-click="exampleCtrl.onStreetsToggle($event)" /> Transportation</label></div>
 
+            <button ng-click="exampleCtrl.changeMap()">Change map for this esri-scene-view</button>
+
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-layers/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -41,31 +43,30 @@
                     function(
                         Map, SceneView, ArcGISTiledLayer
                     ) {
-
                         /*****************************************************************
                          * Create two ArcGISTiledLayer instances. One pointing to a
                          * cached map service depicting U.S. male population and the other
                          * pointing to a layer of roads and highways.
                          *****************************************************************/
                         var transportationLyr = new ArcGISTiledLayer({
-                          url: '//server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer',
-                          //This property can be used to uniquely identify the layer
-                          id: 'streets'
+                            url: '//server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer',
+                            //This property can be used to uniquely identify the layer
+                            id: 'streets'
                         });
 
                         var popLyr = new ArcGISTiledLayer({
-                          url: '//services.arcgisonline.com/arcgis/rest/services/Demographics/USA_Population_by_Sex/MapServer',
-                          id: 'male-population',
-                          //controls the opacity of the layer
-                          opacity: 0.7
+                            url: '//services.arcgisonline.com/arcgis/rest/services/Demographics/USA_Population_by_Sex/MapServer',
+                            id: 'male-population',
+                            //controls the opacity of the layer
+                            opacity: 0.7
                         });
 
                         /*****************************************************************
                          * Layers may be added to the map in the map's constructor
                          *****************************************************************/
                         self.map = new Map({
-                          basemap: 'dark-gray',
-                          layers: [popLyr]
+                            basemap: 'dark-gray',
+                            layers: [popLyr]
                         });
 
                         /*****************************************************************
@@ -91,9 +92,17 @@
                          * the layer is still part of the map, which means you can access
                          * its properties and perform analysis even though it isn't visible.
                          *******************************************************************/
-                         self.onStreetsToggle = function(e) {
+                        self.onStreetsToggle = function(e) {
                             transportationLyr.visible = !!e.currentTarget.checked;
-                         }
+                        }
+
+                        self.changeMap = function() {
+                            // create the map
+                            // and add a feature layer
+                            self.map = new Map({
+                                basemap: 'gray'
+                            });
+                        };
                     });
                 });
         </script>
