@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Deferred Map</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+    </head>
+    <body ng-controller="ExampleController as exampleCtrl">
+        <h2>Deferred Map</h2>
+        <p>Click the button to lazy load the Esri JSAPI. This can be used when you want to defer its inclusion until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
+        <button ng-click="exampleCtrl.lazyload()" ng-disabled="exampleCtrl.loaded">Load Esri JSAPI and Map View</button>
+        <!-- add the map view to page only once the Esri API has loaded -->
+        <div ng-if="exampleCtrl.loaded">
+            <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
+                view-options="{
+                    zoom: 4,
+                    center: [15, 65]
+                }">
+            </esri-map-view>
+            <p>
+                Lat: {{ exampleCtrl.mapView.center.latitude | number:3 }},
+                Lng: {{ exampleCtrl.mapView.center.longitude | number:3 }}, 
+                Zoom: {{ exampleCtrl.mapView.zoom | number:3 }}
+            </p>
+        </div>
+        <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
+
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader, $scope) {
+                    var self = this;
+
+                    // Default loaded to be false
+                    self.loaded = false;
+
+                    // This function will be called when you click the button
+                    this.lazyload = function() {
+                        // Make a call to load Esri JSAPI resources at version 4.0beta3.
+                        // A promise is provided for when the resources have finished loading.
+                        esriLoader.bootstrap({
+                            url: '//js.arcgis.com/4.0beta3'
+                        }).then(function() {
+                            // Set loaded to be true
+                            self.loaded = true;
+                            self.createMap();
+                        }, function(err) {
+                            self.loaded = err;
+                        });
+                    };
+
+                    this.createMap = function() {
+                        esriLoader.require('esri/Map', function(Map) {
+                            // Create the map
+                            self.map = new Map({
+                                basemap: 'streets'
+                            });
+                        });
+                    };
+
+                    this.onViewCreated = function(view) {
+                        self.mapView = view;
+                        // Experimental: setup a JSAPI 4.x property watch outside of Angular
+                        //  and update bound Angular controller properties
+                        self.mapView.watch('center,zoom', function() {
+                            $scope.$applyAsync('exampleCtrl.mapView');
+                        });
+                    };
+                });
+        </script>
+    </body>
+</html>
