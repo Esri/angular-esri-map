@@ -52,19 +52,18 @@
                     var self = this;
                     // load esri modules
                     esriLoader.require([
-                      'esri/Map',
-                      'esri/layers/FeatureLayer'
+                        'esri/Map',
+                        'esri/layers/FeatureLayer'
                     ], function(Map, FeatureLayer) {
-
                         // create the map
                         // and add a feature layer
                         self.map = new Map({
-                          basemap: 'hybrid',
-                          layers: [
-                              new FeatureLayer({
-                                  url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0'
-                              })
-                          ]
+                            basemap: 'hybrid',
+                            layers: [
+                                new FeatureLayer({
+                                    url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0'
+                                })
+                            ]
                         });
 
                         self.onViewCreated = function(view) {
@@ -72,15 +71,10 @@
                         };
 
                         self.changeMap = function() {
-                            esriLoader.require([
-                                'esri/Map'
-                            ], function(Map) {
-
-                                // create the map
-                                // and add a feature layer
-                                self.map = new Map({
-                                    basemap: 'gray'
-                                });
+                            // create the map
+                            // and add a feature layer
+                            self.map = new Map({
+                                basemap: 'gray'
                             });
                         };
                     });
