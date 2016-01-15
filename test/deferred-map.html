@@ -20,11 +20,6 @@
                     center: [15, 65]
                 }">
             </esri-map-view>
-            <p>
-                Lat: {{ exampleCtrl.mapView.center.latitude | number:3 }},
-                Lng: {{ exampleCtrl.mapView.center.longitude | number:3 }}, 
-                Zoom: {{ exampleCtrl.mapView.zoom | number:3 }}
-            </p>
         </div>
         <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
 
@@ -35,7 +30,7 @@
         <!-- run example app controller -->
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader, $scope) {
+                .controller('ExampleController', function(esriLoader) {
                     var self = this;
 
                     // Default loaded to be false
@@ -62,15 +57,6 @@
                             self.map = new Map({
                                 basemap: 'streets'
                             });
-                        });
-                    };
-
-                    this.onViewCreated = function(view) {
-                        self.mapView = view;
-                        // Experimental: setup a JSAPI 4.x property watch outside of Angular
-                        //  and update bound Angular controller properties
-                        self.mapView.watch('center,zoom', function() {
-                            $scope.$applyAsync('exampleCtrl.mapView');
                         });
                     };
                 });
