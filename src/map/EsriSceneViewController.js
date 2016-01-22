@@ -50,10 +50,10 @@
              * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Set a map on the SceneView. A new SceneView will be constructed
+             * Set a Map or WebScene on the SceneView. A new SceneView will be constructed
              * if it does not already exist.
              *
-             * @param {Object} map Map instance
+             * @param {Object} map Map instance or WebScene instance
              *
              * @return {Promise} Returns a $q style promise and then
              * sets the map property and other options on the SceneView.

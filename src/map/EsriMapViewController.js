@@ -50,7 +50,7 @@
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Set a map on the MapView. A new MapView will be constructed
+             * Set a Map on the MapView. A new MapView will be constructed
              * if it does not already exist.
              *
              * @param {Object} map Map instance

@@ -11,7 +11,7 @@
             '2D': [{
                 toc: {
                     title: 'Feature Layer',
-                    description: 'Load a feature layer onto a map',
+                    description: 'Load a feature layer onto a map.',
                     url: urlPrefixes.templateHref + 'feature-layer'
                 },
                 route: {
@@ -33,17 +33,54 @@
                     controller: 'SceneViewCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'WebScene Slides',
+                    description: 'Load a WebScene from an ArcGIS for Portal item and work with its WebScene.',
+                    url: urlPrefixes.templateHref + 'webscene-slides'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'webscene-slides',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'webscene-slides.html',
+                    controller: 'WebSceneSlidesCtrl',
+                    controllerAs: 'vm'
+                }
+            }, {
+                toc: {
+                    title: 'Extrude Polygon',
+                    description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a SceneView.',
+                    url: urlPrefixes.templateHref + 'extrude-polygon'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'extrude-polygon',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'extrude-polygon.html',
+                    controller: 'ExtrudePolygonCtrl',
+                    controllerAs: 'vm'
+                }
             }],
+            Visualization: [],
             Controls: [{
                 toc: {
                     title: 'Home Button',
-                    description: 'A home button directive to return the map/scene view to it\'s starting point',
+                    description: 'A home button directive to return the map/scene view to it\'s starting point.',
                     url: urlPrefixes.templateHref + 'home-button'
                 },
                 route: {
                     path: urlPrefixes.routePath + 'home-button',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'home-button.html',
                     controller: 'HomeButtonCtrl',
+                    controllerAs: 'vm'
+                }
+            }, {
+                toc: {
+                    title: 'Get Started with Popups',
+                    description: 'Define a PopupTemplate for a FeatureLayer.',
+                    url: urlPrefixes.templateHref + 'popups'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'popups',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'popups.html',
+                    controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
             }]

@@ -15,7 +15,7 @@
      * ## Examples
      * - {@link ../#/examples/scene-view Scene View}
      *
-     * @param {Object} map Instance of a map.
+     * @param {Object} map Instance of a Map or WebScene.
      * @param {Function=} on-create Callback for successful creation of the scene view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
      */

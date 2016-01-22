@@ -1,0 +1,39 @@
+<h2>Work with Slides in a WebScene</h2>
+<style type="text/css">
+    .slidesDiv {
+        position: absolute;
+        z-index: 50;
+        top: 0;
+        right: 0;
+        background-color: black;
+        opacity: 0.8;
+        color: snow;
+        padding: 10px;
+        border-radius: 10px;
+        max-height: 85%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        font-size: 0.68em;
+    }
+    .slide {
+        cursor: pointer;
+    }
+    .activeSlide {
+        box-shadow: 0 0 12px #ffffff;
+        border-style: solid;
+        border-width: thin;
+        border-color: white;
+    }
+</style>
+<div style="position:relative;">
+    <esri-scene-view map="vm.map" on-create="vm.onViewCreated"></esri-scene-view>
+    <div class="slidesDiv" ng-show="vm.slides.length > 0">
+        <span class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
+            {{slide.title.text}}
+            <br>
+            <img src="{{slide.thumbnail.url}}" title="{{slide.title.text}}" ng-class="{activeSlide: slide.isActiveSlide}">
+            <br>
+        </span>
+    </div>
+</div>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-featurelayer/index.html">this sample</a>.</p>

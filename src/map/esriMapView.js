@@ -15,7 +15,7 @@
      * ## Examples
      * - {@link ../#/examples/feature-layer Feature Layer}
      *
-     * @param {Object} map Instance of a map.
+     * @param {Object} map Instance of a Map.
      * @param {Function=} on-create Callback for successful creation of the map view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
      */
