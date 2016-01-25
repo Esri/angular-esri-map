@@ -4,10 +4,9 @@ angular.module('esri-map-docs')
         // load esri modules
         esriLoader.require([
             'esri/Map',
-            'esri/views/SceneView',
             'esri/layers/ArcGISTiledLayer'
         ], function(
-            Map, SceneView, ArcGISTiledLayer
+            Map, ArcGISTiledLayer
         ) {
 
             // add layers to the map

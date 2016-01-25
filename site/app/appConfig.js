@@ -57,8 +57,19 @@
                     controller: 'ExtrudePolygonCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'Toggle Basemap Elevation',
+                    description: 'Turn on/off the basemap\'s elevation layer in a SceneView.',
+                    url: urlPrefixes.templateHref + 'scene-toggle-elevation'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'scene-toggle-elevation',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'scene-toggle-elevation.html',
+                    controller: 'SceneToggleElevationCtrl',
+                    controllerAs: 'vm'
+                }
             }],
-            Visualization: [],
             Controls: [{
                 toc: {
                     title: 'Home Button',

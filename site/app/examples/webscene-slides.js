@@ -6,10 +6,9 @@ angular.module('esri-map-docs')
 
         // load esri modules
         esriLoader.require([
-            'esri/views/SceneView',
             'esri/portal/PortalItem',
             'esri/WebScene'
-        ], function(SceneView, PortalItem, WebScene) {
+        ], function(PortalItem, WebScene) {
             // create a new WebScene
             var webScene = new WebScene({
                 portalItem: new PortalItem({
@@ -26,7 +25,7 @@ angular.module('esri-map-docs')
                 view.then(function() {
                     self.sceneView = view;
 
-                    self.slides = view.map.presentation.slides.items;
+                    self.slides = view.map.presentation.slides.getAll();
                     // tack on an extra property for ng-class css styling
                     self.slides.forEach(function(slide) {
                         slide.isActiveSlide = false;

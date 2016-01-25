@@ -1,0 +1,30 @@
+<style type="text/css">
+    #elevationDiv {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        padding: 12px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 0.8em;
+    }
+    #elevationDiv label,
+    #elevationDiv input {
+        cursor: pointer;
+    }
+</style>
+<h2>Toggle the Basemap's Elevation Layer</h2>
+<div style="position:relative;">
+    <esri-scene-view map="vm.map" on-create="vm.onViewCreated" 
+        view-options="{
+            camera: {
+                position: [7.654, 45.919, 5184],
+                tilt: 80
+            }
+        }">
+    </esri-scene-view>
+    <div id="elevationDiv">
+        <label>Elevation: <input type="checkbox" checked ng-click="vm.updateElevation($event)" /></label>
+    </div>
+</div>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>
