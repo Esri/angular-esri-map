@@ -163,22 +163,21 @@ gulp.task('karma', function(done) {
 
 // TODO: run functional tests once we've written some
 // for now just running karma coverage
-gulp.task('test', ['karma-coverage']);
-// gulp.task('test', ['karma-coverage', 'serve-test'], function() {
-//   return gulp.src(['./test/e2e/specs/*.js'])
-//     .pipe(angularProtractor({
-//       'configFile': 'test/e2e/conf.js',
-//       'args': ['--baseUrl', 'http://localhost:9002'],
-//       'autoStartStopServer': true
-//       // 'debug': true
-//     }))
-//     .on('end', function() {
-//       browserSync.exit();
-//     })
-//     .on('error', function(e) {
-//       throw e;
-//     });
-// });
+gulp.task('test', ['karma-coverage', 'serve-test'], function() {
+  return gulp.src(['./test/e2e/specs/*.js'])
+    .pipe(angularProtractor({
+      'configFile': 'test/e2e/conf.js',
+      'args': ['--baseUrl', 'http://localhost:9002'],
+      'autoStartStopServer': true,
+      'debug': true
+    }))
+    .on('end', function() {
+      browserSync.exit();
+    })
+    .on('error', function(e) {
+      throw e;
+    });
+});
 
 gulp.task('ngdocs', [], function () {
   var gulpDocs = require('gulp-ngdocs');
