@@ -44,30 +44,29 @@
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader) {
+                .controller('ExampleController', function(esriLoader, $scope) {
                     var self = this;
 
                     esriLoader.require([
-                        'esri/Map'
-                    ], function(Map) {
+                        'esri/Map',
+                        'esri/widgets/Search',
+                        'esri/widgets/Search/SearchViewModel'
+                    ], function(Map, Search, SearchVM) {
                         self.map = new Map({
                             basemap: 'hybrid'
                         });
-                    });
 
-                    self.onViewCreated = function(view) {
-                        esriLoader.require([
-                            'esri/widgets/Search',
-                            'esri/widgets/Search/SearchViewModel'
-                        ], function(Search, SearchVM) {
+                        self.onViewCreated = function(view) {
                             var searchWidget = new Search({
                                 viewModel: new SearchVM({
                                     view: view
                                 })
                             }, 'searchDiv');
                             searchWidget.startup();
-                        });
-                    };
+                        };
+
+                        $scope.$apply();
+                    });
                 });
         </script>
     </body>

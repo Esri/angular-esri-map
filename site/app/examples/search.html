@@ -1,0 +1,19 @@
+<style type="text/css">
+    #searchDiv {
+        position: absolute;
+        z-index: 20;
+        top: 20px;
+        left: 74px;
+    }
+</style>
+<h2>Search Widget</h2>
+<div style="position: relative;">
+    <div id="searchDiv"></div>
+    <esri-map-view map="vm.map" on-create="vm.onViewCreated"
+        view-options="{
+            center: [-97, 38],
+            zoom: 6
+        }">
+    </esri-map-view>
+</div>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/widgets-search-2d/index.html">this sample</a>.</p>

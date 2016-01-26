@@ -94,6 +94,18 @@
                     controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'Search',
+                    description: 'Add a search tool to find locations on the map.',
+                    url: urlPrefixes.templateHref + 'search'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'search',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'search.html',
+                    controller: 'SearchCtrl',
+                    controllerAs: 'vm'
+                }
             }]
         },
         patternsPages: [
