@@ -1,0 +1,26 @@
+<style type="text/css">
+    #results {
+        top: 20px;
+        right: 20px;
+        position: absolute;
+        z-index: 99;
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        opacity: 0.75;
+        font-size: 0.9em;
+    }
+</style>
+<h2>Chaining Promises</h2>
+<div style="position:relative;">
+    <esri-scene-view map="vm.map" on-create="vm.onViewCreated">
+    <div id="results">
+        <!-- <button ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">Start Promise Chain</button> -->
+        <button type="button" class="btn btn-sm btn-default" ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">Start Promise Chain</button>
+        <span id="areaSpan" ng-hide="!vm.area">
+            <br><br>Area = {{vm.area | number: 0}} acres
+        </span>
+    </div>
+    </esri-scene-view>
+</div>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/chaining-promises/index.html">this sample</a>.</p>

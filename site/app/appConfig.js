@@ -106,6 +106,19 @@
                     controller: 'SearchCtrl',
                     controllerAs: 'vm'
                 }
+            }],
+            Other: [{
+                toc: {
+                    title: 'Chaining Promises',
+                    description: 'Chain together asynchronous operations with promises for more complex interactions and calculations.',
+                    url: urlPrefixes.templateHref + 'chaining-promises'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'chaining-promises',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'chaining-promises.html',
+                    controller: 'ChainingPromisesCtrl',
+                    controllerAs: 'vm'
+                }
             }]
         },
         patternsPages: [

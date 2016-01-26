@@ -21,7 +21,7 @@ describe('Feature Layer', function() {
                 return allGs.count().then(function(countValue) {
                     return countValue > 0;
                 });
-            }, 5000).then(function() {
+            }, 8000).then(function() {
                 expect(allGs.count()).toEqual(1);
             });
         });

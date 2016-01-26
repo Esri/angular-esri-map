@@ -15,10 +15,11 @@ describe('Popups', function() {
                 return allGs.count().then(function(countValue) {
                     return countValue > 0;
                 });
-            }, 5000).then(function() {
+            }, 8000).then(function() {
                 var popupDiv = element(by.css('.esri-popup'));
 
-                mapView.click();
+                var clickableMapElement = element(by.css('.esri-view-surface'));
+                clickableMapElement.click();
 
                 // SHOULD NOT INCLUDE CLASS "esri-invisible"
                 expect(popupDiv.getAttribute('class')).toEqual('esri-popup');
