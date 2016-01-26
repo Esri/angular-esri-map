@@ -84,33 +84,32 @@
                         $scope.$apply(function() {
                             self.map = webScene;
                         });
+                    });
 
-                        self.onViewCreated = function(view) {
-                            // to be sure that the view is both created and loaded with all slides,
-                            //  perform additional logic in the promise callback
-                            view.then(function() {
-                                self.sceneView = view;
+                    self.onViewCreated = function(view) {
+                        // to be sure that the view is both created and loaded with all slides,
+                        //  perform additional logic in the promise callback
+                        view.then(function() {
+                            self.sceneView = view;
 
-                                self.slides = view.map.presentation.slides.getAll();
-                                // tack on an extra property for ng-class css styling
-                                self.slides.forEach(function(slide) {
-                                    slide.isActiveSlide = false;
-                                });
-
-                                // manually apply scope since we are outside of the Angular digest cycle
-                                $scope.$apply();
-                            });
-                        };
-
-
-                        self.onSlideClick = function(slide) {
+                            self.slides = view.map.presentation.slides.getAll();
+                            // tack on an extra property for ng-class css styling
                             self.slides.forEach(function(slide) {
                                 slide.isActiveSlide = false;
                             });
-                            slide.isActiveSlide = true;
-                            slide.applyTo(self.sceneView);
-                        };
-                    });
+
+                            // manually apply scope since we are outside of the Angular digest cycle
+                            $scope.$apply('exampleCtrl.slides');
+                        });
+                    };
+
+                    self.onSlideClick = function(slide) {
+                        self.slides.forEach(function(slide) {
+                            slide.isActiveSlide = false;
+                        });
+                        slide.isActiveSlide = true;
+                        slide.applyTo(self.sceneView);
+                    };
                 });
         </script>
     </body>

@@ -15,13 +15,13 @@ describe('Webscene Slides', function() {
 
     it('should have six slides', function() {
         helper.getSceneViewElement().then(function() {
-            var slides = element(by.repeater('slide in exampleCtrl.slides'));
+            var slides = element.all(by.repeater('slide in exampleCtrl.slides'));
 
             browser.wait(function() {
                 return slides.count().then(function(countValue) {
                     return countValue > 0;
                 });
-            }, 5000).then(function() {
+            }, 8000).then(function() {
                 expect(slides.count()).toEqual(6);
             });
         });
