@@ -17,7 +17,7 @@ angular.module('esri-map-docs')
             });
 
             // establish the WebScene as the bound "map" property for the <esri-scene-view>
-            $scope.$apply(function() {
+            $scope.$evalAsync(function() {
                 self.map = webScene;
             });
         });

@@ -18,8 +18,13 @@ angular.module('esri-map-docs')
                     })
                 }, 'searchDiv');
                 searchWidget.startup();
+
+                // destroy the search widget when angular scope is also being destroyed
+                $scope.$on('$destroy', function() {
+                    searchWidget.destroy();
+                });
             };
 
-            $scope.$apply();
+            $scope.$evalAsync();
         });
     });
