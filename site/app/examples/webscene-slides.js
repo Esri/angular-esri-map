@@ -17,7 +17,9 @@ angular.module('esri-map-docs')
             });
 
             // establish the WebScene as the bound "map" property for the <esri-scene-view>
-            self.map = webScene;
+            $scope.$apply(function() {
+                self.map = webScene;
+            });
 
             self.onViewCreated = function(view) {
                 // to be sure that the view is both created and loaded with all slides,
@@ -30,7 +32,7 @@ angular.module('esri-map-docs')
                     self.slides.forEach(function(slide) {
                         slide.isActiveSlide = false;
                     });
-                    
+
                     // manually apply scope since we are outside of the Angular digest cycle
                     $scope.$apply();
                 });
