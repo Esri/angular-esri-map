@@ -26,7 +26,7 @@
 </style>
 <h2>Work with Slides in a WebScene</h2>
 <div style="position:relative;">
-    <esri-scene-view map="vm.map" on-create="vm.onViewCreated"></esri-scene-view>
+    <esri-scene-view map="vm.map" on-load="vm.onViewLoaded"></esri-scene-view>
     <div class="slidesDiv" ng-show="vm.slides.length > 0">
         <span class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
             {{slide.title.text}}

@@ -33,6 +33,7 @@
                     map: '=?',
                     // function binding for event handlers
                     onCreate: '&',
+                    onLoad: '&',
                     // function binding for reading object hash from attribute string
                     // or from scope object property
                     viewOptions: '&'

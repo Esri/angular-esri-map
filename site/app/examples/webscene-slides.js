@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('WebSceneSlidesCtrl', function(esriLoader, $scope) {
+    .controller('WebSceneSlidesCtrl', function(esriLoader) {
         var self = this;
         self.slides = [];
         self.sceneView = null;
@@ -8,7 +8,10 @@ angular.module('esri-map-docs')
         esriLoader.require([
             'esri/portal/PortalItem',
             'esri/WebScene'
-        ], function(PortalItem, WebScene) {
+        ]).then(function(esriModules) {
+            var PortalItem = esriModules[0];
+            var WebScene = esriModules[1];
+
             // create a new WebScene
             var webScene = new WebScene({
                 portalItem: new PortalItem({
@@ -17,15 +20,11 @@ angular.module('esri-map-docs')
             });
 
             // establish the WebScene as the bound "map" property for the <esri-scene-view>
-            $scope.$evalAsync(function() {
-                self.map = webScene;
-            });
-        });
+            self.map = webScene;
 
-        self.onViewCreated = function(view) {
             // to be sure that the view is both created and loaded with all slides,
-            //  perform additional logic in the promise callback
-            view.then(function() {
+            //  perform additional logic in the view directive's load callback
+            self.onViewLoaded = function(view) {
                 self.sceneView = view;
 
                 self.slides = view.map.presentation.slides.getAll();
@@ -33,17 +32,14 @@ angular.module('esri-map-docs')
                 self.slides.forEach(function(slide) {
                     slide.isActiveSlide = false;
                 });
+            };
 
-                // manually apply scope since we are outside of the Angular digest cycle
-                $scope.$apply('exampleCtrl.slides');
-            });
-        };
-
-        self.onSlideClick = function(slide) {
-            self.slides.forEach(function(slide) {
-                slide.isActiveSlide = false;
-            });
-            slide.isActiveSlide = true;
-            slide.applyTo(self.sceneView);
-        };
+            self.onSlideClick = function(slide) {
+                self.slides.forEach(function(slide) {
+                    slide.isActiveSlide = false;
+                });
+                slide.isActiveSlide = true;
+                slide.applyTo(self.sceneView);
+            };
+        });
     });

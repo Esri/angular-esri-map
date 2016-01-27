@@ -11,7 +11,7 @@
      * @requires esri.core.factory:esriLoader
      */
     angular.module('esri.map')
-        .controller('EsriSceneViewController', function EsriSceneViewController($element, esriLoader) {
+        .controller('EsriSceneViewController', function EsriSceneViewController($element, $scope, esriLoader) {
             var self = this;
 
             // read options passed in as either a JSON string expression
@@ -39,10 +39,11 @@
                 });
             };
 
+            // TODO: is this still needed?
             // load the view module, get a ref to the promise
-            this.createViewPromise = this.getSceneView().then(function(result) {
-                return result;
-            });
+            // this.createViewPromise = this.getSceneView().then(function(result) {
+            //     return result;
+            // });
 
             /**
              * @ngdoc function
@@ -66,12 +67,19 @@
                 if (!self.view) {
                     // construct a new SceneView with the supplied map and options
                     self.options.map = map;
-                    return this.createViewPromise.then(function(result) {
+                    return this.getSceneView().then(function(result) {
                         self.view = new result.view(self.options);
 
                         if (typeof self.onCreate() === 'function') {
                             self.onCreate()(self.view);
                         }
+                        self.view.then(function() {
+                            if (typeof self.onLoad() === 'function') {
+                                $scope.$apply(function() {
+                                    self.onLoad()(self.view);
+                                });
+                            }
+                        });
                     });
                 } else {
                     // SceneView already constructed; only set the map property
