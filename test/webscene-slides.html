@@ -37,7 +37,7 @@
         <h2>Work with Slides in a WebScene</h2>
         <div ng-controller="ExampleController as exampleCtrl">
             <div style="position:relative;">
-                <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"></esri-scene-view>
+                <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
                 <div class="slidesDiv" ng-show="exampleCtrl.slides.length > 0">
                     <span class="slide" ng-repeat="slide in exampleCtrl.slides" ng-click="exampleCtrl.onSlideClick(slide)">
                         {{slide.title.text}}
@@ -82,12 +82,10 @@
 
                         // establish the WebScene as the bound "map" property for the <esri-scene-view>
                         self.map = webScene;
-                    });
 
-                    self.onViewCreated = function(view) {
                         // to be sure that the view is both created and loaded with all slides,
-                        //  perform additional logic in the promise callback
-                        view.then(function() {
+                        //  perform additional logic in the view directive's load callback
+                        self.onViewLoaded = function(view) {
                             self.sceneView = view;
 
                             self.slides = view.map.presentation.slides.getAll();
@@ -95,22 +93,16 @@
                             self.slides.forEach(function(slide) {
                                 slide.isActiveSlide = false;
                             });
-
-                            // manually apply scope since we are outside of the Angular digest cycle
-                            /*
-                                NOTE: check if this can go away after the on-load hook is added to src instead
-                            */
-                            $scope.$apply('exampleCtrl.slides');
-                        });
-                    };
-
-                    self.onSlideClick = function(slide) {
-                        self.slides.forEach(function(slide) {
-                            slide.isActiveSlide = false;
-                        });
-                        slide.isActiveSlide = true;
-                        slide.applyTo(self.sceneView);
-                    };
+                        };
+                        
+                        self.onSlideClick = function(slide) {
+                            self.slides.forEach(function(slide) {
+                                slide.isActiveSlide = false;
+                            });
+                            slide.isActiveSlide = true;
+                            slide.applyTo(self.sceneView);
+                        };
+                    });
                 });
         </script>
     </body>
