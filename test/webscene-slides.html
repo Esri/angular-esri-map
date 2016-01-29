@@ -72,11 +72,7 @@
                     esriLoader.require([
                         'esri/portal/PortalItem',
                         'esri/WebScene'
-                    // ], function(PortalItem, WebScene) {
-                    ]).then(function(esriModules) {
-                        var PortalItem = esriModules[0];
-                        var WebScene = esriModules[1];
-
+                    ], function(PortalItem, WebScene) {
                         // create a new WebScene
                         var webScene = new WebScene({
                             portalItem: new PortalItem({
@@ -98,7 +94,7 @@
                                 slide.isActiveSlide = false;
                             });
                         };
-
+                        
                         self.onSlideClick = function(slide) {
                             self.slides.forEach(function(slide) {
                                 slide.isActiveSlide = false;

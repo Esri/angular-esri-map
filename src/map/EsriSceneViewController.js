@@ -9,6 +9,8 @@
      * Functions to help create SceneView instances.
      *
      * @requires esri.core.factory:esriLoader
+     * @requires $element
+     * @requires $scope
      */
     angular.module('esri.map')
         .controller('EsriSceneViewController', function EsriSceneViewController($element, $scope, esriLoader) {
@@ -39,12 +41,6 @@
                 });
             };
 
-            // TODO: is this still needed?
-            // load the view module, get a ref to the promise
-            // this.createViewPromise = this.getSceneView().then(function(result) {
-            //     return result;
-            // });
-
             /**
              * @ngdoc function
              * @name setMap
@@ -52,7 +48,7 @@
              *
              * @description
              * Set a Map or WebScene on the SceneView. A new SceneView will be constructed
-             * if it does not already exist.
+             * if it does not already exist, and also execute optional `on-load` and `on-create` events.
              *
              * @param {Object} map Map instance or WebScene instance
              *
@@ -73,6 +69,7 @@
                         if (typeof self.onCreate() === 'function') {
                             self.onCreate()(self.view);
                         }
+
                         self.view.then(function() {
                             if (typeof self.onLoad() === 'function') {
                                 $scope.$apply(function() {

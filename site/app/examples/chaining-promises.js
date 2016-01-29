@@ -40,13 +40,13 @@ angular.module('esri-map-docs')
             });
 
             // create the map for the esri-scene-view
-            var map = new Map({
+            self.map = new Map({
                 basemap: 'hybrid'
             });
 
             // create layer to store graphics and add to map
             var layer = new GraphicsLayer();
-            map.add(layer);
+            self.map.add(layer);
 
             // location of meteor crater centroid in Arizona desert
             var meteorPoint = new Point({
@@ -66,12 +66,6 @@ angular.module('esri-map-docs')
                     .then(calculateArea)    // when promise resolves, send buffer to calculateArea()
                     .then(printArea);       // when promise resolves, send buffer to printArea()
             };
-
-            // after loading AMD modules, we are likely outside of the digest cycle
-            // apply scope to establish the bound "map" property
-            $scope.$evalAsync(function() {
-                self.map = map;
-            });
 
             // adds the point and buffer graphics to the layer
             function addGraphics(buffer) {

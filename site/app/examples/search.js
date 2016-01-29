@@ -24,7 +24,5 @@ angular.module('esri-map-docs')
                     searchWidget.destroy();
                 });
             };
-
-            $scope.$evalAsync();
         });
     });

@@ -17,6 +17,7 @@
      *
      * @param {Object} map Instance of a Map or WebScene.
      * @param {Function=} on-create Callback for successful creation of the scene view.
+     * @param {Function=} on-load Callback for successful loading of the scene view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
      */
     angular.module('esri.map')
@@ -29,7 +30,7 @@
 
                 // isolate scope
                 scope: {
-                    // to-way binding
+                    // two-way binding
                     map: '=?',
                     // function binding for event handlers
                     onCreate: '&',
