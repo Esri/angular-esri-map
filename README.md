@@ -23,7 +23,7 @@ npm install angular-esri-map
 ```
 Alternatively, you can clone or [download](https://github.com/Esri/angular-esri-map/releases) this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
 
-Once you've added the module to your application, you can use the sample code below to use the map and feature layer directives. Just change the "path/to/angular-esri-map.js" to point to the location of the file in your environment and load the page in a browser.
+Once you've added the module to your application, you can use the sample code below to use the scene view directive. Just change the "path/to/angular-esri-map.js" to point to the location of the file in your environment and load the page in a browser.
 
 ![App](https://raw.github.com/Esri/angular-esri-map/master/angular-esri-map.png)
 
@@ -33,28 +33,25 @@ Once you've added the module to your application, you can use the sample code be
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-
-        <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.15/esri/css/esri.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
     </head>
-    <body ng-controller="MapController">
-    <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0"></esri-feature-layer>
-        <esri-feature-layer url="http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Portland_Parks/FeatureServer/0"></esri-feature-layer>
-    </esri-map>
-    <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-        <script type="text/javascript" src="http://js.arcgis.com/3.15compact"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+    <body ng-controller="MapController as vm">
+        <esri-scene-view map="vm.map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">
+        </esri-scene-view>
+        
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
+
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
-                .controller('MapController', function ($scope) {
-                    $scope.map = {
-                        center: {
-                            lng: -122.676207,
-                            lat: 45.523452
-                        },
-                        zoom: 12
-                    };
+                .controller('MapController', function(esriLoader) {
+                    var self = this;
+                    esriLoader.require(['esri/Map'], function(Map) {
+                        self.map = new Map({
+                            basemap: 'streets'
+                        });
+                    });
                 });
         </script>
     </body>
@@ -80,12 +77,13 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-These directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
+At version 1.x, these directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). For version 2.x, the ArcGIS API for JavaScript v4.0 beta is required. They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
 
 angular-esri-map | Angular | ArcGIS API for JavaScript
 --- | --- | ---
-v1.0 | v1.3+ | v3.12+ 
-v1.1 | v1.3+ | v3.15+
+v1.0 | v1.3+ | [v3.12+](https://developers.arcgis.com/javascript/)
+v1.1 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/)
+v2.xbeta | v1.3+ | [v4.0beta3+](https://developers.arcgis.com/javascript/beta/)
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 

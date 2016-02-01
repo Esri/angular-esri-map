@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Changed
+
+Refactored to support JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-map/pull/198) [#206](https://github.com/Esri/angular-esri-map/pull/206) [#220](https://github.com/Esri/angular-esri-map/pull/220) [#221](https://github.com/Esri/angular-esri-map/pull/221)
+
+### Documentation
+
+Added/updated example and test pages to show how to use this with JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-map/pull/198) [#207](https://github.com/Esri/angular-esri-map/pull/207) [#210](https://github.com/Esri/angular-esri-map/pull/210)
+
 ## [v1.1.0]
 
 ### Added
