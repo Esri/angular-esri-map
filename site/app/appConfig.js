@@ -11,13 +11,25 @@
             '2D': [{
                 toc: {
                     title: 'Feature Layer',
-                    description: 'Load a feature layer onto a map.',
+                    description: 'Load a FeatureLayer onto a map.',
                     url: urlPrefixes.templateHref + 'feature-layer'
                 },
                 route: {
                     path: urlPrefixes.routePath + 'feature-layer',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'feature-layer.html',
                     controller: 'FeatureLayerCtrl',
+                    controllerAs: 'vm'
+                }
+            }, {
+                toc: {
+                    title: 'Vector Tiles',
+                    description: 'Load a VectorTileLayer onto a map.',
+                    url: urlPrefixes.templateHref + 'vector-tiles'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'vector-tiles',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'vector-tiles.html',
+                    controller: 'VectorTileLayerCtrl',
                     controllerAs: 'vm'
                 }
             }],
@@ -117,6 +129,18 @@
                     path: urlPrefixes.routePath + 'chaining-promises',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'chaining-promises.html',
                     controller: 'ChainingPromisesCtrl',
+                    controllerAs: 'vm'
+                }
+            }, {
+                toc: {
+                    title: 'Geodesic Buffers',
+                    description: 'Create geodesic buffers using the GeometryEngine in 2D and 3D views referencing the same map.',
+                    url: urlPrefixes.templateHref + 'geodesic-buffers'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'geodesic-buffers',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'geodesic-buffers.html',
+                    controller: 'GeodesicBuffersCtrl',
                     controllerAs: 'vm'
                 }
             }]

@@ -40,17 +40,17 @@ var _getEsriViewElement = function(elementArrayFinder, deferred) {
 // wait for map's "esri-display-object" in DOM to be ready (for a JSAPI 4.x MapView)
 var getMapViewElement = function() {
     var deferred = protractor.promise.defer();
-    var mapViewParent = element(by.css('.esri-view-root')).all(by.css('.esri-display-object'));
+    var mapViewParent = element(by.tagName('esri-map-view')).all(by.css('.esri-display-object'));
 
     _getEsriViewElement(mapViewParent, deferred);
 
     return deferred.promise;
 };
 
-// wait for map's esri-view-surface in DOM to be ready (for a JSAPI 4.x SceneView)
+// wait for canvas in DOM to be ready (for a JSAPI 4.x SceneView)
 var getSceneViewElement = function() {
     var deferred = protractor.promise.defer();
-    var sceneViewParent = element(by.css('.esri-view-root')).all(by.css('.esri-view-surface'));
+    var sceneViewParent = element(by.tagName('esri-scene-view')).all(by.tagName('canvas'));
 
     _getEsriViewElement(sceneViewParent, deferred);
 

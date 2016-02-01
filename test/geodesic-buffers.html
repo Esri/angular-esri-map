@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Geodesic Buffers</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .viewDivBase {
+                padding: 0;
+                margin: 0;
+                /*height: 100%;*/
+                width: 49.9%;
+                position: relative;
+            }
+            #viewDiv2d {
+                float: left;
+            }
+            #viewDiv3d {
+                float: right;
+            }
+            .title {
+                top: 0;
+                right: 0;
+                position: absolute;
+                z-index: 99;
+                background-color: white;
+                padding: 5px;
+                opacity: 0.75;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Geodesic Buffers</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-map-view class="viewDivBase" id="viewDiv2d" 
+                map="exampleCtrl.map"
+                view-options="{
+                    zoom: 3,
+                    center: [0, 45]
+                }">
+                <div class="title">MapView</div>
+            </esri-map-view>
+
+            <esri-scene-view class="viewDivBase" id="viewDiv3d" 
+                map="exampleCtrl.map"
+                view-options="{
+                    zoom: 4,
+                    center: [0, 45]
+                }">
+                <div class="title">SceneView</div>
+            </esri-scene-view>
+            
+            <div>
+                <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/ge-geodesicbuffer/index.html">this sample</a>.</p>
+            </div>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/Map',
+                        'esri/layers/GraphicsLayer',
+                        'esri/Graphic',
+
+                        'esri/geometry/SpatialReference',
+                        'esri/geometry/geometryEngine',
+                        'esri/geometry/Point',
+
+                        'esri/symbols/SimpleMarkerSymbol',
+                        'esri/symbols/SimpleLineSymbol',
+                        'esri/symbols/SimpleFillSymbol'
+                    ],
+                    function(
+                        Map, GraphicsLayer, Graphic,
+                        SpatialReference, geometryEngine, Point,
+                        SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol
+                    ) {
+                        self.map = new Map({
+                            basemap: 'satellite'
+                        });
+
+                        /********************************************************************
+                         * Add two graphics layers to map: one for points, another for buffers
+                         ********************************************************************/
+                        var bufferLayer = new GraphicsLayer();
+                        var pointLayer = new GraphicsLayer();
+
+                        self.map.add([bufferLayer, pointLayer]);
+
+                        var sr = new SpatialReference(4326);
+
+                        var pointSym = new SimpleMarkerSymbol({
+                            color: [255, 0, 0],
+                            outline: new SimpleLineSymbol({
+                                color: [255, 255, 255],
+                                width: 1
+                            }),
+                            size: 7
+                        });
+
+                        var polySym = new SimpleFillSymbol({
+                            color: [255, 255, 255, 0.5],
+                            outline: new SimpleLineSymbol({
+                                color: [0, 0, 0, 0.5],
+                                width: 2
+                            })
+                        });
+
+                        /********************************************************************
+                         * Generate points every 10 degrees along Prime Meridian. Add to layer.
+                         * Buffer each point by 560km using GeometryEngine. Add buffers to map.
+                         ********************************************************************/
+                        self.map.then(addPoints);
+
+                        function addPoints() {
+                            var point, buffer, lat;
+
+                            for (lat = -80; lat <= 80; lat += 10) {
+                                point = new Point({
+                                    x: 0,
+                                    y: lat,
+                                    spatialReference: sr
+                                });
+                                pointLayer.add(new Graphic({
+                                    geometry: point,
+                                    symbol: pointSym
+                                }));
+
+                                buffer = geometryEngine.geodesicBuffer(point, 560, 'kilometers');
+                                bufferLayer.add(new Graphic({
+                                    geometry: buffer,
+                                    symbol: polySym
+                                }));
+                            }
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>
