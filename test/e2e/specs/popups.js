@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-describe('Popups', function() {
+xdescribe('Popups', function() {
     beforeAll(function() {
         browser.get('/popups.html');
     });
