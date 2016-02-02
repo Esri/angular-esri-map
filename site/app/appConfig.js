@@ -143,6 +143,18 @@
                     controller: 'GeodesicBuffersCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'Property Binding',
+                    description: 'Bind properties together between AngularJS and Esri JSAPI.',
+                    url: urlPrefixes.templateHref + 'property-binding'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'property-binding',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'property-binding.html',
+                    controller: 'PropertyBindingCtrl',
+                    controllerAs: 'vm'
+                }
             }]
         },
         patternsPages: [

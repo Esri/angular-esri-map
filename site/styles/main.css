@@ -41,6 +41,13 @@
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
 }
 
+.table {
+  font-size: 0.95em;
+}
+.table td {
+  white-space: nowrap;
+}
+
 /* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
 body {
   background-color: #ffffff;

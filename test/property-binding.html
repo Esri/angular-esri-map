@@ -34,7 +34,7 @@
                 <thead>
                     <tr>
                         <th>Direction</th>
-                        <th>JSAPI <code>watch</code></th>
+                        <th>JSAPI <code>watch()</code></th>
                         <th>Angular <code>$scope.$applyAsync()</code></th>
                         <th>Angular <code>ng-model</code></th>
                     </tr>
@@ -61,8 +61,9 @@
                 </tbody>
             </table>
             
-            <p>Lat: {{ exampleCtrl.mapView.center.latitude | number:3 }}, Lng: {{ exampleCtrl.mapView.center.longitude | number:3 }}</p>
-            <p>Zoom: {{ exampleCtrl.mapView.zoom | number:3 }}</p>
+            <p><strong>Lat:</strong> {{ exampleCtrl.mapView.center.latitude | number:3 }}, <strong>Lng:</strong> {{ exampleCtrl.mapView.center.longitude | number:3 }}</p>
+            <p><strong>Scale:</strong> {{ exampleCtrl.mapView.scale | number:2 }}</p>
+            <p><strong>Zoom:</strong> {{ exampleCtrl.mapView.zoom | number:2 }}</p>
             <p>Rotation: <input type="number" ng-model="exampleCtrl.mapView.rotation" /></p>
             
             <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
@@ -71,6 +72,9 @@
                     center: [-6.66, 62.23]
                 }">
             </esri-map-view>
+
+
+            <p>Learn more about the MapView <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-views-MapView.html#rotation">rotation property</a>.</p>
         </div>
 
         <!-- load Esri JavaScript API -->
@@ -96,7 +100,7 @@
                         self.mapView = view;
                         // Setup a JSAPI 4.x property watch outside of Angular
                         //  and update bound Angular controller properties
-                        self.mapView.watch('center,zoom,rotation', function() {
+                        self.mapView.watch('center,scale,zoom,rotation', function() {
                             $scope.$applyAsync('exampleCtrl.mapView');
                         });
                     };
