@@ -37,11 +37,10 @@
                     // load esri modules
                     esriLoader.require([
                         'esri/Map',
-                        'esri/views/SceneView',
                         'esri/layers/ArcGISTiledLayer'
                     ],
                     function(
-                        Map, SceneView, ArcGISTiledLayer
+                        Map, ArcGISTiledLayer
                     ) {
                         /*****************************************************************
                          * Create two ArcGISTiledLayer instances. One pointing to a
@@ -83,7 +82,7 @@
                             popLyr.then(function() {
                                 view.animateTo(popLyr.initialExtent);
                             });
-                        }
+                        };
 
 
                         /*****************************************************************
@@ -94,7 +93,7 @@
                          *******************************************************************/
                         self.onStreetsToggle = function(e) {
                             transportationLyr.visible = !!e.currentTarget.checked;
-                        }
+                        };
 
                         self.changeMap = function() {
                             // create the map

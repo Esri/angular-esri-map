@@ -15,8 +15,9 @@
      * ## Examples
      * - {@link ../#/examples/feature-layer Feature Layer}
      *
-     * @param {Object} map Instance of a map.
+     * @param {Object} map Instance of a Map.
      * @param {Function=} on-create Callback for successful creation of the map view.
+     * @param {Function=} on-load Callback for successful loading of the map view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
      */
     angular.module('esri.map')
@@ -33,6 +34,7 @@
                     map: '=?',
                     // function binding for event handlers
                     onCreate: '&',
+                    onLoad: '&',
                     // function binding for reading object hash from attribute string
                     // or from scope object property
                     viewOptions: '&'

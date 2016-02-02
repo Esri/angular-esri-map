@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Work with Slides in a WebScene</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .slidesDiv {
+                position: absolute;
+                z-index: 50;
+                top: 0;
+                right: 0;
+                background-color: black;
+                opacity: 0.8;
+                color: snow;
+                padding: 10px;
+                border-radius: 10px;
+                max-height: 85%;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .slide {
+                cursor: pointer;
+            }
+            .activeSlide {
+                box-shadow: 0 0 12px #ffffff;
+                border-style: solid;
+                border-width: thin;
+                border-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Work with Slides in a WebScene</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <div style="position:relative;">
+                <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
+                <div class="slidesDiv" ng-show="exampleCtrl.slides.length > 0">
+                    <span class="slide" ng-repeat="slide in exampleCtrl.slides" ng-click="exampleCtrl.onSlideClick(slide)">
+                        {{slide.title.text}}
+                        <br>
+                        <img src="{{slide.thumbnail.url}}" title="{{slide.title.text}}" ng-class="{activeSlide: slide.isActiveSlide}">
+                        <br>
+                    </span>
+                </div>
+            </div>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-featurelayer/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader, $scope) {
+                    var self = this;
+                    self.slides = [];
+                    self.sceneView = null;
+
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/portal/PortalItem',
+                        'esri/WebScene'
+                    ], function(PortalItem, WebScene) {
+                        // create a new WebScene
+                        var webScene = new WebScene({
+                            portalItem: new PortalItem({
+                                id: '51c67be4a5ea4da6948a40210ddfab1a'
+                            })
+                        });
+
+                        // establish the WebScene as the bound "map" property for the <esri-scene-view>
+                        self.map = webScene;
+
+                        // to be sure that the view is both created and loaded with all slides,
+                        //  perform additional logic in the view directive's load callback
+                        self.onViewLoaded = function(view) {
+                            self.sceneView = view;
+
+                            self.slides = view.map.presentation.slides.getAll();
+                            // tack on an extra property for ng-class css styling
+                            self.slides.forEach(function(slide) {
+                                slide.isActiveSlide = false;
+                            });
+                        };
+                        
+                        self.onSlideClick = function(slide) {
+                            self.slides.forEach(function(slide) {
+                                slide.isActiveSlide = false;
+                            });
+                            slide.isActiveSlide = true;
+                            slide.applyTo(self.sceneView);
+                        };
+                    });
+                });
+        </script>
+    </body>
+</html>

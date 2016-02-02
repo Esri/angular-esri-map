@@ -72,15 +72,18 @@
             <div ng-view="" ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
 
             <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl" class="col-sm-9 pull-right" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
-                <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
-                    <li ng-repeat="tab in tabs" ng-select-option="tab">
-                        <a href="">{{ tab }}</a>
-                    </li>
-                </ul>
-                <div class="tab-container">
-                    <div ng-repeat="tab in tabs">
-                      <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
+            <div>
+                <div class="col-sm-3"></div>
+                <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
+                    <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+                        <li ng-repeat="tab in tabs" ng-select-option="tab">
+                            <a href="">{{ tab }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-container">
+                        <div ng-repeat="tab in tabs">
+                          <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +122,19 @@
     <script type="text/javascript" src="app/common/leftNavController.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
+    <!-- example pages -->
+    <script type="text/javascript" src="app/examples/chaining-promises.js"></script>
+    <script type="text/javascript" src="app/examples/extrude-polygon.js"></script>
     <script type="text/javascript" src="app/examples/feature-layer.js"></script>
-    <script type="text/javascript" src="app/examples/scene-view.js"></script>
+    <script type="text/javascript" src="app/examples/geodesic-buffers.js"></script>
     <script type="text/javascript" src="app/examples/home-button.js"></script>
+    <script type="text/javascript" src="app/examples/popups.js"></script>
+    <script type="text/javascript" src="app/examples/property-binding.js"></script>
+    <script type="text/javascript" src="app/examples/scene-toggle-elevation.js"></script>
+    <script type="text/javascript" src="app/examples/scene-view.js"></script>
+    <script type="text/javascript" src="app/examples/search.js"></script>
+    <script type="text/javascript" src="app/examples/vector-tiles.js"></script>
+    <script type="text/javascript" src="app/examples/webscene-slides.js"></script>
 
     <!-- google analytics -->
     <script>
