@@ -63,10 +63,7 @@ angular.module('esri-map-docs')
                     });
 
                     // set the active tool once a button is clicked
-                    // apply this function binding to scope since it is outside of the digest cycle
-                    $scope.$apply(function() {
-                        $scope.activateDrawTool = activateDrawTool;
-                    });
+                    $scope.activateDrawTool = activateDrawTool;
                 }
 
                 function activateDrawTool(tool) {

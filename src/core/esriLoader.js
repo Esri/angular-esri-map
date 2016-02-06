@@ -78,38 +78,44 @@
             var deferred = $q.defer();
 
             // Throw Error if Esri is not loaded yet
-            if ( !isLoaded() ) {
-                deferred.reject('Trying to call esriLoader.require(), but esri API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading esri ArcGIS API.');
+            if (!isLoaded()) {
+                deferred.reject('Trying to call esriLoader.require(), but Esri ArcGIS API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading Esri ArcGIS API.');
                 return deferred.promise;
             }
+            
             if (typeof moduleName === 'string') {
                 require([moduleName], function (module) {
+                    // grab the single module passed back from require callback and send to promise
+                    deferred.resolve(module);
+                });
 
-                    // Check if callback exists, and execute if it does
+                // return a chained promise that calls the callback function
+                //  to ensure it occurs within the digest cycle
+                return deferred.promise.then(function(module) {
                     if (callback && typeof callback === 'function') {
                         callback(module);
                     }
-                    deferred.resolve(module);
+                    return module;
                 });
-            }
-            else if (moduleName instanceof Array) {
+            } else if (moduleName instanceof Array) {
                 require(moduleName, function () {
+                    var modules = Array.prototype.slice.call(arguments);
+                    // grab all of the modules passed back from require callback and send as array to promise
+                    deferred.resolve(modules);
+                });
 
-                    var args = Array.prototype.slice.call(arguments);
-
-                    // callback check, sends modules loaded as arguments
+                // return a chained promise that calls the callback function
+                //  to ensure it occurs within the digest cycle
+                return deferred.promise.then(function(modules) {
                     if (callback && typeof callback === 'function') {
-                        callback.apply(this, args);
+                        callback.apply(this, modules);
                     }
-
-                    // Grab all of the modules pass back from require callback and send as array to promise.
-                    deferred.resolve(args);
+                    return modules;
                 });
             } else {
                 deferred.reject('An Array<String> or String is required to load modules.');
+                return deferred.promise;
             }
-
-            return deferred.promise;
         }
 
         // Return list of aformentioned functions
