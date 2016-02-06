@@ -142,7 +142,7 @@ gulp.task('deploy', ['build'], function () {
 gulp.task('deploy-prod', ['build'], function () {
   return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*'])
     .pipe(deploy({
-      remoteUrl: 'https://github.com/Esri/angular-esri-map.git'
+      remoteUrl: 'https://github.com/jwasil/angular-esri-map-site-v1.git'
     }));
 });
 
