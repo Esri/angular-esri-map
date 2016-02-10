@@ -48,31 +48,41 @@
 
                     esriLoader.require(['esri/dijit/Legend'], function(Legend) {
                         mapController.getMap().then(function(map) {
-                            var legend;
+                            var createLegend = function(map) {
+                                var legend;
 
-                            var options = {
-                                map: map
+                                var options = {
+                                    map: map
+                                };
+
+                                var layerInfos = mapController.getLayerInfos();
+                                if (layerInfos) {
+                                    options.layerInfos = layerInfos;
+                                }
+
+                                legend = new Legend(options, targetId);
+                                legend.startup();
+
+                                scope.$watchCollection(function() {
+                                    return mapController.getLayerInfos();
+                                }, function(newValue /*, oldValue, scope*/ ) {
+                                    legend.refresh(newValue);
+                                });
+
+                                legendDeferred.resolve(legend);
+
+                                scope.$on('$destroy', function() {
+                                    legend.destroy();
+                                });
                             };
 
-                            var layerInfos = mapController.getLayerInfos();
-                            if (layerInfos) {
-                                options.layerInfos = layerInfos;
+                            if (!map.loaded) {
+                                map.on('load', function() {
+                                    createLegend(map);
+                                });
+                            } else {
+                                createLegend(map);
                             }
-
-                            legend = new Legend(options, targetId);
-                            legend.startup();
-
-                            scope.$watchCollection(function() {
-                                return mapController.getLayerInfos();
-                            }, function(newValue /*, oldValue, scope*/ ) {
-                                legend.refresh(newValue);
-                            });
-
-                            legendDeferred.resolve(legend);
-
-                            scope.$on('$destroy', function() {
-                                legend.destroy();
-                            });
                         });
                     });
                 }
