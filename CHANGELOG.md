@@ -8,7 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v1.1.1]
 
 ### Changed
+Using the callback form of `esriLoader.require()` now triggers the digest cycle, and should eliminate the need to manually call `$scope.$apply()` within the callback.
 
+### Support
+The gulp `deploy-prod` task deploys to a new repo for v1.x so that we can have both v1.x and v2.x docs live at the same time.
 
 ## [v1.1.0]
 
