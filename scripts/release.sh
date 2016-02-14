@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # config
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$(node --eval "console.log(require('./package.json').version);")
 NAME=$(node --eval "console.log(require('./package.json').name);")
 
@@ -28,12 +29,12 @@ zip -r $NAME-v$VERSION.zip dist
 # run gh-release to create the tag and push release to github
 gh-release --assets $NAME-v$VERSION.zip
 
-# checkout master and delete release branch locally and on GitHub
-git checkout master
+# checkout prev branch and delete release branch locally and on GitHub
+git checkout $BRANCH
 git branch -D gh-release
 git push origin :gh-release
 
-# re-run build in master branch before publishing
+# re-run build in prevgit  branch before publishing
 npm run build
 
 # publish release on NPM
