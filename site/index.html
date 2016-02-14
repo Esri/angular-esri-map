@@ -93,8 +93,11 @@
             </div>
         </div>
     </div>
-    <div class="alert alert-warning version-alert">
-        This documentation is for v1 and for use with v3.x of the ArcGIS API for JavaScript. If you are using v4.x of the ArcGIS API for JavaScript, please see <a href="https://esri.github.io/angular-esri-map/">the v2 documentation</a>.</div>
+    <div ng-controller="AlertController">
+        <div ng-if="showAlert" class="alert alert-warning alert-dismissible version-alert" role="alert">
+            <button type="button" ng-click="hideAlert()" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            This documentation is for v1 and for use with v3.x of the ArcGIS API for JavaScript. If you are using v4.x of the ArcGIS API for JavaScript, please see <a href="https://esri.github.io/angular-esri-map/">the v2 documentation</a>.</div>
+        </div>
     </div>
 
     <!-- load Esri JavaScript API -->
@@ -121,6 +124,7 @@
     <script type="text/javascript" src="app/patterns/patterns.js"></script>
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
+    <script type="text/javascript" src="app/common/alertController.js"></script>
     <script type="text/javascript" src="app/common/leftNavController.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
