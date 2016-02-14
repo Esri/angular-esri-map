@@ -3,13 +3,16 @@
 var helper = require('../helper');
 
 describe('Web Map', function() {
+    var zoomIn = element(by.css('.esriSimpleSliderIncrementButton'));
+
     beforeAll(function() {
         // refer to "gulp test" task to get the baseUrl that is prepended
         browser.get('/legend.html');
     });
 
     it('should have a legend and information about 2 layers', function() {
-        // element locator(s) specific to this test
+        zoomIn.click(); // zooming in assists with getting both layers visible in the map's extent
+
         var legend = element(by.id('legend'));
         helper.waitUntilElementIsReady(legend);
 
