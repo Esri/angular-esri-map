@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+## [v1.1.2]
+
+### Changed
+Fixed bug where legend labels did not show properly after reloading the route [#225](https://github.com/Esri/angular-esri-map/issues/225)
+
+### Support
+Docs show dismissable warning about version with link to latest.
+
 ## [v1.1.1]
 
 ### Changed
