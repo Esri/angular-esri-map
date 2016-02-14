@@ -5,5 +5,5 @@ angular.module('esri-map-docs')
         $scope.showAlert = true;
         $scope.hideAlert = function() {
             $scope.showAlert = false;
-        }
+        };
     });
