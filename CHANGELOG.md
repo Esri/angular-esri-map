@@ -11,7 +11,9 @@ Refactored to support JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-m
 
 ### Documentation
 
-Added/updated example and test pages to show how to use this with JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-map/pull/198) [#207](https://github.com/Esri/angular-esri-map/pull/207) [#210](https://github.com/Esri/angular-esri-map/pull/210)
+Added/updated example and test pages to show how to use this with JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-map/pull/198) [#207](https://github.com/Esri/angular-esri-map/pull/207) [#210](https://github.com/Esri/angular-esri-map/pull/210) [#230](https://github.com/Esri/angular-esri-map/pull/230)
+
+Updated examples site and readme example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
 
 ## [v1.1.0]
 

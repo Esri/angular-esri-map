@@ -40,7 +40,7 @@ Once you've added the module to your application, you can use the sample code be
         </esri-scene-view>
         
         <script src="//js.arcgis.com/4.0beta3/"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
         <script src="path/to/angular-esri-map.js"></script>
 
         <script type="text/javascript">
