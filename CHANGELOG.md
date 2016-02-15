@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+[Upcoming changes][unreleased]
+
+### Documentation
+
+Updated examples site and readme example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
+
 ## [v1.1.2]
 
 ### Changed
