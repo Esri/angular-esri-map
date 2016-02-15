@@ -15,6 +15,9 @@ Added/updated example and test pages to show how to use this with JSAPI v4.0+. [
 
 Updated examples site and readme example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
 
+### Support
+Docs show dismissable warning about version with link to previous. [#237](https://github.com/Esri/angular-esri-map/issues/237)
+
 ## [v1.1.0]
 
 ### Added
