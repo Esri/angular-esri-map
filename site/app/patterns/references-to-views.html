@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Getting a Reference to the Map and Scene Views</h2>
+        <p>The map and scene view directives include function binding (events)
+            as a way for you to get direct references to the underlying map and
+            scene view objects from a parent controller. This will allow you to
+            manipulate those objects in ways beyond what is allowed by the
+            declarative directive API.</p>
+        <h3>Events</h3>
+        <p>The map and scene view directives each include both <code>on-create</code> and <code>on-load</code> events that pass a reference to the underlying map or scene view object to a callback function. The <code>on-create</code> event is fired immediately after the view has been created (i.e. <code>new MapView()</code>) and the <code>on-load</code> event fires after the view's <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-Map.html#then">promise has been resolved</a>. See these examples:</p>
+        <h4>On-create</h4>
+        <ul>
+            <li><a href="#/examples/scene-view">Scene View</a></li>
+            <li><a href="#/examples/search">Search</a></li>
+            <li><a href="#/examples/home-button">Home Button</a></li>
+            <li><a href="#/examples/scene-toggle-elevation">Toggle the Basemap's Elevation Layer</a></li>
+            <li><a href="#/examples/property-binding">Property Binding</a></li>
+        </ul>
+        <h4>On-load</h4>
+        <ul>
+            <li><a href="#/examples/webscene-slides">Work with Slides in a WebScene</a></li>
+        </ul>
+    </div>
+</div>

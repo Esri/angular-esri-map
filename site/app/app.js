@@ -46,5 +46,10 @@
                         controller: 'PatternsCtrl'
                     });
             });
+
+            // redirects from previous version of docs
+            $routeProvider.when('/patterns/references-to-map-and-layers', {
+                redirectTo: '/patterns/references-to-views'
+            });
         });
 })(angular);

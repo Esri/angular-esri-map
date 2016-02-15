@@ -159,23 +159,24 @@
         },
         patternsPages: [
             {
-                path: '/patterns/references-to-map-and-layers',
-                templateUrl: 'app/patterns/references-to-map-and-layers.html',
-                title: 'Getting a Reference to the Map and Layers',
-                shortTitle: 'Map and Layer References'
-            },
-            {
                 path: '/patterns/other-esri-classes',
                 templateUrl: 'app/patterns/other-esri-modules.html',
                 title: 'Loading and Using Other Esri Classes',
-                shortTitle: 'Other Esri Classes'
+                shortTitle: 'Loading Esri Classes'
             },
             {
-                path: '/patterns/create-your-own-directives',
-                templateUrl: 'app/patterns/create-your-own-directives.html',
-                title: 'Create Your Own Directives',
-                shortTitle: 'Custom Directives'
+                path: '/patterns/references-to-views',
+                templateUrl: 'app/patterns/references-to-views.html',
+                title: 'Getting a Reference to the Map and Scene Views',
+                shortTitle: 'Map and Scene View References'
             },
+            // TODO: custom directive's page
+            // {
+            //     path: '/patterns/create-your-own-directives',
+            //     templateUrl: 'app/patterns/create-your-own-directives.html',
+            //     title: 'Create Your Own Directives',
+            //     shortTitle: 'Custom Directives'
+            // },
             {
                 path: '/patterns/lazy-load',
                 templateUrl: 'app/patterns/lazy-load.html',
