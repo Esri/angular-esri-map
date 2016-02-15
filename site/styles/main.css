@@ -105,3 +105,13 @@ button.btn-default:active, button.btn-default[disabled]:active {
   background-color: #b52e31!important;
   border-color: #b52e31 !important;
 }
+
+.version-alert {
+  position: fixed;
+  bottom: -24px;
+  width: 80%;
+  left: calc(50% - 40%);
+  text-align: center;
+  font-size: small;
+  z-index: 100;
+}

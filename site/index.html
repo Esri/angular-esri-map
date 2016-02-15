@@ -32,6 +32,7 @@
                 </li>
                 <li role="presentation"><a href="./docs">API</a>
                 </li>
+                <li role="presentation"><a href="https://arcgis.github.io/angular-esri-map-site-v1/">Previous Version (v1)</a>
                 <li role="presentation"><a href="//github.com/esri/angular-esri-map">GitHub</a>
                 </li>
             </ul>
@@ -95,6 +96,13 @@
         </div>
     </div>
 
+    <div ng-controller="AlertController">
+        <div ng-if="showAlert" class="alert alert-warning alert-dismissible version-alert" role="alert">
+            <button type="button" ng-click="hideAlert()" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            This documentation is for v2 <strong>beta</strong> and for use with v4.x of the ArcGIS API for JavaScript. If you are using v3.x of the ArcGIS API for JavaScript, please see <a href="https://arcgis.github.io/angular-esri-map-site-v1/">the v1 documentation</a>.</div>
+        </div>
+    </div>
+
     <!-- load Esri JavaScript API -->
     <!-- NOTE: defer is only needed b/c of UMD blocks in highlight.min.js -->
     <script defer type="text/javascript" src="//js.arcgis.com/4.0beta3/"></script>
@@ -119,6 +127,7 @@
     <script type="text/javascript" src="app/patterns/patterns.js"></script>
     <script type="text/javascript" src="app/common/pathService.js"></script>
     <script type="text/javascript" src="app/common/nav.js"></script>
+    <script type="text/javascript" src="app/common/alertController.js"></script>
     <script type="text/javascript" src="app/common/leftNavController.js"></script>
     <script type="text/javascript" src="app/examples/snippets.js"></script>
     <script type="text/javascript" src="app/examples/examples.js"></script>
