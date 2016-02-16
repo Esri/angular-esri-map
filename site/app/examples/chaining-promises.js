@@ -58,6 +58,10 @@ angular.module('esri-map-docs')
                 self.view = view;
             };
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             self.onStartButtonClick = function() {
                 // buffer crater point and chain promise to additional functions
                 geometryEngineAsync.geodesicBuffer(meteorPoint, 700, 'yards')
