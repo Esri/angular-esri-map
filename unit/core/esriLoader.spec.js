@@ -35,8 +35,8 @@ describe('esriLoader', function() {
             });
 
             describe('when not passing url in options', function() {
-                it('should default to 3.15compact', function() {
-                    var url = window.location.protocol + '//js.arcgis.com/3.15compact';
+                it('should default to 4.0beta3', function() {
+                    var url = window.location.protocol + '//js.arcgis.com/4.0beta3';
                     esriLoader.bootstrap();
                     expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
                 });
@@ -121,6 +121,7 @@ describe('esriLoader', function() {
                     });
                     it('should call the callback with 1 argument', function() {
                         esriLoader.require('notARealModuleName', callback);
+                        $rootScope.$digest();
                         expect(callback.calls.argsFor(0).length).toEqual(1);
                     });
                 });
@@ -152,6 +153,7 @@ describe('esriLoader', function() {
                     });
                     it('should call the callback function with more than 1 argument', function() {
                         esriLoader.require(['notARealModuleName', 'anotherOne'], callback);
+                        $rootScope.$digest();
                         expect(callback.calls.argsFor(0).length).toEqual(2);
                     });
                 });

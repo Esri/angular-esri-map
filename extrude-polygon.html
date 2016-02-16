@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Extrude Polygon by Visual Variables</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+    </head>
+    <body>
+        <h2>Extrude Polygon by Visual Variables</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-scene-view map="exampleCtrl.map" 
+                view-options="{
+                    camera: {
+                        position: [-118.25, 4.27, 6249238],
+                        tilt: 30,
+                        heading: 23
+                    }
+                }">
+            </esri-scene-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/polygon-extrusion-3d/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/Map',
+                        'esri/Color',
+                        'esri/views/SceneView',
+                        'esri/layers/FeatureLayer',
+                        'esri/symbols/PolygonSymbol3D',
+                        'esri/symbols/ExtrudeSymbol3DLayer',
+                        'esri/renderers/SimpleRenderer'
+                    ], function(Map, Color, SceneView, FeatureLayer, PolygonSymbol3D, ExtrudeSymbol3DLayer, SimpleRenderer) {
+                        // create the map
+                        self.map = new Map({
+                            basemap: 'streets'
+                        });
+
+                        //Create featureLayer and add to the map
+                        var featureLayer = new FeatureLayer({
+                            url: '//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3'
+                        });
+                        self.map.add(featureLayer);
+
+                        //Create the Renderer for the featureLayer,
+                        var extrudePolygonRenderer = new SimpleRenderer({
+                            symbol: new PolygonSymbol3D({
+                                symbolLayers: [new ExtrudeSymbol3DLayer()]
+                            }),
+                            visualVariables: [{
+                                type: 'sizeInfo',
+                                field: 'POP07_SQMI',
+                                minSize: 40000,
+                                maxSize: 1000000,
+                                minDataValue: 1,
+                                maxDataValue: 1000
+                            }, {
+                                type: 'colorInfo',
+                                field: 'SQMI',
+                                minDataValue: 1,
+                                maxDataValue: 600000,
+                                colors: [
+                                    new Color('white'),
+                                    new Color('red')
+                                ]
+                            }]
+                        });
+
+                        featureLayer.renderer = extrudePolygonRenderer;
+                    });
+                });
+        </script>
+    </body>
+</html>

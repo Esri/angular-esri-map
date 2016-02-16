@@ -6,20 +6,24 @@
         <title>Deferred Map</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.11/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
     </head>
-    <body ng-controller="MapController">
+    <body ng-controller="ExampleController as exampleCtrl">
         <h2>Deferred Map</h2>
-        <p>Click the button to lazy load the Esri JSAPI. This can be used when you want to defer its inclusion until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
-        <button ng-click="lazyload()" ng-disabled="loaded">Load Esri JSAPI and Map</button>
-        <!-- add map to page only once the ESRI API has loaded -->
-        <div ng-if="loaded">
-          <esri-map id="map" center="map.center" zoom="map.zoom" basemap="topo">
-          </esri-map>
-          <p>Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}</p>
-          <p>Based on <a href="https://developers.arcgis.com/javascript/jssamples/map_simple.html">this sample</a>.</p>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <p>Click the button to lazy load the Esri JSAPI. This can be used when you want to defer its inclusion until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
+            <button ng-click="exampleCtrl.lazyload()" ng-disabled="exampleCtrl.loaded">Load Esri JSAPI and Map View</button>
+            <!-- add the map view to page only once the Esri API has loaded -->
+            <div ng-if="exampleCtrl.loaded">
+                <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
+                    view-options="{
+                        zoom: 4,
+                        center: [15, 65]
+                    }">
+                </esri-map-view>
+            </div>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
         </div>
-
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load angular-esri-map directives -->
@@ -27,34 +31,35 @@
         <!-- run example app controller -->
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
-                .controller('MapController', function ($scope, esriLoader) {
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
 
                     // Default loaded to be false
-                    $scope.loaded = false;
+                    self.loaded = false;
 
                     // This function will be called when you click the button
-                    $scope.lazyload = function() {
-
-                        // Make a call to load Esri JSAPI resources at version 3.11.
+                    this.lazyload = function() {
+                        // Make a call to load Esri JSAPI resources at version 4.0beta3.
                         // A promise is provided for when the resources have finished loading.
                         esriLoader.bootstrap({
-                            url: '//js.arcgis.com/3.11compact'
+                            url: '//js.arcgis.com/4.0beta3'
                         }).then(function() {
-
-                            // Set Loaded to be true
-                            $scope.loaded = true;
-
-                            // Once the API is loaded set the map parameters
-                            $scope.map = {
-                                center: {
-                                    lng: -77.00,
-                                    lat: 38.88
-                                },
-                                zoom: 13
-                            };
+                            // Set loaded to be true
+                            self.loaded = true;
+                            self.createMap();
+                        }, function(err) {
+                            self.loaded = err;
                         });
                     };
 
+                    this.createMap = function() {
+                        esriLoader.require('esri/Map', function(Map) {
+                            // Create the map
+                            self.map = new Map({
+                                basemap: 'streets'
+                            });
+                        });
+                    };
                 });
         </script>
     </body>

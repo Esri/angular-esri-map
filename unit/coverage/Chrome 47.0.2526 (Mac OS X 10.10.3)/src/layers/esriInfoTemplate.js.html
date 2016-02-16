@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/layers/esriInfoTemplate.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> esriInfoTemplate.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">16.67% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/12</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function (angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriInfoTemplate
+     * @restrict E
+     * @element
+     *
+     * @description
+     * This directive creates an
+     * {@link https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html InfoTemplate}
+     * and binds it to a layer to provide "popup" information functionality when clicking on the visible layer in the map.
+     * This directive **must** be placed within an esri-feature-layer directive or esri-dynamic-map-service-layer directive.
+     * 
+     * ## Examples
+     * - {@link ../#/examples/dynamic-map-service-layers Multiple Dynamic Map Service Layers}
+     *
+     * &lt;pre&gt;
+     *   &lt;!-- The title is provided as an attribute parameter
+     *   but the content is the entire inner HTML --&gt;
+     *
+     *   &lt;esri-info-template title="Parks"&gt;
+     *      &lt;span&gt;${PARK_NAME}&lt;/span&gt;
+     *      &lt;span&gt;This park had ${TOTAL_VISITS_2014} visitors in 2014&lt;/span&gt;
+     *   &lt;/esri-info-template&gt;
+     * &lt;/pre&gt;
+     *
+     * @param {String=} layer-id The layer id to which the InfoTemplate should be connected to.
+     *  **Note:** This is only applicable when the parent directive is an esri-dynamic-map-service-layer.
+     * @param {String=} title The title of the template.
+     * @param {String | Node[]=} content **Note:** The content of the template is provided as inner HTML to this directive.
+     * 
+     */
+    angular.module('esri.map').directive('esriInfoTemplate', <span class="fstat-no" title="function not covered" >function () {</span>
+        // this object will tell angular how our directive behaves
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            // only allow esriInfoTemplate to be used as an element (&lt;esri-feature-layer&gt;)
+            restrict: 'E',
+&nbsp;
+            // require the esriInfoTemplate to have its own controller as well an esriMap controller
+            // you can access these controllers in the link function
+            require: ['?esriInfoTemplate', '?^esriDynamicMapServiceLayer', '?^esriFeatureLayer'],
+&nbsp;
+            // replace this element with our template.
+            // since we aren't declaring a template this essentially destroys the element
+            replace: true,
+&nbsp;
+            compile: <span class="fstat-no" title="function not covered" >function($element) {</span>
+&nbsp;
+                // get info template content from element inner HTML
+<span class="cstat-no" title="statement not covered" >                var content = $element.html();</span>
+&nbsp;
+                // clear element inner HTML
+<span class="cstat-no" title="statement not covered" >                $element.html('');</span>
+&nbsp;
+                // since we are using compile we need to return our linker function
+                // the 'link' function handles how our directive responds to changes in $scope
+<span class="cstat-no" title="statement not covered" >                return <span class="fstat-no" title="function not covered" >function (scope, element, attrs, controllers) {</span></span>
+                    // controllers is now an array of the controllers from the 'require' option
+                    // var templateController = controllers[0];
+<span class="cstat-no" title="statement not covered" >                    var dynamicMapServiceLayerController = controllers[1];</span>
+<span class="cstat-no" title="statement not covered" >                    var featureLayerController = controllers[2];</span>
+                    
+<span class="cstat-no" title="statement not covered" >                    if (dynamicMapServiceLayerController) {</span>
+<span class="cstat-no" title="statement not covered" >                        dynamicMapServiceLayerController.setInfoTemplate(attrs.layerId, {</span>
+                            title: attrs.title,
+                            content: content
+                        });
+                    }
+                    
+<span class="cstat-no" title="statement not covered" >                    if (featureLayerController) {</span>
+<span class="cstat-no" title="statement not covered" >                        featureLayerController.setInfoTemplate({</span>
+                            title: attrs.title,
+                            content: content
+                        });
+                    }
+                };
+            }
+        };
+    });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 19 2015 10:05:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

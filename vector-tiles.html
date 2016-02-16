@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Vector Tiles</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+    </head>
+    <body>
+        <h2>Vector Tiles</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-map-view map="exampleCtrl.map" 
+                view-options="{
+                    zoom: 10,
+                    center: [-100.33, 25.69]
+                }">
+            </esri-map-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-vectortilelayer/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/Map',
+                        'esri/layers/VectorTileLayer'
+                    ],
+                    function(
+                        Map, VectorTileLayer
+                    ) {
+                        self.map = new Map();
+
+                        // add a tile layer to the map
+                        var tileLyr = new VectorTileLayer({
+                            url: '//www.arcgis.com/sharing/rest/content/items/f96366254a564adda1dc468b447ed956/resources/styles/root.json'
+                        });
+                        self.map.add(tileLyr);
+                    });
+                });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Toggle the Basemap's Elevation Layer</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            #elevationDiv {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                padding: 12px;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
+            }
+            #elevationDiv label,
+            #elevationDiv input {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Toggle the Basemap's Elevation Layer</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <div style="position:relative;">
+                <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated" 
+                    view-options="{
+                        camera: {
+                            position: [7.654, 45.919, 5184],
+                            tilt: 80
+                        }
+                    }">
+                </esri-scene-view>
+                <div id="elevationDiv">
+                    <label>Elevation: <input type="checkbox" checked ng-click="exampleCtrl.updateElevation($event)" /></label>
+                </div>
+            </div>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require('esri/Map', function(Map) {
+                        self.map = new Map({
+                            basemap: 'hybrid'
+                        });
+
+                        self.onViewCreated = function(view) {
+                            // to be sure that the view is both created and loaded with all elevation layer info,
+                            //  perform additional logic in the promise callback
+                            view.then(function() {
+                                // store the default elevation layers
+                                self.elevationLayers = view.map.basemap.elevationLayers.getAll();
+                            });
+                        };
+
+                        self.updateElevation = function(e) {
+                            if (!e.currentTarget.checked) {
+                                // clear all elevation layers
+                                self.map.basemap.elevationLayers.clear();
+                            } else {
+                                // restore elevation layers to the original ones
+                                self.map.basemap.elevationLayers = self.elevationLayers;
+                            }
+                        };
+                    });
+                });
+        </script>
+    </body>
+</html>

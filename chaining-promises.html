@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Chaining Promises</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            #results {
+                top: 20px;
+                right: 20px;
+                position: absolute;
+                z-index: 99;
+                background-color: white;
+                border-radius: 8px;
+                padding: 10px;
+                opacity: 0.75;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Chaining Promises</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <div style="position:relative;">
+                <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated">
+                    <div id="results">
+                        <button ng-click="exampleCtrl.onStartButtonClick()" ng-disabled="exampleCtrl.area">Start Promise Chain</button>
+                        <span id="areaSpan" ng-hide="!exampleCtrl.area">
+                            <br><br>Area = {{exampleCtrl.area | number: 0}} acres
+                        </span>
+                    </div>
+                </esri-scene-view>
+            </div>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/chaining-promises/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader, $scope) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/geometry/geometryEngineAsync',
+                        'esri/geometry/Point',
+                        'esri/Graphic',
+                        'esri/layers/GraphicsLayer',
+                        'esri/Map',
+
+                        'esri/symbols/SimpleFillSymbol',
+                        'esri/symbols/SimpleLineSymbol',
+                        'esri/symbols/SimpleMarkerSymbol'
+                    ],
+                    function(
+                        geometryEngineAsync, Point, Graphic, GraphicsLayer, Map,
+                        SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol
+                    ) {
+                        // define semi-transparent red point symbol
+                        var pointSym = new SimpleMarkerSymbol({
+                            style: 'circle',
+                            color: [255, 0, 0, 0.5],
+                            size: 6,
+                            outline: new SimpleLineSymbol({
+                                style: 'solid',
+                                color: [255, 255, 255, 0.5]
+                            })
+                        });
+
+                        // define semi-transparent white symbol for buffers
+                        var polySym = new SimpleFillSymbol({
+                            style: 'solid',
+                            color: [255, 255, 255, 0.5],
+                            outline: new SimpleLineSymbol({
+                                style: 'solid',
+                                color: [0, 0, 0],
+                                width: 2
+                            })
+                        });
+
+                        // create the map for the esri-scene-view
+                        self.map = new Map({
+                            basemap: 'hybrid'
+                        });
+
+                        // create layer to store graphics and add to map
+                        var layer = new GraphicsLayer();
+                        self.map.add(layer);
+
+                        // location of meteor crater centroid in Arizona desert
+                        var meteorPoint = new Point({
+                            longitude: -111.022887,
+                            latitude: 35.027410
+                        });
+
+                        self.onViewCreated = function(view) {
+                            self.view = view;
+                        };
+
+                        self.onStartButtonClick = function() {
+                            // buffer crater point and chain promise to additional functions
+                            geometryEngineAsync.geodesicBuffer(meteorPoint, 700, 'yards')
+                                .then(addGraphics)      // when promise resolves, send buffer to addGraphics()
+                                .then(zoomTo)           // when promise resolves, send buffer to zoomTo()
+                                .then(calculateArea)    // when promise resolves, send buffer to calculateArea()
+                                .then(printArea);       // when promise resolves, send buffer to printArea()
+                        };
+
+                        // adds the point and buffer graphics to the layer
+                        function addGraphics(buffer) {
+                            layer.add(new Graphic({
+                                geometry: meteorPoint,
+                                symbol: pointSym
+                            }));
+                            layer.add(new Graphic({
+                                geometry: buffer,
+                                symbol: polySym
+                            }));
+
+                            return buffer;
+                        }
+
+                        // zooms to the buffer location
+                        function zoomTo(geom) {
+                            // when the view is ready
+                            return self.view.then(function() {
+                                // animate to the buffer geometry
+                                return self.view.animateTo(geom).then(function() {
+                                    // when the animation completes, set the scale to 1:24,000
+                                    self.view.scale = 24000;
+                                    // resolve the promises with the input geometry
+                                    return geom;
+                                });
+                            });
+                        }
+
+                        // calculates the area of the buffer in acres
+                        function calculateArea(polyGeom) {
+                            return geometryEngineAsync.geodesicArea(polyGeom, 'acres');
+                        }
+
+                        // prints the area to the DOM
+                        function printArea(area) {
+                            self.area = area;
+                            $scope.$apply('exampleCtrl.area');
+                        }
+                    });
+                });
+        </script>
+    </body>
+</html>

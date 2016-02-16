@@ -27,11 +27,8 @@
 }
 
 /* Esri JSAPI */
-.map {
-  margin-bottom: 10px;
-}
-.map .tooltip {
-  opacity: 1;
+.esri-view {
+  height: 400px;
 }
 
 /* highlightjs */
@@ -42,6 +39,13 @@
   white-space: pre;
   font-size: 13px;
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
+}
+
+.table {
+  font-size: 0.95em;
+}
+.table td {
+  white-space: nowrap;
 }
 
 /* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
@@ -88,4 +92,26 @@ button.list-group-item:focus,
 button.list-group-item:hover {
   /*color: #000000;*/
   background-color: #f8f8f8;
+}
+button.btn-default, button.btn-default[disabled] {
+  color: #b52e31;
+  background-color: #fff;
+  border-color: #b52e31;
+}
+button.btn-default:focus, button.btn-default[disabled]:focus,
+button.btn-default:hover, button.btn-default[disabled]:hover,
+button.btn-default:active, button.btn-default[disabled]:active {
+  color: #fff!important;
+  background-color: #b52e31!important;
+  border-color: #b52e31 !important;
+}
+
+.version-alert {
+  position: fixed;
+  bottom: -24px;
+  width: 80%;
+  left: calc(50% - 40%);
+  text-align: center;
+  font-size: small;
+  z-index: 100;
 }

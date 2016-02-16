@@ -1,0 +1,59 @@
+<h2>Property Binding</h2>
+
+<p>
+    Developers can bind properties between Esri JSAPI 4.x and Angular 1.x by making use of
+    <a href="https://developers.arcgis.com/javascript/beta/guide/working-with-props/index.html#Watching_properties_55">watching JSAPI properties</a>
+    as well as <code>$scope.$applyAsync()</code> or <code>$scope.$apply()</code>.
+</p>
+<p>
+    But, as an example, if a user input element only needs to make changes to JSAPI properties, then a developer can use <code>ng-model</code> to achieve simple binding from Angular to JSAPI.
+</p>
+
+<div class="row">
+    <div class="col-sm-9">
+        <table class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Direction</th>
+                    <th>JSAPI <div><code>watch()</code></div></th>
+                    <th>Angular <div><code>$scope.$applyAsync()</code></div></th>
+                    <th>Angular <div><code>ng-model</code></div></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>JSAPI to Angular</td>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                    <td><span class="glyphicon glyphicon-ok"></td>
+                    <td><span class="glyphicon glyphicon-minus"></span></td>
+                </tr>
+                <tr>
+                    <td>Angular to JSAPI</td>
+                    <td><span class="glyphicon glyphicon-minus"></span></td>
+                    <td><span class="glyphicon glyphicon-minus"></span></td>
+                    <td><span class="glyphicon glyphicon-ok"></td>
+                </tr>
+                <tr>
+                    <td>Both</td>
+                    <td><span class="glyphicon glyphicon-ok"></td>
+                    <td><span class="glyphicon glyphicon-ok"></td>
+                    <td><span class="glyphicon glyphicon-ok"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p><strong>Lat:</strong> {{ vm.mapView.center.latitude | number:3 }}, <strong>Lng:</strong> {{ vm.mapView.center.longitude | number:3 }}</p>
+<p><strong>Scale:</strong> {{ vm.mapView.scale | number:2 }}</p>
+<p><strong>Zoom:</strong> {{ vm.mapView.zoom | number:2 }}</p>
+<p><strong>Rotation:</strong> <input type="number" ng-model="vm.mapView.rotation" /></p>
+
+<esri-map-view map="vm.map" on-create="vm.onViewCreated"
+    view-options="{
+        zoom: 11,
+        center: [-6.66, 62.23]
+    }">
+</esri-map-view>
+
+<p>Learn more about the MapView <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-views-MapView.html#rotation">rotation property</a>.</p>

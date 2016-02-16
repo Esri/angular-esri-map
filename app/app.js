@@ -32,7 +32,8 @@
                     $routeProvider
                         .when(example.route.path, {
                             templateUrl: example.route.templateUrl,
-                            controller: example.route.controller
+                            controller: example.route.controller,
+                            controllerAs: example.route.controllerAs
                         });
                 });
             });
@@ -44,6 +45,11 @@
                         templateUrl: page.templateUrl,
                         controller: 'PatternsCtrl'
                     });
+            });
+
+            // redirects from previous version of docs
+            $routeProvider.when('/patterns/references-to-map-and-layers', {
+                redirectTo: '/patterns/references-to-views'
             });
         });
 })(angular);

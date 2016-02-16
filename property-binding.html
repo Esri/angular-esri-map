@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Property Binding</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            table {
+                border-collapse: collapse;
+            }
+            td, th {
+                border: 1px solid #999;
+                padding: 0.25rem;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Property Binding</h2>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <p>
+                Developers can bind properties between Esri JSAPI 4.x and Angular 1.x by making use of
+                <a href="https://developers.arcgis.com/javascript/beta/guide/working-with-props/index.html#Watching_properties_55">watching JSAPI properties</a>
+                as well as <code>$scope.$applyAsync()</code> or <code>$scope.$apply()</code>.
+            </p>
+            <p>
+                But, as an example, if a user input element only needs to make changes to JSAPI properties, then a developer can use <code>ng-model</code> to achieve simple binding from Angular to JSAPI.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>JSAPI <code>watch()</code></th>
+                        <th>Angular <code>$scope.$applyAsync()</code></th>
+                        <th>Angular <code>ng-model</code></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>JSAPI to Angular</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td>Angular to JSAPI</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Both</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                        <td>Yes</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>Lat:</strong> {{ exampleCtrl.mapView.center.latitude | number:3 }}, <strong>Lng:</strong> {{ exampleCtrl.mapView.center.longitude | number:3 }}</p>
+            <p><strong>Scale:</strong> {{ exampleCtrl.mapView.scale | number:2 }}</p>
+            <p><strong>Zoom:</strong> {{ exampleCtrl.mapView.zoom | number:2 }}</p>
+            <p>Rotation: <input type="number" ng-model="exampleCtrl.mapView.rotation" /></p>
+            
+            <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
+                view-options="{
+                    zoom: 11,
+                    center: [-6.66, 62.23]
+                }">
+            </esri-map-view>
+
+
+            <p>Learn more about the MapView <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-views-MapView.html#rotation">rotation property</a>.</p>
+        </div>
+
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader, $scope) {
+                    var self = this;
+
+                    esriLoader.require('esri/Map', function(Map) {
+                        // Create the map
+                        self.map = new Map({
+                            basemap: 'satellite'
+                        });
+                    });
+
+                    this.onViewCreated = function(view) {
+                        self.mapView = view;
+                        // Setup a JSAPI 4.x property watch outside of Angular
+                        //  and update bound Angular controller properties
+                        self.mapView.watch('center,scale,zoom,rotation', function() {
+                            $scope.$applyAsync('exampleCtrl.mapView');
+                        });
+                    };
+                });
+        </script>
+    </body>
+</html>
