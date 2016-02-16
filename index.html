@@ -41,6 +41,10 @@
 
         <!-- shared left nav controller for examples and patterns; also modifies styling of snippets and footer -->
         <div ng-controller="LeftNavCtrl">
+
+            <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
+            <div ng-view="" autoscroll ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
+
             <!-- left nav list group for example toc page and individual example pages -->
             <div class="col-sm-3" ng-if="examplesLeftNavShow" style="display:none;" ng-style="{display: examplesLeftNavStyle}">
                 <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
@@ -69,12 +73,8 @@
                 </div>
             </div>
 
-            <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
-            <div ng-view="" autoscroll ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
-
             <!-- source code snippets -->
             <div>
-                <div class="col-sm-3"></div>
                 <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
                     <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
                         <li ng-repeat="tab in tabs" ng-select-option="tab">
@@ -87,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-3"></div>
             </div>
 
             <!-- page footer -->

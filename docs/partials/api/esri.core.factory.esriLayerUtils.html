@@ -1,0 +1,43 @@
+<h1><code ng:non-bindable="">esriLayerUtils</code>
+<div><span class="hint">service in module <code ng:non-bindable="">esri.core</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-core-factory-page esri-core-factory-esrilayerutils-page"><p>Functions to create instances of layers and related classes (such as InfoTemplate).</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/esri.core.factory:esriLoader">esriLoader</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_createdynamicmapservicelayer">createDynamicMapServiceLayer(url, options)</h3>
+<div class="createdynamicmapservicelayer"><div class="createdynamicmapservicelayer-page"><p>Create an instance of an <a href="https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1">ArcGISDynamicMapServiceLayer</a></p>
+</div><h5 id="methods_createdynamicmapservicelayer_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>url</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createdynamicmapservicelayer-page"><p>The url of the map service</p>
+</div></td></tr><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="createdynamicmapservicelayer-page"><p>ArcGISDynamicMapServiceLayer options</p>
+</div></td></tr></tbody></table><h5 id="methods_createdynamicmapservicelayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createdynamicmapservicelayer-page"><p>Returns a $q style promise resolved with an instance of ArcGISDynamicMapServiceLayer</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createfeaturelayer">createFeatureLayer(url, options)</h3>
+<div class="createfeaturelayer"><div class="createfeaturelayer-page"><p>Create an instance of a <a href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html">FeatureLayer</a></p>
+</div><h5 id="methods_createfeaturelayer_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>url</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createfeaturelayer-page"><p>The url of the map or feature service layer</p>
+</div></td></tr><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="createfeaturelayer-page"><p>FeatureLayer options</p>
+</div></td></tr></tbody></table><h5 id="methods_createfeaturelayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createfeaturelayer-page"><p>Returns a $q style promise resolved with an instance of FeatureLayer</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createinfotemplate">createInfoTemplate(infoTemplate)</h3>
+<div class="createinfotemplate"><div class="createinfotemplate-page"><p>Create an instance of an <a href="https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html">InfoTemplate</a></p>
+</div><h5 id="methods_createinfotemplate_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>infoTemplate</td><td><a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="createinfotemplate-page"><p>Either an array with <code>[&#39;title&#39;, &#39;content&#39;]</code> or an object with <code>{title: &#39;title&#39;, content: &#39;content&#39;}</code></p>
+</div></td></tr></tbody></table><h5 id="methods_createinfotemplate_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createinfotemplate-page"><p>Returns a $q style promise resolved with an instance of InfoTemplate</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_createvectortilelayer">createVectorTileLayer(url, options)</h3>
+<div class="createvectortilelayer"><div class="createvectortilelayer-page"><p>Create an instance of a <a href="https://developers.arcgis.com/javascript/jsapi/vectortilelayer-amd.html#vectortilelayer1">VectorTileLayer</a></p>
+</div><h5 id="methods_createvectortilelayer_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>url</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="createvectortilelayer-page"><p>The url of the vector tile service or style JSON</p>
+</div></td></tr><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="createvectortilelayer-page"><p>VectorTileLayer options</p>
+</div></td></tr></tbody></table><h5 id="methods_createvectortilelayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="createvectortilelayer-page"><p>Returns a $q style promise resolved with an instance of VectorTileLayer</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>
