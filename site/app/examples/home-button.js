@@ -10,5 +10,9 @@ angular.module('esri-map-docs')
             self.onViewCreated = function(view) {
                 self.sceneView = view;
             };
+
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
         });
     });

@@ -7,7 +7,21 @@
             manipulate those objects in ways beyond what is allowed by the
             declarative directive API.</p>
         <h3>Events</h3>
-        <p>The map and scene view directives each include both <code>on-create</code> and <code>on-load</code> events that pass a reference to the underlying map or scene view object to a callback function. The <code>on-create</code> event is fired immediately after the view has been created (i.e. <code>new MapView()</code>) and the <code>on-load</code> event fires after the view's <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-Map.html#then">promise has been resolved</a>. See these examples:</p>
+        <p>The map and scene view directives each include both <code>on-create</code>
+            and <code>on-load</code> events that pass a reference to the underlying map or
+            scene view object to a callback function. The <code>on-create</code> event is
+            fired immediately after the view has been created (i.e. <code>new MapView()</code>)
+            and the <code>on-load</code> event fires after the view's
+            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-views-MapView.html#then">promise has been resolved</a>.
+        </p> 
+        <p>The map and scene view directives also include an <code>on-error</code> event
+            that passes the error information object if a view's promise has been rejected.
+            This can be useful, for example, if you wish to use a scene view directive but
+            need to <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-webgl-support/index.html">gracefully handle</a>
+            browsers that do not support WebGL. Most examples using the scene view directive
+            also demonstrate how to use this binding.
+        </p>
+        <p>See these examples:</p>
         <h4>On-create</h4>
         <ul>
             <li><a href="#/examples/scene-view">Scene View</a></li>

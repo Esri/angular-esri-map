@@ -12,15 +12,20 @@
     }
 </style>
 <h2>Chaining Promises</h2>
-<div style="position:relative;">
-    <esri-scene-view map="vm.map" on-create="vm.onViewCreated">
-    <div id="results">
-        <!-- <button ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">Start Promise Chain</button> -->
-        <button type="button" class="btn btn-sm btn-default" ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">Start Promise Chain</button>
-        <span id="areaSpan" ng-hide="!vm.area">
-            <br><br>Area = {{vm.area | number: 0}} acres
-        </span>
-    </div>
+
+<div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
+
+<div ng-hide="vm.showViewError" style="position:relative;">
+    <esri-scene-view map="vm.map" on-create="vm.onViewCreated" on-error="vm.onViewError">
+        <div id="results">
+            <button type="button" class="btn btn-sm btn-default" ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">
+                Start Promise Chain
+            </button>
+            <span id="areaSpan" ng-hide="!vm.area">
+                <br><br>Area = {{vm.area | number: 0}} acres
+            </span>
+        </div>
     </esri-scene-view>
 </div>
+
 <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/chaining-promises/index.html">this sample</a>.</p>

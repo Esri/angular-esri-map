@@ -25,8 +25,11 @@
     }
 </style>
 <h2>Work with Slides in a WebScene</h2>
-<div style="position:relative;">
-    <esri-scene-view map="vm.map" on-load="vm.onViewLoaded"></esri-scene-view>
+
+<div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
+
+<div ng-hide="vm.showViewError" style="position:relative;">
+    <esri-scene-view map="vm.map" on-load="vm.onViewLoaded" on-error="vm.onViewError"></esri-scene-view>
     <div class="slidesDiv" ng-show="vm.slides.length > 0">
         <span class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
             {{slide.title.text}}
@@ -36,4 +39,5 @@
         </span>
     </div>
 </div>
+
 <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/layers-featurelayer/index.html">this sample</a>.</p>

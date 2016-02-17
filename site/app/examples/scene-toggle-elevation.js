@@ -16,6 +16,10 @@ angular.module('esri-map-docs')
                 });
             };
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             self.updateElevation = function(e) {
                 if (!e.currentTarget.checked) {
                     // clear all elevation layers

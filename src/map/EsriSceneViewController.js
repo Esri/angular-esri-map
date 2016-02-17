@@ -47,8 +47,10 @@
              * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Set a Map or WebScene on the SceneView. A new SceneView will be constructed
-             * if it does not already exist, and also execute optional `on-load` and `on-create` events.
+             * Set a Map or WebScene on the SceneView.
+             * A new SceneView will be constructed if it does not already exist,
+             * and also execute the optional `on-load` and `on-create` events.
+             * If a new SceneView is rejected, the optional `on-error` event will be executed.
              *
              * @param {Object} map Map instance or WebScene instance
              *
@@ -75,6 +77,10 @@
                                 $scope.$apply(function() {
                                     self.onLoad()(self.view);
                                 });
+                            }
+                        }, function(err) {
+                            if (typeof self.onError() === 'function') {
+                                self.onError()(err);
                             }
                         });
                     });

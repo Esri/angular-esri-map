@@ -26,6 +26,11 @@
   margin: 0 0 10px 0;
 }
 
+.web-gl-warning {
+  color: #b52e31;
+  font-weight: bold;
+}
+
 /* Esri JSAPI */
 .esri-view {
   height: 400px;

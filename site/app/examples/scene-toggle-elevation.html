@@ -14,17 +14,23 @@
     }
 </style>
 <h2>Toggle the Basemap's Elevation Layer</h2>
-<div style="position:relative;">
-    <esri-scene-view map="vm.map" on-create="vm.onViewCreated" 
+
+<div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
+
+<div ng-hide="vm.showViewError" style="position:relative;">
+    <esri-scene-view map="vm.map" 
         view-options="{
             camera: {
                 position: [7.654, 45.919, 5184],
                 tilt: 80
             }
-        }">
+        }"
+        on-create="vm.onViewCreated"
+        on-error="vm.onViewError">
     </esri-scene-view>
     <div id="elevationDiv">
         <label>Elevation: <input type="checkbox" checked ng-click="vm.updateElevation($event)" /></label>
     </div>
 </div>
+
 <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>

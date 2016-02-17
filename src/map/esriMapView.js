@@ -18,6 +18,7 @@
      * @param {Object} map Instance of a Map.
      * @param {Function=} on-create Callback for successful creation of the map view.
      * @param {Function=} on-load Callback for successful loading of the map view.
+     * @param {Function=} on-error Callback for rejected/failed loading of the map view.
      * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
      */
     angular.module('esri.map')
@@ -35,6 +36,7 @@
                     // function binding for event handlers
                     onCreate: '&',
                     onLoad: '&',
+                    onError: '&',
                     // function binding for reading object hash from attribute string
                     // or from scope object property
                     viewOptions: '&'

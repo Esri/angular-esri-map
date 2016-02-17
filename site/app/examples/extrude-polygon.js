@@ -16,6 +16,10 @@ angular.module('esri-map-docs')
                 basemap: 'streets'
             });
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             //Create featureLayer and add to the map
             var featureLayer = new FeatureLayer({
                 url: '//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3'
