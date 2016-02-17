@@ -24,6 +24,10 @@ angular.module('esri-map-docs')
                 basemap: 'satellite'
             });
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             /********************************************************************
              * Add two graphics layers to map: one for points, another for buffers
              ********************************************************************/

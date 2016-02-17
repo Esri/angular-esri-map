@@ -34,6 +34,10 @@ angular.module('esri-map-docs')
                 });
             };
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             self.onSlideClick = function(slide) {
                 self.slides.forEach(function(slide) {
                     slide.isActiveSlide = false;

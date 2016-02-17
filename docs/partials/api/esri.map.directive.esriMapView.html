@@ -16,6 +16,7 @@ There are plenty of examples showing how to use this directive and its bound par
        map="{Object}"
        [on-create="{Function}"]
        [on-load="{Function}"]
+       [on-error="{Function}"]
        [view-options="{Object | String}"]&gt;
 &lt;/esri-map-view&gt;</pre>
 <h3 id="usage_directive-info">Directive info</h3>
@@ -25,6 +26,7 @@ There are plenty of examples showing how to use this directive and its bound par
 <h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>map</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Instance of a Map.</p>
 </div></td></tr><tr><td>on-create <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Callback for successful creation of the map view.</p>
 </div></td></tr><tr><td>on-load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Callback for successful loading of the map view.</p>
+</div></td></tr><tr><td>on-error <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Callback for rejected/failed loading of the map view.</p>
 </div></td></tr><tr><td>view-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>An object or inline object hash string defining additional map view constructor options.</p>
 </div></td></tr></tbody></table></div>
 </div>

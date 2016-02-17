@@ -22,8 +22,10 @@ resolved with an object with a <code>view</code> property that refers to the Map
 </div></td></tr></table></div>
 </li>
 <li><h3 id="methods_setmap">setMap(map)</h3>
-<div class="setmap"><div class="setmap-page"><p>Set a Map on the MapView. A new MapView will be constructed
-if it does not already exist, and also execute optional <code>on-load</code> and <code>on-create</code> events.</p>
+<div class="setmap"><div class="setmap-page"><p>Set a Map on the MapView.
+A new MapView will be constructed if it does not already exist,
+and also execute the optional <code>on-load</code> and <code>on-create</code> events.
+If a new MapView is rejected, the optional <code>on-error</code> event will be executed.</p>
 </div><h5 id="methods_setmap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>map</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="setmap-page"><p>Map instance</p>
 </div></td></tr></tbody></table></div>
 </li>

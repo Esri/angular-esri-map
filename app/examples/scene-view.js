@@ -32,6 +32,10 @@ angular.module('esri-map-docs')
                 });
             };
 
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             // toggle transportation layer based on user click
             self.onStreetsToggle = function(e) {
                 transportationLyr.visible = !!e.currentTarget.checked;

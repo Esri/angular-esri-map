@@ -55,7 +55,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create MapView instances.",
-      "keywords": "$element $q $scope api constructed controller core create esri events execute exist factory function functions getmapview help instance instances load map mapview module object on-create on-load optional promise property reference refers resolved returns set setmap style view"
+      "keywords": "$element $q $scope api constructed controller core create esri event events execute executed exist factory function functions getmapview help instance instances load map mapview module object on-create on-error on-load optional promise property reference refers rejected resolved returns set setmap style view"
     },
     {
       "section": "api",
@@ -64,7 +64,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create SceneView instances.",
-      "keywords": "$element $q $scope api constructed controller core create esri events execute exist factory function functions getsceneview help instance instances load map module object on-create on-load optional options promise property reference refers resolved returns sceneview set setmap sets style view webscene"
+      "keywords": "$element $q $scope api constructed controller core create esri event events execute executed exist factory function functions getsceneview help instance instances load map module object on-create on-error on-load optional options promise property reference refers rejected resolved returns sceneview set setmap sets style view webscene"
     },
     {
       "section": "api",
@@ -82,7 +82,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a map view using the Esri ArcGIS API for JavaScript.",
-      "keywords": "additional api arcgis bound callback create creation defining directive esri examples feature hash inline instance javascript layer loading map object on-create on-load options parameters plenty showing string successful view view-options"
+      "keywords": "additional api arcgis bound callback create creation defining directive esri examples feature hash inline instance javascript layer loading map object on-create on-error on-load options parameters plenty rejected showing string successful view view-options"
     },
     {
       "section": "api",
@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a scene view using the Esri ArcGIS API for JavaScript.",
-      "keywords": "additional api arcgis bound callback create creation defining directive esri examples hash inline instance javascript loading map object on-create on-load options parameters plenty scene showing string successful view view-options webscene"
+      "keywords": "additional api arcgis bound callback create creation defining directive esri example examples hash inline instance javascript loading map object on-create on-error on-load options parameters plenty rejected scene showing string successful supported view view-options webgl webscene"
     }
   ],
   "apis": {
@@ -112,7 +112,7 @@ NG_DOCS={
     "html5Mode": false,
     "editExample": true,
     "navTemplate": "site/docs-resources/docs-nav-template.html",
-    "navContent": "<ul class=\"nav pull-right\">\r\n    <li><a href=\"../\">Home</a></li>\r\n    <li><a href=\"../#/examples\">Examples</a></li>\r\n    <li><a href=\"../#/patterns\">Patterns</a></li>\r\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\r\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\r\n</ul>\r\n",
+    "navContent": "<ul class=\"nav pull-right\">\n    <li><a href=\"../\">Home</a></li>\n    <li><a href=\"../#/examples\">Examples</a></li>\n    <li><a href=\"../#/patterns\">Patterns</a></li>\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\n</ul>\n",
     "navTemplateData": {},
     "loadDefaults": {
       "angular": true,
