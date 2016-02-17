@@ -207,7 +207,7 @@ Published to NPM [#80](https://github.com/Esri/angular-esri-map/issues/80)
 
 * [Deferred Map Example test page](http://esri.github.io/angular-esri-map/deferred-map.html)
 
-Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasil for their contributions and continued patience.
+Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasilgeo for their contributions and continued patience.
 
 ## [v0.0.1-beta.2]
 
