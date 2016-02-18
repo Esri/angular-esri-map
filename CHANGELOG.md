@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 [Upcoming changes][unreleased]
 
+### Added
+
+Added `on-error` event for view directives, and site uses this to show warning in unsupported (mobile) browsers [#242](https://github.com/Esri/angular-esri-map/pull/242)
+
+Property binding patterns page [#238](https://github.com/Esri/angular-esri-map/pull/238)
+
 ## [v2.0.0-beta.1]
 
 ### Changed
