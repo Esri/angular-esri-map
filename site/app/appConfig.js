@@ -170,6 +170,12 @@
                 title: 'Getting a Reference to the Map and Scene Views',
                 shortTitle: 'Map and Scene View References'
             },
+            {
+                path: '/patterns/property-binding',
+                templateUrl: 'app/patterns/property-binding.html',
+                title: 'Binding Properties Between AngularJS and Esri',
+                shortTitle: 'Property Binding'
+            },
             // TODO: custom directive's page
             // {
             //     path: '/patterns/create-your-own-directives',
