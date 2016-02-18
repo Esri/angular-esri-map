@@ -45,7 +45,15 @@
   font-size: 13px;
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
 }
+.tab-container pre {
+  margin-bottom: 0;
+  border-top: 0;
+}
+.snippet-file-name {
+  margin-bottom: 12px;
+}
 
+/* tables */
 .table {
   font-size: 0.95em;
 }
