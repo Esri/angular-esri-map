@@ -1,0 +1,63 @@
+<h1><code ng:non-bindable="">EsriMapController</code>
+<div><span class="hint">controller in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-controller-page esri-map-controller-esrimapcontroller-page"><p>This controller is used by the esri-map directive to construct the map,
+provide it with several supporting methods,
+and also add it to the registry if following the <a href="../#/examples/registry-pattern">Registry Pattern</a>.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$attrs">$attrs</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/ng.$timeout">$timeout</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/esri.core.factory:esriMapUtils">esriMapUtils</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/esri.core.factory:esriRegistry">esriRegistry</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_addlayer">addLayer(layer, index)</h3>
+<div class="addlayer"><div class="addlayer-page"><p>Adds the layer to the map.</p>
+</div><h5 id="methods_addlayer_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>layer</td><td><a href="" class="label type-hint type-hint-featurelayer">FeatureLayer </a><a href="" class="label type-hint type-hint-object"> VectorTileLayer </a><a href="" class="label type-hint type-hint-object"> ArcGISDynamicMapServiceLayer</a></td><td><div class="addlayer-page"><p>Layer to add to the map</p>
+</div></td></tr><tr><td>index <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="addlayer-page"><p>Layer ordering position on the map</p>
+</div></td></tr></tbody></table><h5 id="methods_addlayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="addlayer-page"><p>The promise that will be resolved with the result of <code>map.addLayer</code>.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_addlayerinfo">addLayerInfo(layerInfo)</h3>
+<div class="addlayerinfo"><div class="addlayerinfo-page"><p>Adds to the array to store layer info, which is needed for the esri-legend directive.</p>
+</div><h5 id="methods_addlayerinfo_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>layerInfo</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="addlayerinfo-page"><p>Information about the layer, see
+<a href="https://developers.arcgis.com/javascript/jsapi/legend-amd.html#legend1">layerInfo</a> for object specification.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_bindmapevents">bindMapEvents(scope, attrs)</h3>
+<div class="bindmapevents"><div class="bindmapevents-page"><p>Updates scope in response to map events,
+and updates the map in response to scope properties.</p>
+</div><h5 id="methods_bindmapevents_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>scope</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bindmapevents-page"><p>$scope</p>
+</div></td></tr><tr><td>attrs</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bindmapevents-page"><p>$attrs</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_getlayerinfos">getLayerInfos()</h3>
+<div class="getlayerinfos"><h5 id="methods_getlayerinfos_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="getlayerinfos-page"><p>The array of layer info objects that are used by the esri-legend directive.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_getmap">getMap()</h3>
+<div class="getmap"><h5 id="methods_getmap_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="getmap-page"><p>The promise that will be resolved with the loaded map.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_getmapproperties">getMapProperties()</h3>
+<div class="getmapproperties"><div class="getmapproperties-page"><p>Formats and prepares map options from controller properties.</p>
+</div><h5 id="methods_getmapproperties_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="getmapproperties-page"><p>A map options object for map construction.</p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_removelayer">removeLayer(layer)</h3>
+<div class="removelayer"><div class="removelayer-page"><p>Removes the layer from the map, for example when a esri-feature-layer directive goes out of scope.</p>
+</div><h5 id="methods_removelayer_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>layer</td><td><a href="" class="label type-hint type-hint-featurelayer">FeatureLayer </a><a href="" class="label type-hint type-hint-object"> VectorTileLayer </a><a href="" class="label type-hint type-hint-object"> ArcGISDynamicMapServiceLayer</a></td><td><div class="removelayer-page"><p>Layer to remove from the map</p>
+</div></td></tr></tbody></table><h5 id="methods_removelayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="removelayer-page"><p>The promise that will be resolved with the result of <code>map.removeLayer</code>.</p>
+</div></td></tr></table></div>
+</li>
+</ul>
+</div>
+</div>

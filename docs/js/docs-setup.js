@@ -112,7 +112,7 @@ NG_DOCS={
     "html5Mode": false,
     "editExample": true,
     "navTemplate": "site/docs-resources/docs-nav-template.html",
-    "navContent": "<ul class=\"nav pull-right\">\n    <li><a href=\"../\">Home</a></li>\n    <li><a href=\"../#/examples\">Examples</a></li>\n    <li><a href=\"../#/patterns\">Patterns</a></li>\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\n</ul>\n",
+    "navContent": "<ul class=\"nav pull-right\">\r\n    <li><a href=\"../\">Home</a></li>\r\n    <li><a href=\"../#/examples\">Examples</a></li>\r\n    <li><a href=\"../#/patterns\">Patterns</a></li>\r\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\r\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\r\n</ul>\r\n",
     "navTemplateData": {},
     "loadDefaults": {
       "angular": true,

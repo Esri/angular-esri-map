@@ -1,0 +1,43 @@
+<h1><code ng:non-bindable="">esriFeatureLayer</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>This directive creates a <a href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html">FeatureLayer</a>
+and adds it to the map.
+This directive <strong>must</strong> be placed within an esri-map directive.</p>
+<h4 id="examples" id="description_examples">Examples</h4>
+<ul>
+<li><a href="../#/examples/feature-layers">Feature Layers</a></li>
+<li><a href="../#/examples/add-remove-layers">Add/Remove Layers</a></li>
+<li><a href="../#/examples/layer-events">Layer Events</a></li>
+<li><a href="../#/examples/no-basemap">No Basemap</a></li>
+<li>and more...</li>
+</ul>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as element:<pre class="prettyprint linenums">&lt;esri-feature-layer
+       url="{String}"
+       [visible="{Boolean}"]
+       [opacity="{Number}"]
+       [definition-expression="{String}"]
+       [load="{Function}"]
+       [update-end="{Function}"]
+       [layer-options="{Object | String}"]&gt;
+&lt;/esri-feature-layer&gt;</pre>
+<h3 id="usage_directive-info">Directive info</h3>
+<div class="directive-info"><ul><li>This directive creates new scope.</li>
+</ul>
+</div>
+<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>url</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>The url to the ArcGIS Server REST layer resource.</p>
+</div></td></tr><tr><td>visible <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>The visibility of the layer. Two-way bound.</p>
+</div></td></tr><tr><td>opacity <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-number">Number</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>The opacity of the layer. Two-way bound.</p>
+</div></td></tr><tr><td>definition-expression <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>The definition expression where clause. Two-way bound.</p>
+</div></td></tr><tr><td>load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>Callback for layer
+<a href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-load">load event</a>.</p>
+</div></td></tr><tr><td>update-end <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>Callback for layer
+<a href="https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#event-update-end">update-end event</a>.</p>
+</div></td></tr><tr><td>layer-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrifeaturelayer-page"><p>An object or inline object hash string defining additional layer constructor options.</p>
+</div></td></tr></tbody></table></div>
+</div>
