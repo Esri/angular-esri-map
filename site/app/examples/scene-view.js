@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('SceneViewCtrl', function(esriLoader) {
+    .controller('SceneViewCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -32,13 +32,17 @@ angular.module('esri-map-docs')
                 });
             };
 
-            self.onViewError = function() {
-                self.showViewError = true;
-            };
-
             // toggle transportation layer based on user click
             self.onStreetsToggle = function(e) {
                 transportationLyr.visible = !!e.currentTarget.checked;
+            };
+
+            // check that the device/browser can support WebGL
+            //  by checking the userAgent and
+            //  by handling the scene view directive on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
             };
         });
     });
