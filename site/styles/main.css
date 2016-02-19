@@ -22,15 +22,6 @@
   margin-bottom: 28px;
 }
 
-.page-header.list-group-category {
-  margin: 0 0 10px 0;
-}
-
-.web-gl-warning {
-  color: #b52e31;
-  font-weight: bold;
-}
-
 /* Esri JSAPI */
 .esri-view {
   height: 400px;
@@ -61,6 +52,23 @@
   white-space: nowrap;
 }
 
+/*warning for non-webgl browsers*/
+.web-gl-warning {
+  color: #b52e31;
+  font-weight: bold;
+}
+
+/*dismissable alert to warn about docs version*/
+.version-alert {
+  position: fixed;
+  bottom: -24px;
+  width: 80%;
+  left: calc(50% - 40%);
+  text-align: center;
+  font-size: small;
+  z-index: 100;
+}
+
 /* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
 body {
   background-color: #ffffff;
@@ -75,6 +83,9 @@ a {
 a:focus,
 a:hover {
   color: #b52e31;
+}
+.navbar-nav>li>a:focus, .navbar-nav>li>a:hover {
+    background-image: linear-gradient(to top,transparent 92%,#b52e31 93%,#b52e31 100%);
 }
 .nav-pills>li.active>a,
 .nav-pills>li.active>a:focus,
@@ -117,14 +128,4 @@ button.btn-default:active, button.btn-default[disabled]:active {
   color: #fff!important;
   background-color: #b52e31!important;
   border-color: #b52e31 !important;
-}
-
-.version-alert {
-  position: fixed;
-  bottom: -24px;
-  width: 80%;
-  left: calc(50% - 40%);
-  text-align: center;
-  font-size: small;
-  z-index: 100;
 }

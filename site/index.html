@@ -20,23 +20,24 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- page header -->
-        <div class="page-header">
-            <ul class="nav nav-pills pull-right" role="tablist" ng-controller="NavCtrl">
-                <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
-                </li>
-                <li role="presentation" ng-class="{ active: page === 'patterns' }"><a ng-href="#/patterns">Patterns</a>
-                </li>
-                <li role="presentation"><a href="./docs">API</a>
-                </li>
-                <li role="presentation"><a href="https://arcgis.github.io/angular-esri-map-site-v1/">v1 <span class="hidden-xs">Docs</span></a>
-                <li role="presentation"><a href="//github.com/esri/angular-esri-map">GitHub</a>
-                </li>
-            </ul>
-            <h3 class="text-muted"><a ng-href="#/home">angular-esri-map</a></h3>
-        </div>
 
+    <!-- top nav -->
+    <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 20px;">
+        <div class="container">
+            <div class="navbar-header" style="float:left;">
+                <a class="navbar-brand" style="font-size: 25px; font-weight: 200;" ng-href="#/home">angular-esri-map</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" style="float: right;">
+                <li style="float: left;" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a></li>
+                <li style="float: left;" ng-class="{ active: page === 'patterns' }"><a ng-href="#/patterns">Patterns</a></li>
+                <li style="float: left;"><a href="./docs">API</a></li>
+                <li style="float: left;"><a href="https://arcgis.github.io/angular-esri-map-site-v1/">v1 <span class="hidden-xs">Docs</span></a></li>
+                <li style="float: left;"><a href="//github.com/esri/angular-esri-map">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
         <!-- shared left nav controller for examples and patterns; also modifies styling of snippets and footer -->
         <div ng-controller="LeftNavCtrl">
         <div class="row">
