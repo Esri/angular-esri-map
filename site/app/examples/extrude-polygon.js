@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('ExtrudePolygonCtrl', function(esriLoader) {
+    .controller('ExtrudePolygonCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -11,14 +11,18 @@ angular.module('esri-map-docs')
             'esri/symbols/ExtrudeSymbol3DLayer',
             'esri/renderers/SimpleRenderer'
         ], function(Map, Color, SceneView, FeatureLayer, PolygonSymbol3D, ExtrudeSymbol3DLayer, SimpleRenderer) {
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+            
             // create the map
             self.map = new Map({
                 basemap: 'streets'
             });
-
-            self.onViewError = function() {
-                self.showViewError = true;
-            };
 
             //Create featureLayer and add to the map
             var featureLayer = new FeatureLayer({

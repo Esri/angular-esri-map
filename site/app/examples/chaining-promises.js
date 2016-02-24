@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('ChainingPromisesCtrl', function(esriLoader, $scope) {
+    .controller('ChainingPromisesCtrl', function(esriLoader, $scope, browserDetectionService) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -17,6 +17,14 @@ angular.module('esri-map-docs')
             geometryEngineAsync, Point, Graphic, GraphicsLayer, Map,
             SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol
         ) {
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+            
             // define semi-transparent red point symbol
             var pointSym = new SimpleMarkerSymbol({
                 style: 'circle',
@@ -56,10 +64,6 @@ angular.module('esri-map-docs')
 
             self.onViewCreated = function(view) {
                 self.view = view;
-            };
-
-            self.onViewError = function() {
-                self.showViewError = true;
             };
 
             self.onStartButtonClick = function() {
