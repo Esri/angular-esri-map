@@ -13,9 +13,12 @@ Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how y
 ### Quick Start
 
 To use these directives in your own Angular application, first install the module as a dependency using any of the following methods.
-
+```html
+<!-- load angular-esri-map from CDN -->
+<script src="//npmcdn.com/angular-esri-map@2.0.0-beta.1"></script>
+```
 ```bash
-# install via bower
+# OR install via bower
 bower install angular-esri-map
 
 # OR install via npm
@@ -23,7 +26,7 @@ npm install angular-esri-map
 ```
 Alternatively, you can clone or [download](https://github.com/Esri/angular-esri-map/releases) this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
 
-Once you've added the module to your application, you can use the sample code below to use the scene view directive. Just change the "path/to/angular-esri-map.js" to point to the location of the file in your environment and load the page in a browser.
+Once you've added the module to your application, you can use the sample code below to use the scene view directive.  If you have downloaded or installed locally, point to the location of the module file in your environment (instead of CDN) and load the page in a browser.
 
 ![App](https://raw.github.com/Esri/angular-esri-map/master/angular-esri-map.png)
 
@@ -31,6 +34,7 @@ Once you've added the module to your application, you can use the sample code be
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
+        <title>Angular Esri Quick Start</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
@@ -39,9 +43,12 @@ Once you've added the module to your application, you can use the sample code be
         <esri-scene-view map="vm.map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">
         </esri-scene-view>
         
+        <!-- load Esri JSAPI -->
         <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load AngularJS -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-        <script src="path/to/angular-esri-map.js"></script>
+        <!-- load angular-esri-map -->
+        <script src="//npmcdn.com/angular-esri-map@2.0.0-beta.1"></script>
 
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
