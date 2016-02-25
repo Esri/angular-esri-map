@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('WebSceneSlidesCtrl', function(esriLoader) {
+    .controller('WebSceneSlidesCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
         self.slides = [];
         self.sceneView = null;
@@ -34,6 +34,10 @@ angular.module('esri-map-docs')
                 });
             };
 
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
             self.onViewError = function() {
                 self.showViewError = true;
             };

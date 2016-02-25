@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('SceneViewCtrl', function(esriLoader) {
+    .controller('SceneViewCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -8,7 +8,6 @@ angular.module('esri-map-docs')
         ], function(
             Map, ArcGISTiledLayer
         ) {
-
             // add layers to the map
             var transportationLyr = new ArcGISTiledLayer({
                 url: '//server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer',
@@ -32,6 +31,10 @@ angular.module('esri-map-docs')
                 });
             };
 
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
             self.onViewError = function() {
                 self.showViewError = true;
             };

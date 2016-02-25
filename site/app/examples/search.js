@@ -14,7 +14,8 @@ angular.module('esri-map-docs')
             self.onViewCreated = function(view) {
                 var searchWidget = new Search({
                     viewModel: new SearchVM({
-                        view: view
+                        view: view,
+                        buttonModeEnabled: true
                     })
                 }, 'searchDiv');
                 searchWidget.startup();
