@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('GeodesicBuffersCtrl', function(esriLoader) {
+    .controller('GeodesicBuffersCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -23,10 +23,6 @@ angular.module('esri-map-docs')
             self.map = new Map({
                 basemap: 'satellite'
             });
-
-            self.onViewError = function() {
-                self.showViewError = true;
-            };
 
             /********************************************************************
              * Add two graphics layers to map: one for points, another for buffers
@@ -82,5 +78,13 @@ angular.module('esri-map-docs')
                     }));
                 }
             }
+
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
         });
     });
