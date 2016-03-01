@@ -1,0 +1,29 @@
+<style type="text/css">
+    .slides-container {
+        background-color: black;
+        color: white;
+        padding: 10px;
+    }
+    .slide {
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    .active-slide {
+        box-shadow: 0 0 12px white;
+        border-style: solid;
+        border-width: thin;
+        border-color: white;
+    }
+</style>
+<h2>Southern California Ski Resorts</h2>
+<h4>Work with Slides in a WebScene using the &lt;esri-webscene-slides&gt; directive</h4>
+
+<div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
+
+<div ng-hide="vm.showViewError" style="position:relative;">
+    <esri-webscene-slides slides="vm.slides" on-slide-change="vm.onSlideChange"></esri-webscene-slides>
+    <esri-scene-view map="vm.map" on-load="vm.onViewLoaded" on-error="vm.onViewError"></esri-scene-view>
+</div>
+
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/webscene-slides/index.html">this sample</a>.</p>

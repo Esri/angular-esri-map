@@ -14,7 +14,7 @@
             The Esri JSAPI offers a collection of
             <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Widget.html">built-in widgets</a>
             that can be loaded with
-            <a href="/docs/#/api/esri.core.factory:esriLoader#methods_require"><code>esriLoader.require()</code></a>
+            <a href="#/patterns/other-esri-classes"><code>esriLoader.require()</code></a>
             and constructed once there is
             <a href="#/patterns/references-to-views">reference to</a>
             a map view or scene view. This pattern also recommends that you properly tear down and
@@ -30,13 +30,13 @@
         <h3>Esri View Models</h3>
         <p><a href="https://developers.arcgis.com/javascript/beta/guide/whats-new/index.html#Developerfriendly_widgets_4">View models</a>
             allow for the separation of a widget's methods and properties from
-            its UI presentation. By taking advantage of view models, you can rely
+            its UI presentation. By taking advantage of view models, you can use
             on Esri widget functionality, but apply custom directive templates and styles.
             For example, the included
             <a href="/docs/#/api/esri.map.directive:esriHomeButton"><code>&lt;esri-home-button&gt;</code></a>
-            Angular directive relies on the Esri
+            Angular directive makes use of the Esri
             <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Home-HomeViewModel.html"><code>HomeViewModel</code></a>
-            in its controller logic and also defines its own look and feel.
+            in its controller logic but defines its own look and feel.
         </p>
         <p>Example:</p>
         <ul>
@@ -44,37 +44,21 @@
         </ul>
         
         <h3>Custom Angular Directives</h3>
+        <p>Directives do not necessarily need to to build directly on top of
+            Esri widget or view model functionality. For instance, the
+            <a href="#/examples/webscene-slides">WebScene Slides</a> example page
+            could have been written to separate the slide bookmarks into their own
+            directive; however, the purpose of those example pages is to provide parity
+            with corresponding, authoritative Esri JSAPI examples.
+        </p>
+        <p>The <a href="#/examples/webscene-slides-as-directive">WebScene Slides with Custom Directive</a>
+            example demonstrates how encapsulate the slide bookmarks into a custom Angular directive
+            (<a href="/docs/#/api/esri.map.directive:esriWebsceneSlides"><code>&lt;esri-webscene-slides&gt;</code></a>)
+            which has been added to this library.
+        </p>
         <p>Example:</p>
         <ul>
-            <li><a href="#/examples/webscene-slides">Work with Slides in a WebScene</a></li>
+            <li><a href="#/examples/webscene-slides-as-directive">WebScene Slides with Custom Directive</a></li>
         </ul>
-
-        <!-- <p>The map and scene view directives each include both <code>on-create</code>
-            and <code>on-load</code> events that pass a reference to the underlying map or
-            scene view object to a callback function. The <code>on-create</code> event is
-            fired immediately after the view has been created (i.e. <code>new MapView()</code>)
-            and the <code>on-load</code> event fires after the view's
-            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-views-MapView.html#then">promise has been resolved</a>.
-        </p> 
-        <p>The map and scene view directives also include an <code>on-error</code> event
-            that passes the error information object if a view's promise has been rejected.
-            This can be useful, for example, if you wish to use a scene view directive but
-            need to <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-webgl-support/index.html">gracefully handle</a>
-            browsers that do not support WebGL. Most examples using the scene view directive
-            also demonstrate how to use this binding.
-        </p>
-        <p>See these examples:</p>
-        <h4>On-create</h4>
-        <ul>
-            <li><a href="#/examples/scene-view">Scene View</a></li>
-            <li><a href="#/examples/search">Search</a></li>
-            <li><a href="#/examples/home-button">Home Button</a></li>
-            <li><a href="#/examples/scene-toggle-elevation">Toggle the Basemap's Elevation Layer</a></li>
-            <li><a href="#/examples/property-binding">Property Binding</a></li>
-        </ul>
-        <h4>On-load</h4>
-        <ul>
-            <li><a href="#/examples/webscene-slides">Work with Slides in a WebScene</a></li>
-        </ul> -->
     </div>
 </div>

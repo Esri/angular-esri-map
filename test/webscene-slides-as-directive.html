@@ -29,12 +29,10 @@
     </head>
     <body>
         <h2>Southern California Ski Resorts</h2>
-        <h3>Work with Slides in a WebScene using the &lt;esri-webscene-slides&gt; directive</h3>
+        <h4>Work with Slides in a WebScene using the &lt;esri-webscene-slides&gt; directive</h4>
         <div ng-controller="ExampleController as exampleCtrl">
             <esri-webscene-slides slides="exampleCtrl.slides" on-slide-change="exampleCtrl.onSlideChange"></esri-webscene-slides>
-            <div>
-                <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
-            </div>
+            <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/webscene-slides/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -51,7 +49,7 @@
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader, $scope) {
+                .controller('ExampleController', function(esriLoader) {
                     var self = this;
                     self.slides = [];
                     self.sceneView = null;
@@ -82,6 +80,8 @@
                         };
 
                         self.onSlideChange = function(slide) {
+                            // handle the on-slide-change callback
+                            //  by setting the scene view location to the slide's viewpoint
                             self.sceneView.animateTo(slide.viewpoint);
                         };
                     });

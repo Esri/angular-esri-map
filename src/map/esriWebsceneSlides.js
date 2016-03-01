@@ -24,7 +24,6 @@
      * For example, to arrange slides horizontally and give a highlighted effect on the selected slide, the following styles could be used:
      * ```css
      * .slides-container {
-     *     display: inline-block;
      *     background-color: black;
      *     color: white;
      *     padding: 10px;
@@ -42,6 +41,8 @@
      * }
      * ```
      *
+     * ## Examples
+     * - {@link ../#/examples/webscene-slides-as-directive WebScene Slides with Custom Directive}
      *
      * @param {Array} slides Array of {@link https://developers.arcgis.com/javascript/beta/api-reference/esri-webscene-Slide.html Slide} instances.
      * @param {Function=} on-slide-change Callback for handling a change in the active slide.
