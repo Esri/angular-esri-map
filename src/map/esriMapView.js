@@ -14,6 +14,9 @@
      *
      * ## Examples
      * - {@link ../#/examples/feature-layer Feature Layer}
+     * - {@link ../#/examples/vector-tiles Vector Tiles}
+     * - {@link ../#/examples/search Search}
+     * - {@link ../#/examples and more...}
      *
      * @param {Object} map Instance of a Map.
      * @param {Function=} on-create Callback for successful creation of the map view.
