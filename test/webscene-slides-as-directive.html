@@ -8,25 +8,19 @@
         <!-- load Esri CSS  -->
         <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
         <style type="text/css">
-            .slidesDiv {
-                position: absolute;
-                z-index: 50;
-                top: 0;
-                right: 0;
+            .slides-container {
+                display: inline-block;
                 background-color: black;
-                opacity: 0.8;
-                color: snow;
+                color: white;
                 padding: 10px;
-                border-radius: 10px;
-                max-height: 85%;
-                overflow-y: auto;
-                overflow-x: hidden;
             }
             .slide {
                 cursor: pointer;
+                display: inline-block;
+                margin: 0 10px;
             }
-            .activeSlide {
-                box-shadow: 0 0 12px #ffffff;
+            .active-slide {
+                box-shadow: 0 0 12px white;
                 border-style: solid;
                 border-width: thin;
                 border-color: white;
@@ -34,18 +28,12 @@
         </style>
     </head>
     <body>
-        <h2>Work with Slides in a WebScene</h2>
+        <h2>Southern California Ski Resorts</h2>
+        <h3>Work with Slides in a WebScene using the &lt;esri-webscene-slides&gt; directive</h3>
         <div ng-controller="ExampleController as exampleCtrl">
-            <div style="position:relative;">
+            <esri-webscene-slides slides="exampleCtrl.slides" on-slide-change="exampleCtrl.onSlideChange"></esri-webscene-slides>
+            <div>
                 <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
-                <div class="slidesDiv" ng-show="exampleCtrl.slides.length > 0">
-                    <span class="slide" ng-repeat="slide in exampleCtrl.slides" ng-click="exampleCtrl.onSlideClick(slide)">
-                        {{slide.title.text}}
-                        <br>
-                        <img src="{{slide.thumbnail.url}}" title="{{slide.title.text}}" ng-class="{activeSlide: slide.isActiveSlide}">
-                        <br>
-                    </span>
-                </div>
             </div>
             <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/webscene-slides/index.html">this sample</a>.</p>
         </div>
@@ -76,7 +64,7 @@
                         // create a new WebScene
                         var webScene = new WebScene({
                             portalItem: new PortalItem({
-                                id: '51c67be4a5ea4da6948a40210ddfab1a'
+                                id: '08974d4b5fcd446b8c8b1663783c5549'
                             })
                         });
 
@@ -88,19 +76,13 @@
                         self.onViewLoaded = function(view) {
                             self.sceneView = view;
 
+                            // assign slides array to controller property, which will update and set
+                            //  the required binding in the <esri-webscene-slides> directive
                             self.slides = view.map.presentation.slides.getAll();
-                            // tack on an extra property for ng-class css styling
-                            self.slides.forEach(function(slide) {
-                                slide.isActiveSlide = false;
-                            });
                         };
-                        
-                        self.onSlideClick = function(slide) {
-                            self.slides.forEach(function(slide) {
-                                slide.isActiveSlide = false;
-                            });
-                            slide.isActiveSlide = true;
-                            slide.applyTo(self.sceneView);
+
+                        self.onSlideChange = function(slide) {
+                            self.sceneView.animateTo(slide.viewpoint);
                         };
                     });
                 });

@@ -69,9 +69,11 @@ gulp.task('build-js', function() {
     'src/map/EsriHomeButtonController.js',
     'src/map/EsriMapViewController.js',
     'src/map/EsriSceneViewController.js',
+    'src/map/EsriWebsceneSlidesController.js',
     'src/map/esriHomeButton.js',
     'src/map/esriMapView.js',
-    'src/map/esriSceneView.js'])
+    'src/map/esriSceneView.js',
+    'src/map/esriWebsceneSlides.js'])
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
