@@ -14,6 +14,9 @@
      *
      * ## Examples
      * - {@link ../#/examples/scene-view Scene View}
+     * - {@link ../#/examples/extrude-polygon Extrude Polygon}
+     * - {@link ../#/examples/scene-toggle-elevation Toggle Basemap Elevation}
+     * - {@link ../#/examples and more...}
      *
      * @param {Object} map Instance of a Map or WebScene.
      * @param {Function=} on-create Callback for successful creation of the scene view.

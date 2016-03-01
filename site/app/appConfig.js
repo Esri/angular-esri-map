@@ -171,6 +171,12 @@
                 shortTitle: 'Map and Scene View References'
             },
             {
+                path: '/patterns/using-creating-widgets',
+                templateUrl: 'app/patterns/using-creating-widgets.html',
+                title: 'Using and Creating Esri Widgets',
+                shortTitle: 'Creating Widgets'
+            },
+            {
                 path: '/patterns/property-binding',
                 templateUrl: 'app/patterns/property-binding.html',
                 title: 'Binding Properties Between AngularJS and Esri',
