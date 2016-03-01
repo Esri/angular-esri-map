@@ -11,6 +11,14 @@ Added `on-error` event for view directives, and site uses this to show warning i
 
 Property binding patterns page [#238](https://github.com/Esri/angular-esri-map/pull/238)
 
+Added esri-webscene-slides directive and related test, example, and patterns pages [#254](https://github.com/Esri/angular-esri-map/pull/254)
+
+### Support
+
+Docs site is more mobile friendly [#245](https://github.com/Esri/angular-esri-map/pull/245) and shows error message when mobile browsers don't have required support for WebGL [#250](https://github.com/Esri/angular-esri-map/pull/250).
+
+Updated quick start in README to include instructions for CDN [#252](https://github.com/Esri/angular-esri-map/pull/252).
+
 ## [v2.0.0-beta.1]
 
 ### Changed
