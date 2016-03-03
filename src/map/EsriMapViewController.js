@@ -9,11 +9,12 @@
      * Functions to help create MapView instances.
      *
      * @requires esri.core.factory:esriLoader
+     * @requires esri.core.factory:esriRegistry
      * @requires $element
      * @requires $scope
      */
     angular.module('esri.map')
-        .controller('EsriMapViewController', function EsriMapViewController($element, $scope, esriLoader) {
+        .controller('EsriMapViewController', function EsriMapViewController($element, $scope, esriLoader, esriRegistry) {
             var self = this;
 
             // read options passed in as either a JSON string expression
@@ -64,6 +65,15 @@
                     self.options.map = map;
                     return this.getMapView().then(function(result) {
                         self.view = new result.view(self.options);
+
+                        if (typeof self.registerAs === 'string') {
+                            self.deregister = esriRegistry._register(self.registerAs, self.view);
+                            $scope.$on('$destroy', function() {
+                                if (self.deregister) {
+                                    self.deregister();
+                                }
+                            });
+                        }
 
                         if (typeof self.onCreate() === 'function') {
                             self.onCreate()(self.view);
