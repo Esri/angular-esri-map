@@ -6,7 +6,7 @@
      * @name esri.core.factory:esriRegistry
      *
      * @description
-     * Use `esriRegistry` to store and retrieve MapView or SceneView instances for use in parent controllers.
+     * Use `esriRegistry` to store and retrieve MapView or SceneView instances for use in different controllers.
      *
      * ## Examples
      * - {@link ../#/examples/registry-pattern Registry Pattern}
@@ -49,7 +49,9 @@
              *
              * @description
              * Get the MapView or SceneView instance registered with the given name.
-             * See {@link esri.map.directive:esriMap esriMap} for info on how to register a map using the `resgister-as` attribute.
+             * See {@link esri.map.directive:esriMapView esriMapView} or
+             * {@link esri.map.directive:esriSceneView esriSceneView}
+             * for info on how to register a map using the `register-as` attribute.
              *
              * @param {String} name Name that the view was registered with.
              *
