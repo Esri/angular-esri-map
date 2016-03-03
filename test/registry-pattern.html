@@ -41,11 +41,19 @@
         </div>
 
         <div ng-controller="AnotherController as anotherCtrl">
-            <p ng-show="!anotherCtrl.mapViewPoint">Click the map view to see point X / Y.</p>
-            <p ng-show="anotherCtrl.mapViewPoint">Clicked map view point X: {{ anotherCtrl.mapViewPoint.x }}, Y: {{ anotherCtrl.mapViewPoint.y }}</p>
+            <p ng-show="!anotherCtrl.mapViewPoint">
+                Click the map view to see point X / Y.
+            </p>
+            <p id="mapViewClickInfo" ng-show="anotherCtrl.mapViewPoint">
+                Clicked map view point X: {{ anotherCtrl.mapViewPoint.x }}, Y: {{ anotherCtrl.mapViewPoint.y }}
+            </p>
 
-            <p ng-show="!anotherCtrl.sceneViewPoint">Click the scene view to see point X / Y.</p>
-            <p ng-show="anotherCtrl.sceneViewPoint">Clicked scene view point X: {{ anotherCtrl.sceneViewPoint.x }}, Y: {{ anotherCtrl.sceneViewPoint.y }}</p>
+            <p ng-show="!anotherCtrl.sceneViewPoint">
+                Click the scene view to see point X / Y.
+            </p>
+            <p id="sceneViewClickInfo" ng-show="anotherCtrl.sceneViewPoint">
+                Clicked scene view point X: {{ anotherCtrl.sceneViewPoint.x }}, Y: {{ anotherCtrl.sceneViewPoint.y }}
+            </p>
         </div>
 
         <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
