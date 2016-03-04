@@ -9,11 +9,13 @@
      * Functions to help create MapView instances.
      *
      * @requires esri.core.factory:esriLoader
+     * @requires esri.core.factory:esriRegistry
      * @requires $element
      * @requires $scope
+     * @requires $q
      */
     angular.module('esri.map')
-        .controller('EsriMapViewController', function EsriMapViewController($element, $scope, esriLoader) {
+        .controller('EsriMapViewController', function EsriMapViewController($element, $scope, $q, esriLoader, esriRegistry) {
             var self = this;
 
             // read options passed in as either a JSON string expression
@@ -65,6 +67,17 @@
                     return this.getMapView().then(function(result) {
                         self.view = new result.view(self.options);
 
+                        // set up a deferred for dealing with the (optional) esriRegistry
+                        var viewRegistryDeferred = $q.defer();
+                        if (typeof self.registerAs === 'string') {
+                            self.deregister = esriRegistry._register(self.registerAs, viewRegistryDeferred.promise);
+                            $scope.$on('$destroy', function() {
+                                if (self.deregister) {
+                                    self.deregister();
+                                }
+                            });
+                        }
+
                         if (typeof self.onCreate() === 'function') {
                             self.onCreate()(self.view);
                         }
@@ -75,10 +88,16 @@
                                     self.onLoad()(self.view);
                                 });
                             }
+                            // handle the deferred that is intended for use with the esriRegistry
+                            viewRegistryDeferred.resolve({
+                                view: self.view
+                            });
                         }, function(err) {
                             if (typeof self.onError() === 'function') {
                                 self.onError()(err);
                             }
+                            // handle the deferred that is intended for use with the esriRegistry
+                            viewRegistryDeferred.reject(err);
                         });
                     });
                 } else {

@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-describe('Webscene Slides', function() {
+describe('Webscene Slides as Directive', function() {
     beforeAll(function() {
         browser.get('/webscene-slides-as-directive.html');
     });

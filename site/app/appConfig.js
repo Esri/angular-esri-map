@@ -167,6 +167,18 @@
                     controller: 'PropertyBindingCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'Registry Pattern',
+                    description: 'Shows how to get a reference to the map object by using the registry.',
+                    url: urlPrefixes.templateHref + 'registry-pattern'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'registry-pattern',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'registry-pattern.html',
+                    controller: 'RegistryPatternCtrl',
+                    controllerAs: 'vm'
+                }
             }]
         },
         patternsPages: [

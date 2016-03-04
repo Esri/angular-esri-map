@@ -23,6 +23,8 @@
      * @param {Function=} on-load Callback for successful loading of the scene view.
      * @param {Function=} on-error Callback for rejected/failed loading of the scene view, for example when WebGL is not supported.
      * @param {Object | String=} view-options An object or inline object hash string defining additional scene view constructor options.
+     * @param {String=} register-as A name to use when registering the view so that it can be used by other controllers.
+     *  See {@link esri.core.factory:esriRegistry esriRegistry}.
      */
     angular.module('esri.map')
         .directive('esriSceneView', function esriSceneView() {
@@ -34,6 +36,8 @@
 
                 // isolate scope
                 scope: {
+                    // one-way binding
+                    registerAs: '@?',
                     // two-way binding
                     map: '=?',
                     // function binding for event handlers
