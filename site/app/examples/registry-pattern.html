@@ -6,18 +6,23 @@
 
 <h2>Registry Pattern</h2>
 
-<esri-map-view map="vm.map" register-as="myMapView" on-create="vm.onMapViewCreated" 
-    view-options="{
-        zoom: 4,
-        center: [15, 65]
-    }">
+<esri-map-view 
+    map="vm.map"
+    register-as="myMapView"
+    view-options="vm.mapViewOptions"
+    on-create="vm.onMapViewCreated">
 </esri-map-view>
+
 <hr>
-<esri-scene-view map="vm.map" register-as="mySceneView" on-create="vm.onSceneViewCreated" 
-    view-options="{
-        zoom: 4,
-        center: [15, 65]
-    }">
+
+<div class="web-gl-warning" ng-show="vm.showSceneViewError">WebGL is not supported on your platform/browser.</div>
+<esri-scene-view 
+    map="vm.map"
+    register-as="mySceneView" 
+    view-options="vm.sceneViewOptions"
+    on-create="vm.onSceneViewCreated" 
+    on-error="vm.onSceneViewError"
+    ng-hide="vm.showSceneViewError">
 </esri-scene-view>
 
 <div ng-controller="AnotherController as anotherCtrl">

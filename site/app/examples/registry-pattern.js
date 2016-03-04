@@ -1,6 +1,17 @@
 angular.module('esri-map-docs')
-    .controller('RegistryPatternCtrl', function(esriLoader) {
+    .controller('RegistryPatternCtrl', function(esriLoader, browserDetectionService) {
         var self = this;
+        
+        self.mapViewOptions = {
+            zoom: 4,
+            center: [15, 65]
+        };
+        
+        self.sceneViewOptions = {
+            zoom: 4,
+            center: [15, 65]
+        };
+
         // load esri modules
         esriLoader.require([
             'esri/Map'
@@ -19,6 +30,14 @@ angular.module('esri-map-docs')
             self.onSceneViewCreated = function(view) {
                 self.sceneView = view;
                 // do something with the scene view
+            };
+
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showSceneViewError = browserDetectionService.isMobile();
+            self.onSceneViewError = function() {
+                self.showSceneViewError = true;
             };
         });
     })
