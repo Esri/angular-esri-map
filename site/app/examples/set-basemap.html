@@ -3,16 +3,27 @@
 </esri-map>
 <p>Basemap:
     <select ng-model="map.basemap">
-        <option value="gray">Gray</option>
-        <option value="dark-gray">Dark Gray</option>
-        <option value="topo">Topographic</option>
-        <option value="streets">Streets</option>
-        <option value="satellite">Satellite</option>
-        <option value="hybrid">Hybrid</option>
-        <option value="oceans">Oceans</option>
-        <option value="national-geographic">National Geographic</option>
-        <option value="terrain">Terrain</option>
-        <option value="osm">Open Street Map</option>
+        <optgroup label="Tiled">
+            <option value="gray">Gray</option>
+            <option value="dark-gray">Dark Gray</option>
+            <option value="topo">Topographic</option>
+            <option value="streets">Streets</option>
+            <option value="satellite">Satellite</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="oceans">Oceans</option>
+            <option value="national-geographic">National Geographic</option>
+            <option value="terrain">Terrain</option>
+            <option value="osm">Open Street Map</option>
+        </optgroup>
+        <optgroup label="Vector">
+            <option value="gray-vector">Gray</option>
+            <option value="dark-gray-vector">Dark Gray</option>
+            <option value="topo-vector">Topographic</option>
+            <option value="streets-vector">Streets</option>
+            <option value="streets-navigation-vector">Streets Navigation</option>
+            <option value="streets-night-vector">Streets Night</option>
+            <option value="streets-relief-vector">Streets Relief</option>
+        </optgroup>
     </select>
     Lat: {{ map.center.lat | number:3 }}, Lng: {{ map.center.lng | number:3 }}, Zoom: {{map.zoom}}
 </p>
