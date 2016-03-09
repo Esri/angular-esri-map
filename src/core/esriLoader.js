@@ -41,7 +41,7 @@
             // Create Script Object to be loaded
             var script    = document.createElement('script');
             script.type   = 'text/javascript';
-            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/3.15compact';
+            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/3.16compact';
 
             // Set onload callback to resolve promise
             script.onload = function() { deferred.resolve( window.require ); };
