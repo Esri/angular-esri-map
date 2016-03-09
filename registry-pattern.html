@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Registry Pattern</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .esri-view {
+                max-height: 250px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Registry Pattern</h2>
+
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-map-view
+                map="exampleCtrl.map"
+                register-as="myMapView"
+                on-create="exampleCtrl.onMapViewCreated"
+                view-options="{
+                    zoom: 4,
+                    center: [15, 65]
+                }">
+            </esri-map-view>
+            
+            <hr>
+            
+            <esri-scene-view 
+                map="exampleCtrl.map"
+                register-as="mySceneView"
+                on-create="exampleCtrl.onSceneViewCreated"
+                view-options="{
+                    zoom: 4,
+                    center: [15, 65]
+                }">
+            </esri-scene-view>
+        </div>
+
+        <div ng-controller="AnotherController as anotherCtrl">
+            <p ng-show="!anotherCtrl.mapViewPoint">
+                Click the map view to see point X / Y.
+            </p>
+            <p id="mapViewClickInfo" ng-show="anotherCtrl.mapViewPoint">
+                Clicked map view point X: {{ anotherCtrl.mapViewPoint.x }}, Y: {{ anotherCtrl.mapViewPoint.y }}
+            </p>
+
+            <p ng-show="!anotherCtrl.sceneViewPoint">
+                Click the scene view to see point X / Y.
+            </p>
+            <p id="sceneViewClickInfo" ng-show="anotherCtrl.sceneViewPoint">
+                Clicked scene view point X: {{ anotherCtrl.sceneViewPoint.x }}, Y: {{ anotherCtrl.sceneViewPoint.y }}
+            </p>
+        </div>
+
+        <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/Map'
+                    ], function(Map) {
+                        // create the map
+                        self.map = new Map({
+                            basemap: 'streets'
+                        });
+
+                        // NOTE: This is one way to get a reference to the map or scene view within
+                        //  the SAME parent controller, by binding to the on-create callback.
+                        self.onMapViewCreated = function(view) {
+                            self.mapView = view;
+                            // do something with the map view
+                        };
+                        self.onSceneViewCreated = function(view) {
+                            self.sceneView = view;
+                            // do something with the scene view
+                        };
+                    });
+                })
+                .controller('AnotherController', function(esriRegistry, $scope) {
+                    // NOTE: This is a way to get a reference to a view in
+                    //  a DIFFERENT controller, by setting the register-as attribute
+                    //  on the view directive and then using esriRegistry to get the view by name.
+                    var self = this;
+
+                    esriRegistry.get('myMapView').then(function(res) {
+                        // establish a click listener on the view in the response
+                        res.view.on('click', function(e) {
+                            // set or update the point property that is used in the html template
+                            self.mapViewPoint = e.mapPoint;
+
+                            // NOTE: $scope.$apply() is needed b/c the view's click event
+                            // happens outside of Angular's digest cycle
+                            $scope.$apply();
+                        });
+                    });
+
+                    esriRegistry.get('mySceneView').then(function(res) {
+                        res.view.on('click', function(e) {
+                            self.sceneViewPoint = e.mapPoint;
+                            $scope.$apply();
+                        });
+                    });
+                });
+        </script>
+    </body>
+</html>

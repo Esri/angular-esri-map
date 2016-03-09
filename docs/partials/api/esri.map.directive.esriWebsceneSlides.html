@@ -1,0 +1,55 @@
+<h1><code ng:non-bindable="">esriWebsceneSlides</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>This is the directive which will create slide bookmarks for WebScene Slides for the Esri ArcGIS API for JavaScript.
+Each bookmark will include the title and screenshot of the slide, and clicking on a bookmark will
+provide the slide object to a callback function (<code>on-slide-change</code>). For example, the slide provided
+in the callback will have a viewpoint property that could be used to change the location of an associated Esri Scene View.
+<strong>Note:</strong> this directive does not rely on any out of the box Esri widgets or view models.</p>
+<h4 id="styling-and-css" id="description_styling-and-css">Styling and CSS</h4>
+<p>Use the following class names to supply styling to this directive:</p>
+<ul>
+<li><strong><code>slides-container</code></strong>: outer-most container (<code>div</code>)</li>
+<li><strong><code>slide</code></strong>: individual slide bookmark (<code>span</code>)</li>
+<li><strong><code>active-slide</code></strong>: conditional class which is set by <code>ng-class</code> when an individual slide is clicked</li>
+</ul>
+<p>For example, to arrange slides horizontally and give a highlighted effect on the selected slide, the following styles could be used:</p>
+<pre><code class="lang-css">.slides-container {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+.slide {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 10px;
+}
+.active-slide {
+    box-shadow: 0 0 12px white;
+    border-style: solid;
+    border-width: thin;
+    border-color: white;
+}
+</code></pre>
+<h4 id="examples" id="description_examples">Examples</h4>
+<ul>
+<li><a href="../#/examples/webscene-slides-as-directive">WebScene Slides with Custom Directive</a></li>
+</ul>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as element:<pre class="prettyprint linenums">&lt;esri-webscene-slides
+       slides="{Array}"
+       [on-slide-change="{Function}"]&gt;
+&lt;/esri-webscene-slides&gt;</pre>
+<h3 id="usage_directive-info">Directive info</h3>
+<div class="directive-info"><ul><li>This directive creates new scope.</li>
+</ul>
+</div>
+<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>slides</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>Array of <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-webscene-Slide.html">Slide</a> instances.</p>
+</div></td></tr><tr><td>on-slide-change <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>Callback for handling a change in the active slide.
+May be used, for example, to update the viewpoint location of an associated Esri Scene View.</p>
+</div></td></tr></tbody></table></div>
+</div>

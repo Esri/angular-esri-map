@@ -9,6 +9,9 @@ There are plenty of examples showing how to use this directive and its bound par
 <h4 id="examples" id="description_examples">Examples</h4>
 <ul>
 <li><a href="../#/examples/feature-layer">Feature Layer</a></li>
+<li><a href="../#/examples/vector-tiles">Vector Tiles</a></li>
+<li><a href="../#/examples/search">Search</a></li>
+<li><a href="../#/examples">and more...</a></li>
 </ul>
 </div></div>
 <h2 id="usage">Usage</h2>
@@ -17,7 +20,8 @@ There are plenty of examples showing how to use this directive and its bound par
        [on-create="{Function}"]
        [on-load="{Function}"]
        [on-error="{Function}"]
-       [view-options="{Object | String}"]&gt;
+       [view-options="{Object | String}"]
+       [register-as="{String}"]&gt;
 &lt;/esri-map-view&gt;</pre>
 <h3 id="usage_directive-info">Directive info</h3>
 <div class="directive-info"><ul><li>This directive creates new scope.</li>
@@ -28,5 +32,7 @@ There are plenty of examples showing how to use this directive and its bound par
 </div></td></tr><tr><td>on-load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Callback for successful loading of the map view.</p>
 </div></td></tr><tr><td>on-error <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>Callback for rejected/failed loading of the map view.</p>
 </div></td></tr><tr><td>view-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>An object or inline object hash string defining additional map view constructor options.</p>
+</div></td></tr><tr><td>register-as <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrimapview-page"><p>A name to use when registering the view so that it can be used by other controllers.
+See <a href="#/api/esri.core.factory:esriRegistry">esriRegistry</a>.</p>
 </div></td></tr></tbody></table></div>
 </div>

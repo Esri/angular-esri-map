@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/layers/EsriFeatureLayerController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> EsriFeatureLayerController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">11.11% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc controller
+     * @name esri.map.controller:EsriFeatureLayerController
+     *
+     * @requires $controller
+     * @requires esri.core.factory:esriLayerUtils
+     * @requires esri.map.controller:EsriLayerControllerBase
+     *
+     * @description
+     * This controller is used by the esri-feature-layer directive to construct the layer,
+     * provide it with several supporting methods,
+     * and help bind layer events and other properties such as layer visibility.
+     */
+    angular.module('esri.map').controller('EsriFeatureLayerController', <span class="fstat-no" title="function not covered" >function EsriFeatureLayerController($controller, esriLayerUtils) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var layerPromise;</span>
+&nbsp;
+        // extends layer controller base class
+<span class="cstat-no" title="statement not covered" >        angular.extend(this, $controller('EsriLayerControllerBase'));</span>
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getFeatureLayerOptions
+         * @methodOf esri.map.controller:EsriFeatureLayerController
+         *
+         * @description
+         * Formats and prepares feature layer options from layer controller properties.
+         * In addition to {@link esri.map.controller:EsriLayerControllerBase#methods_getlayeroptions EsriLayerControllerBase.getLayerOptions()},
+         * it also sets the definitionExpression on the returned options object.
+         *
+         * @returns {Object} A layer options object for layer construction.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getFeatureLayerOptions = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            var layerOptions = this.getLayerOptions();</span>
+            // definitionExpression takes precedence over layerOptions.definitionExpression
+<span class="cstat-no" title="statement not covered" >            if (this.definitionExpression) {</span>
+<span class="cstat-no" title="statement not covered" >                layerOptions.definitionExpression = this.definitionExpression;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return layerOptions;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getLayer
+         * @methodOf esri.map.controller:EsriFeatureLayerController
+         *
+         * @returns {Promise} Returns a $q style promise resolved with an instance of
+         *  {@link https://developers.arcgis.com/javascript/jsapi/featurelayer-amd.html#featurelayer1 FeatureLayer}
+         */
+<span class="cstat-no" title="statement not covered" >        this.getLayer = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            return layerPromise;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name setInfoTemplate
+         * @methodOf esri.map.controller:EsriFeatureLayerController
+         *
+         * @description
+         * Sets the InfoTemplate once the layer has been loaded.
+         *
+         * @param {Object|Array} infoTemplate Either an array with `['title', 'content']` or an object with `{title: 'title', content: 'content'}`
+         */
+<span class="cstat-no" title="statement not covered" >        this.setInfoTemplate = <span class="fstat-no" title="function not covered" >function(infoTemplate) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return this.getLayer().then(<span class="fstat-no" title="function not covered" >function(layer) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return esriLayerUtils.createInfoTemplate(infoTemplate).then(<span class="fstat-no" title="function not covered" >function(infoTemplateObject) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    layer.setInfoTemplate(infoTemplateObject);</span>
+<span class="cstat-no" title="statement not covered" >                    return infoTemplateObject;</span>
+                });
+            });
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name bindLayerEvents
+         * @methodOf esri.map.controller:EsriFeatureLayerController
+         *
+         * @description
+         * Binds esri-feature-layer directive attributes to layer properties and events,
+         * such as the visibility and definitionExpression.
+         *
+         * @param {Object} scope Isolate scope for layer directive controller
+         * @param {Object} attrs Attribute properties
+         * @param {FeatureLayer} layer The layer to bind properties and events to.
+         * @param {EsriMapController} mapController The map controller is also required to help remove the layer
+         *  from the map when the layer scope is destroyed.
+         */
+<span class="cstat-no" title="statement not covered" >        this.bindLayerEvents = <span class="fstat-no" title="function not covered" >function(scope, attrs, layer, mapController) {</span></span>
+            // bind directive attributes to layer properties and events
+<span class="cstat-no" title="statement not covered" >            this._bindLayerEvents(scope, attrs, layer, mapController);</span>
+&nbsp;
+            // additional directive attribute binding specific to this type of layer
+&nbsp;
+            // watch the scope's definitionExpression property for changes
+            // set the definitionExpression of the feature layer
+<span class="cstat-no" title="statement not covered" >            scope.$watch('layerCtrl.definitionExpression', <span class="fstat-no" title="function not covered" >function(newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (newVal !== oldVal) {</span>
+<span class="cstat-no" title="statement not covered" >                    layer.setDefinitionExpression(newVal);</span>
+                }
+            });
+        };
+&nbsp;
+        // create the layer
+<span class="cstat-no" title="statement not covered" >        layerPromise = esriLayerUtils.createFeatureLayer(this.url, this.getFeatureLayerOptions());</span>
+    });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 08 2016 18:20:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

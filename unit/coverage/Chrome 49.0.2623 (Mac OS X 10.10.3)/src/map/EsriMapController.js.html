@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/map/EsriMapController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/map/</a> EsriMapController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.06% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/79</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">4.35% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.06% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/79</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc controller
+     * @name esri.map.controller:EsriMapController
+     * @requires $attrs
+     * @requires $timeout
+     * @requires esri.core.factory:esriMapUtils
+     * @requires esri.core.factory:esriRegistry
+     *
+     * @description
+     * This controller is used by the esri-map directive to construct the map,
+     * provide it with several supporting methods,
+     * and also add it to the registry if following the {@link ../#/examples/registry-pattern Registry Pattern}.
+     */
+    angular.module('esri.map').controller('EsriMapController', <span class="fstat-no" title="function not covered" >function EsriMapController($attrs, $timeout, esriMapUtils, esriRegistry) {</span>
+&nbsp;
+        // check if a variable is undefined
+<span class="fstat-no" title="function not covered" >        function isUndefined(v) {</span>
+<span class="cstat-no" title="statement not covered" >            return typeof v === 'undefined';</span>
+        }
+&nbsp;
+        // update two-way bound scope properties based on map state
+<span class="fstat-no" title="function not covered" >        function updateCenterAndZoom(scope, map) {</span>
+<span class="cstat-no" title="statement not covered" >            var geoCenter = map.geographicExtent &amp;&amp; map.geographicExtent.getCenter();</span>
+<span class="cstat-no" title="statement not covered" >            if (geoCenter) {</span>
+<span class="cstat-no" title="statement not covered" >                geoCenter = geoCenter.normalize();</span>
+<span class="cstat-no" title="statement not covered" >                scope.center = {</span>
+                    lat: geoCenter.y,
+                    lng: geoCenter.x
+                };
+            }
+<span class="cstat-no" title="statement not covered" >            scope.zoom = map.getZoom();</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var attrs = $attrs;</span>
+&nbsp;
+        // this deferred will be resolved with the map
+<span class="cstat-no" title="statement not covered" >        var mapPromise;</span>
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getMapProperties
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Formats and prepares map options from controller properties.
+         *
+         * @returns {Object} A map options object for map construction.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getMapOptions = <span class="fstat-no" title="function not covered" >function() {</span></span>
+&nbsp;
+            // read options passed in as either a JSON string expression
+            // or as a function bound object
+<span class="cstat-no" title="statement not covered" >            var mapOptions = this.mapOptions() || {};</span>
+&nbsp;
+            // check for 1 way bound properties (basemap)
+            // basemap takes precedence over mapOptions.basemap
+<span class="cstat-no" title="statement not covered" >            if (this.basemap) {</span>
+<span class="cstat-no" title="statement not covered" >                mapOptions.basemap = this.basemap;</span>
+            }
+&nbsp;
+            // check for 2 way bound properties (center and zoom)
+            // center takes precedence over mapOptions.center
+<span class="cstat-no" title="statement not covered" >            if (this.center) {</span>
+<span class="cstat-no" title="statement not covered" >                if (this.center.lng &amp;&amp; this.center.lat) {</span>
+<span class="cstat-no" title="statement not covered" >                    mapOptions.center = [this.center.lng, this.center.lat];</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    mapOptions.center = this.center;</span>
+                }
+            }
+&nbsp;
+            // zoom takes precedence over mapOptions.zoom
+<span class="cstat-no" title="statement not covered" >            if (this.zoom) {</span>
+<span class="cstat-no" title="statement not covered" >                mapOptions.zoom = this.zoom;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return mapOptions;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getMap
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @return {Promise} The promise that will be resolved with the loaded map.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getMap = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            return mapPromise;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name addLayer
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Adds the layer to the map.
+         *
+         * @param {FeatureLayer | VectorTileLayer | ArcGISDynamicMapServiceLayer} layer Layer to add to the map
+         * @param {Number=} index Layer ordering position on the map
+         *
+         * @return {Promise} The promise that will be resolved with the result of `map.addLayer`.
+         */
+<span class="cstat-no" title="statement not covered" >        this.addLayer = <span class="fstat-no" title="function not covered" >function(layer, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return this.getMap().then(<span class="fstat-no" title="function not covered" >function(map) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return map.addLayer(layer, index);</span>
+            });
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name removeLayer
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Removes the layer from the map, for example when a esri-feature-layer directive goes out of scope.
+         *
+         * @param {FeatureLayer | VectorTileLayer | ArcGISDynamicMapServiceLayer} layer Layer to remove from the map
+         *
+         * @return {Promise} The promise that will be resolved with the result of `map.removeLayer`.
+         */
+<span class="cstat-no" title="statement not covered" >        this.removeLayer = <span class="fstat-no" title="function not covered" >function (layer) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return this.getMap().then(<span class="fstat-no" title="function not covered" >function (map) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return map.removeLayer(layer);</span>
+            });
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name addLayerInfo
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Adds to the array to store layer info, which is needed for the esri-legend directive.
+         *
+         * @param {Object} layerInfo Information about the layer, see
+         *  {@link https://developers.arcgis.com/javascript/jsapi/legend-amd.html#legend1 layerInfo} for object specification.
+         */
+<span class="cstat-no" title="statement not covered" >        this.addLayerInfo = <span class="fstat-no" title="function not covered" >function(layerInfo) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (!this.layerInfos) {</span>
+<span class="cstat-no" title="statement not covered" >                this.layerInfos = [layerInfo];</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                this.layerInfos.unshift(layerInfo);</span>
+            }
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getLayerInfos
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @return {Array} The array of layer info objects that are used by the esri-legend directive.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getLayerInfos = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            return this.layerInfos;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name bindMapEvents
+         * @methodOf esri.map.controller:EsriMapController
+         *
+         * @description
+         * Updates scope in response to map events,
+         * and updates the map in response to scope properties.
+         *
+         * @param {Object} scope $scope
+         * @param {Object} attrs $attrs
+         */
+<span class="cstat-no" title="statement not covered" >        this.bindMapEvents = <span class="fstat-no" title="function not covered" >function(scope, attrs) {</span></span>
+<span class="cstat-no" title="statement not covered" >            var self = this;</span>
+&nbsp;
+            // get the map once it's loaded
+<span class="cstat-no" title="statement not covered" >            this.getMap().then(<span class="fstat-no" title="function not covered" >function(map) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (map.loaded) {</span>
+                    // map already loaded, we need to
+                    // update two-way bound scope properties
+                    // updateCenterAndZoom(scope, map);
+<span class="cstat-no" title="statement not covered" >                    updateCenterAndZoom(self, map);</span>
+                    // make map object available to caller
+                    // by calling the load event handler
+<span class="cstat-no" title="statement not covered" >                    if (attrs.load) {</span>
+<span class="cstat-no" title="statement not covered" >                        self.load()(map);</span>
+                    }
+                } else {
+                    // map is not yet loaded, this means that
+                    // two-way bound scope properties
+                    // will be updated by extent-change handler below
+                    // so don't need to update them here
+                    // just set up a handler for the map load event (if any)
+<span class="cstat-no" title="statement not covered" >                    if (attrs.load) {</span>
+<span class="cstat-no" title="statement not covered" >                        map.on('load', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                            scope.$apply(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                                self.load()(map);</span>
+                            });
+                        });
+                    }
+                }
+&nbsp;
+                // listen for changes to map extent and
+                // call extent-change handler (if any)
+                // also update scope.center and scope.zoom
+<span class="cstat-no" title="statement not covered" >                map.on('extent-change', <span class="fstat-no" title="function not covered" >function(e) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (attrs.extentChange) {</span>
+<span class="cstat-no" title="statement not covered" >                        self.extentChange()(e);</span>
+                    }
+                    // prevent circular updates between $watch and $apply
+<span class="cstat-no" title="statement not covered" >                    if (self.inUpdateCycle) {</span>
+<span class="cstat-no" title="statement not covered" >                        return;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    self.inUpdateCycle = true;</span>
+<span class="cstat-no" title="statement not covered" >                    scope.$apply(<span class="fstat-no" title="function not covered" >function() {</span></span>
+                        // update scope properties
+<span class="cstat-no" title="statement not covered" >                        updateCenterAndZoom(self, map);</span>
+<span class="cstat-no" title="statement not covered" >                        $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+                            // this will be executed after the $digest cycle
+<span class="cstat-no" title="statement not covered" >                            self.inUpdateCycle = false;</span>
+                        }, 0);
+                    });
+                });
+&nbsp;
+                // listen for changes to scope.basemap and update map
+<span class="cstat-no" title="statement not covered" >                scope.$watch('mapCtrl.basemap', <span class="fstat-no" title="function not covered" >function(newBasemap, oldBasemap) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (map.loaded &amp;&amp; newBasemap !== oldBasemap) {</span>
+<span class="cstat-no" title="statement not covered" >                        map.setBasemap(newBasemap);</span>
+                    }
+                });
+&nbsp;
+                // listen for changes to scope.center and scope.zoom and update map
+<span class="cstat-no" title="statement not covered" >                self.inUpdateCycle = false;</span>
+<span class="cstat-no" title="statement not covered" >                if (!isUndefined(attrs.center) || !isUndefined(attrs.zoom)) {</span>
+<span class="cstat-no" title="statement not covered" >                    scope.$watchGroup(['mapCtrl.center.lng', 'mapCtrl.center.lat', 'mapCtrl.zoom'], <span class="fstat-no" title="function not covered" >function(newCenterZoom) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        if (self.inUpdateCycle) {</span>
+<span class="cstat-no" title="statement not covered" >                            return;</span>
+                        }
+<span class="cstat-no" title="statement not covered" >                        if (newCenterZoom[0] !== '' &amp;&amp; newCenterZoom[1] !== '' &amp;&amp; newCenterZoom[2] !== '') {</span>
+                            // prevent circular updates between $watch and $apply
+<span class="cstat-no" title="statement not covered" >                            self.inUpdateCycle = true;</span>
+<span class="cstat-no" title="statement not covered" >                            map.centerAndZoom([newCenterZoom[0], newCenterZoom[1]], newCenterZoom[2]).then(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                                self.inUpdateCycle = false;</span>
+                            });
+                        }
+                    });
+                }
+&nbsp;
+                // clean up
+<span class="cstat-no" title="statement not covered" >                scope.$on('$destroy', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                    if (self.deregister) {</span>
+<span class="cstat-no" title="statement not covered" >                        self.deregister();</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    map.destroy();</span>
+                });
+            });
+        };
+&nbsp;
+        // initialize the map
+<span class="cstat-no" title="statement not covered" >        if (attrs.webmapId) {</span>
+            // load map object from web map
+<span class="cstat-no" title="statement not covered" >            mapPromise = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, this.getMapOptions(), this);</span>
+        } else {
+            // create a new map object
+<span class="cstat-no" title="statement not covered" >            mapPromise = esriMapUtils.createMap(attrs.id, this.getMapOptions());</span>
+        }
+&nbsp;
+        // add this map to the registry and get a
+        // handle to deregister the map when it's destroyed
+<span class="cstat-no" title="statement not covered" >        if (attrs.registerAs) {</span>
+<span class="cstat-no" title="statement not covered" >            this.deregister = esriRegistry._register(attrs.registerAs, mapPromise);</span>
+        }
+    });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 08 2016 18:20:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

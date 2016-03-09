@@ -19,7 +19,7 @@ NG_DOCS={
       "type": "overview",
       "moduleName": "esri.core",
       "shortDescription": "esri.core Module",
-      "keywords": "api arcgis core custom directives directly esri esriloader factory includes lazy load loading map module modules overview services"
+      "keywords": "api arcgis controllers core custom directives directly esri esriloader esriregistry factory includes instances lazy load loading map mapview module modules overview reference retrieve sceneview services store"
     },
     {
       "section": "api",
@@ -29,6 +29,15 @@ NG_DOCS={
       "moduleName": "esri.core",
       "shortDescription": "Use esriLoader to lazyload the Esri ArcGIS API or to require API modules.",
       "keywords": "$q amd api arcgis array boolean bootstrap callback condition core defaults dojo esri esriloader event factory function isloaded javascript lazyload list load loaded loader loading loads loop module modules optional options promise race require resolved returns send service string style support"
+    },
+    {
+      "section": "api",
+      "id": "esri.core.factory:esriRegistry",
+      "shortName": "esriRegistry",
+      "type": "service",
+      "moduleName": "esri.core",
+      "shortDescription": "Use esriRegistry to store and retrieve MapView or SceneView instances for use in different controllers.",
+      "keywords": "$q api attribute controllers core directive esri esrimapview esriregistry esrisceneview examples factory function info instance instances loaded map mapview pattern promise register register-as registered registry resolved retrieve returns sceneview service store style view"
     },
     {
       "section": "api",
@@ -68,12 +77,21 @@ NG_DOCS={
     },
     {
       "section": "api",
+      "id": "esri.map.controller:EsriWebsceneSlidesController",
+      "shortName": "EsriWebsceneSlidesController",
+      "type": "controller",
+      "moduleName": "esri.map",
+      "shortDescription": "Functions to help create and manage individual slide properties and behaviors.",
+      "keywords": "active api arcgis array assist associated behaviors bound callback clicked controller create css directive entry esri executed function functions help html https individual instance instances manage manipulating map method object on-slide-change onslideclick passes properties scene set sets setslides slide slides status styling template true view"
+    },
+    {
+      "section": "api",
       "id": "esri.map.directive:esriHomeButton",
       "shortName": "esriHomeButton",
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a home button using the Esri ArcGIS API for JavaScript.",
-      "keywords": "api arcgis bound button create directive esri examples instance javascript map mapview parameters plenty sceneview showing view"
+      "keywords": "api arcgis button create directive esri examples instance javascript map mapview sceneview view"
     },
     {
       "section": "api",
@@ -82,7 +100,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a map view using the Esri ArcGIS API for JavaScript.",
-      "keywords": "additional api arcgis bound callback create creation defining directive esri examples feature hash inline instance javascript layer loading map object on-create on-error on-load options parameters plenty rejected showing string successful view view-options"
+      "keywords": "additional api arcgis bound callback controllers core create creation defining directive esri esriregistry examples factory feature hash inline instance javascript layer loading map object on-create on-error on-load options parameters plenty register-as registering rejected search showing string successful tiles vector view view-options"
     },
     {
       "section": "api",
@@ -91,7 +109,16 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a scene view using the Esri ArcGIS API for JavaScript.",
-      "keywords": "additional api arcgis bound callback create creation defining directive esri example examples hash inline instance javascript loading map object on-create on-error on-load options parameters plenty rejected scene showing string successful supported view view-options webgl webscene"
+      "keywords": "additional api arcgis basemap bound callback controllers core create creation defining directive elevation esri esriregistry example examples extrude factory hash inline instance javascript loading map object on-create on-error on-load options parameters plenty polygon register-as registering rejected scene showing string successful supported toggle view view-options webgl webscene"
+    },
+    {
+      "section": "api",
+      "id": "esri.map.directive:esriWebsceneSlides",
+      "shortName": "esriWebsceneSlides",
+      "type": "directive",
+      "moduleName": "esri.map",
+      "shortDescription": "This is the directive which will create slide bookmarks for WebScene Slides for the Esri ArcGIS API for JavaScript.",
+      "keywords": "active active-slide api arcgis arrange array associated background-color black bookmark bookmarks border-color border-style border-width box box-shadow callback change class clicked clicking color conditional container create css cursor custom directive display div esri example examples function handling highlighted horizontally html https include individual inline-block instances javascript location map margin models names ng-class object on-slide-change outer-most padding pointer property provide provided rely scene screenshot selected set slide slides slides-container solid span styles styling supply thin title update view viewpoint webscene white widgets"
     }
   ],
   "apis": {
@@ -112,7 +139,7 @@ NG_DOCS={
     "html5Mode": false,
     "editExample": true,
     "navTemplate": "site/docs-resources/docs-nav-template.html",
-    "navContent": "<ul class=\"nav pull-right\">\r\n    <li><a href=\"../\">Home</a></li>\r\n    <li><a href=\"../#/examples\">Examples</a></li>\r\n    <li><a href=\"../#/patterns\">Patterns</a></li>\r\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\r\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\r\n</ul>\r\n",
+    "navContent": "<ul class=\"nav pull-right\">\n    <li><a href=\"../\">Home</a></li>\n    <li><a href=\"../#/examples\">Examples</a></li>\n    <li><a href=\"../#/patterns\">Patterns</a></li>\n    <li role=\"presentation\"><a href=\"https://arcgis.github.io/angular-esri-map-site-v1/docs/#/api\">Previous Version (v1)</a>\n    <li><a href=\"https://github.com/Esri/angular-esri-map\">Github</a></li>\n</ul>\n",
     "navTemplateData": {},
     "loadDefaults": {
       "angular": true,

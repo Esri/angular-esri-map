@@ -48,7 +48,7 @@
             }, {
                 toc: {
                     title: 'WebScene Slides',
-                    description: 'Load a WebScene from an ArcGIS for Portal item and work with its WebScene.',
+                    description: 'Load a WebScene from an ArcGIS for Portal item and work with its WebScene, using inline templating and functionality.',
                     url: urlPrefixes.templateHref + 'webscene-slides'
                 },
                 route: {
@@ -85,7 +85,7 @@
             Controls: [{
                 toc: {
                     title: 'Home Button',
-                    description: 'A home button directive to return the map/scene view to it\'s starting point.',
+                    description: 'A home button directive to return the map/scene view to its starting point.',
                     url: urlPrefixes.templateHref + 'home-button'
                 },
                 route: {
@@ -116,6 +116,18 @@
                     path: urlPrefixes.routePath + 'search',
                     templateUrl: urlPrefixes.routeTemplateUrl + 'search.html',
                     controller: 'SearchCtrl',
+                    controllerAs: 'vm'
+                }
+            }, {
+                toc: {
+                    title: 'WebScene Slides with Custom Directive',
+                    description: 'Load a WebScene from an ArcGIS for Portal item and work with its WebScene slides using the <esri-webscene-slides> directive.',
+                    url: urlPrefixes.templateHref + 'webscene-slides-as-directive'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'webscene-slides-as-directive',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'webscene-slides-as-directive.html',
+                    controller: 'WebSceneSlidesAsDirectiveCtrl',
                     controllerAs: 'vm'
                 }
             }],
@@ -155,6 +167,18 @@
                     controller: 'PropertyBindingCtrl',
                     controllerAs: 'vm'
                 }
+            }, {
+                toc: {
+                    title: 'Registry Pattern',
+                    description: 'Shows how to get a reference to the map object by using the registry.',
+                    url: urlPrefixes.templateHref + 'registry-pattern'
+                },
+                route: {
+                    path: urlPrefixes.routePath + 'registry-pattern',
+                    templateUrl: urlPrefixes.routeTemplateUrl + 'registry-pattern.html',
+                    controller: 'RegistryPatternCtrl',
+                    controllerAs: 'vm'
+                }
             }]
         },
         patternsPages: [
@@ -169,6 +193,12 @@
                 templateUrl: 'app/patterns/references-to-views.html',
                 title: 'Getting a Reference to the Map and Scene Views',
                 shortTitle: 'Map and Scene View References'
+            },
+            {
+                path: '/patterns/using-creating-widgets',
+                templateUrl: 'app/patterns/using-creating-widgets.html',
+                title: 'Using and Creating Esri Widgets',
+                shortTitle: 'Creating Widgets'
             },
             {
                 path: '/patterns/property-binding',

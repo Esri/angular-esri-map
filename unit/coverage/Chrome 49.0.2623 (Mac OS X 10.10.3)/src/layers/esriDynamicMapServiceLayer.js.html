@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/layers/esriDynamicMapServiceLayer.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> esriDynamicMapServiceLayer.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">20% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/10</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function (angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriDynamicMapServiceLayer
+     * @restrict E
+     * @element
+     * @scope
+     *
+     * @description
+     * This directive creates an
+     * {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html ArcGISDynamicMapServiceLayer}
+     * and adds it to the map.
+     * This directive **must** be placed within an esri-map directive.
+     *
+     * ## Examples
+     * - {@link ../#/examples/dynamic-map-service-layer Dynamic Map Service Layer}
+     * - {@link ../#/examples/dynamic-map-service-layers Multiple Dynamic Map Service Layers}
+     * - {@link ../#/examples/layer-events Layer Events}
+     *
+     * @param {String} url The url to the ArcGIS Server REST map service resource.
+     * @param {Boolean=} visible The visibility of the layer. Two-way bound.
+     * @param {Number=} opacity The opacity of the layer. Two-way bound.
+     * @param {Array|String=} visible-layers The visible sublayer ids of the map service,
+     *  either an array of integers or a string of comma-separated integers. Two-way bound.
+     * @param {Function=} load Callback for layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#event-load load event}.
+     * @param {Function=} update-end Callback for layer
+     *  {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#event-update-end update-end event}.
+     * @param {Object | Function=} layer-options An object or inline object hash string defining additional layer constructor options.
+     */
+    angular.module('esri.map').directive('esriDynamicMapServiceLayer', <span class="fstat-no" title="function not covered" >function () {</span>
+        // this object will tell angular how our directive behaves
+<span class="cstat-no" title="statement not covered" >        return {</span>
+            // only allow esriDynamicMapServiceLayer to be used as an element (&lt;esri-dynamic-map-service-layer&gt;)
+            restrict: 'E',
+&nbsp;
+            // require the esriDynamicMapServiceLayer to have its own controller as well an esriMap controller
+            // you can access these controllers in the link function
+            require: ['esriDynamicMapServiceLayer', '^esriMap'],
+&nbsp;
+            // replace this element with our template.
+            // since we aren't declaring a template this essentially destroys the element
+            replace: true,
+&nbsp;
+            // isolate scope for dynamic layer so it can be added/removed dynamically
+            scope: {
+                url: '@',
+                visible: '@?',
+                opacity: '@?',
+                visibleLayers: '@?',
+                // function binding for event handlers
+                load: '&amp;',
+                updateEnd: '&amp;',
+                // function binding for reading object hash from attribute string
+                // or from scope object property
+                // see Example 7 here: https://gist.github.com/CMCDragonkai/6282750
+                layerOptions: '&amp;'
+            },
+&nbsp;
+            controllerAs: 'layerCtrl',
+&nbsp;
+            bindToController: true,
+&nbsp;
+            // define an interface for working with this directive
+            controller: 'EsriDynamicMapServiceLayerController',
+&nbsp;
+            // now we can link our directive to the scope, but we can also add it to the map..
+            link: <span class="fstat-no" title="function not covered" >function (scope, element, attrs, controllers) {</span>
+                // controllers is now an array of the controllers from the 'require' option
+<span class="cstat-no" title="statement not covered" >                var layerController = controllers[0];</span>
+<span class="cstat-no" title="statement not covered" >                var mapController = controllers[1];</span>
+&nbsp;
+                // get the layer object
+<span class="cstat-no" title="statement not covered" >                layerController.getLayer().then(<span class="fstat-no" title="function not covered" >function(layer){</span></span>
+&nbsp;
+                    // get layer info from layer object and directive attributes
+<span class="cstat-no" title="statement not covered" >                    var layerInfo = layerController.getLayerInfo(layer, attrs);</span>
+&nbsp;
+                    // add the layer to the map
+<span class="cstat-no" title="statement not covered" >                    mapController.addLayer(layer);</span>
+<span class="cstat-no" title="statement not covered" >                    mapController.addLayerInfo(layerInfo);</span>
+&nbsp;
+                    // bind directive attributes to layer properties and events
+<span class="cstat-no" title="statement not covered" >                    layerController.bindLayerEvents(scope, attrs, layer, mapController);</span>
+                });
+            }
+        };
+    });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 08 2016 18:20:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

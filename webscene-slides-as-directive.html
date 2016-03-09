@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Work with Slides in a WebScene</title>
+
+        <!-- load Esri CSS  -->
+        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <style type="text/css">
+            .slides-container {
+                display: inline-block;
+                background-color: black;
+                color: white;
+                padding: 10px;
+            }
+            .slide {
+                cursor: pointer;
+                display: inline-block;
+                margin: 0 10px;
+            }
+            .active-slide {
+                box-shadow: 0 0 12px white;
+                border-style: solid;
+                border-width: thin;
+                border-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Southern California Ski Resorts</h2>
+        <h4>Work with Slides in a WebScene using the &lt;esri-webscene-slides&gt; directive</h4>
+        <div ng-controller="ExampleController as exampleCtrl">
+            <esri-webscene-slides slides="exampleCtrl.slides" on-slide-change="exampleCtrl.onSlideChange"></esri-webscene-slides>
+            <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/webscene-slides/index.html">this sample</a>.</p>
+        </div>
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load the angular-esri-map module -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            /*eslint indent:false*/
+            /*global angular:false*/
+            'use strict';
+
+            // include esri.map module
+            angular.module('esri-map-example', ['esri.map'])
+                .controller('ExampleController', function(esriLoader) {
+                    var self = this;
+                    self.slides = [];
+                    self.sceneView = null;
+
+                    // load esri modules
+                    esriLoader.require([
+                        'esri/portal/PortalItem',
+                        'esri/WebScene'
+                    ], function(PortalItem, WebScene) {
+                        // create a new WebScene
+                        var webScene = new WebScene({
+                            portalItem: new PortalItem({
+                                id: '08974d4b5fcd446b8c8b1663783c5549'
+                            })
+                        });
+
+                        // establish the WebScene as the bound "map" property for the <esri-scene-view>
+                        self.map = webScene;
+
+                        // to be sure that the view is both created and loaded with all slides,
+                        //  perform additional logic in the view directive's load callback
+                        self.onViewLoaded = function(view) {
+                            self.sceneView = view;
+
+                            // assign slides array to controller property, which will update and set
+                            //  the required binding in the <esri-webscene-slides> directive
+                            self.slides = view.map.presentation.slides.getAll();
+                        };
+
+                        self.onSlideChange = function(slide) {
+                            // handle the on-slide-change callback
+                            //  by setting the scene view location to the slide's viewpoint
+                            self.sceneView.animateTo(slide.viewpoint);
+                        };
+                    });
+                });
+        </script>
+    </body>
+</html>

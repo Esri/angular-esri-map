@@ -1,0 +1,45 @@
+<style type="text/css">
+    .esri-view {
+        max-height: 250px;
+    }
+</style>
+
+<h2>Registry Pattern</h2>
+
+<esri-map-view 
+    map="vm.map"
+    register-as="myMapView"
+    view-options="vm.mapViewOptions"
+    on-create="vm.onMapViewCreated">
+</esri-map-view>
+
+<hr>
+
+<div class="web-gl-warning" ng-show="vm.showSceneViewError">WebGL is not supported on your platform/browser.</div>
+<esri-scene-view 
+    map="vm.map"
+    register-as="mySceneView" 
+    view-options="vm.sceneViewOptions"
+    on-create="vm.onSceneViewCreated" 
+    on-error="vm.onSceneViewError"
+    ng-hide="vm.showSceneViewError">
+</esri-scene-view>
+
+<div ng-controller="AnotherController as anotherCtrl">
+    <p ng-show="!anotherCtrl.mapViewPoint">
+        Click the map view to see point X / Y.
+    </p>
+    <p id="mapViewClickInfo" ng-show="anotherCtrl.mapViewPoint">
+        Clicked map view point X: {{ anotherCtrl.mapViewPoint.x }}, Y: {{ anotherCtrl.mapViewPoint.y }}
+    </p>
+
+    <p ng-show="!anotherCtrl.sceneViewPoint">
+        Click the scene view to see point X / Y.
+    </p>
+    <p id="sceneViewClickInfo" ng-show="anotherCtrl.sceneViewPoint">
+        Clicked scene view point X: {{ anotherCtrl.sceneViewPoint.x }}, Y: {{ anotherCtrl.sceneViewPoint.y }}
+    </p>
+</div>
+
+<p>Learn more about the <a href="/#/patterns/references-to-views">registry pattern</a>.</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>

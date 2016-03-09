@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/map/esriLegend.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/map/</a> esriLegend.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.69% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>2/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.09% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.69% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>2/26</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc directive
+     * @name esri.map.directive:esriLegend
+     * @restrict EA
+     * @element
+     *
+     * @description
+     * Show a legend for the map in the specified element on the page.
+     * The legend directive **must** be placed within an esri-map directive,
+     * but the target element (that will contain the legend) can be anywhere
+     * on the page.
+     * 
+     * ## Examples
+     * - {@link ../#/examples/legend Legend}
+     * - {@link ../#/examples/web-map Web Map}
+     * - {@link ../#/examples/additional-map-options Additional Map Options}
+     *
+     * @param {string} target-id The id of the element where you want to place the legend
+     */
+    angular.module('esri.map')
+        .directive('esriLegend', <span class="fstat-no" title="function not covered" >function($q, esriLoader) {</span>
+<span class="cstat-no" title="statement not covered" >            return {</span>
+                //run last
+                priority: -10,
+                restrict: 'EA',
+                // require the esriMap controller
+                // you can access these controllers in the link function
+                require: ['?esriLegend', '^esriMap'],
+                replace: true,
+&nbsp;
+                scope: {},
+                controllerAs: 'legendCtrl',
+                bindToController: true,
+&nbsp;
+                controller: <span class="fstat-no" title="function not covered" >function() {</span>},
+&nbsp;
+                // now we can link our directive to the scope, but we can also add it to the map
+                link: <span class="fstat-no" title="function not covered" >function(scope, element, attrs, controllers) {</span>
+&nbsp;
+                    // controllers is now an array of the controllers from the 'require' option
+                    // var legendController = controllers[0];
+<span class="cstat-no" title="statement not covered" >                    var mapController = controllers[1];</span>
+<span class="cstat-no" title="statement not covered" >                    var targetId = attrs.targetId || attrs.id;</span>
+<span class="cstat-no" title="statement not covered" >                    var legendDeferred = $q.defer();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    esriLoader.require(['esri/dijit/Legend'], <span class="fstat-no" title="function not covered" >function(Legend) {</span></span>
+<span class="cstat-no" title="statement not covered" >                        mapController.getMap().then(<span class="fstat-no" title="function not covered" >function(map) {</span></span>
+<span class="cstat-no" title="statement not covered" >                            var createLegend = <span class="fstat-no" title="function not covered" >function(map) {</span></span>
+<span class="cstat-no" title="statement not covered" >                                var legend;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                var options = {</span>
+                                    map: map
+                                };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                var layerInfos = mapController.getLayerInfos();</span>
+<span class="cstat-no" title="statement not covered" >                                if (layerInfos) {</span>
+<span class="cstat-no" title="statement not covered" >                                    options.layerInfos = layerInfos;</span>
+                                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                legend = new Legend(options, targetId);</span>
+<span class="cstat-no" title="statement not covered" >                                legend.startup();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                scope.$watchCollection(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    return mapController.getLayerInfos();</span>
+                                }, <span class="fstat-no" title="function not covered" >function(newValue /*, oldValue, scope*/ ) {</span>
+<span class="cstat-no" title="statement not covered" >                                    legend.refresh(newValue);</span>
+                                });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                legendDeferred.resolve(legend);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                scope.$on('$destroy', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    legend.destroy();</span>
+                                });
+                            };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            if (!map.loaded) {</span>
+<span class="cstat-no" title="statement not covered" >                                map.on('load', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                                    createLegend(map);</span>
+                                });
+                            } else {
+<span class="cstat-no" title="statement not covered" >                                createLegend(map);</span>
+                            }
+                        });
+                    });
+                }
+            };
+        });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 08 2016 18:16:07 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

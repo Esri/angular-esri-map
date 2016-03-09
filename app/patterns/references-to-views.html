@@ -6,6 +6,7 @@
             scene view objects from a parent controller. This will allow you to
             manipulate those objects in ways beyond what is allowed by the
             declarative directive API.</p>
+        
         <h3>Events</h3>
         <p>The map and scene view directives each include both <code>on-create</code>
             and <code>on-load</code> events that pass a reference to the underlying map or
@@ -34,5 +35,11 @@
         <ul>
             <li><a href="#/examples/webscene-slides">Work with Slides in a WebScene</a></li>
         </ul>
+
+        <h3>Registry</h3>
+        <p>We've also included a <a href="/docs/#/api/esri.core.factory:esriRegistry">registry service</a>
+        that you can use to get a direct reference to a map view or scene view object by setting the
+        <code>register-as</code> attribute on the map view or scene view directive.
+        See the <a href="#/examples/registry-pattern">Registry Pattern</a> example.</p>
     </div>
 </div>

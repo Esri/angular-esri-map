@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Using and Creating Esri Widgets</h2>
+        <p>Widgets—or as they are known in Angular 1.x, directives—are used and
+            developed in several ways. Out of the box Esri widgets can be
+            loaded and used as-is, Esri view models provide the ability to
+            combine a custom user interface with existing Esri widget logic, and
+            completely custom Angular directives without reference to any widgets or
+            view models can also be developed to work alongside the Esri JSAPI.
+        </p>
+        
+        <h3>Esri Widgets</h3>
+        <p>Widgets are usually comprised of properties, methods, and a user interface.
+            The Esri JSAPI offers a collection of
+            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Widget.html">built-in widgets</a>
+            that can be loaded with
+            <a href="#/patterns/other-esri-classes"><code>esriLoader.require()</code></a>
+            and constructed once there is
+            <a href="#/patterns/references-to-views">reference to</a>
+            a map view or scene view. This pattern also recommends that you properly tear down and
+            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Widget.html#destroy"><code>destroy()</code></a>
+            widgets when Angular scope is being destroyed.
+        </p>
+        <!-- <div hljs=""></div> -->
+        <p>Example:</p>
+        <ul>
+            <li><a href="#/examples/search">Search</a></li>
+        </ul>
+        
+        <h3>Esri View Models</h3>
+        <p><a href="https://developers.arcgis.com/javascript/beta/guide/whats-new/index.html#Developerfriendly_widgets_4">View models</a>
+            allow for the separation of a widget's methods and properties from
+            its UI presentation. By taking advantage of view models, you can use
+            on Esri widget functionality, but apply custom directive templates and styles.
+            For example, the included
+            <a href="/docs/#/api/esri.map.directive:esriHomeButton"><code>&lt;esri-home-button&gt;</code></a>
+            Angular directive makes use of the Esri
+            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Home-HomeViewModel.html"><code>HomeViewModel</code></a>
+            in its controller logic but defines its own look and feel.
+        </p>
+        <p>Example:</p>
+        <ul>
+            <li><a href="#/examples/home-button">Home Button</a></li>
+        </ul>
+        
+        <h3>Custom Angular Directives</h3>
+        <p>Directives do not necessarily need to to build directly on top of
+            Esri widget or view model functionality. For instance, the
+            <a href="#/examples/webscene-slides">WebScene Slides</a> example page
+            could have been written to separate the slide bookmarks into their own
+            directive; however, the purpose of those example pages is to provide parity
+            with corresponding, authoritative Esri JSAPI examples.
+        </p>
+        <p>The <a href="#/examples/webscene-slides-as-directive">WebScene Slides with Custom Directive</a>
+            example demonstrates how encapsulate the slide bookmarks into a custom Angular directive
+            (<a href="/docs/#/api/esri.map.directive:esriWebsceneSlides"><code>&lt;esri-webscene-slides&gt;</code></a>)
+            which has been added to this library.
+        </p>
+        <p>Example:</p>
+        <ul>
+            <li><a href="#/examples/webscene-slides-as-directive">WebScene Slides with Custom Directive</a></li>
+        </ul>
+    </div>
+</div>

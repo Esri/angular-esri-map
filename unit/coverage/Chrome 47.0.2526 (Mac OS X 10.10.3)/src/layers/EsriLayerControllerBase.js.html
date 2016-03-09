@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/layers/EsriLayerControllerBase.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">src/layers/</a> EsriLayerControllerBase.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.38% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/32</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">7.69% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">9.38% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/32</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function(angular) {
+    'use strict';
+&nbsp;
+    /**
+     * @ngdoc controller
+     * @name esri.map.controller:EsriLayerControllerBase
+     *
+     * @description
+     * This controller is used by the controllers of the esri-feature-layer, esri-dynamic-map-service-layer
+     * and esri-vector-tile-layer directives to provide several shared supporting methods.
+     */
+    angular.module('esri.map').controller('EsriLayerControllerBase', <span class="fstat-no" title="function not covered" >function EsriLayerControllerBase() {</span>
+&nbsp;
+        // test if a string value (i.e. directive attribute value) is true
+<span class="fstat-no" title="function not covered" >        function isTrue(val) {</span>
+<span class="cstat-no" title="statement not covered" >            return val === true || val === 'true';</span>
+        }
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getLayerOptions
+         * @methodOf esri.map.controller:EsriLayerControllerBase
+         *
+         * @description
+         * Formats and prepares common layer options from layer controller properties.
+         *
+         * @returns {Object} A layer options object for layer construction.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getLayerOptions = <span class="fstat-no" title="function not covered" >function () {</span></span>
+&nbsp;
+            // read options passed in as either a JSON string expression
+            // or as a function bound object
+<span class="cstat-no" title="statement not covered" >            var layerOptions = this.layerOptions() || {};</span>
+&nbsp;
+            // visible takes precedence over layerOptions.visible
+<span class="cstat-no" title="statement not covered" >            if (typeof this.visible !== 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >                layerOptions.visible = isTrue(this.visible);</span>
+            }
+&nbsp;
+            // opacity takes precedence over layerOptions.opacity
+<span class="cstat-no" title="statement not covered" >            if (this.opacity) {</span>
+<span class="cstat-no" title="statement not covered" >                layerOptions.opacity = Number(this.opacity);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return layerOptions;</span>
+        };
+&nbsp;
+        /**
+         * @ngdoc function
+         * @name getLayerInfo
+         * @methodOf esri.map.controller:EsriLayerControllerBase
+         *
+         * @description
+         * Gets layer info from layer and directive attributes.
+         *
+         * @param {FeatureLayer | ArcGISDynamicMapServiceLayer} layer Layer to get layerInfo for.
+         * @param {Object} attrs Bound attribute properties such as `title`, `hideLayers`, or `defaultSymbol`.
+         *
+         * @returns {Object} A layerInfo object, which is needed for the esri-legend directive.
+         *  See {@link https://developers.arcgis.com/javascript/jsapi/legend-amd.html#legend1 layerInfo} for object specification.
+         */
+<span class="cstat-no" title="statement not covered" >        this.getLayerInfo = <span class="fstat-no" title="function not covered" >function(layer, attrs) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return {</span>
+                title: attrs.title || layer.name,
+                layer: layer,
+                hideLayers: (attrs.hideLayers) ? attrs.hideLayers.split(',').map(Number) : undefined,
+                defaultSymbol: (attrs.defaultSymbol) ? JSON.parse(attrs.defaultSymbol) : true
+            };
+        };
+&nbsp;
+        // get common layer options from layer controller properties
+<span class="cstat-no" title="statement not covered" >        this._bindLayerEvents = <span class="fstat-no" title="function not covered" >function(scope, attrs, layer, mapController) {</span></span>
+&nbsp;
+            // call load handler (if any)
+<span class="cstat-no" title="statement not covered" >            if (attrs.load) {</span>
+<span class="cstat-no" title="statement not covered" >                if (layer.loaded) {</span>
+                    // layer is already loaded
+                    // make layer object available to caller immediately
+<span class="cstat-no" title="statement not covered" >                    scope.layerCtrl.load()(layer);</span>
+                } else {
+                    // layer is not yet loaded
+                    // wait for load event, and then make layer object available
+<span class="cstat-no" title="statement not covered" >                    layer.on('load', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                        scope.$apply(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                            scope.layerCtrl.load()(layer);</span>
+                        });
+                    });
+                }
+            }
+&nbsp;
+            // call updateEnd handler (if any)
+<span class="cstat-no" title="statement not covered" >            if (attrs.updateEnd) {</span>
+<span class="cstat-no" title="statement not covered" >                layer.on('update-end', <span class="fstat-no" title="function not covered" >function(e) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    scope.$apply(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                        scope.layerCtrl.updateEnd()(e);</span>
+                    });
+                });
+            }
+&nbsp;
+            // watch the scope's visible property for changes
+            // set the visibility of the feature layer
+<span class="cstat-no" title="statement not covered" >            scope.$watch('layerCtrl.visible', <span class="fstat-no" title="function not covered" >function(newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (newVal !== oldVal) {</span>
+<span class="cstat-no" title="statement not covered" >                    layer.setVisibility(isTrue(newVal));</span>
+                }
+            });
+&nbsp;
+            // watch the scope's opacity property for changes
+            // set the opacity of the feature layer
+<span class="cstat-no" title="statement not covered" >            scope.$watch('layerCtrl.opacity', <span class="fstat-no" title="function not covered" >function(newVal, oldVal) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (newVal !== oldVal) {</span>
+<span class="cstat-no" title="statement not covered" >                    layer.setOpacity(Number(newVal));</span>
+                }
+            });
+&nbsp;
+            // remove the layer from the map when the layer scope is destroyed
+<span class="cstat-no" title="statement not covered" >            scope.$on('$destroy', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                mapController.removeLayer(layer);</span>
+            });
+        };
+    });
+&nbsp;
+})(angular);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Dec 19 2015 10:05:04 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
