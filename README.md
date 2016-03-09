@@ -3,19 +3,19 @@ angular-esri-map
 
 [![Build Status](https://travis-ci.org/Esri/angular-esri-map.svg?branch=master)](https://travis-ci.org/Esri/angular-esri-map)
 
-A collection of directives to help you use Esri maps and services in your Angular applications.
+A collection of directives to help you use Esri maps and services in your Angular 1.x applications.
 
 These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](http://esri.github.io/angular-esri-map/#/about)
 
 ## Getting started
-Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own Angular applications.
+Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own Angular 1.x applications.
 
 ### Quick Start
 
-To use these directives in your own Angular application, first install the module as a dependency using any of the following methods.
+To use these directives in your own Angular 1.x application, first install the module as a dependency using any of the following methods.
 ```html
 <!-- load angular-esri-map from CDN -->
-<script src="//npmcdn.com/angular-esri-map@2.0.0-beta.1"></script>
+<script src="//npmcdn.com/angular-esri-map@2.0.0-beta.2"></script>
 ```
 ```bash
 # OR install via bower
@@ -48,7 +48,7 @@ Once you've added the module to your application, you can use the sample code be
         <!-- load AngularJS -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
         <!-- load angular-esri-map -->
-        <script src="//npmcdn.com/angular-esri-map@2.0.0-beta.1"></script>
+        <script src="//npmcdn.com/angular-esri-map@2.0.0-beta.2"></script>
 
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
