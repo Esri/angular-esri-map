@@ -15,7 +15,7 @@ Here are [a few examples](https://arcgis.github.io/angular-esri-map-site-v1/) sh
 To use these directives in your own Angular 1.x application, first install the module as a dependency using any of the following methods.
 ```html
 <!-- load angular-esri-map from CDN -->
-<script src="//npmcdn.com/angular-esri-map@1.1.2"></script>
+<script src="//npmcdn.com/angular-esri-map@1"></script>
 ```
 ```bash
 # OR install via bower
@@ -51,7 +51,7 @@ Once you've added the module to your application, you can use the sample code be
         <!-- load AngularJS -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
         <!-- load angular-esri-map -->
-        <script src="//npmcdn.com/angular-esri-map@1.1.2"></script>
+        <script src="//npmcdn.com/angular-esri-map@1"></script>
 
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
