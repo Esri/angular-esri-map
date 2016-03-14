@@ -20,6 +20,7 @@
      * @param {String} id The id of the element where to construct the map.
      * @param {Array | Object=} center The initial location of the map.
      * @param {Number=} zoom The initial zoom level of the map.
+     * @param {String=} webmap-id A web map item id if loading from a saved web map. See also the `item-info` parameter.
      * @param {Object=} item-info When loading a web map from an item id, this object will be populated with the item's info.
      * @param {String=} basemap The basemap of the map, which can be a valid string from the ArcGIS API for JavaScript, or a custom basemap.
      * @param {Function=} load Callback for map `load` event.

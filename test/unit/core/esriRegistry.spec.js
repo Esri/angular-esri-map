@@ -31,7 +31,7 @@ describe('esriRegistry', function() {
             removeHandle();
         });
 
-        it('should get the registerd promise', function() {
+        it('should get the registered promise', function() {
             esriRegistry.get('test').then(function(map) {
                 expect(map).toEqual(fakeMap);
             });
