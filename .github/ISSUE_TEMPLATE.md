@@ -7,7 +7,7 @@
 
 - Describe what occurs in your code.
 - Specifically, what seems to work differently than you intended?
-- Provide any error messages you see in the console
+- Provide any error messages you see in the console.
 
 #### Steps to reproduce the behavior
 
