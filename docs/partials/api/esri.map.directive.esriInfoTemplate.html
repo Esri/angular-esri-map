@@ -1,0 +1,36 @@
+<h1><code ng:non-bindable="">esriInfoTemplate</code>
+<div><span class="hint">directive in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esriinfotemplate-page"><p>This directive creates an
+<a href="https://developers.arcgis.com/javascript/jsapi/infotemplate-amd.html">InfoTemplate</a>
+and binds it to a layer to provide &quot;popup&quot; information functionality when clicking on the visible layer in the map.
+This directive <strong>must</strong> be placed within an esri-feature-layer directive or esri-dynamic-map-service-layer directive.</p>
+<h4 id="examples" id="description_examples">Examples</h4>
+<ul>
+<li><a href="../#/examples/dynamic-map-service-layers">Multiple Dynamic Map Service Layers</a></li>
+</ul>
+<pre class="prettyprint linenums">
+  &lt;!-- The title is provided as an attribute parameter
+  but the content is the entire inner HTML --&gt;
+
+  &lt;esri-info-template title="Parks"&gt;
+     &lt;span&gt;${PARK_NAME}&lt;/span&gt;
+     &lt;span&gt;This park had ${TOTAL_VISITS_2014} visitors in 2014&lt;/span&gt;
+  &lt;/esri-info-template&gt;
+</pre>
+</div></div>
+<h2 id="usage">Usage</h2>
+<div class="usage">as element:<pre class="prettyprint linenums">&lt;esri-info-template
+       [layer-id="{String}"]
+       [title="{String}"]
+       [content="{String | Node[]}"]&gt;
+&lt;/esri-info-template&gt;</pre>
+<h4 id="usage_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>layer-id <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esriinfotemplate-page"><p>The layer id to which the InfoTemplate should be connected to.
+<strong>Note:</strong> This is only applicable when the parent directive is an esri-dynamic-map-service-layer.</p>
+</div></td></tr><tr><td>title <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esriinfotemplate-page"><p>The title of the template.</p>
+</div></td></tr><tr><td>content <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String </a><a href="" class="label type-hint type-hint-object"> Node[]</a></td><td><div class="esri-map-directive-page esri-map-directive-esriinfotemplate-page"><p><strong>Note:</strong> The content of the template is provided as inner HTML to this directive.</p>
+</div></td></tr></tbody></table></div>
+</div>

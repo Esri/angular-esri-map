@@ -1,0 +1,43 @@
+<h1><code ng:non-bindable="">EsriDynamicMapServiceLayerController</code>
+<div><span class="hint">controller in module <code ng:non-bindable="">esri.map</code>
+</span>
+</div>
+</h1>
+<div><h2 id="description">Description</h2>
+<div class="description"><div class="esri-map-controller-page esri-map-controller-esridynamicmapservicelayercontroller-page"><p>This controller is used by the esri-dynamic-map-service-layer directive to construct the layer,
+provide it with several supporting methods,
+and help bind layer events and other properties such as layer visibility.</p>
+</div></div>
+<h2 id="dependencies">Dependencies</h2>
+<ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$controller">$controller</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/esri.core.factory:esriLayerUtils">esriLayerUtils</a></code>
+</li>
+<li><code ng:non-bindable=""><a href="#/api/esri.map.controller:EsriLayerControllerBase">EsriLayerControllerBase</a></code>
+</li>
+</ul>
+<div class="member method"><h2 id="methods">Methods</h2>
+<ul class="methods"><li><h3 id="methods_bindlayerevents">bindLayerEvents(scope, attrs, layer, mapController)</h3>
+<div class="bindlayerevents"><div class="bindlayerevents-page"><p>Binds esri-dynamic-map-service-layer directive attributes to layer properties and events,
+such as the visibility and opacity.</p>
+</div><h5 id="methods_bindlayerevents_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>scope</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bindlayerevents-page"><p>Isolate scope for layer directive controller</p>
+</div></td></tr><tr><td>attrs</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bindlayerevents-page"><p>Attribute properties</p>
+</div></td></tr><tr><td>layer</td><td><a href="" class="label type-hint type-hint-arcgisdynamicmapservicelayer">ArcGISDynamicMapServiceLayer</a></td><td><div class="bindlayerevents-page"><p>The layer to bind properties and events to.</p>
+</div></td></tr><tr><td>mapController</td><td><a href="" class="label type-hint type-hint-esrimapcontroller">EsriMapController</a></td><td><div class="bindlayerevents-page"><p>The map controller is also required to help remove the layer
+from the map when the layer scope is destroyed.</p>
+</div></td></tr></tbody></table></div>
+</li>
+<li><h3 id="methods_getlayer">getLayer()</h3>
+<div class="getlayer"><h5 id="methods_getlayer_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="getlayer-page"><p>Returns a $q style promise resolved with an instance of
+<a href="https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1">ArcGISDynamicMapServiceLayer</a></p>
+</div></td></tr></table></div>
+</li>
+<li><h3 id="methods_setinfotemplate">setInfoTemplate(layerId, infoTemplate)</h3>
+<div class="setinfotemplate"><div class="setinfotemplate-page"><p>Sets the InfoTemplate once the layer has been loaded.</p>
+</div><h5 id="methods_setinfotemplate_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>layerId</td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="setinfotemplate-page"><p>The sublayer id to which the InfoTemplate should be connected to.</p>
+</div></td></tr><tr><td>infoTemplate</td><td><a href="" class="label type-hint type-hint-object">Object</a><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="setinfotemplate-page"><p>Either an array with <code>[&#39;title&#39;, &#39;content&#39;]</code> or an object with <code>{title: &#39;title&#39;, content: &#39;content&#39;}</code></p>
+</div></td></tr></tbody></table></div>
+</li>
+</ul>
+</div>
+</div>
