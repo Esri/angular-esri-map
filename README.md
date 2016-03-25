@@ -103,6 +103,10 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 * [Importing Data Into Feature Services](https://developers.arcgis.com/tools/csv-to-feature-service/)
 * [@Esri](http://twitter.com/esri)
 
+**Presentations**
+* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](http://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
+* [ArcGIS API for JavaScript and AngularJS: What's New, What's Next](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016), Esri 2016 International Developer Summit
+
 ## Issues
 
 Find a bug or want to request a new feature?  Please let us know by submitting an issue.  Thank you!
