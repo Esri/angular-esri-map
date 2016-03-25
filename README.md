@@ -34,7 +34,7 @@ Once you've added the module to your application, you can use the sample code be
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <title>Angular Esri Quickstart</title>
+        <title>Angular Esri Quick Start</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.16/esri/css/esri.css">
@@ -104,6 +104,10 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 * [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
 * [Importing Data Into Feature Services](https://developers.arcgis.com/tools/csv-to-feature-service/)
 * [@Esri](http://twitter.com/esri)
+
+**Presentations**
+* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](http://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
+* [ArcGIS API for JavaScript and AngularJS: What's New, What's Next](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016), Esri 2016 International Developer Summit
 
 ## Issues
 
