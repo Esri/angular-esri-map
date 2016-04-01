@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-[Upcoming changes][unreleased]
+## [Upcoming changes][unreleased]
+
+### Maintenance
+Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
+
+### Documentation
+Added readme links to recent presentation slides.
 
 ## [v2.0.0-beta.2]
 

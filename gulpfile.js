@@ -49,11 +49,11 @@ gulp.task('build-core-js', function() {
     'src/core/esri.core.module.js',
     'src/core/esriLoader.js',
     'src/core/esriRegistry.js'])
+    .pipe(ngAnnotate({single_quotes: true}))
     .pipe(concat('angular-esri-core.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
     .pipe(stripDebug())
-    .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(rename('angular-esri-core.min.js'))
     .pipe(gulp.dest('dist'))
@@ -76,11 +76,11 @@ gulp.task('build-js', function() {
     'src/map/esriMapView.js',
     'src/map/esriSceneView.js',
     'src/map/esriWebsceneSlides.js'])
+    .pipe(ngAnnotate({single_quotes: true}))
     .pipe(concat('angular-esri-map.js'))
     .pipe(gulp.dest('dist'))
     .pipe(gulp.dest('site/lib'))
     .pipe(stripDebug())
-    .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(rename('angular-esri-map.min.js'))
     .pipe(gulp.dest('dist'))
