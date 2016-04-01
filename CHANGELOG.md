@@ -8,6 +8,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Maintenance
 Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
 
+### Documentation
+Added documentation info for map directive "webmap-id" parameter.
+
+Added readme links to recent presentation slides.
+
 ## [v1.1.3]
 
 ### Changed
