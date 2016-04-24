@@ -3,7 +3,7 @@
   color: #fff;
 }
 
-/* Custom page footer */
+/* custom page footer */
 .footer {
   position: relative;
   margin-top: 19px;
@@ -17,7 +17,7 @@
   overflow-wrap: break-word;
 }
 
-/* Examples title and summary spacing */
+/* examples title and summary spacing */
 .marketing h4 + p {
   margin-bottom: 28px;
 }
@@ -52,13 +52,13 @@
   white-space: nowrap;
 }
 
-/*warning for non-webgl browsers*/
+/* warning for non-webgl browsers */
 .web-gl-warning {
   color: #b52e31;
   font-weight: bold;
 }
 
-/*dismissable alert to warn about docs version*/
+/* dismissable alert to warn about docs version */
 .version-alert {
   position: fixed;
   bottom: -24px;
@@ -69,7 +69,33 @@
   z-index: 100;
 }
 
-/* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
+/* navbar size and position overrides of calcite-bootstrap */
+.navbar.navbar-inverse.navbar-static-top {
+  margin-bottom: 20px;
+}
+.navbar-header {
+  float: left;
+}
+.navbar-brand {
+  font-size: 25px;
+  font-weight: 200;
+}
+.navbar-right {
+  float: right;
+}
+.navbar-nav>li {
+  float: left;
+}
+@media (max-width: 768px) {
+  /* bootstrap's extra small devices (width less than 768px) */
+  /* reduced default padding to fit nav links along 1 row */
+  .navbar-nav>li>a {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+/* angular color overrides of calcite-bootstrap (red highlight, white background, black font/header) */
 body {
   background-color: #ffffff;
   color: #000000;
@@ -84,14 +110,9 @@ a:focus,
 a:hover {
   color: #b52e31;
 }
-.navbar-nav>li>a:focus, .navbar-nav>li>a:hover {
-    background-image: linear-gradient(to top,transparent 92%,#b52e31 93%,#b52e31 100%);
-}
-.nav-pills>li.active>a,
-.nav-pills>li.active>a:focus,
-.nav-pills>li.active>a:hover {
-  color: #fff;
-  background-color: #b52e31;
+.navbar-nav>li>a:focus,
+.navbar-nav>li>a:hover {
+  background-image: linear-gradient(to top,transparent 92%,#b52e31 93%,#b52e31 100%);
 }
 .nav>li>a:focus,
 .nav>li>a:hover {
@@ -116,16 +137,4 @@ button.list-group-item:focus,
 button.list-group-item:hover {
   /*color: #000000;*/
   background-color: #f8f8f8;
-}
-button.btn-default, button.btn-default[disabled] {
-  color: #b52e31;
-  background-color: #fff;
-  border-color: #b52e31;
-}
-button.btn-default:focus, button.btn-default[disabled]:focus,
-button.btn-default:hover, button.btn-default[disabled]:hover,
-button.btn-default:active, button.btn-default[disabled]:active {
-  color: #fff!important;
-  background-color: #b52e31!important;
-  border-color: #b52e31 !important;
 }
