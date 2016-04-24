@@ -20,83 +20,117 @@
 </head>
 
 <body>
-    <div class="container">
-        <!-- page header -->
-        <div class="page-header">
-            <ul class="nav nav-pills pull-right" role="tablist" ng-controller="NavCtrl">
-                <li role="presentation" ng-class="{ active: page === 'home' }"><a ng-href="#/home">Home</a>
+    <!-- top nav -->
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-href="#/home">angular-esri-map</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{active: page === 'examples'}">
+                    <a ng-href="#/examples">Examples</a>
                 </li>
-                <li role="presentation" ng-class="{ active: page === 'examples' }"><a ng-href="#/examples">Examples</a>
+                <li ng-class="{active: page === 'patterns'}">
+                    <a ng-href="#/patterns">Patterns</a>
                 </li>
-                <li role="presentation" ng-class="{ active: page === 'patterns' }"><a ng-href="#/patterns">Patterns</a>
+                <li>
+                    <a href="./docs">API</a>
                 </li>
-                <li role="presentation"><a href="./docs">API</a>
+                <li>
+                    <a href="//esri.github.io/angular-esri-map/">
+                        <span class="hidden-xs">Latest Version Docs</span>
+                        <span class="visible-xs">v2</span>
+                    </a>
                 </li>
-                <li role="presentation"><a href="//esri.github.io/angular-esri-map/">Latest Version (v2)</a>
-                </li>
-                <li role="presentation"><a href="//github.com/Esri/angular-esri-map/tree/v1.x">GitHub</a>
+                <li>
+                    <a href="//github.com/Esri/angular-esri-map/tree/v1.x">GitHub</a>
                 </li>
             </ul>
-            <h3 class="text-muted">angular-esri-map</h3>
         </div>
+    </nav>
 
+    <!-- main content container -->
+    <div class="container">
         <!-- shared left nav controller for examples and patterns; also modifies styling of snippets and footer -->
         <div ng-controller="LeftNavCtrl">
-            <!-- left nav list group for example toc page and individual example pages -->
-            <div class="col-sm-3" ng-if="examplesLeftNavShow" style="display:none;" ng-style="{display: examplesLeftNavStyle}">
-                <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
-                    <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
+            <!-- page content row -->
+            <div class="row">
+
+                <!-- apply a column size depending on if a left nav is visible -->
+                <div ng-class="{
+                        'col-sm-9 col-sm-push-3': (examplesLeftNavShow || patternsLeftNavShow),
+                        'col-xs-12': !(examplesLeftNavShow || patternsLeftNavShow)
+                    }">
+
+                    <!-- page content for ngRoute -->
+                    <div ng-view="" autoscroll></div>
+
+                    <!-- source code snippets -->
+                    <div ng-controller="SnippetsCtrl" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
+                        <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
+                            <li ng-repeat="tab in tabs" ng-select-option="tab">
+                                <a href="" title="{{tab}}">{{tab.substr(tab.lastIndexOf('.') + 1).toUpperCase()}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-container">
+                            <div ng-repeat="tab in tabs">
+                              <div ng-show="tab === currentTab">
+                                  <div hljs="" include="currentTab"></div>
+                                  <div class="snippet-file-name">{{tab}}</div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- left nav list group for example toc page and individual example pages -->
+                <div class="col-sm-3 col-sm-pull-9" ng-if="examplesLeftNavShow" style="display:none;" ng-style="{display: examplesLeftNavStyle}">
+                    <div ng-repeat="(categoryKeyName, examplesArray) in examplePageCategories">
+                        <h4 class="page-header list-group-category">{{categoryKeyName}}</h4>
+                        <div class="list-group">
+                            <a href="{{example.toc.url}}"
+                                class="list-group-item"
+                                ng-class="{'active': example.route.controller === activeExample}"
+                                ng-repeat="example in examplesArray">
+                                {{example.toc.title}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- left nav list group for patterns pages -->
+                <div class="col-sm-3 col-sm-pull-9" ng-if="patternsLeftNavShow" style="display:none;" ng-style="{display: patternsLeftNavStyle}">
+                    <h4 class="page-header list-group-category">Patterns</h4>
                     <div class="list-group">
-                        <a href="{{example.toc.url}}"
+                        <a ng-href="{{'#' + page.path}}"
                             class="list-group-item"
-                            ng-class="{'active': example.route.controller === activeExample}"
-                            ng-repeat="example in examplesArray">
-                            {{example.toc.title}}
+                            ng-class="{'active': page.path === activePath}"
+                            ng-repeat="page in patternsPages">
+                            {{page.shortTitle}}
                         </a>
                     </div>
                 </div>
+
+            <!-- end page content row -->
             </div>
 
-            <!-- left nav list group for patterns pages -->
-            <div class="col-sm-3" ng-if="patternsLeftNavShow" style="display:none;" ng-style="{display: patternsLeftNavStyle}">
-                <h4 class="page-header list-group-category">Patterns</h4>
-                <div class="list-group">
-                    <a ng-href="{{'#' + page.path}}"
-                        class="list-group-item"
-                        ng-class="{'active': page.path === activePath}",
-                        ng-repeat="page in patternsPages">
-                        {{page.shortTitle}}
-                    </a>
-                </div>
-            </div>
-
-            <!-- page content for ngRoute; apply a column size if the examples left nav is visible -->
-            <div ng-view="" ng-class="{'col-sm-9': (examplesLeftNavShow || patternsLeftNavShow)}"></div>
-
-            <!-- source code snippets -->
-            <div ng-controller="SnippetsCtrl" class="col-sm-9" style="display:none;" ng-style="{display: (examplesLeftNavStyle || patternsLeftNavStyle)}">
-                <ul ng-show="tabs" class="nav nav-tabs" ng-select ng-model="currentTab" select-class="{'active': $optSelected}">
-                    <li ng-repeat="tab in tabs" ng-select-option="tab">
-                        <a href="">{{ tab }}</a>
-                    </li>
-                </ul>
-                <div class="tab-container">
-                    <div ng-repeat="tab in tabs">
-                      <div ng-show="tab === currentTab" hljs="" include="currentTab"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- page footer -->
+            <!-- page footer row -->
             <div class="footer" ng-class="{'col-xs-12': (examplesLeftNavShow || patternsLeftNavShow)}">
                 <p><span class="glyphicon glyphicon-heart"></span> from Esri</p>
             </div>
+
+        <!-- end shared left nav controller -->
         </div>
+    <!-- end main content container -->
     </div>
+
+    <!-- version alert controller -->
     <div ng-controller="AlertController">
         <div ng-if="showAlert" class="alert alert-warning alert-dismissible version-alert" role="alert">
-            <button type="button" ng-click="hideAlert()" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            This documentation is for v1 and for use with v3.x of the ArcGIS API for JavaScript. If you are using v4.x of the ArcGIS API for JavaScript, please see <a href="https://esri.github.io/angular-esri-map/">the v2 documentation</a>.</div>
+            <button type="button" ng-click="hideAlert()" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            This documentation is for v1 and for use with v3.x of the ArcGIS API for JavaScript. If you are using v4.x of the ArcGIS API for JavaScript, please see <a href="https://esri.github.io/angular-esri-map/">the v2 documentation</a>.
         </div>
     </div>
 

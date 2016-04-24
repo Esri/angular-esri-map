@@ -3,7 +3,7 @@
   color: #fff;
 }
 
-/* Custom page footer */
+/* custom page footer */
 .footer {
   position: relative;
   margin-top: 19px;
@@ -17,13 +17,9 @@
   overflow-wrap: break-word;
 }
 
-/* Examples title and summary spacing */
+/* examples title and summary spacing */
 .marketing h4 + p {
   margin-bottom: 28px;
-}
-
-.page-header.list-group-category {
-  margin: 0 0 10px 0;
 }
 
 /* Esri JSAPI */
@@ -43,8 +39,52 @@
   font-size: 13px;
   background-color: inherit; /* only use if syntax highlighting background is light gray or near white */
 }
+.tab-container pre {
+  margin-bottom: 0;
+  border-top: 0;
+}
+.snippet-file-name {
+  margin-bottom: 12px;
+}
 
-/* angular color overrides calcite-bootstrap (red highlight, white background, black font/header) */
+/* dismissable alert to warn about docs version */
+.version-alert {
+  position: fixed;
+  bottom: -24px;
+  width: 80%;
+  left: calc(50% - 40%);
+  text-align: center;
+  font-size: small;
+  z-index: 100;
+}
+
+/* navbar size and position overrides of calcite-bootstrap */
+.navbar.navbar-inverse.navbar-static-top {
+  margin-bottom: 20px;
+}
+.navbar-header {
+  float: left;
+}
+.navbar-brand {
+  font-size: 25px;
+  font-weight: 200;
+}
+.navbar-right {
+  float: right;
+}
+.navbar-nav>li {
+  float: left;
+}
+@media (max-width: 768px) {
+  /* bootstrap's extra small devices (width less than 768px) */
+  /* reduced default padding to fit nav links along 1 row */
+  .navbar-nav>li>a {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+
+/* angular color overrides of calcite-bootstrap (red highlight, white background, black font/header) */
 body {
   background-color: #ffffff;
   color: #000000;
@@ -59,11 +99,9 @@ a:focus,
 a:hover {
   color: #b52e31;
 }
-.nav-pills>li.active>a,
-.nav-pills>li.active>a:focus,
-.nav-pills>li.active>a:hover {
-  color: #fff;
-  background-color: #b52e31;
+.navbar-nav>li>a:focus,
+.navbar-nav>li>a:hover {
+  background-image: linear-gradient(to top,transparent 92%,#b52e31 93%,#b52e31 100%);
 }
 .nav>li>a:focus,
 .nav>li>a:hover {
@@ -88,14 +126,4 @@ button.list-group-item:focus,
 button.list-group-item:hover {
   /*color: #000000;*/
   background-color: #f8f8f8;
-}
-
-.version-alert {
-  position: fixed;
-  bottom: -24px;
-  width: 80%;
-  left: calc(50% - 40%);
-  text-align: center;
-  font-size: small;
-  z-index: 100;
 }
