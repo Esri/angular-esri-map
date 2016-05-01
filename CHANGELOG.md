@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Maintenance
 Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
 
+Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
+
 ### Documentation
 Added readme links to recent presentation slides.
 
