@@ -3,7 +3,9 @@
   "version": "2.0.0-beta.2",
   "description": "A collection of directives to help you use Esri maps and services in your Angular applications",
   "main": "dist/angular-esri-map.js",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "^1.3.0"
+  },
   "devDependencies": {
     "angular": "^1.4.7",
     "angular-mocks": "^1.4.7",
