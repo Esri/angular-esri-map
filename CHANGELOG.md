@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Maintenance
+Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
+
 ## [v1.1.4]
 
 ### Maintenance
