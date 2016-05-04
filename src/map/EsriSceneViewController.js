@@ -30,10 +30,10 @@
              * @methodOf esri.map.controller:EsriSceneViewController
              *
              * @description
-             * Load and get a reference to a SceneView module
+             * Load and get a reference to a SceneView module.
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the SceneView
+             * resolved with an object with a `view` property that refers to the SceneView module.
              */
             this.getSceneView = function() {
                 return esriLoader.require('esri/views/SceneView').then(function(SceneView) {

@@ -14,37 +14,24 @@
         .controller('EsriHomeButtonController', function EsriHomeButtonController(esriLoader) {
             var self = this;
 
-            // assign required options for the HomeViewModel
-            var options = {
-                view: self.view
-            };
-
             /**
              * @ngdoc function
-             * @name createViewModel
+             * @name getViewModel
              * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
-             * Create a HomeViewModel instance
-             *
-             * @param {Object} options HomeViewModel options
+             * Load and get a reference to a HomeViewModel module.
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `viewModel` property that refers to the HomeViewModel
+             * resolved with an object with a `viewModel` property that refers to the HomeViewModel module
              */
-            this.createViewModel = function(options) {
+            this.getViewModel = function() {
                 return esriLoader.require('esri/widgets/Home/HomeViewModel').then(function(HomeVM) {
                     return {
-                        viewModel: new HomeVM(options)
+                        viewModel: HomeVM
                     };
                 });
             };
-
-            // create the viewModel, get a ref to the promise
-            this.createViewModelPromise = this.createViewModel(options).then(function(result) {
-                self.viewModel = result.viewModel;
-                return result;
-            });
 
             /**
              * @ngdoc function
@@ -52,36 +39,37 @@
              * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
-             * Set a view on the HomeViewModel
+             * Set a view on the HomeViewModel.
+             * A new HomeViewModel will be constructed.
+             * To be fully functional, the HomeViewModel requires a valid view property.
              *
              * @param {Object} view view instance
-             *
-             * @return {Promise} Returns a $q style promise and sets the view property on the HomeViewModel.
              */
             this.setView = function(view) {
                 if (!view) {
                     return;
                 }
-                // to be fully functional, the HomeViewModel requires a valid view property
-                return this.createViewModelPromise.then(function(result) {
-                    result.viewModel.view = view;
+                return this.getViewModel().then(function(result) {
+                    self.viewModel = new result.viewModel({
+                        view: view
+                    });
                 });
             };
 
             /**
              * @ngdoc function
-             * @name goHome
+             * @name go
              * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
-             * A wrapper around the Esri JSAPI HomeViewModel.goHome() method,
+             * A wrapper around the Esri JSAPI `HomeViewModel.go()` method,
              * which is executed when the esriHomeButton is clicked.
              */
-            this.goHome = function() {
+            this.go = function() {
                 if (!this.viewModel) {
                     return;
                 }
-                this.viewModel.goHome();
+                this.viewModel.go();
             };
         });
 })(angular);

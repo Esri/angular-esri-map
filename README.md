@@ -15,7 +15,7 @@ Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how y
 To use these directives in your own Angular 1.x application, first install the module as a dependency using any of the following methods.
 ```html
 <!-- load angular-esri-map from CDN -->
-<script src="//npmcdn.com/angular-esri-map@2.0.0-beta.2"></script>
+<script src="//npmcdn.com/angular-esri-map@2"></script>
 ```
 ```bash
 # OR install via bower
@@ -37,18 +37,18 @@ Once you've added the module to your application, you can use the sample code be
         <title>Angular Esri Quick Start</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
     </head>
     <body ng-controller="MapController as vm">
         <esri-scene-view map="vm.map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">
         </esri-scene-view>
         
         <!-- load Esri JSAPI -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load AngularJS -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
         <!-- load angular-esri-map -->
-        <script src="//npmcdn.com/angular-esri-map@2.0.0-beta.2"></script>
+        <script src="//npmcdn.com/angular-esri-map@2"></script>
 
         <script type="text/javascript">
             angular.module('esri-map-example', ['esri.map'])
@@ -88,19 +88,18 @@ At version 1.x, these directives and services require, at a minimum, Angular v1.
 
 angular-esri-map | Angular | ArcGIS API for JavaScript
 --- | --- | ---
-v1.0 | v1.3+ | [v3.12+](https://developers.arcgis.com/javascript/)
-v1.1 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/)
-v2.xbeta | v1.3+ | [v4.0beta3+](https://developers.arcgis.com/javascript/beta/)
+v1.0 | v1.3+ | [v3.12+](https://developers.arcgis.com/javascript/3/)
+v1.1 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/)
+v2.xbeta | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/)
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
 ## Resources
 
 * [Angular JS](https://angularjs.org/)
-* [ArcGIS API for JavaScript](//js.arcgis.com)
+* [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
 * [ArcGIS for Developers](http://developers.arcgis.com)
 * [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
-* [Importing Data Into Feature Services](https://developers.arcgis.com/tools/csv-to-feature-service/)
 * [@Esri](http://twitter.com/esri)
 
 **Presentations**

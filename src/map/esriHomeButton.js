@@ -28,11 +28,9 @@
                 },
 
                 template: [
-                    '<div class="esri-home" role="presentation">',
-                    '  <div role="button" tabindex="0" class="esri-container">',
-                    '    <span aria-hidden="true" class="esri-icon esri-icon-home"></span>',
+                    '<div role="button" tabindex="0" class="esri-home esri-widget-button esri-widget esri-component">',
+                    '    <span aria-hidden="true" class="esri-icon esri-icon-home" title="Default extent"></span>',
                     '    <span class="esri-icon-font-fallback-text">Home</span>',
-                    '  </div>',
                     '</div>'
                 ].join(''),
 
@@ -49,7 +47,7 @@
                     });
 
                     element.on('click', function() {
-                        controller.goHome();
+                        controller.go();
                     });
                 }
             };
