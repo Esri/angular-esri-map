@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Work with Slides in a WebScene</title>
 
         <!-- load Esri CSS  -->
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
         <style type="text/css">
+            .esri-view {
+                    height: 400px;
+            }
             .slidesDiv {
                 position: absolute;
                 z-index: 50;
@@ -47,10 +50,10 @@
                     </span>
                 </div>
             </div>
-            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/webscene-slides/index.html">this sample</a>.</p>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/webscene-slides/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load the angular-esri-map module -->
@@ -63,7 +66,7 @@
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader, $scope) {
+                .controller('ExampleController', function(esriLoader) {
                     var self = this;
                     self.slides = [];
                     self.sceneView = null;
@@ -88,7 +91,9 @@
                         self.onViewLoaded = function(view) {
                             self.sceneView = view;
 
-                            self.slides = view.map.presentation.slides.getAll();
+                            // presentation slides are in fact an "esri/core/Collection"
+                            // make a shallow copy as a new array object for angular scope
+                            self.slides = view.map.presentation.slides.toArray();
                             // tack on an extra property for ng-class css styling
                             self.slides.forEach(function(slide) {
                                 slide.isActiveSlide = false;
