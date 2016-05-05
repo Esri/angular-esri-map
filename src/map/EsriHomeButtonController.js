@@ -9,10 +9,13 @@
      * Functions to help create HomeViewModel instances.
      *
      * @requires esri.core.factory:esriLoader
+     * @requires $element
      */
     angular.module('esri.map')
-        .controller('EsriHomeButtonController', function EsriHomeButtonController(esriLoader) {
+        .controller('EsriHomeButtonController', function EsriHomeButtonController($element, esriLoader) {
             var self = this;
+            var element = $element.children()[0];
+            self.uiPosition = self.viewUiPosition();
 
             /**
              * @ngdoc function
@@ -42,6 +45,8 @@
              * Set a view on the HomeViewModel.
              * A new HomeViewModel will be constructed.
              * To be fully functional, the HomeViewModel requires a valid view property.
+             * This will also add the directive to a view's UI position if using the
+             * optional `view-ui-position` isolate scope property.
              *
              * @param {Object} view view instance
              */
@@ -53,6 +58,10 @@
                     self.viewModel = new result.viewModel({
                         view: view
                     });
+
+                    if (self.uiPosition) {
+                        view.ui.add(element, self.uiPosition);
+                    }
                 });
             };
 
