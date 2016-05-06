@@ -13,16 +13,16 @@ describe('Feature Layer', function() {
         });
     });
 
-    it('should have 1 feature layer, identified by an svg "g" element', function() {
+    it('should have a feature layer with many circle symbols, identified by svg "circle" elements', function() {
         helper.getMapViewElement().then(function(mapView) {
-            var allGs = mapView.all(by.tagName('g'));
+            var allCircles = mapView.all(by.tagName('circle'));
 
             browser.wait(function() {
-                return allGs.count().then(function(countValue) {
+                return allCircles.count().then(function(countValue) {
                     return countValue > 0;
                 });
             }, 8000).then(function() {
-                expect(allGs.count()).toEqual(1);
+                expect(allCircles.count()).toBeGreaterThan(1);
             });
         });
     });
