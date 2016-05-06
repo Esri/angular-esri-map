@@ -10,6 +10,8 @@ Unminified dist files adhere to strict dependecy injection (DI). Note that minif
 
 Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
 
+Source code, test pages, unit tests, and e2e tests updated for Esri JSAPI 4.0 release, in preparation for a tagged v2 release of this repo. [#281](https://github.com/Esri/angular-esri-map/pull/281)
+
 ### Documentation
 Added readme links to recent presentation slides.
 
