@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Chaining Promises</title>
 
         <!-- load Esri CSS  -->
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
         <style type="text/css">
-            #results {
-                top: 20px;
-                right: 20px;
-                position: absolute;
-                z-index: 99;
+            .esri-view {
+                height: 400px;
+            }
+            #resultsDiv {
                 background-color: white;
                 border-radius: 8px;
                 padding: 10px;
                 opacity: 0.75;
+            }
+            #areaDiv {
+                margin-top: 10px;
             }
         </style>
     </head>
     <body>
         <h2>Chaining Promises</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <div style="position:relative;">
-                <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated">
-                    <div id="results">
-                        <button ng-click="exampleCtrl.onStartButtonClick()" ng-disabled="exampleCtrl.area">Start Promise Chain</button>
-                        <span id="areaSpan" ng-hide="!exampleCtrl.area">
-                            <br><br>Area = {{exampleCtrl.area | number: 0}} acres
-                        </span>
+            <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated">
+                <div id="resultsDiv" ng-show="exampleCtrl.viewLoaded">
+                    <button ng-click="exampleCtrl.onStartButtonClick()" ng-disabled="exampleCtrl.area">Start Promise Chain</button>
+                    <div id="areaDiv" ng-show="exampleCtrl.area">
+                        Area = {{exampleCtrl.area | number: 0}} acres
                     </div>
-                </esri-scene-view>
-            </div>
-            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/chaining-promises/index.html">this sample</a>.</p>
+                </div>
+            </esri-scene-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/chaining-promises/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load the angular-esri-map module -->
@@ -51,6 +51,7 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader, $scope) {
                     var self = this;
+                    self.viewLoaded = false;
                     // load esri modules
                     esriLoader.require([
                         'esri/geometry/geometryEngineAsync',
@@ -91,7 +92,8 @@
 
                         // create the map for the esri-scene-view
                         self.map = new Map({
-                            basemap: 'hybrid'
+                            basemap: 'hybrid',
+                            ground: 'world-elevation'
                         });
 
                         // create layer to store graphics and add to map
@@ -106,6 +108,11 @@
 
                         self.onViewCreated = function(view) {
                             self.view = view;
+                            // add the analysis button's parent container to the view's UI,
+                            //  instead of relying on CSS positioning
+                            //  https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html
+                            self.view.ui.add('resultsDiv', 'top-right');
+                            self.viewLoaded = true;
                         };
 
                         self.onStartButtonClick = function() {
@@ -135,10 +142,13 @@
                         function zoomTo(geom) {
                             // when the view is ready
                             return self.view.then(function() {
-                                // animate to the buffer geometry
-                                return self.view.animateTo(geom).then(function() {
-                                    // when the animation completes, set the scale to 1:24,000
-                                    self.view.scale = 24000;
+                                // zoom to the buffer geometry
+                                return self.view.goTo({
+                                    target: geom,
+                                    scale: 24000,
+                                    tilt: 0,
+                                    heading: 0
+                                }).then(function() {
                                     // resolve the promises with the input geometry
                                     return geom;
                                 });
