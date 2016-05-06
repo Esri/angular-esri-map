@@ -1,31 +1,28 @@
 <style type="text/css">
-    #results {
-        top: 20px;
-        right: 20px;
-        position: absolute;
-        z-index: 99;
+    #resultsDiv {
         background-color: white;
         border-radius: 8px;
         padding: 10px;
         opacity: 0.75;
         font-size: 0.9em;
     }
+    #areaDiv {
+        margin-top: 10px;
+    }
 </style>
 <h2>Chaining Promises</h2>
 
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
 
-<div ng-hide="vm.showViewError" style="position:relative;">
-    <esri-scene-view map="vm.map" on-create="vm.onViewCreated" on-error="vm.onViewError">
-        <div id="results">
-            <button type="button" class="btn btn-sm btn-default" ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">
-                Start Promise Chain
-            </button>
-            <span id="areaSpan" ng-hide="!vm.area">
-                <br><br>Area = {{vm.area | number: 0}} acres
-            </span>
+<esri-scene-view map="vm.map" on-create="vm.onViewCreated" 
+    on-error="vm.onViewError"
+    ng-hide="vm.showViewError">
+    <div id="resultsDiv" ng-show="vm.viewLoaded">
+        <button class="btn btn-sm btn-default" ng-click="vm.onStartButtonClick()" ng-disabled="vm.area">Start Promise Chain</button>
+        <div id="areaDiv" ng-show="vm.area">
+            Area = {{vm.area | number: 0}} acres
         </div>
-    </esri-scene-view>
-</div>
+    </div>
+</esri-scene-view>
 
-<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/chaining-promises/index.html">this sample</a>.</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/chaining-promises/index.html">this sample</a>.</p>

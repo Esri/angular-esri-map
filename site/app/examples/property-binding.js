@@ -12,7 +12,7 @@ angular.module('esri-map-docs')
         this.onViewCreated = function(view) {
             self.mapView = view;
             // Setup a JSAPI 4.x property watch outside of Angular
-            //  and update bound Angular controller properties
+            //  and update bound Angular controller properties.
             self.mapView.watch('center,scale,zoom,rotation', function() {
                 $scope.$applyAsync('vm.mapView');
             });

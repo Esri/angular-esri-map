@@ -20,11 +20,8 @@
             <esri-map-view
                 map="exampleCtrl.map"
                 register-as="myMapView"
-                on-create="exampleCtrl.onMapViewCreated"
-                view-options="{
-                    zoom: 4,
-                    center: [15, 65]
-                }">
+                view-options="exampleCtrl.mapViewOptions"
+                on-create="exampleCtrl.onMapViewCreated">
             </esri-map-view>
             
             <hr>
@@ -32,11 +29,8 @@
             <esri-scene-view 
                 map="exampleCtrl.map"
                 register-as="mySceneView"
-                on-create="exampleCtrl.onSceneViewCreated"
-                view-options="{
-                    zoom: 4,
-                    center: [15, 65]
-                }">
+                view-options="exampleCtrl.sceneViewOptions"
+                on-create="exampleCtrl.onSceneViewCreated">
             </esri-scene-view>
         </div>
 
@@ -74,6 +68,17 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader) {
                     var self = this;
+                    
+                    self.mapViewOptions = {
+                        zoom: 4,
+                        center: [15, 65]
+                    };
+                    
+                    self.sceneViewOptions = {
+                        zoom: 4,
+                        center: [15, 65]
+                    };
+
                     // load esri modules
                     esriLoader.require([
                         'esri/Map'

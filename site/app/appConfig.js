@@ -59,7 +59,7 @@
                 }
             }, {
                 toc: {
-                    title: 'Extrude Polygon',
+                    title: 'Data-Driven Extrusion',
                     description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a SceneView.',
                     url: urlPrefixes.templateHref + 'extrude-polygon'
                 },
@@ -85,7 +85,7 @@
             Controls: [{
                 toc: {
                     title: 'Home Button',
-                    description: 'A home button directive to return the map/scene view to its starting point.',
+                    description: 'A custom home button directive to return the map/scene view to its starting point.',
                     url: urlPrefixes.templateHref + 'home-button'
                 },
                 route: {
@@ -94,9 +94,9 @@
                     controller: 'HomeButtonCtrl',
                     controllerAs: 'vm'
                 }
-            }/*, {
+            }, {
                 toc: {
-                    title: 'Get Started with Popups',
+                    title: 'Get Started with PopupTemplate',
                     description: 'Define a PopupTemplate for a FeatureLayer.',
                     url: urlPrefixes.templateHref + 'popups'
                 },
@@ -106,7 +106,7 @@
                     controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
-            }*/, {
+            }, {
                 toc: {
                     title: 'Search',
                     description: 'Add a search tool to find locations on the map.',

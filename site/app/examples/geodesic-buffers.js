@@ -6,79 +6,16 @@ angular.module('esri-map-docs')
             'esri/Map',
             'esri/layers/GraphicsLayer',
             'esri/Graphic',
-
-            'esri/geometry/SpatialReference',
             'esri/geometry/geometryEngine',
             'esri/geometry/Point',
-
+            'esri/renderers/SimpleRenderer',
             'esri/symbols/SimpleMarkerSymbol',
-            'esri/symbols/SimpleLineSymbol',
             'esri/symbols/SimpleFillSymbol'
-        ],
-        function(
+        ], function(
             Map, GraphicsLayer, Graphic,
-            SpatialReference, geometryEngine, Point,
-            SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol
+            geometryEngine, Point,
+            SimpleRenderer, SimpleMarkerSymbol, SimpleFillSymbol
         ) {
-            self.map = new Map({
-                basemap: 'satellite'
-            });
-
-            /********************************************************************
-             * Add two graphics layers to map: one for points, another for buffers
-             ********************************************************************/
-            var bufferLayer = new GraphicsLayer();
-            var pointLayer = new GraphicsLayer();
-
-            self.map.add([bufferLayer, pointLayer]);
-
-            var sr = new SpatialReference(4326);
-
-            var pointSym = new SimpleMarkerSymbol({
-                color: [255, 0, 0],
-                outline: new SimpleLineSymbol({
-                    color: [255, 255, 255],
-                    width: 1
-                }),
-                size: 7
-            });
-
-            var polySym = new SimpleFillSymbol({
-                color: [255, 255, 255, 0.5],
-                outline: new SimpleLineSymbol({
-                    color: [0, 0, 0, 0.5],
-                    width: 2
-                })
-            });
-
-            /********************************************************************
-             * Generate points every 10 degrees along Prime Meridian. Add to layer.
-             * Buffer each point by 560km using GeometryEngine. Add buffers to map.
-             ********************************************************************/
-            self.map.then(addPoints);
-
-            function addPoints() {
-                var point, buffer, lat;
-
-                for (lat = -80; lat <= 80; lat += 10) {
-                    point = new Point({
-                        x: 0,
-                        y: lat,
-                        spatialReference: sr
-                    });
-                    pointLayer.add(new Graphic({
-                        geometry: point,
-                        symbol: pointSym
-                    }));
-
-                    buffer = geometryEngine.geodesicBuffer(point, 560, 'kilometers');
-                    bufferLayer.add(new Graphic({
-                        geometry: buffer,
-                        symbol: polySym
-                    }));
-                }
-            }
-
             // check that the device/browser can support WebGL
             //  by inspecting the userAgent and
             //  by handling the scene view directive's on-error
@@ -86,5 +23,58 @@ angular.module('esri-map-docs')
             self.onViewError = function() {
                 self.showViewError = true;
             };
+            
+            self.map = new Map({
+                basemap: 'satellite'
+            });
+
+            // add two graphics layers to map: one for points, another for buffers
+            var polySym = new SimpleFillSymbol({
+                color: [255, 255, 255, 0.5],
+                outline: {
+                    color: [0, 0, 0, 0.5],
+                    width: 2
+                }
+            });
+
+            var pointSym = new SimpleMarkerSymbol({
+                color: [255, 0, 0],
+                outline: {
+                    color: [255, 255, 255],
+                    width: 1
+                },
+                size: 7
+            });
+
+            var bufferLayer = new GraphicsLayer({
+                renderer: new SimpleRenderer({
+                    symbol: polySym
+                })
+            });
+
+            var pointLayer = new GraphicsLayer({
+                renderer: new SimpleRenderer({
+                    symbol: pointSym
+                })
+            });
+
+            self.map.addMany([bufferLayer, pointLayer]);
+
+            // Generate points every 10 degrees along Prime Meridian. Add to layer.
+            // Buffer each point by 560km using GeometryEngine. Add buffers to map.
+            for (var lat = -80; lat <= 80; lat += 10) {
+                var point = new Point({
+                    longitude: 0,
+                    latitude: lat
+                });
+                pointLayer.add(new Graphic({
+                    geometry: point
+                }));
+
+                var buffer = geometryEngine.geodesicBuffer(point, 560, 'kilometers');
+                bufferLayer.add(new Graphic({
+                    geometry: buffer
+                }));
+            }
         });
     });

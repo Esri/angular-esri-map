@@ -21,8 +21,8 @@ angular.module('esri-map-docs')
                 fieldInfos: [{
                     fieldName: 'MARRIED_CY',
                     format: {
-                        digitSeparator: true, //Uses a comma separator in large numbers
-                        places: 0 //sets the number of decimal places to 0 and rounds up
+                        digitSeparator: true,
+                        places: 0
                     }
                 }, {
                     fieldName: 'NEVMARR_CY',
@@ -46,10 +46,5 @@ angular.module('esri-map-docs')
             });
 
             self.map.add(featureLayer);
-
-            self.onViewCreated = function(view) {
-                self.mapView = view;
-                console.log(view);
-            };
         });
     });

@@ -34,7 +34,7 @@
                 },
 
                 template: [
-                    '<div role="button" tabindex="0" class="esri-home esri-widget-button esri-widget esri-component">',
+                    '<div ng-click="homeButtonCtrl.go()" role="button" tabindex="0" class="esri-home esri-widget-button esri-widget esri-component">',
                     '    <span aria-hidden="true" class="esri-icon esri-icon-home" title="Default extent"></span>',
                     '    <span class="esri-icon-font-fallback-text">Home</span>',
                     '</div>'
@@ -50,10 +50,6 @@
                 link: function esriHomeButtonLink(scope, element, attrs, controller) {
                     scope.$watch('homeButtonCtrl.view', function(newVal) {
                         controller.setView(newVal);
-                    });
-
-                    element.on('click', function() {
-                        controller.go();
                     });
                 }
             };

@@ -6,16 +6,16 @@ angular.module('esri-map-docs')
             'esri/Map',
             'esri/layers/FeatureLayer'
         ], function(Map, FeatureLayer) {
-
             // create the map
-            // and add a feature layer
             self.map = new Map({
-                basemap: 'hybrid',
-                layers: [
-                    new FeatureLayer({
-                        url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0'
-                    })
-                ]
+                basemap: 'hybrid'
             });
+
+            // and add a feature layer
+            var featureLayer = new FeatureLayer({
+                url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0'
+            });
+
+            self.map.add(featureLayer);
         });
     });
