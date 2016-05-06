@@ -99,10 +99,9 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 ## Resources
 
 * [Angular JS](https://angularjs.org/)
-* [ArcGIS API for JavaScript](//js.arcgis.com)
+* [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
 * [ArcGIS for Developers](http://developers.arcgis.com)
 * [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
-* [Importing Data Into Feature Services](https://developers.arcgis.com/tools/csv-to-feature-service/)
 * [@Esri](http://twitter.com/esri)
 
 **Presentations**
