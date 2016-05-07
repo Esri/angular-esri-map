@@ -12,6 +12,8 @@ Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bowe
 
 Source code, test pages, unit tests, and e2e tests updated for Esri JSAPI 4.0 release, in preparation for a tagged v2 release of this repo. [#281](https://github.com/Esri/angular-esri-map/pull/281)
 
+Documentation site, examples, and patterns pages updated for Esri JSAPI 4.0 release, also in preparation for a tagged v2 release of this repo. [#282](https://github.com/Esri/angular-esri-map/pull/282)
+
 ### Documentation
 Added readme links to recent presentation slides.
 
