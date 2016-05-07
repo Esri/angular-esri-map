@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Deferred Map</title>
 
         <!-- load Esri CSS -->
-        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0/esri/css/main.css">
+        <style type="text/css">
+            .esri-view {
+                height: 400px;
+            }
+        </style>
     </head>
     <body ng-controller="ExampleController as exampleCtrl">
         <h2>Deferred Map</h2>
@@ -22,7 +27,7 @@
                     }">
                 </esri-map-view>
             </div>
-            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/get-started-mapview/index.html">this sample</a>.</p>
         </div>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
@@ -39,10 +44,10 @@
 
                     // This function will be called when you click the button
                     this.lazyload = function() {
-                        // Make a call to load Esri JSAPI resources at version 4.0beta3.
+                        // Make a call to load Esri JSAPI resources at version 4.0.
                         // A promise is provided for when the resources have finished loading.
                         esriLoader.bootstrap({
-                            url: '//js.arcgis.com/4.0beta3'
+                            url: '//js.arcgis.com/4.0'
                         }).then(function() {
                             // Set loaded to be true
                             self.loaded = true;
