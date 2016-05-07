@@ -12,9 +12,6 @@
                 height: 400px;
             }
             #elevationDiv {
-                position: absolute;
-                top: 12px;
-                right: 12px;
                 padding: 12px;
                 background-color: rgba(0, 0, 0, 0.5);
                 color: white;
@@ -28,19 +25,17 @@
     <body>
         <h2>Toggle Ground Elevation</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <div style="position:relative;">
-                <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded" 
-                    view-options="{
-                        camera: {
-                            position: [7.654, 45.919, 5184],
-                            tilt: 80
-                        }
-                    }">
-                </esri-scene-view>
+            <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded" 
+                view-options="{
+                    camera: {
+                        position: [7.654, 45.919, 5184],
+                        tilt: 80
+                    }
+                }">
                 <div id="elevationDiv" ng-show="exampleCtrl.viewLoaded">
                     <label>Elevation: <input type="checkbox" checked ng-click="exampleCtrl.updateElevation($event)"></label>
                 </div>
-            </div>
+            </esri-scene-view>
             <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -59,7 +54,7 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader) {
                     var self = this;
-                    this.viewLoaded = false;
+                    self.viewLoaded = false;
                     // load esri modules
                     esriLoader.require('esri/Map', function(Map) {
                         self.map = new Map({
@@ -68,6 +63,10 @@
                         });
 
                         self.onViewLoaded = function(view) {
+                            // add the analysis button's parent container to the view's UI,
+                            //  instead of relying on CSS positioning
+                            //  https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html
+                            view.ui.add('elevationDiv', 'top-right');
                             self.viewLoaded = true;
                         };
 

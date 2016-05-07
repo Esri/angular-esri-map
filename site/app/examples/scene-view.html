@@ -1,23 +1,32 @@
+<style type="text/css">
+    #layerToggle {
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        opacity: 0.75;
+        /*color: white;*/
+        font-size: 0.8em;
+    }
+    #layerToggle label,
+    #layerToggle input {
+        cursor: pointer;
+    }
+</style>
+
 <h2>Scene View</h2>
 
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
 
 <esri-scene-view map="vm.map" 
-    view-options="{
-        environment: {
-            stars: 'none'
-        },
-        ui: {
-            components: ['logo']
-        }
-    }"
-    on-create="vm.onViewCreated" 
+    on-load="vm.onViewLoaded"
     on-error="vm.onViewError"
     ng-hide="vm.showViewError">
+
+    <span id="layerToggle" ng-show="vm.viewLoaded">
+        <!-- The visible property on a layer can be used to toggle the layer's visibility in the view. -->
+        <label><input type="checkbox" ng-model="vm.transportationLyr.visible" /> Transportation</label>
+    </span>
+
 </esri-scene-view>
 
-<div ng-hide="vm.showViewError">
-	<label><input type="checkbox" checked ng-click="vm.onStreetsToggle($event)" /> Transportation</label>
-</div>
-
-<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-layers/index.html">this sample</a>.</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/get-started-layers/index.html">this sample</a>.</p>

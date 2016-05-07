@@ -12,10 +12,6 @@
                 height: 400px;
             }
             #layerToggle {
-              top: 20px;
-              right: 20px;
-              position: absolute;
-              z-index: 99;
               background-color: white;
               border-radius: 8px;
               padding: 10px;
@@ -30,13 +26,12 @@
     <body>
         <h2>Scene View</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <div style="position:relative;">
-                <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
-                <span id="layerToggle">
+            <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded">
+                <span id="layerToggle" ng-show="exampleCtrl.viewLoaded">
                     <!-- The visible property on a layer can be used to toggle the layer's visibility in the view. -->
                     <label><input type="checkbox" ng-model="exampleCtrl.transportationLyr.visible" /> Transportation</label>
                 </span>
-            </div>
+            </esri-scene-view>
 
             <button ng-click="exampleCtrl.changeMap()">Change map for this esri-scene-view</button>
 
@@ -59,6 +54,7 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader) {
                     var self = this;
+                    self.viewLoaded = true;
                     // load esri modules
                     esriLoader.require([
                         'esri/Map',
@@ -74,8 +70,8 @@
                         });
 
                         var housingLyr = new TileLayer({
-                            url: "//tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/New_York_Housing_Density/MapServer",
-                            id: "ny-housing",
+                            url: '//tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/New_York_Housing_Density/MapServer',
+                            id: 'ny-housing',
                             opacity: 0.9
                         });
 
@@ -89,6 +85,10 @@
                         self.map.add(self.transportationLyr);
 
                         self.onViewLoaded = function(view) {
+                            // add the layer toggle control to the view's UI top right corner
+                            view.ui.add('layerToggle', 'top-right');
+                            self.viewLoaded = true;
+
                             // The map handles the layers' data, while the view
                             // and layer views take care of renderering the layers.
                             view.on('layerview-create', function(evt) {

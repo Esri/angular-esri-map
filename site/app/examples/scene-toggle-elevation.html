@@ -1,8 +1,5 @@
 <style type="text/css">
     #elevationDiv {
-        position: absolute;
-        top: 12px;
-        right: 12px;
         padding: 12px;
         background-color: rgba(0, 0, 0, 0.5);
         color: white;
@@ -13,24 +10,26 @@
         cursor: pointer;
     }
 </style>
-<h2>Toggle the Basemap's Elevation Layer</h2>
+
+<h2>Toggle Ground Elevation</h2>
 
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
 
-<div ng-hide="vm.showViewError" style="position:relative;">
-    <esri-scene-view map="vm.map" 
-        view-options="{
-            camera: {
-                position: [7.654, 45.919, 5184],
-                tilt: 80
-            }
-        }"
-        on-create="vm.onViewCreated"
-        on-error="vm.onViewError">
-    </esri-scene-view>
-    <div id="elevationDiv">
-        <label>Elevation: <input type="checkbox" checked ng-click="vm.updateElevation($event)" /></label>
+<esri-scene-view map="vm.map" 
+    view-options="{
+        camera: {
+            position: [7.654, 45.919, 5184],
+            tilt: 80
+        }
+    }"
+    on-load="vm.onViewLoaded"
+    on-error="vm.onViewError"
+    ng-hide="vm.showViewError">
+    
+    <div id="elevationDiv" ng-show="vm.viewLoaded">
+        <label>Elevation: <input type="checkbox" checked ng-click="vm.updateElevation($event)"></label>
     </div>
-</div>
 
-<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>
+</esri-scene-view>
+
+<p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/scene-toggle-elevation/index.html">this sample</a>.</p>
