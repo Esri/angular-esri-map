@@ -34,19 +34,29 @@ Once you've added the module to your application, you can use the sample code be
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <title>Angular Esri Quick Start</title>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+        <title>Angular Esri Quick Start</title>
+
         <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
+        <style type="text/css">
+            html, body, .esri-view {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                width: 100%;
+            }
+        </style>
     </head>
     <body ng-controller="MapController as vm">
         <esri-scene-view map="vm.map" view-options="{scale: 50000000, center: [-101.17, 21.78]}">
         </esri-scene-view>
-        
+
         <!-- load Esri JSAPI -->
         <script src="//js.arcgis.com/4.0/"></script>
         <!-- load AngularJS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
         <!-- load angular-esri-map -->
         <script src="//npmcdn.com/angular-esri-map@2"></script>
 
@@ -84,13 +94,13 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-At version 1.x, these directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). For version 2.x, the ArcGIS API for JavaScript v4.0 beta is required. They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
+At version 1.x, these directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). For version 2.x, the ArcGIS API for JavaScript v4.0 is required. They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
 
 angular-esri-map | Angular | ArcGIS API for JavaScript
 --- | --- | ---
 v1.0 | v1.3+ | [v3.12+](https://developers.arcgis.com/javascript/3/)
 v1.1 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/)
-v2.xbeta | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/)
+v2.x | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/)
 
 You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
