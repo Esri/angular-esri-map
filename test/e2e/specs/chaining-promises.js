@@ -16,18 +16,18 @@ describe('Chaining Promises', function() {
     it('should report the area at the end of the promise chain', function() {
         helper.getSceneViewElement().then(function() {
             var startPromiseChainButton = element(by.buttonText('Start Promise Chain'));
-            var areaSpan = element(by.id('areaSpan'));
-            areaSpan.getText().then(function(value) {
+            var areaDiv = element(by.id('areaDiv'));
+            areaDiv.getText().then(function(value) {
                 var areaTextBefore = value;
 
                 startPromiseChainButton.click();
 
                 browser.wait(function() {
-                    return areaSpan.getAttribute('class').then(function(value) {
+                    return areaDiv.getAttribute('class').then(function(value) {
                         return value.indexOf('ng-hide') === -1;
                     });
                 }, 8000).then(function() {
-                    areaSpan.getText().then(function(value) {
+                    areaDiv.getText().then(function(value) {
                         var areaTextAfter = value;
                         expect(areaTextBefore).not.toEqual(areaTextAfter);
                     });

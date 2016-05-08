@@ -9,6 +9,14 @@ angular.module('esri-map-docs')
             'esri/portal/PortalItem',
             'esri/WebScene'
         ]).then(function(esriModules) {
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+
             var PortalItem = esriModules[0];
             var WebScene = esriModules[1];
 
@@ -26,21 +34,16 @@ angular.module('esri-map-docs')
             //  perform additional logic in the view directive's load callback
             self.onViewLoaded = function(view) {
                 self.sceneView = view;
-
-                self.slides = view.map.presentation.slides.getAll();
+                
+                // presentation slides are in fact an "esri/core/Collection"
+                // make a shallow copy as a new array object for angular scope
+                self.slides = view.map.presentation.slides.toArray();
                 // tack on an extra property for ng-class css styling
                 self.slides.forEach(function(slide) {
                     slide.isActiveSlide = false;
                 });
             };
 
-            // check that the device/browser can support WebGL
-            //  by inspecting the userAgent and
-            //  by handling the scene view directive's on-error
-            self.showViewError = browserDetectionService.isMobile();
-            self.onViewError = function() {
-                self.showViewError = true;
-            };
 
             self.onSlideClick = function(slide) {
                 self.slides.forEach(function(slide) {

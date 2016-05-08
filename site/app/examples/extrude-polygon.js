@@ -4,13 +4,11 @@ angular.module('esri-map-docs')
         // load esri modules
         esriLoader.require([
             'esri/Map',
-            'esri/Color',
-            'esri/views/SceneView',
             'esri/layers/FeatureLayer',
+            'esri/renderers/SimpleRenderer',
             'esri/symbols/PolygonSymbol3D',
-            'esri/symbols/ExtrudeSymbol3DLayer',
-            'esri/renderers/SimpleRenderer'
-        ], function(Map, Color, SceneView, FeatureLayer, PolygonSymbol3D, ExtrudeSymbol3DLayer, SimpleRenderer) {
+            'esri/symbols/ExtrudeSymbol3DLayer'
+        ], function(Map, FeatureLayer, SimpleRenderer, PolygonSymbol3D, ExtrudeSymbol3DLayer) {
             // check that the device/browser can support WebGL
             //  by inspecting the userAgent and
             //  by handling the scene view directive's on-error
@@ -18,42 +16,75 @@ angular.module('esri-map-docs')
             self.onViewError = function() {
                 self.showViewError = true;
             };
-            
-            // create the map
-            self.map = new Map({
-                basemap: 'streets'
-            });
 
-            //Create featureLayer and add to the map
-            var featureLayer = new FeatureLayer({
-                url: '//sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer/3'
-            });
-            self.map.add(featureLayer);
+            // limit visualization to southeast U.S. counties
+            var defExp = ['STATE = \'LA\'', 'STATE = \'AL\'', 'STATE = \'AR\'',
+                'STATE = \'MS\'', 'STATE = \'TN\'', 'STATE = \'GA\'',
+                'STATE = \'FL\'', 'STATE = \'SC\'', 'STATE = \'NC\'',
+                'STATE = \'VA\'', 'STATE = \'KY\'', 'STATE = \'WV\''
+            ];
 
-            //Create the Renderer for the featureLayer,
-            var extrudePolygonRenderer = new SimpleRenderer({
+            var renderer = new SimpleRenderer({
                 symbol: new PolygonSymbol3D({
                     symbolLayers: [new ExtrudeSymbol3DLayer()]
                 }),
+                label: '% population in poverty by county',
                 visualVariables: [{
-                    type: 'sizeInfo',
-                    field: 'POP07_SQMI',
-                    minSize: 40000,
-                    maxSize: 1000000,
-                    minDataValue: 1,
-                    maxDataValue: 1000
+                    type: 'size',
+                    field: 'POP_POVERTY',
+                    normalizationField: 'TOTPOP_CY',
+                    stops: [{
+                        value: 0.10,
+                        size: 10000,
+                        label: '<10%'
+                    }, {
+                        value: 0.50,
+                        size: 500000,
+                        label: '>50%'
+                    }]
                 }, {
-                    type: 'colorInfo',
-                    field: 'SQMI',
-                    minDataValue: 1,
-                    maxDataValue: 600000,
-                    colors: [
-                        new Color('white'),
-                        new Color('red')
-                    ]
+                    type: 'color',
+                    field: 'POP_POVERTY',
+                    normalizationField: 'TOTPOP_CY',
+                    stops: [{
+                        value: 0.10,
+                        color: '#FFFCD4',
+                        label: '<15%'
+                    }, {
+                        value: 0.35,
+                        color: [153, 83, 41],
+                        label: '>35%'
+                    }]
                 }]
             });
+            var povLyr = new FeatureLayer({
+                url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/counties_politics_poverty/FeatureServer/0',
+                renderer: renderer,
+                outFields: ['*'],
+                popupTemplate: {
+                    title: '{COUNTY}, {STATE}',
+                    content: '{POP_POVERTY} of {TOTPOP_CY} people live below the poverty line.',
+                    fieldInfos: [{
+                        fieldName: 'POP_POVERTY',
+                        format: {
+                            digitSeparator: true,
+                            places: 0
+                        }
+                    }, {
+                        fieldName: 'TOTPOP_CY',
+                        format: {
+                            digitSeparator: true,
+                            places: 0
+                        }
+                    }]
+                },
+                definitionExpression: defExp.join(' OR ') // only display counties from states in defExp
+            });
 
-            featureLayer.renderer = extrudePolygonRenderer;
+            // create the map
+            self.map = new Map({
+                basemap: 'gray',
+                layers: [povLyr]
+            });
         });
     });

@@ -6,12 +6,25 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Upcoming changes][unreleased]
 
 ### Maintenance
+
 Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
 
 Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
 
+Source code, test pages, unit tests, and e2e tests were updated for the Esri JSAPI 4.0 release. The `<esri-home-button>` directive was given a new bound property (`view-ui-position`) to be able to specify its position in a MapView or SceneView. [#282](https://github.com/Esri/angular-esri-map/pull/282)
+
+
 ### Documentation
-Added readme links to recent presentation slides.
+
+Documentation site examples and patterns pages were updated for the Esri JSAPI 4.0 release. [#282](https://github.com/Esri/angular-esri-map/pull/282)
+
+Updated documentation site and README quick start to use Angular v1.5.5. [#282](https://github.com/Esri/angular-esri-map/issues/282)
+
+Added popups example page to documentation site. [#211](https://github.com/Esri/angular-esri-map/issues/211)
+
+Removed ng-router autoscroll from examples since it is not needed as a temp fix with Esri JSAPI 4.0 release. [#235](https://github.com/Esri/angular-esri-map/issues/235)
+
+Added README links to Dev Summit 2016 presentation slides.
 
 ## [v2.0.0-beta.2]
 
@@ -41,7 +54,7 @@ Refactored to support JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-m
 
 Added/updated example and test pages to show how to use this with JSAPI v4.0+. [#198](https://github.com/Esri/angular-esri-map/pull/198) [#207](https://github.com/Esri/angular-esri-map/pull/207) [#210](https://github.com/Esri/angular-esri-map/pull/210) [#230](https://github.com/Esri/angular-esri-map/pull/230)
 
-Updated examples site and readme example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
+Updated examples site and README example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
 
 Docs show dismissable warning about version with link to previous. [#237](https://github.com/Esri/angular-esri-map/issues/237)
 

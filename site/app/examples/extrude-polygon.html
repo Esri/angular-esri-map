@@ -1,17 +1,21 @@
-<h2>Extrude Polygon by Visual Variables</h2>
+<h2>Data-Driven Extrusion</h2>
 
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
 
 <esri-scene-view map="vm.map" 
     view-options="{
         camera: {
-            position: [-118.25, 4.27, 6249238],
-            tilt: 30,
-            heading: 23
+            position: {
+                latitude: 18.24237,
+                longitude: -88.72943,
+                z: 1534560
+            },
+            tilt: 45,
+            heading: 10
         }
     }"
     on-error="vm.onViewError"
     ng-hide="vm.showViewError">
 </esri-scene-view>
 
-<p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/polygon-extrusion-3d/index.html">this sample</a>.</p>
+<p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/visualization-vv-extrusion/index.html">this sample</a>.</p>

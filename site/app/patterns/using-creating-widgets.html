@@ -12,13 +12,13 @@
         <h3>Esri Widgets</h3>
         <p>Widgets are usually comprised of properties, methods, and a user interface.
             The Esri JSAPI offers a collection of
-            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Widget.html">built-in widgets</a>
+            <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Widget.html">built-in widgets</a>
             that can be loaded with
             <a href="#/patterns/other-esri-classes"><code>esriLoader.require()</code></a>
             and constructed once there is
             <a href="#/patterns/references-to-views">reference to</a>
             a map view or scene view. This pattern also recommends that you properly tear down and
-            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Widget.html#destroy"><code>destroy()</code></a>
+            <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Widget.html#destroy"><code>destroy()</code></a>
             widgets when Angular scope is being destroyed.
         </p>
         <!-- <div hljs=""></div> -->
@@ -28,14 +28,13 @@
         </ul>
         
         <h3>Esri View Models</h3>
-        <p><a href="https://developers.arcgis.com/javascript/beta/guide/whats-new/index.html#Developerfriendly_widgets_4">View models</a>
-            allow for the separation of a widget's methods and properties from
+        <p>View models allow for the separation of a widget's methods and properties from
             its UI presentation. By taking advantage of view models, you can use
             Esri widget functionality, but apply custom directive templates and styles.
             For example, the included
             <a href="./docs/#/api/esri.map.directive:esriHomeButton"><code>&lt;esri-home-button&gt;</code></a>
             Angular directive makes use of the Esri
-            <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-widgets-Home-HomeViewModel.html"><code>HomeViewModel</code></a>
+            <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Home-HomeViewModel.html"><code>HomeViewModel</code></a>
             in its controller logic but defines its own look and feel.
         </p>
         <p>Example:</p>

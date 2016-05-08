@@ -16,7 +16,7 @@ describe('Scene View', function() {
     it('should change the data attribution text when toggling elevation layers', function() {
         helper.getSceneViewElement().then(function() {
             var elevationToggle = element(by.id('elevationDiv'));
-            var attributionTextElement = element(by.css('.esri-attribution-text'));
+            var attributionTextElement = element(by.css('.esri-attribution__sources'));
             browser.wait(function() {
                 return attributionTextElement.getText().then(function(textValue) {
                     return textValue.indexOf('Source: USGS, NGA, NASA, CGIAR') > -1;

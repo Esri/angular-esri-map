@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Registry Pattern</title>
 
         <!-- load Esri CSS  -->
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
         <style type="text/css">
             .esri-view {
-                max-height: 250px;
+                height: 250px;
             }
         </style>
     </head>
@@ -20,11 +20,8 @@
             <esri-map-view
                 map="exampleCtrl.map"
                 register-as="myMapView"
-                on-create="exampleCtrl.onMapViewCreated"
-                view-options="{
-                    zoom: 4,
-                    center: [15, 65]
-                }">
+                view-options="exampleCtrl.mapViewOptions"
+                on-create="exampleCtrl.onMapViewCreated">
             </esri-map-view>
             
             <hr>
@@ -32,11 +29,8 @@
             <esri-scene-view 
                 map="exampleCtrl.map"
                 register-as="mySceneView"
-                on-create="exampleCtrl.onSceneViewCreated"
-                view-options="{
-                    zoom: 4,
-                    center: [15, 65]
-                }">
+                view-options="exampleCtrl.sceneViewOptions"
+                on-create="exampleCtrl.onSceneViewCreated">
             </esri-scene-view>
         </div>
 
@@ -59,7 +53,7 @@
         <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-mapview/index.html">this sample</a>.</p>
 
         <!-- load Esri JavaScript API -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load the angular-esri-map module -->
@@ -74,6 +68,17 @@
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader) {
                     var self = this;
+                    
+                    self.mapViewOptions = {
+                        zoom: 4,
+                        center: [15, 65]
+                    };
+                    
+                    self.sceneViewOptions = {
+                        zoom: 4,
+                        center: [15, 65]
+                    };
+
                     // load esri modules
                     esriLoader.require([
                         'esri/Map'

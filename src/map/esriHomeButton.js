@@ -15,6 +15,11 @@
      * - {@link ../#/examples/home-button Home Button}
      *
      * @param {Object} view Instance of a MapView or SceneView.
+     * @param {Object=} view-ui-position The MapView or SceneView UI position object which this directive
+     * can be added to, instead of element positioning with other DOM elements and CSS rules.
+     * For details on valid object properties, see the
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html#add `DefaultUI.add()`}
+     * **`position`** object argument.
      */
     angular.module('esri.map')
         .directive('esriHomeButton', function esriHomeButton() {
@@ -24,15 +29,14 @@
 
                 // isolate scope
                 scope: {
-                    view: '='
+                    view: '=',
+                    viewUiPosition: '&'
                 },
 
                 template: [
-                    '<div class="esri-home" role="presentation">',
-                    '  <div role="button" tabindex="0" class="esri-container">',
-                    '    <span aria-hidden="true" class="esri-icon esri-icon-home"></span>',
+                    '<div ng-click="homeButtonCtrl.go()" role="button" tabindex="0" class="esri-home esri-widget-button esri-widget esri-component">',
+                    '    <span aria-hidden="true" class="esri-icon esri-icon-home" title="Default extent"></span>',
                     '    <span class="esri-icon-font-fallback-text">Home</span>',
-                    '  </div>',
                     '</div>'
                 ].join(''),
 
@@ -46,10 +50,6 @@
                 link: function esriHomeButtonLink(scope, element, attrs, controller) {
                     scope.$watch('homeButtonCtrl.view', function(newVal) {
                         controller.setView(newVal);
-                    });
-
-                    element.on('click', function() {
-                        controller.goHome();
                     });
                 }
             };

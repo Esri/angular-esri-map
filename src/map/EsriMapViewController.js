@@ -30,10 +30,10 @@
              * @methodOf esri.map.controller:EsriMapViewController
              *
              * @description
-             * Load and get a reference to a MapView module
+             * Load and get a reference to a MapView module.
              *
              * @return {Promise} Returns a $q style promise which is
-             * resolved with an object with a `view` property that refers to the MapView
+             * resolved with an object with a `view` property that refers to the MapView module.
              */
             this.getMapView = function() {
                 return esriLoader.require('esri/views/MapView').then(function(MapView) {
