@@ -5,15 +5,24 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+## [v1.1.5]
+
 ### Maintenance
+
 Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
+
+### Documentation
+
+Updated docs site header and layout to be more mobile friendly and same as v2 docs site. [#277](https://github.com/Esri/angular-esri-map/issues/277)
 
 ## [v1.1.4]
 
 ### Maintenance
+
 Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
 
 ### Documentation
+
 Added documentation info for map directive "webmap-id" parameter.
 
 Added readme links to recent presentation slides.
@@ -21,9 +30,11 @@ Added readme links to recent presentation slides.
 ## [v1.1.3]
 
 ### Changed
+
 esriLoader defaults to loading JSAPI v3.16. Docs site uses JSAPI v3.16. [#258](https://github.com/Esri/angular-esri-map/issues/258)
 
 ### Support
+
 Updated examples site and readme example to use Angular v1.5.0. [#228](https://github.com/Esri/angular-esri-map/issues/228)
 
 ## [v1.1.2]
@@ -32,14 +43,17 @@ Updated examples site and readme example to use Angular v1.5.0. [#228](https://g
 Fixed bug where legend labels did not show properly after reloading the route [#225](https://github.com/Esri/angular-esri-map/issues/225)
 
 ### Support
+
 Docs show dismissable warning about version with link to latest.
 
 ## [v1.1.1]
 
 ### Changed
+
 Using the callback form of `esriLoader.require()` now triggers the digest cycle, and should eliminate the need to manually call `$scope.$apply()` within the callback.
 
 ### Support
+
 The gulp `deploy-prod` task deploys to a new repo for v1.x so that we can have both v1.x and v2.x docs live at the same time.
 
 ## [v1.1.0]
@@ -73,6 +87,7 @@ Use protocol agnostic links to resouces in test pages [#179](https://github.com/
 ## [v1.0.0]
 
 ### Changed
+
 esriLoader defaults to loading JSAPI v3.15. Docs site uses JSAPI v3.15 and Angular v1.4.8. [#166](https://github.com/Esri/angular-esri-map/pull/166)
 
 ### Documentation
@@ -254,7 +269,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasilgeo for their c
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.1.4...v1.x
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v1.1.5...v1.x
+[v1.1.5]: https://github.com/Esri/angular-esri-map/compare/v1.1.4...v1.1.5
 [v1.1.4]: https://github.com/Esri/angular-esri-map/compare/v1.1.3...v1.1.4
 [v1.1.3]: https://github.com/Esri/angular-esri-map/compare/v1.1.2...v1.1.3
 [v1.1.2]: https://github.com/Esri/angular-esri-map/compare/v1.1.1...v1.1.2
