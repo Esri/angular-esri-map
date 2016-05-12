@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+## [v2.0.0]
+
 ### Maintenance
 
 Unminified dist files adhere to strict dependecy injection (DI). Note that minified dist files already had strict DI. [#269](https://github.com/Esri/angular-esri-map/issues/269)
@@ -22,7 +24,7 @@ Updated documentation site and README quick start to use Angular v1.5.5. [#282](
 
 Added popups example page to documentation site. [#211](https://github.com/Esri/angular-esri-map/issues/211)
 
-Removed ng-router autoscroll from examples since it is not needed as a temp fix with Esri JSAPI 4.0 release. [#235](https://github.com/Esri/angular-esri-map/issues/235)
+Removed ng-router autoscroll from examples since it is not needed as a temp workaround with Esri JSAPI 4.0 release. [#235](https://github.com/Esri/angular-esri-map/issues/235)
 
 Added README links to Dev Summit 2016 presentation slides.
 
@@ -270,7 +272,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasilgeo for their c
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v2.0.0-beta.2...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v2.0.0...HEAD
+[v2.0.0]: https://github.com/Esri/angular-esri-map/compare/v2.0.0-beta.2...v2.0.0
 [v2.0.0-beta.2]: https://github.com/Esri/angular-esri-map/compare/v2.0.0-beta.1...v2.0.0-beta.2
 [v2.0.0-beta.1]: https://github.com/Esri/angular-esri-map/compare/v1.1.0...v2.0.0-beta.1
 [v1.1.0]: https://github.com/Esri/angular-esri-map/compare/v1.0.1...v1.1.0
