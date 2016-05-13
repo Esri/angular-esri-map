@@ -12,8 +12,7 @@ angular.module('esri-map-docs')
             'esri/symbols/SimpleFillSymbol',
             'esri/symbols/SimpleLineSymbol',
             'esri/symbols/SimpleMarkerSymbol'
-        ],
-        function(
+        ], function(
             geometryEngineAsync, Point, Graphic, GraphicsLayer, Map,
             SimpleFillSymbol, SimpleLineSymbol, SimpleMarkerSymbol
         ) {
@@ -24,7 +23,7 @@ angular.module('esri-map-docs')
             self.onViewError = function() {
                 self.showViewError = true;
             };
-            
+
             // define semi-transparent red point symbol
             var pointSym = new SimpleMarkerSymbol({
                 style: 'circle',
@@ -49,7 +48,8 @@ angular.module('esri-map-docs')
 
             // create the map for the esri-scene-view
             self.map = new Map({
-                basemap: 'hybrid'
+                basemap: 'hybrid',
+                ground: 'world-elevation'
             });
 
             // create layer to store graphics and add to map
@@ -64,6 +64,11 @@ angular.module('esri-map-docs')
 
             self.onViewCreated = function(view) {
                 self.view = view;
+                // add the analysis button's parent container to the view's UI,
+                //  instead of relying on CSS positioning
+                //  https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html
+                self.view.ui.add('resultsDiv', 'top-right');
+                self.viewLoaded = true;
             };
 
             self.onStartButtonClick = function() {
@@ -93,10 +98,13 @@ angular.module('esri-map-docs')
             function zoomTo(geom) {
                 // when the view is ready
                 return self.view.then(function() {
-                    // animate to the buffer geometry
-                    return self.view.animateTo(geom).then(function() {
-                        // when the animation completes, set the scale to 1:24,000
-                        self.view.scale = 24000;
+                    // zoom to the buffer geometry
+                    return self.view.goTo({
+                        target: geom,
+                        scale: 24000,
+                        tilt: 0,
+                        heading: 0
+                    }).then(function() {
                         // resolve the promises with the input geometry
                         return geom;
                     });
@@ -111,7 +119,7 @@ angular.module('esri-map-docs')
             // prints the area to the DOM
             function printArea(area) {
                 self.area = area;
-                $scope.$apply('exampleCtrl.area');
+                $scope.$apply('ChainingPromisesCtrl.area');
             }
         });
     });

@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-xdescribe('Popups', function() {
+describe('Popups', function() {
     beforeAll(function() {
         browser.get('/popups.html');
     });
@@ -18,11 +18,11 @@ xdescribe('Popups', function() {
             }, 8000).then(function() {
                 var popupDiv = element(by.css('.esri-popup'));
 
-                var clickableMapElement = element(by.css('.esri-view-surface'));
-                clickableMapElement.click();
+                var clickableMapElements = element.all(by.css('.esri-view-surface'));
+                clickableMapElements.click();
 
                 // SHOULD NOT INCLUDE CLASS "esri-invisible"
-                expect(popupDiv.getAttribute('class')).toEqual('esri-popup');
+                expect(popupDiv.getAttribute('class')).toEqual('esri-popup esri-widget');
             });
         });
     });

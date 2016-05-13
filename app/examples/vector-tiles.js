@@ -5,8 +5,7 @@ angular.module('esri-map-docs')
         esriLoader.require([
             'esri/Map',
             'esri/layers/VectorTileLayer'
-        ],
-        function(
+        ], function(
             Map, VectorTileLayer
         ) {
             self.map = new Map();

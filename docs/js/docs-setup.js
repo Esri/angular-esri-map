@@ -55,7 +55,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create HomeViewModel instances.",
-      "keywords": "$q api clicked controller core create createviewmodel esri esrihomebutton executed factory function functions gohome help homeviewmodel instance instances jsapi map method object options promise property refers resolved returns set sets setview style view viewmodel wrapper"
+      "keywords": "$element $q add api clicked constructed controller core create directive esri esrihomebutton executed factory fully function functional functions getviewmodel help homeviewmodel instance instances isolate jsapi load map method module object optional position promise property reference refers requires resolved returns scope set setview style ui valid view view-ui-position viewmodel wrapper"
     },
     {
       "section": "api",
@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a home button using the Esri ArcGIS API for JavaScript.",
-      "keywords": "api arcgis button create directive esri examples instance javascript map mapview sceneview view"
+      "keywords": "add api arcgis argument button create css defaultui details directive dom element elements esri examples html https instance javascript map mapview object position positioning properties rules sceneview ui valid view view-ui-position"
     },
     {
       "section": "api",

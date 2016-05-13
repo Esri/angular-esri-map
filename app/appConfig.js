@@ -59,8 +59,8 @@
                 }
             }, {
                 toc: {
-                    title: 'Extrude Polygon',
-                    description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a SceneView.',
+                    title: 'Data-Driven Extrusion',
+                    description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a Scene View.',
                     url: urlPrefixes.templateHref + 'extrude-polygon'
                 },
                 route: {
@@ -71,8 +71,8 @@
                 }
             }, {
                 toc: {
-                    title: 'Toggle Basemap Elevation',
-                    description: 'Turn on/off the basemap\'s elevation layer in a SceneView.',
+                    title: 'Toggle Ground Elevation',
+                    description: 'Turn on or off the ground elevation layer in a Scene View.',
                     url: urlPrefixes.templateHref + 'scene-toggle-elevation'
                 },
                 route: {
@@ -85,7 +85,7 @@
             Controls: [{
                 toc: {
                     title: 'Home Button',
-                    description: 'A home button directive to return the map/scene view to its starting point.',
+                    description: 'A custom home button directive to return the Map or Scene View to its starting point.',
                     url: urlPrefixes.templateHref + 'home-button'
                 },
                 route: {
@@ -94,9 +94,9 @@
                     controller: 'HomeButtonCtrl',
                     controllerAs: 'vm'
                 }
-            }/*, {
+            }, {
                 toc: {
-                    title: 'Get Started with Popups',
+                    title: 'Get Started with PopupTemplate',
                     description: 'Define a PopupTemplate for a FeatureLayer.',
                     url: urlPrefixes.templateHref + 'popups'
                 },
@@ -106,7 +106,7 @@
                     controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
-            }*/, {
+            }, {
                 toc: {
                     title: 'Search',
                     description: 'Add a search tool to find locations on the map.',

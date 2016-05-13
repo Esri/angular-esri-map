@@ -9,6 +9,14 @@ angular.module('esri-map-docs')
             'esri/portal/PortalItem',
             'esri/WebScene'
         ], function(PortalItem, WebScene) {
+            // check that the device/browser can support WebGL
+            //  by inspecting the userAgent and
+            //  by handling the scene view directive's on-error
+            self.showViewError = browserDetectionService.isMobile();
+            self.onViewError = function() {
+                self.showViewError = true;
+            };
+            
             // create a new WebScene
             var webScene = new WebScene({
                 portalItem: new PortalItem({
@@ -26,21 +34,14 @@ angular.module('esri-map-docs')
 
                 // assign slides array to controller property, which will update and set
                 //  the required binding in the <esri-webscene-slides> directive
-                self.slides = view.map.presentation.slides.getAll();
+                self.slides = view.map.presentation.slides.toArray();
             };
 
-            // check that the device/browser can support WebGL
-            //  by inspecting the userAgent and
-            //  by handling the scene view directive's on-error
-            self.showViewError = browserDetectionService.isMobile();
-            self.onViewError = function() {
-                self.showViewError = true;
-            };
 
             self.onSlideChange = function(slide) {
                 // handle the on-slide-change callback
                 //  by setting the scene view location to the slide's viewpoint
-                self.sceneView.animateTo(slide.viewpoint);
+                self.sceneView.goTo(slide.viewpoint);
             };
         });
     });

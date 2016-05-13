@@ -4,21 +4,23 @@ angular.module('esri-map-docs')
 
         esriLoader.require([
             'esri/Map',
-            'esri/widgets/Search',
-            'esri/widgets/Search/SearchViewModel'
-        ], function(Map, Search, SearchVM) {
+            'esri/widgets/Search'
+        ], function(Map, Search) {
             self.map = new Map({
-                basemap: 'hybrid'
+                basemap: 'streets-relief-vector'
             });
 
             self.onViewCreated = function(view) {
                 var searchWidget = new Search({
-                    viewModel: new SearchVM({
-                        view: view,
-                        buttonModeEnabled: true
-                    })
-                }, 'searchDiv');
+                    view: view
+                });
                 searchWidget.startup();
+
+                // add the search widget to the top left corner of the view
+                view.ui.add(searchWidget, {
+                    position: 'top-left',
+                    index: 0
+                });
 
                 // destroy the search widget when angular scope is also being destroyed
                 $scope.$on('$destroy', function() {

@@ -138,3 +138,16 @@ button.list-group-item:hover {
   /*color: #000000;*/
   background-color: #f8f8f8;
 }
+
+button.btn-default, button.btn-default[disabled] {
+  color: #b52e31;
+  background-color: #fff;
+  border-color: #b52e31;
+}
+button.btn-default:focus, button.btn-default[disabled]:focus,
+button.btn-default:hover, button.btn-default[disabled]:hover,
+button.btn-default:active, button.btn-default[disabled]:active {
+  color: #fff!important;
+  background-color: #b52e31!important;
+  border-color: #b52e31 !important;
+}

@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Scene View</title>
 
         <!-- load Esri CSS  -->
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
+        <style type="text/css">
+            .esri-view {
+                height: 400px;
+            }
+            #layerToggle {
+              background-color: white;
+              border-radius: 8px;
+              padding: 10px;
+              opacity: 0.75;
+            }
+            #layerToggle label,
+            #layerToggle input {
+                cursor: pointer;
+            }
+        </style>
     </head>
     <body>
         <h2>Scene View</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <esri-scene-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"></esri-scene-view>
-            <div><label><input type="checkbox" checked ng-click="exampleCtrl.onStreetsToggle($event)" /> Transportation</label></div>
+            <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded">
+                <span id="layerToggle" ng-show="exampleCtrl.viewLoaded">
+                    <!-- The visible property on a layer can be used to toggle the layer's visibility in the view. -->
+                    <label><input type="checkbox" ng-model="exampleCtrl.transportationLyr.visible" /> Transportation</label>
+                </span>
+            </esri-scene-view>
 
             <button ng-click="exampleCtrl.changeMap()">Change map for this esri-scene-view</button>
 
-            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/get-started-layers/index.html">this sample</a>.</p>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/get-started-layers/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load the angular-esri-map module -->
@@ -28,76 +47,71 @@
         <script type="text/javascript">
             /*eslint indent:false*/
             /*global angular:false*/
+            /*global console:false*/
             'use strict';
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
                 .controller('ExampleController', function(esriLoader) {
                     var self = this;
+                    self.viewLoaded = true;
                     // load esri modules
                     esriLoader.require([
                         'esri/Map',
-                        'esri/layers/ArcGISTiledLayer'
-                    ],
-                    function(
-                        Map, ArcGISTiledLayer
+                        'esri/layers/TileLayer'
+                    ], function(
+                        Map, TileLayer
                     ) {
-                        /*****************************************************************
-                         * Create two ArcGISTiledLayer instances. One pointing to a
-                         * cached map service depicting U.S. male population and the other
-                         * pointing to a layer of roads and highways.
-                         *****************************************************************/
-                        var transportationLyr = new ArcGISTiledLayer({
+                        // put this layer on the controller scope so that the checkbox can be used directly with ng-model
+                        self.transportationLyr = new TileLayer({
                             url: '//server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer',
-                            //This property can be used to uniquely identify the layer
-                            id: 'streets'
+                            id: 'streets',
+                            visible: false
                         });
 
-                        var popLyr = new ArcGISTiledLayer({
-                            url: '//services.arcgisonline.com/arcgis/rest/services/Demographics/USA_Population_by_Sex/MapServer',
-                            id: 'male-population',
-                            //controls the opacity of the layer
-                            opacity: 0.7
+                        var housingLyr = new TileLayer({
+                            url: '//tiles.arcgis.com/tiles/nGt4QxSblgDfeJn9/arcgis/rest/services/New_York_Housing_Density/MapServer',
+                            id: 'ny-housing',
+                            opacity: 0.9
                         });
 
-                        /*****************************************************************
-                         * Layers may be added to the map in the map's constructor
-                         *****************************************************************/
+                        // layers may be added to the map in the map's constructor
                         self.map = new Map({
-                            basemap: 'dark-gray',
-                            layers: [popLyr]
+                            basemap: 'oceans',
+                            layers: [housingLyr]
                         });
 
-                        /*****************************************************************
-                         * Or they may be added to the map using map.add()
-                         *****************************************************************/
-                        self.map.add(transportationLyr);
+                        // or they may be added to the map using map.add()
+                        self.map.add(self.transportationLyr);
 
-                        self.onViewCreated = function(view) {
-                            /*****************************************************************
-                             * Layers are promises that resolve when loaded, or when all their
-                             * properties may be accessed. Once the population layer has loaded,
-                             * the view will animate to it's initial extent.
-                             *****************************************************************/
-                            popLyr.then(function() {
-                                view.animateTo(popLyr.initialExtent);
+                        self.onViewLoaded = function(view) {
+                            // add the layer toggle control to the view's UI top right corner
+                            view.ui.add('layerToggle', 'top-right');
+                            self.viewLoaded = true;
+
+                            // The map handles the layers' data, while the view
+                            // and layer views take care of renderering the layers.
+                            view.on('layerview-create', function(evt) {
+                                if (evt.layer.id === 'ny-housing') {
+                                    // Explore the properties of the population layer's layer view here.
+                                    console.log('LayerView for male population created!', evt.layerView);
+                                }
+                                if (evt.layer.id === 'streets') {
+                                    // Explore the properties of the transportation layer's layer view here.
+                                    console.log('LayerView for streets created!', evt.layerView);
+                                }
                             });
-                        };
 
+                            // Once the housing layer has loaded,
+                            // the view will animate to it's initial extent.
+                            housingLyr.then(function() {
+                                view.goTo(housingLyr.fullExtent);
+                            });
 
-                        /*****************************************************************
-                         * The visible property on the layer can be used to toggle the
-                         * layer's visibility in the view. When the visibility is turned off
-                         * the layer is still part of the map, which means you can access
-                         * its properties and perform analysis even though it isn't visible.
-                         *******************************************************************/
-                        self.onStreetsToggle = function(e) {
-                            transportationLyr.visible = !!e.currentTarget.checked;
                         };
 
                         self.changeMap = function() {
-                            // create the map
-                            // and add a feature layer
+                            // test to show that changing the map property works for the same view
                             self.map = new Map({
                                 basemap: 'gray'
                             });

@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html ng-app="esri-map-example">
     <head>
-        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
         <title>Search Widget</title>
 
         <!-- load Esri CSS  -->
-        <link rel="stylesheet" href="//js.arcgis.com/4.0beta3/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
         <style type="text/css">
-            #searchDiv {
-                position: absolute;
-                z-index: 20;
-                top: 20px;
-                left: 74px;
+            .esri-view {
+                height: 400px;
             }
         </style>
     </head>
     <body>
         <h2>Search Widget</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <div style="position: relative;">
-                <div id="searchDiv"></div>
-                <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
-                    view-options="{
-                        center: [-97, 38],
-                        zoom: 6
-                    }">
-                </esri-map-view>
-            </div>
-            <p>Based on <a href="https://developers.arcgis.com/javascript/beta/sample-code/widgets-search-2d/index.html">this sample</a>.</p>
+            <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"
+                view-options="{
+                    center: [-76.75, -12],
+                    zoom: 8
+                }">
+            </esri-map-view>
+            <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/widgets-search-3d/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
-        <script src="//js.arcgis.com/4.0beta3/"></script>
+        <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
         <!-- load the angular-esri-map module -->
@@ -49,20 +43,23 @@
 
                     esriLoader.require([
                         'esri/Map',
-                        'esri/widgets/Search',
-                        'esri/widgets/Search/SearchViewModel'
-                    ], function(Map, Search, SearchVM) {
+                        'esri/widgets/Search'
+                    ], function(Map, Search) {
                         self.map = new Map({
-                            basemap: 'hybrid'
+                            basemap: 'streets-relief-vector'
                         });
 
                         self.onViewCreated = function(view) {
                             var searchWidget = new Search({
-                                viewModel: new SearchVM({
-                                    view: view
-                                })
-                            }, 'searchDiv');
+                                view: view
+                            });
                             searchWidget.startup();
+
+                            // add the search widget to the top left corner of the view
+                            view.ui.add(searchWidget, {
+                                position: 'top-left',
+                                index: 0
+                            });
 
                             // destroy the search widget when angular scope is also being destroyed
                             $scope.$on('$destroy', function() {
