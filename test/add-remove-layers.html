@@ -21,7 +21,10 @@
         </esri-map>
         <p>Click the checkbox next to each layer to add or remove it to/from the map.</p>
         <div ng-repeat="layer in layers">
-            <input type="checkbox" ng-model="selected" ng-change="toggleLayer(layer.url)" /> {{layer.name}} <br />
+            <label>
+                <input type="checkbox" ng-model="selected" ng-change="toggleLayer(layer.url)" />
+                {{layer.name}}
+            </label>
         </div>
         <!-- load Esri JavaScript API -->
         <script type="text/javascript" src="//js.arcgis.com/3.11compact"></script>
