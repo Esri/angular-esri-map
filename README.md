@@ -49,7 +49,7 @@ Once you've added the module to your application, you can use the sample code be
         <!-- load Esri JSAPI -->
         <script src="//js.arcgis.com/3.17compact"></script>
         <!-- load AngularJS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
         <!-- load angular-esri-map -->
         <script src="//npmcdn.com/angular-esri-map@1"></script>
 
