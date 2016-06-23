@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Changed
+
+esriLoader defaults to loading JSAPI v3.17. Docs site and readme quick start example also uses JSAPI 3.17. [#283](https://github.com/Esri/angular-esri-map/issues/283)
+
+Updated docs site and readme quick start to use Angular v1.5.5. [#283](https://github.com/Esri/angular-esri-map/issues/283)
+
 ## [v1.1.5]
 
 ### Maintenance
