@@ -9,7 +9,9 @@
      * @scope
      *
      * @description
-     * This is the directive which will create a map view using the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create a
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html MapView}
+     * instance using the Esri ArcGIS API for JavaScript.
      * There are plenty of examples showing how to use this directive and its bound parameters.
      *
      * ## Examples
@@ -18,11 +20,13 @@
      * - {@link ../#/examples/search Search}
      * - {@link ../#/examples and more...}
      *
-     * @param {Object} map Instance of a Map.
-     * @param {Function=} on-create Callback for successful creation of the map view.
-     * @param {Function=} on-load Callback for successful loading of the map view.
-     * @param {Function=} on-error Callback for rejected/failed loading of the map view.
-     * @param {Object | String=} view-options An object or inline object hash string defining additional map view constructor options.
+     * @param {Object} map Instance of a {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html Map}
+     *  or {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html WebMap}.
+     * @param {Function=} on-create Callback for successful creation of the MapView.
+     * @param {Function=} on-load Callback for successful loading of the MapView.
+     * @param {Function=} on-error Callback for rejected/failed loading of the MapView.
+     * @param {Object | String=} view-options An object or inline object hash string defining additional
+     *  {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#properties MapView properties}.
      * @param {String=} register-as A name to use when registering the view so that it can be used by other controllers.
      *  See {@link esri.core.factory:esriRegistry esriRegistry}.
      */

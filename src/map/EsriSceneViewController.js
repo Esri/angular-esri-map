@@ -6,7 +6,9 @@
      * @name esri.map.controller:EsriSceneViewController
      *
      * @description
-     * Functions to help create SceneView instances.
+     * Functions to help create
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html SceneView}
+     * instances.  This contoller is used by the {@link esri.map.directive:esriSceneView esriSceneView} directive.
      *
      * @requires esri.core.factory:esriLoader
      * @requires esri.core.factory:esriRegistry

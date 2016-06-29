@@ -9,10 +9,12 @@
      * @scope
      *
      * @description
-     * This is the directive which will create slide bookmarks for WebScene Slides for the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create slide bookmarks for
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-webscene-Slide.html WebScene Slides}
+     * for the Esri ArcGIS API for JavaScript.
      * Each bookmark will include the title and screenshot of the slide, and clicking on a bookmark will
      * provide the slide object to a callback function (`on-slide-change`). For example, the slide provided
-     * in the callback will have a viewpoint property that could be used to change the location of an associated Esri Scene View.
+     * in the callback will have a viewpoint property that could be used to change the location of an associated Esri SceneView.
      * **Note:** this directive does not rely on any out of the box Esri widgets or view models.
      *
      * ## Styling and CSS
