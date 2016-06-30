@@ -3,6 +3,19 @@
   color: #fff;
 }
 
+.primary-jumbotron-title {
+  position: absolute;
+}
+
+.show-hide-jumbotron-title {
+  transition: opacity linear 0.75s;
+}
+
+.show-hide-jumbotron-title.ng-hide {
+  opacity: 0;
+  display: block !important;
+}
+
 /* custom page footer */
 .footer {
   position: relative;
