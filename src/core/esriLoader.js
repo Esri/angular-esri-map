@@ -9,7 +9,7 @@
      * @requires $q
      *
      * @description
-     * Use `esriLoader` to lazy load the Esri ArcGIS API or to require individual API modules.
+     * Use `esriLoader` to lazy load the Esri ArcGIS API for JavaScript or to require individual API modules.
      */
     angular.module('esri.core').factory('esriLoader', function ($q) {
 

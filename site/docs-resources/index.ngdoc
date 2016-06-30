@@ -8,7 +8,7 @@
 
 ### `esri.map` Module
 
-The {@link esri.map esri.map} module includes reusable directives for map view, scene view, and related UI elements such as a home button.
+The {@link esri.map esri.map} module includes reusable directives for an Esri MapView, a SceneView, and related UI elements such as a home button.
 
 ### `esri.core` Module
 

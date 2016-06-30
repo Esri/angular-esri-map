@@ -8,7 +8,7 @@
 
     var config = {
         examplePageCategories: {
-            '2D': [{
+            '2D MapView': [{
                 toc: {
                     title: 'Feature Layer',
                     description: 'Load a FeatureLayer onto a map.',
@@ -33,7 +33,7 @@
                     controllerAs: 'vm'
                 }
             }],
-            '3D': [{
+            '3D SceneView': [{
                 toc: {
                     title: 'Scene View',
                     description: 'Use the scene view directive to load a tiled basemap onto a 3D globe.',
