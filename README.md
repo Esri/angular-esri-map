@@ -8,7 +8,7 @@ A collection of directives to help you use Esri maps and services in your Angula
 These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](http://esri.github.io/angular-esri-map/#/about)
 
 ## Getting started
-Here are [a few examples](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own Angular 1.x applications.
+Here are [examples and guides](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own Angular 1.x applications.
 
 ### Quick Start
 
@@ -26,7 +26,7 @@ npm install angular-esri-map
 ```
 Alternatively, you can clone or [download](https://github.com/Esri/angular-esri-map/releases) this repo and copy the desired module file (`angular-esri-map.js` or `angular-esri-map.min.js`) into your application.
 
-Once you've added the module to your application, you can use the sample code below to use the scene view directive.  If you have downloaded or installed locally, point to the location of the module file in your environment (instead of CDN) and load the page in a browser.
+Once you've added the module to your application, you can use the sample code below to use the scene view directive. If you have downloaded or installed locally, point to the location of the module file in your environment (instead of CDN) and load the page in a browser.
 
 ![App](https://raw.github.com/Esri/angular-esri-map/master/angular-esri-map.png)
 
@@ -75,7 +75,7 @@ Once you've added the module to your application, you can use the sample code be
 </html>
 ```
 
-See the documentation for [examples](http://esri.github.io/angular-esri-map/#examples) of how to use the other directives.
+See the documentation for [examples and guides](http://esri.github.io/angular-esri-map) of how to use the other directives and services.
 
 ### Lazy Loading of the ArcGIS API for JavaScript
 
@@ -94,7 +94,11 @@ Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gul
 
 ## Dependencies
 
-At version 1.x, these directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11). For version 2.x, the ArcGIS API for JavaScript v4.0 is required. They have been tested on every minor release of each of those libraries since then. See the compatibility table below for details.
+At version 1.x, these directives and services require, at a minimum, Angular v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11).
+
+For version 2.x, the ArcGIS API for JavaScript v4.0 is required. These directives and services have been tested on every minor release of each of those libraries since then.
+
+See the compatibility table below for details.
 
 angular-esri-map | Angular | ArcGIS API for JavaScript
 --- | --- | ---
@@ -106,7 +110,8 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 
 ## Resources
 
-* [Angular JS](https://angularjs.org/)
+**Websites**
+* [AngularJS v1.x](https://angularjs.org/)
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
 * [ArcGIS for Developers](http://developers.arcgis.com)
 * [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
@@ -118,7 +123,7 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 
 ## Issues
 
-Find a bug or want to request a new feature?  Please let us know by submitting an issue.  Thank you!
+Find a bug or want to request a new feature? Please let us know by submitting an issue. Thank you!
 
 ## Contributing
 
