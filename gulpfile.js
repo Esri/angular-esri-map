@@ -134,13 +134,13 @@ gulp.task('serve-test', ['build'], function() {
 
 // deploy to github pages
 gulp.task('deploy', ['build'], function () {
-  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*'])
+  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*', '!./test/unit/coverage/**/*'])
     .pipe(deploy());
 });
 
 // deploy to Esri's github pages
 gulp.task('deploy-prod', ['build'], function () {
-  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*'])
+  return gulp.src(['./site/**/*', 'ngdocs/**/*', './test/**/*', '!./test/unit/coverage/**/*'])
     .pipe(deploy({
       remoteUrl: 'https://github.com/ArcGIS/angular-esri-map-site-v1.git'
     }));
