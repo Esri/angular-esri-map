@@ -9,14 +9,14 @@
      * @scope
      *
      * @description
-     * This is the directive which will create a home button using the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create a home button using the ArcGIS API for JavaScript.
      *
      * ## Examples
      * - {@link ../#/examples/home-button Home Button}
      *
      * @param {Object} view Instance of a MapView or SceneView.
      * @param {Object=} view-ui-position The MapView or SceneView UI position object which this directive
-     * can be added to, instead of element positioning with other DOM elements and CSS rules.
+     * can be added to, as an alternative to element positioning with other DOM elements and CSS rules.
      * For details on valid object properties, see the
      * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-ui-DefaultUI.html#add `DefaultUI.add()`}
      * **`position`** object argument.

@@ -53,7 +53,7 @@
              * {@link esri.map.directive:esriSceneView esriSceneView}
              * for info on how to register a map using the `register-as` attribute.
              *
-             * @param {String} name Name that the view was registered with.
+             * @param {String} name The name that the view was registered with.
              *
              * @return {Promise} Returns a $q style promise which is resolved with the view once it has been loaded.
              */

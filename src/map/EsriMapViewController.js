@@ -6,7 +6,9 @@
      * @name esri.map.controller:EsriMapViewController
      *
      * @description
-     * Functions to help create MapView instances.
+     * Functions to help create
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html MapView}
+     * instances. This contoller is used by the {@link esri.map.directive:esriMapView esriMapView} directive.
      *
      * @requires esri.core.factory:esriLoader
      * @requires esri.core.factory:esriRegistry

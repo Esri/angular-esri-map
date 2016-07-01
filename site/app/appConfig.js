@@ -8,10 +8,10 @@
 
     var config = {
         examplePageCategories: {
-            '2D': [{
+            '2D MapView': [{
                 toc: {
                     title: 'Feature Layer',
-                    description: 'Load a FeatureLayer onto a map.',
+                    description: 'Use the <esri-map-view> directive to load a FeatureLayer onto a 2D map.',
                     url: urlPrefixes.templateHref + 'feature-layer'
                 },
                 route: {
@@ -33,10 +33,10 @@
                     controllerAs: 'vm'
                 }
             }],
-            '3D': [{
+            '3D SceneView': [{
                 toc: {
-                    title: 'Scene View',
-                    description: 'Use the scene view directive to load a tiled basemap onto a 3D globe.',
+                    title: 'SceneView',
+                    description: 'Use the <esri-scene-view> directive to load a tiled basemap onto a 3D globe.',
                     url: urlPrefixes.templateHref + 'scene-view'
                 },
                 route: {
@@ -60,7 +60,7 @@
             }, {
                 toc: {
                     title: 'Data-Driven Extrusion',
-                    description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a Scene View.',
+                    description: 'Extrude polygon features based on a field value using ExtrudeSymbol3DLayer in a SceneView.',
                     url: urlPrefixes.templateHref + 'extrude-polygon'
                 },
                 route: {
@@ -72,7 +72,7 @@
             }, {
                 toc: {
                     title: 'Toggle Ground Elevation',
-                    description: 'Turn on or off the ground elevation layer in a Scene View.',
+                    description: 'Turn on or off the ground elevation layer in a SceneView.',
                     url: urlPrefixes.templateHref + 'scene-toggle-elevation'
                 },
                 route: {
@@ -85,7 +85,7 @@
             Controls: [{
                 toc: {
                     title: 'Home Button',
-                    description: 'A custom home button directive to return the Map or Scene View to its starting point.',
+                    description: 'A custom home button directive to return the MapView or SceneView to its starting point.',
                     url: urlPrefixes.templateHref + 'home-button'
                 },
                 route: {
@@ -170,7 +170,7 @@
             }, {
                 toc: {
                     title: 'Registry Pattern',
-                    description: 'Shows how to get a reference to the map object by using the registry.',
+                    description: 'Shows how to get a reference to a MapView or SceneView object by using the registry.',
                     url: urlPrefixes.templateHref + 'registry-pattern'
                 },
                 route: {
@@ -191,8 +191,8 @@
             {
                 path: '/patterns/references-to-views',
                 templateUrl: 'app/patterns/references-to-views.html',
-                title: 'Getting a Reference to the Map and Scene Views',
-                shortTitle: 'Map and Scene View References'
+                title: 'Getting a Reference to MapViews and SceneViews',
+                shortTitle: 'MapView and SceneView References'
             },
             {
                 path: '/patterns/using-creating-widgets',

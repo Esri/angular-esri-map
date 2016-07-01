@@ -6,7 +6,9 @@
      * @name esri.map.controller:EsriHomeButtonController
      *
      * @description
-     * Functions to help create HomeViewModel instances.
+     * Functions to help create and manage
+     * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-widgets-Home-HomeViewModel.html HomeViewModel}
+     * instances.
      *
      * @requires esri.core.factory:esriLoader
      * @requires $element
@@ -46,7 +48,7 @@
              * A new HomeViewModel will be constructed.
              * To be fully functional, the HomeViewModel requires a valid view property.
              * This will also add the directive to a view's UI position if using the
-             * optional `view-ui-position` isolate scope property.
+             * optional {@link esri.map.directive:esriHomeButton `view-ui-position`} isolate scope property.
              *
              * @param {Object} view view instance
              */
@@ -71,7 +73,7 @@
              * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
-             * A wrapper around the Esri JSAPI `HomeViewModel.go()` method,
+             * A wrapper around the ArcGIS API for JavaScript `HomeViewModel.go()` method,
              * which is executed when the esriHomeButton is clicked.
              */
             this.go = function() {
