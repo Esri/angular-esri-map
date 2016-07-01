@@ -4,11 +4,14 @@
 </div>
 </h1>
 <div><h2 id="description">Description</h2>
-<div class="description"><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>This is the directive which will create slide bookmarks for WebScene Slides for the Esri ArcGIS API for JavaScript.
-Each bookmark will include the title and screenshot of the slide, and clicking on a bookmark will
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>This is the directive which will create slide bookmarks for
+<a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-webscene-Slide.html">WebScene Slides</a>
+for the ArcGIS API for JavaScript.</p>
+<p>Each bookmark will include the title and screenshot of the slide, and clicking on a bookmark will
 provide the slide object to a callback function (<code>on-slide-change</code>). For example, the slide provided
-in the callback will have a viewpoint property that could be used to change the location of an associated Esri Scene View.
-<strong>Note:</strong> this directive does not rely on any out of the box Esri widgets or view models.</p>
+in the callback will have a viewpoint property that could be used to change the location of an associated Esri SceneView.</p>
+<p><strong>Note:</strong> this directive does not rely on any out of the box Esri widgets or view models.
+It demonstrates how a custom directive can be created and made to interact with other parts of the ArcGIS API for JavaScript.</p>
 <h4 id="styling-and-css" id="description_styling-and-css">Styling and CSS</h4>
 <p>Use the following class names to supply styling to this directive:</p>
 <ul>
@@ -50,6 +53,6 @@ in the callback will have a viewpoint property that could be used to change the 
 </div>
 <h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>slides</td><td><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>Array of <a href="https://developers.arcgis.com/javascript/beta/api-reference/esri-webscene-Slide.html">Slide</a> instances.</p>
 </div></td></tr><tr><td>on-slide-change <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esriwebsceneslides-page"><p>Callback for handling a change in the active slide.
-May be used, for example, to update the viewpoint location of an associated Esri Scene View.</p>
+It may be used, for example, to update the viewpoint location of an associated Esri SceneView.</p>
 </div></td></tr></tbody></table></div>
 </div>

@@ -37,7 +37,6 @@ angular.module('esri-map-docs')
                 self.slides = view.map.presentation.slides.toArray();
             };
 
-
             self.onSlideChange = function(slide) {
                 // handle the on-slide-change callback
                 //  by setting the scene view location to the slide's viewpoint

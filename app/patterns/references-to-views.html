@@ -1,45 +1,49 @@
 <div class="row">
     <div class="col-lg-12">
-        <h2>Getting a Reference to the Map and Scene Views</h2>
-        <p>The map and scene view directives include function binding (events)
-            as a way for you to get direct references to the underlying map and
-            scene view objects from a parent controller. This will allow you to
-            manipulate those objects in ways beyond what is allowed by the
+        <h2>Getting a Reference to MapViews and SceneViews</h2>
+        <p>The <code>&lt;esri-map-view&gt;</code> and <code>&lt;esri-scene-view&gt;</code>
+            directives include function binding (events) as a way for you to get direct
+            references to the underlying MapView and SceneView objects from a parent controller.
+            They also can be registered with a service for access among different controllers.
+            This will allow you to manipulate those objects in ways beyond what is allowed by the
             declarative directive API.</p>
         
         <h3>Events</h3>
-        <p>The map and scene view directives each include both <code>on-create</code>
-            and <code>on-load</code> events that pass a reference to the underlying map or
-            scene view object to a callback function. The <code>on-create</code> event is
+        <p>The <code>&lt;esri-map-view&gt;</code> and <code>&lt;esri-scene-view&gt;</code>
+            directives each include both <code>on-create</code>
+            and <code>on-load</code> events that pass a reference to the underlying MapView or
+            SceneView object to a callback function. The <code>on-create</code> event is
             fired immediately after the view has been created (i.e. <code>new MapView()</code>)
             and the <code>on-load</code> event fires after the view's
             <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#then">promise has been resolved</a>.
         </p> 
-        <p>The map and scene view directives also include an <code>on-error</code> event
+        <p>The <code>&lt;esri-map-view&gt;</code> and <code>&lt;esri-scene-view&gt;</code>
+            directives also include an <code>on-error</code> event
             that passes the error information object if a view's promise has been rejected.
-            This can be useful, for example, if you wish to use a scene view directive but
+            This can be useful, for example, if you wish to use a <code>&lt;esri-scene-view&gt;</code> directive but
             need to <a href="https://developers.arcgis.com/javascript/latest/sample-code/scene-webgl-support/index.html">gracefully handle</a>
-            browsers that do not support WebGL. Most examples using the scene view directive
+            browsers that do not support WebGL. Most examples using the <code>&lt;esri-scene-view&gt;</code> directive
             also demonstrate how to use this binding.
         </p>
         <p>See these examples:</p>
-        <h4>On-create</h4>
+        <h5>On-create</h5>
         <ul>
             <li><a href="#/examples/search">Search</a></li>
             <li><a href="#/examples/home-button">Home Button</a></li>
             <li><a href="#/examples/property-binding">Property Binding</a></li>
         </ul>
-        <h4>On-load</h4>
+        <h5>On-load</h5>
         <ul>
-            <li><a href="#/examples/scene-view">Scene View</a></li>
+            <li><a href="#/examples/scene-view">SceneView</a></li>
             <li><a href="#/examples/scene-toggle-elevation">Toggle Ground Elevation</a></li>
             <li><a href="#/examples/webscene-slides">Work with Slides in a WebScene</a></li>
         </ul>
 
         <h3>Registry</h3>
         <p>We've also included a <a href="./docs/#/api/esri.core.factory:esriRegistry">registry service</a>
-        that you can use to get a direct reference to a map view or scene view object by setting the
-        <code>register-as</code> attribute on the map view or scene view directive.
+        that you can use to get a direct reference to a MapView or SceneView object in any controller by setting the
+        <code>register-as</code> attribute on the <code>&lt;esri-map-view&gt;</code> or
+        <code>&lt;esri-scene-view&gt;</code> directive.
         See the <a href="#/examples/registry-pattern">Registry Pattern</a> example.</p>
     </div>
 </div>

@@ -4,7 +4,7 @@
 </div>
 </h1>
 <div><h2 id="description">Description</h2>
-<div class="description"><div class="esri-core-factory-page esri-core-factory-esriloader-page"><p>Use <code>esriLoader</code> to lazyload the Esri ArcGIS API or to require API modules.</p>
+<div class="description"><div class="esri-core-factory-page esri-core-factory-esriloader-page"><p>Use <code>esriLoader</code> to lazy load the ArcGIS API for JavaScript or to require individual API modules.</p>
 </div></div>
 <h2 id="dependencies">Dependencies</h2>
 <ul class="dependencies"><li><code ng:non-bindable=""><a href="#/api/ng.$q">$q</a></code>
@@ -12,21 +12,21 @@
 </ul>
 <div class="member method"><h2 id="methods">Methods</h2>
 <ul class="methods"><li><h3 id="methods_bootstrap">bootstrap(options)</h3>
-<div class="bootstrap"><div class="bootstrap-page"><p>Loads the Esri ArcGIS API for JavaScript.</p>
-</div><h5 id="methods_bootstrap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bootstrap-page"><p>Send a list of options of how to load the Esri ArcGIS API for JavaScript.
-Defaults to <code>{url: &#39;//js.arcgis.com/4.0&#39;}</code></p>
+<div class="bootstrap"><div class="bootstrap-page"><p>Loads the ArcGIS API for JavaScript.</p>
+</div><h5 id="methods_bootstrap_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="bootstrap-page"><p>Send a list of options of how to load the ArcGIS API for JavaScript.
+This defaults to <code>{url: &#39;//js.arcgis.com/4.0&#39;}</code>.</p>
 </div></td></tr></tbody></table><h5 id="methods_bootstrap_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="bootstrap-page"><p>Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.</p>
 </div></td></tr></table></div>
 </li>
 <li><h3 id="methods_isloaded">isLoaded()</h3>
-<div class="isloaded"><h5 id="methods_isloaded_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td><td><div class="isloaded-page"><p>Returns a boolean if the Esri ArcGIS API for JavaScript is already loaded.</p>
+<div class="isloaded"><h5 id="methods_isloaded_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td><td><div class="isloaded-page"><p>Returns a boolean if the ArcGIS API for JavaScript is already loaded.</p>
 </div></td></tr></table></div>
 </li>
 <li><h3 id="methods_require">require(modules, callback)</h3>
-<div class="require"><div class="require-page"><p>Load an Esri module using the Dojo AMD loader.</p>
-</div><h5 id="methods_require_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>modules</td><td><a href="" class="label type-hint type-hint-string">String</a><a href="" class="label type-hint type-hint-array">Array</a></td><td><div class="require-page"><p>A string of a module or an array of modules to be loaded.</p>
-</div></td></tr><tr><td>callback <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="require-page"><p>An optional function used to support AMD style loading, promise and callback are both added to the event loop, possible race condition.</p>
-</div></td></tr></tbody></table><h5 id="methods_require_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="require-page"><p>Returns a $q style promise which is resolved once modules are loaded</p>
+<div class="require"><div class="require-page"><p>Load an Esri module(s) using the Dojo AMD loader.</p>
+</div><h5 id="methods_require_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>modules</td><td><a href="" class="label type-hint type-hint-array">Array</a><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="require-page"><p>An array of module strings (or a string of a single module) to be loaded.</p>
+</div></td></tr><tr><td>callback <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="require-page"><p>An optional function used to support AMD style loading.</p>
+</div></td></tr></tbody></table><h5 id="methods_require_returns">Returns</h5><table class="variables-matrix"><tr><td><a href="" class="label type-hint type-hint-promise">Promise</a></td><td><div class="require-page"><p>Returns a $q style promise which is resolved once modules are loaded.</p>
 </div></td></tr></table></div>
 </li>
 </ul>

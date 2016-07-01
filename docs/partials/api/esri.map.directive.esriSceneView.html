@@ -4,11 +4,13 @@
 </div>
 </h1>
 <div><h2 id="description">Description</h2>
-<div class="description"><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>This is the directive which will create a scene view using the Esri ArcGIS API for JavaScript.
+<div class="description"><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>This is the directive which will create a
+<a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html">SceneView</a>
+instance using the ArcGIS API for JavaScript.
 There are plenty of examples showing how to use this directive and its bound parameters.</p>
 <h4 id="examples" id="description_examples">Examples</h4>
 <ul>
-<li><a href="../#/examples/scene-view">Scene View</a></li>
+<li><a href="../#/examples/scene-view">SceneView</a></li>
 <li><a href="../#/examples/extrude-polygon">Extrude Polygon</a></li>
 <li><a href="../#/examples/scene-toggle-elevation">Toggle Basemap Elevation</a></li>
 <li><a href="../#/examples">and more...</a></li>
@@ -27,11 +29,13 @@ There are plenty of examples showing how to use this directive and its bound par
 <div class="directive-info"><ul><li>This directive creates new scope.</li>
 </ul>
 </div>
-<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>map</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Instance of a Map or WebScene.</p>
-</div></td></tr><tr><td>on-create <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for successful creation of the scene view.</p>
-</div></td></tr><tr><td>on-load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for successful loading of the scene view.</p>
-</div></td></tr><tr><td>on-error <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for rejected/failed loading of the scene view, for example when WebGL is not supported.</p>
-</div></td></tr><tr><td>view-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>An object or inline object hash string defining additional scene view constructor options.</p>
+<h4 id="usage_directive-info_parameters">Parameters</h4><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>map</td><td><a href="" class="label type-hint type-hint-object">Object</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Instance of a <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html">Map</a>
+or <a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-WebScene.html">WebScene</a>.</p>
+</div></td></tr><tr><td>on-create <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for successful creation of the SceneView.</p>
+</div></td></tr><tr><td>on-load <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for successful loading of the SceneView.</p>
+</div></td></tr><tr><td>on-error <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>Callback for rejected/failed loading of the SceneView, for example when WebGL is not supported.</p>
+</div></td></tr><tr><td>view-options <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-object">Object </a><a href="" class="label type-hint type-hint-object"> String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>An object or inline object hash string defining additional
+<a href="https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html#properties">SceneView properties</a>.</p>
 </div></td></tr><tr><td>register-as <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-string">String</a></td><td><div class="esri-map-directive-page esri-map-directive-esrisceneview-page"><p>A name to use when registering the view so that it can be used by other controllers.
 See <a href="#/api/esri.core.factory:esriRegistry">esriRegistry</a>.</p>
 </div></td></tr></tbody></table></div>
