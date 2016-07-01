@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Documentation
+
+Documentation site examples, patterns, and API pages were updated to have more links back to Esri docs and more consistency among module naming conventions. [#290](https://github.com/Esri/angular-esri-map/issues/290)
+
 ## [v2.0.0]
 
 ### Maintenance
@@ -14,7 +18,6 @@ Unminified dist files adhere to strict dependecy injection (DI). Note that minif
 Angular dependencies (^1.3.0) declared for package.json (`npm install`) and bower.json (`bower install`). [#275](https://github.com/Esri/angular-esri-map/issues/275)
 
 Source code, test pages, unit tests, and e2e tests were updated for the Esri JSAPI 4.0 release. The `<esri-home-button>` directive was given a new bound property (`view-ui-position`) to be able to specify its position in a MapView or SceneView. [#282](https://github.com/Esri/angular-esri-map/pull/282)
-
 
 ### Documentation
 
