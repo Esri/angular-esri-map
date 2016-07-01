@@ -11,18 +11,21 @@
      * @description
      * This is the directive which will create slide bookmarks for
      * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-webscene-Slide.html WebScene Slides}
-     * for the Esri ArcGIS API for JavaScript.
+     * for the ArcGIS API for JavaScript.
+     *
      * Each bookmark will include the title and screenshot of the slide, and clicking on a bookmark will
      * provide the slide object to a callback function (`on-slide-change`). For example, the slide provided
      * in the callback will have a viewpoint property that could be used to change the location of an associated Esri SceneView.
+     *
      * **Note:** this directive does not rely on any out of the box Esri widgets or view models.
+     * It demonstrates how a custom directive can be created and made to interact with other parts of the ArcGIS API for JavaScript.
      *
      * ## Styling and CSS
      * Use the following class names to supply styling to this directive:
      * - **`slides-container`**: outer-most container (`div`)
      * - **`slide`**: individual slide bookmark (`span`)
      * - **`active-slide`**: conditional class which is set by `ng-class` when an individual slide is clicked
-     * 
+     *
      * For example, to arrange slides horizontally and give a highlighted effect on the selected slide, the following styles could be used:
      * ```css
      * .slides-container {
@@ -48,7 +51,7 @@
      *
      * @param {Array} slides Array of {@link https://developers.arcgis.com/javascript/beta/api-reference/esri-webscene-Slide.html Slide} instances.
      * @param {Function=} on-slide-change Callback for handling a change in the active slide.
-     *  May be used, for example, to update the viewpoint location of an associated Esri Scene View.
+     *  It may be used, for example, to update the viewpoint location of an associated Esri SceneView.
      */
     angular.module('esri.map')
         .directive('esriWebsceneSlides', function esriWebsceneSlides() {

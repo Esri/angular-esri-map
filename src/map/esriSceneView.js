@@ -11,11 +11,11 @@
      * @description
      * This is the directive which will create a
      * {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-views-SceneView.html SceneView}
-     * instance using the Esri ArcGIS API for JavaScript.
+     * instance using the ArcGIS API for JavaScript.
      * There are plenty of examples showing how to use this directive and its bound parameters.
      *
      * ## Examples
-     * - {@link ../#/examples/scene-view Scene View}
+     * - {@link ../#/examples/scene-view SceneView}
      * - {@link ../#/examples/extrude-polygon Extrude Polygon}
      * - {@link ../#/examples/scene-toggle-elevation Toggle Basemap Elevation}
      * - {@link ../#/examples and more...}

@@ -16,14 +16,14 @@
     <body>
         <h2>Property Binding</h2>
         <div ng-controller="ExampleController as exampleCtrl">
-            <p>These properties are updated directly by the map view:</p>
+            <p>These properties are updated directly by the MapView:</p>
             <ul>
                 <li><strong>Lat:</strong> {{ exampleCtrl.mapView.center.latitude | number:3 }}, <strong>Lng:</strong> {{ exampleCtrl.mapView.center.longitude | number:3 }}</li>
                 <li><strong>Scale:</strong> {{ exampleCtrl.mapView.scale | number:2 }}</li>
                 <li><strong>Zoom:</strong> {{ exampleCtrl.mapView.zoom | number:2 }}</li>
             </ul>
 
-            <p>This property can be changed by interacting with the input form and the map view:</p>
+            <p>This property can be changed by interacting with the input form <strong>and</strong> the MapView:</p>
             <ul>
                 <li><strong>Rotation:</strong> <input type="number" ng-model="exampleCtrl.mapView.rotation" /></li>
             </ul>

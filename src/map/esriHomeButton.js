@@ -9,7 +9,7 @@
      * @scope
      *
      * @description
-     * This is the directive which will create a home button using the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create a home button using the ArcGIS API for JavaScript.
      *
      * ## Examples
      * - {@link ../#/examples/home-button Home Button}

@@ -9,7 +9,7 @@
      * @requires $q
      *
      * @description
-     * Use `esriLoader` to lazy load the Esri ArcGIS API for JavaScript or to require individual API modules.
+     * Use `esriLoader` to lazy load the ArcGIS API for JavaScript or to require individual API modules.
      */
     angular.module('esri.core').factory('esriLoader', function ($q) {
 
@@ -19,12 +19,12 @@
          * @methodOf esri.core.factory:esriLoader
          *
          * @description
-         * Loads the Esri ArcGIS API for JavaScript.
+         * Loads the ArcGIS API for JavaScript.
          *
-         * @param {Object=} options Send a list of options of how to load the Esri ArcGIS API for JavaScript.
+         * @param {Object=} options Send a list of options of how to load the ArcGIS API for JavaScript.
          *  This defaults to `{url: '//js.arcgis.com/4.0'}`.
          *
-         * @return {Promise} Returns a $q style promise which is resolved once the Esri ArcGIS API for JavaScript has been loaded.
+         * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
         function bootstrap(options) {
             var deferred = $q.defer();
@@ -56,7 +56,7 @@
          * @name isLoaded
          * @methodOf esri.core.factory:esriLoader
          *
-         * @return {Boolean} Returns a boolean if the Esri ArcGIS API for JavaScript is already loaded.
+         * @return {Boolean} Returns a boolean if the ArcGIS API for JavaScript is already loaded.
          */
         function isLoaded() {
             return typeof window.require !== 'undefined';

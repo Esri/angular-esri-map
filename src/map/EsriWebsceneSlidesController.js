@@ -38,7 +38,7 @@
              * @description
              * This method is executed when an individual slide is clicked.
              * It passes the slide object to the **`on-slide-change`** bound callback function,
-             * which can be useful for manipulating an associated Esri Scene View.
+             * which can be useful for manipulating an associated Esri SceneView.
              * It also sets the clicked slide's active status to true, to assist with CSS styling.
              *
              * @param {Object} slide slide instance
@@ -50,7 +50,7 @@
                 });
                 slide.isActiveSlide = true;
 
-                // handle click action without direct reference to the Esri JSAPI
+                // handle click action without direct reference to the ArcGIS API for JavaScript
                 //  by passing the viewpoint of the slide to the onSlideChange function binding
                 if (typeof self.onSlideChange === 'function') {
                     self.onSlideChange()(slide);

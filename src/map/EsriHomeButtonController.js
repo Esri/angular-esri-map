@@ -73,7 +73,7 @@
              * @methodOf esri.map.controller:EsriHomeButtonController
              *
              * @description
-             * A wrapper around the Esri ArcGIS API for JavaScript `HomeViewModel.go()` method,
+             * A wrapper around the ArcGIS API for JavaScript `HomeViewModel.go()` method,
              * which is executed when the esriHomeButton is clicked.
              */
             this.go = function() {
