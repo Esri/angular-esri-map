@@ -123,15 +123,15 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 
 ## What about Angular 2?
 
-While **angular-esri-map** currently focuses on providing well tested directives and patterns to help you use Esri maps with Angular v1.x, the ArcGIS API for JavaScript can also be used with [Angular 2](https://angular.io/). In addition to the information discussed in the [2016 "What's New, What's Next" presentation](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016) provided above, there are several resources available to inspire you to try out Esri+Angular2.
+While **angular-esri-map** currently focuses on providing well tested directives and patterns to help you use Esri maps with Angular v1.x, the ArcGIS API for JavaScript can also be used with [Angular 2](https://angular.io/). In addition to the [Angular 2 specific information](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016/#/34) discussed in the [2016 "What's New, What's Next" presentation](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016) provided above, there are several resources available to inspire you to try out Esri+Angular 2.
 
 **Angular2 with SystemJS**
 * [Esri/esri-system-js](https://github.com/Esri/esri-system-js): Load ArcGIS API for JavaScript modules using SystemJS
-  * For a deeper dive into the inspiration behind esri-system-js, see [@odoe](https://github.com/odoe/)'s [2016 blog post](http://odoe.net/blog/angular-2-with-arcgis-js-api/)
-* [jwasilgeo/angular2-esri-playground](https://github.com/jwasilgeo/angular2-esri-playground): Example Angular2 app using esri-system-js and ArcGIS API for JavaScript v4
+  * For a deeper dive into the motivation behind esri-system-js, see [@odoe](https://github.com/odoe/)'s [2016 blog post](http://odoe.net/blog/angular-2-with-arcgis-js-api/)
+* [jwasilgeo/angular2-esri-playground](https://github.com/jwasilgeo/angular2-esri-playground): Example Angular 2 app using esri-system-js and ArcGIS API for JavaScript v4
 
 **Angular2 with Webpack**
-* [tomwayson/angular2-esri-example](https://github.com/tomwayson/angular2-esri-example): Example Angular2 app using Webpack and ArcGIS API for JavaScript v3
+* [tomwayson/angular2-esri-example](https://github.com/tomwayson/angular2-esri-example): Example Angular 2 app using Webpack and ArcGIS API for JavaScript v3
 
 ## Issues
 
