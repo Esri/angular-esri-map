@@ -15,6 +15,7 @@
     </head>
     <body>
         <h2>Custom Factory</h2>
+        <h3>With Two Separate Controllers</h3>
 
         <div ng-controller="ExampleControllerA as exampleCtrlA">
             <h4>ExampleControllerA</h4>
@@ -32,7 +33,8 @@
         <div ng-controller="ExampleControllerB as exampleCtrlB">
             <h4>ExampleControllerB</h4>
 
-            <button ng-click="exampleCtrlB.toggleBasemap()">Change basemap from ExampleControllerB</button>
+            <button ng-click="exampleCtrlB.toggleBasemap()">Change the basemap</button>
+            <span>(from ExampleControllerB, using the factory)</span>
 
             <esri-map-view map="exampleCtrlB.map" 
                 view-options="{
@@ -56,6 +58,8 @@
                 .factory('MapFactory', function(esriLoader, $q) {
                     var mapFactory = {};
 
+                    // create a deferred which will assist with providing a Map instance
+                    //  to other directives and controllers
                     var mapDeferred = $q.defer();
 
                     // this is a "non-public" function that will not be exposed outside of the factory
@@ -79,36 +83,46 @@
                         return mapDeferred.promise;
                     };
 
-                    // call the function once to breathe spatial life into this example
+                    // this is another "public" method in the factory
+                    mapFactory.toggleBasemap = function() {
+                        mapFactory.getLoadedMap().then(function(map) {
+                            // recall that in Esri JSAPI v4.x the map is more like a data model,
+                            //  thus changing a property here is NOT limited to only one of the
+                            //  controllers' <esri-map-view> directives
+                            map.basemap = map.basemap.id === 'topo' ? 'satellite' : 'topo';
+                        });
+                    };
+
+                    // call the map creation function once to breathe spatial life into this example
                     createCommonMap();
 
                     return mapFactory;
                 })
 
-                .controller('ExampleControllerA', function(MapFactory) {
-                    var self = this;
+            .controller('ExampleControllerA', function(MapFactory) {
+                var self = this;
 
-                    // get the Map instance from the MapFactory
-                    MapFactory.getLoadedMap().then(function(map) {
-                        // set the controller's "map" property,
-                        // which is the final step in getting the <esri-map-view> to display a map
-                        self.map = map;
-                    });
-                })
-
-                .controller('ExampleControllerB', function(MapFactory) {
-                    var self = this;
-
-                    MapFactory.getLoadedMap().then(function(map) {
-                        self.map = map;
-                    });
-
-                    this.toggleBasemap = function() {
-                        // recall that in Esri JSAPI v4.x the map is more like a data model
-                        // changing a property here is NOT limited to only this controller's <esri-map-view>
-                        self.map.basemap = self.map.basemap.id === 'topo' ? 'satellite' : 'topo';
-                    };
+                // get the Map instance from the injected MapFactory
+                MapFactory.getLoadedMap().then(function(map) {
+                    // set the controller's "map" property,
+                    // which is the final step in getting the <esri-map-view`to display with a map
+                    self.map = map;
                 });
+            })
+
+            .controller('ExampleControllerB', function(MapFactory) {
+                var self = this;
+
+                MapFactory.getLoadedMap().then(function(map) {
+                    self.map = map;
+                });
+
+                this.toggleBasemap = function() {
+                    // following this pattern, controllers should not hold model logic
+                    // we can point the button's click to the factory to do the work
+                    MapFactory.toggleBasemap();
+                };
+            });
         </script>
     </body>
 </html>

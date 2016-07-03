@@ -214,16 +214,16 @@
             //     shortTitle: 'Custom Directives'
             // },
             {
-                path: '/patterns/lazy-load',
-                templateUrl: 'app/patterns/lazy-load.html',
-                title: 'Lazy Load the ArcGIS API for JavaScript',
-                shortTitle: 'Lazy Load'
-            },
-            {
                 path: '/patterns/create-your-own-factories',
                 templateUrl: 'app/patterns/create-your-own-factories.html',
                 title: 'Create Your Own Factories',
                 shortTitle: 'Custom Factories'
+            },
+            {
+                path: '/patterns/lazy-load',
+                templateUrl: 'app/patterns/lazy-load.html',
+                title: 'Lazy Load the ArcGIS API for JavaScript',
+                shortTitle: 'Lazy Load'
             }
         ]
     };
