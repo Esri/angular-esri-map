@@ -4,7 +4,7 @@ var helper = require('../helper');
 
 describe('Deferred Map', function() {
     // shared element locator(s)
-    var loadJSAPIButton = element(by.buttonText('Load Esri JSAPI and Map View'));
+    var loadJSAPIButton = element(by.buttonText('Load Esri JSAPI and MapView'));
 
     beforeAll(function() {
         // refer to conf.js to get the baseUrl that is prepended
