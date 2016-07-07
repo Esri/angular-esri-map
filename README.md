@@ -126,7 +126,6 @@ You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gu
 While **angular-esri-map** currently focuses on providing well tested directives and patterns to help you use Esri maps with Angular v1.x, the ArcGIS API for JavaScript can also be used with [Angular 2](https://angular.io/). In addition to the [Angular 2 specific information](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016/#/34) discussed in the [2016 "What's New, What's Next" presentation](http://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016) provided above, there are several resources available to inspire you to try out Esri+Angular 2.
 
 * [Esri/esri-system-js](https://github.com/Esri/esri-system-js): Load ArcGIS API for JavaScript modules using SystemJS
-  * For a deeper dive into the motivation behind esri-system-js, see [@odoe](https://github.com/odoe/)'s [2016 blog post](http://odoe.net/blog/angular-2-with-arcgis-js-api/)
 * [jwasilgeo/angular2-esri-playground](https://github.com/jwasilgeo/angular2-esri-playground): Example app using the ArcGIS API for JavaScript v4 with Angular 2 loaded via esri-system-js
 * [tomwayson/angular2-esri-example](https://github.com/tomwayson/angular2-esri-example): Example app using the ArcGIS API for JavaScript v3 with Angular 2 loaded via [Webpack](https://webpack.github.io/) based on [@lobsteropteryx](https://github.com/lobsteropteryx)’s (non-Angular-specific) [esri-webpack configuration](https://github.com/lobsteropteryx/esri-webpack).
 
