@@ -20,12 +20,12 @@
             own <code>&lt;esri-map-view&gt;</code> directives. The basic idea is:
         </p>
         <ol>
-            <li>Establish a factory with an Angular <code>$q</code> deferred.</li>
+            <li>Establish a factory with its own Angular <code>$q</code> deferred.</li>
             <li>Return the deferred's promise in a method that other directives and controllers can use.</li>
             <li>Load an Esri module(s) with <code>esriLoader</code>, such as <code>esri/Map</code>.</li>
             <li>Once the Map instance has been established and is ready, resolve the deferred with it.</li>
             <li>Then, other directives and controllers will have access to a fully loaded Map instance.</li>
-            <li>Rinse and repeat for any other Esri modules or data models that the factory can be in charge of.</li>
+            <li>Rinse and repeat for any other Esri modules (or data models) that the factory can be in charge of.</li>
         </ol>
         <p>See the <a href="./custom-factory.html">Custom Factory page</a> for a demonstration of this pattern. The source code is below:</p>
         <div hljs="" include="'./custom-factory.html'"></div>
