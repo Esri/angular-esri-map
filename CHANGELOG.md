@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Documentation
+
+README and documentation site home page were updated with information about integrating Esri with Angular 2. [#285](https://github.com/Esri/angular-esri-map/issues/285)
+
 ## [v1.1.6]
 
 ### Maintenance
