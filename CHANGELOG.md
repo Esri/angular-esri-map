@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Documentation
 
+Added new patterns page, test page, and e2e functional test for developing custom Angular factories that can load and manage the state of Esri modules. [#287](https://github.com/Esri/angular-esri-map/issues/287)
+
 Documentation site examples, patterns, and API pages were updated to have more links back to Esri docs and more consistency among module naming conventions. [#290](https://github.com/Esri/angular-esri-map/issues/290)
 
 README and documentation site home page were updated with information about integrating Esri with Angular 2. [#285](https://github.com/Esri/angular-esri-map/issues/285)
