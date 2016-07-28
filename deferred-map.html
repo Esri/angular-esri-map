@@ -13,11 +13,11 @@
             }
         </style>
     </head>
-    <body ng-controller="ExampleController as exampleCtrl">
+    <body>
         <h2>Deferred Map</h2>
         <div ng-controller="ExampleController as exampleCtrl">
             <p>Click the button to lazy load the Esri JSAPI. This can be used when you want to defer its inclusion until necessary, which can be particularly helpful when developing Single Page Applications (SPAs). You can see the resources being pulled from dev tools, once you click the button.</p>
-            <button ng-click="exampleCtrl.lazyload()" ng-disabled="exampleCtrl.loaded">Load Esri JSAPI and Map View</button>
+            <button ng-click="exampleCtrl.lazyload()" ng-disabled="exampleCtrl.loaded">Load Esri JSAPI and MapView</button>
             <!-- add the map view to page only once the Esri API has loaded -->
             <div ng-if="exampleCtrl.loaded">
                 <esri-map-view map="exampleCtrl.map" on-create="exampleCtrl.onViewCreated"

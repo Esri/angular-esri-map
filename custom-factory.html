@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+        <title>Custom Factory</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/4.0/esri/css/main.css">
+        <style type="text/css">
+            .esri-view {
+                height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Custom Factory</h2>
+        <h3>With Two Separate Controllers</h3>
+
+        <div ng-controller="ExampleControllerA as exampleCtrlA">
+            <h4>ExampleControllerA</h4>
+
+            <esri-map-view map="exampleCtrlA.map" 
+                view-options="{
+                    zoom: 4,
+                    center: [15, 65]
+                }">
+            </esri-map-view>
+        </div>
+
+        <hr>
+
+        <div ng-controller="ExampleControllerB as exampleCtrlB">
+            <h4>ExampleControllerB</h4>
+
+            <button ng-click="exampleCtrlB.toggleBasemap()">Change the basemap</button>
+            <span>(from ExampleControllerB, using the factory)</span>
+
+            <esri-map-view map="exampleCtrlB.map" 
+                view-options="{
+                    zoom: 11,
+                    center: [174.064, -39.296]
+                }">
+            </esri-map-view>
+        </div>
+
+        <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/get-started-mapview/index.html">this sample</a>.</p>
+
+        <!-- load Esri JavaScript API -->
+        <script src="//js.arcgis.com/4.0/"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app factory and controllers -->
+        <script type="text/javascript">
+            angular.module('esri-map-example', ['esri.map'])
+                .factory('MapFactory', function(esriLoader, $q) {
+                    var mapFactory = {};
+
+                    // create a deferred which will assist with providing a Map instance
+                    //  to other directives and controllers
+                    var mapDeferred = $q.defer();
+
+                    // this is a "non-public" function that will not be exposed outside of the factory
+                    // it is in charge of:
+                    //  - loading the esri/Map module
+                    //  - resolving the mapDeferred with a single Map instance
+                    var createCommonMap = function() {
+                        esriLoader.require(['esri/Map'], function(Map) {
+                            var map = new Map({
+                                basemap: 'topo'
+                            });
+
+                            mapDeferred.resolve(map);
+                        });
+                    };
+
+                    // this is a "public" method in the factory
+                    // other directives/controllers will use this to get access to a Map instance by a promise
+                    mapFactory.getLoadedMap = function() {
+                        // return the promise
+                        return mapDeferred.promise;
+                    };
+
+                    // this is another "public" method in the factory
+                    mapFactory.toggleBasemap = function() {
+                        mapFactory.getLoadedMap().then(function(map) {
+                            // recall that in Esri JSAPI v4.x the map is more like a data model,
+                            //  thus changing a property here is NOT limited to only one of the
+                            //  controllers' <esri-map-view> directives
+                            map.basemap = map.basemap.id === 'topo' ? 'satellite' : 'topo';
+                        });
+                    };
+
+                    // call the map creation function once to breathe spatial life into this example
+                    createCommonMap();
+
+                    return mapFactory;
+                })
+
+            .controller('ExampleControllerA', function(MapFactory) {
+                var self = this;
+
+                // get the Map instance from the injected MapFactory
+                MapFactory.getLoadedMap().then(function(map) {
+                    // set the controller's "map" property,
+                    // which is the final step in getting the <esri-map-view> to display with a map
+                    self.map = map;
+                });
+            })
+
+            .controller('ExampleControllerB', function(MapFactory) {
+                var self = this;
+
+                MapFactory.getLoadedMap().then(function(map) {
+                    self.map = map;
+                });
+
+                this.toggleBasemap = function() {
+                    // following this pattern, controllers should not hold model logic
+                    // we can point the button's click to the factory to do the work
+                    MapFactory.toggleBasemap();
+                };
+            });
+        </script>
+    </body>
+</html>
