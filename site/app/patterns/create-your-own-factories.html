@@ -1,31 +1,32 @@
 <div class="row">
     <div class="col-lg-12">
         <h2>Create Your Own Factories</h2>
-        <p>Knowing how you can get references to MapView and SceneView instances from parent controllers
-            and among unrelated controllers can provide a lot of flexibility in how Angular v1 apps can be
+        <p>Knowing how to get references to MapView and SceneView instances from parent controllers
+            or unrelated controllers can provide a lot of flexibility in how Angular v1 apps can be
             structured and organized. The
             <a href="https://localhost:9002/#/patterns/references-to-views#Registry">Registry Pattern</a>
             provided by <em>angular-esri-map</em> already allows for MapView and SceneView
             states to be shared and accessed in a common service.
         </p>
         <p>As your application continues to grow, it may benefit from having its own custom factory that
-            can be injected into any directive or controller. This kind of paradigm calls for factories
-            that are in charge of maintaining data models and manipulating their state with business logic.
+            can be injected into any directive or controller. Factories using this kind of approach 
+            are fully in charge of maintaining and manipulating data models.
             For more information, see Todd Motto's
             <a href="https://toddmotto.com/rethinking-angular-js-controllers/">Rethinking AngularJS Controllers</a>.
         </p>
         <p>Below is an example of a "MapFactory" that is injected into two separate controllers.
-            It is responsible for loading Esri modules and changing the property of a Map instance, while
-            the controllers that use this factory rely on it for getting access to a Map instance for their
-            own <code>&lt;esri-map-view&gt;</code> directives. The basic idea is:
+            It is responsible for loading Esri modules and changing a property of a shared <code>Map</code> instance,
+            while the controllers that use this factory rely on it for getting access to the <code>Map</code> instance
+            for their own <code>&lt;esri-map-view&gt;</code> directives.
         </p>
+        <p>The overall workflow is:</p>
         <ol>
             <li>Establish a factory with its own Angular <code>$q</code> deferred.</li>
-            <li>Return the deferred's promise in a method that other directives and controllers can use.</li>
-            <li>Load an Esri module(s) with <code>esriLoader</code>, such as <code>esri/Map</code>.</li>
-            <li>Once the Map instance has been established and is ready, resolve the deferred with it.</li>
-            <li>Then, other directives and controllers will have access to a fully loaded Map instance.</li>
-            <li>Rinse and repeat for any other Esri modules (or data models) that the factory can be in charge of.</li>
+            <li>Return the deferred's promise in a method that other directives and controllers can call.</li>
+            <li>Load one or more Esri modules with <code>esriLoader</code>, such as <code>'esri/Map'</code>.</li>
+            <li>Resolve the deferred with the <code>Map</code> instance once it has been established and is ready.</li>
+            <li>Then, other directives and controllers will have access to a fully loaded <code>Map</code> instance.</li>
+            <li>Rinse and repeat for other Esri modules and your own data models that the factory will control.</li>
         </ol>
         <p>See the <a href="./custom-factory.html">Custom Factory page</a> for a demonstration of this pattern. The source code is below:</p>
         <div hljs="" include="'./custom-factory.html'"></div>
