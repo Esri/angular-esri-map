@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="esri-map-example">
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
+        <title>Custom Factory</title>
+
+        <!-- load Esri CSS -->
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css">
+    </head>
+    <body>
+        <h2>Custom Factory</h2>
+        
+        <div ng-controller="ExampleController as exampleCtrl">
+            <p>A feature layer and its infoTemplate are created in the MapUtilsFactory.</p>
+
+            <button ng-click="exampleCtrl.toggleFeatureLayerVisibility()">Toggle feature layer visibility</button>
+            <span>(by using the MapUtilsFactory)</span>
+
+            <esri-map id="map" 
+                map-options="{
+                    basemap: 'dark-gray',
+                    zoom: 6,
+                    center: [-18.5, 65]
+                }"
+                load="exampleCtrl.mapLoaded">
+            </esri-map> 
+        </div>
+
+        <!-- load Esri JavaScript API -->
+        <script type="text/javascript" src="//js.arcgis.com/3.13compact"></script>
+        <!-- load Angular -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js"></script>
+        <!-- load angular-esri-map directives -->
+        <script src="lib/angular-esri-map.js"></script>
+        <!-- run example app controller -->
+        <script type="text/javascript">
+            'use strict';
+            angular.module('esri-map-example', ['esri.map'])
+                .factory('MapUtilsFactory', function(esriLoader, $q) {
+                    var mapUtilsFactory = {};
+
+                    // create a deferred which will assist with providing a FeatureLayer instance
+                    //  to other directives and controllers
+                    var layerDeferred = $q.defer();
+
+                    // this is a "non-public" function that will not be exposed outside of the factory
+                    // it is in charge of:
+                    //  - loading several Esri modules
+                    //  - resolving the layerDeferred with a FeatureLayer instance
+                    var createFeatureLayer = function() {
+                        esriLoader.require([
+                            'esri/InfoTemplate',
+                            'esri/layers/FeatureLayer'
+                        ], function(InfoTemplate, FeatureLayer) {
+                            var infoTemplate = new InfoTemplate('Volcano!!', '${NAME}<br>${TYPE}');
+
+                            var featureLayer = new FeatureLayer('//services.arcgis.com/BG6nSlhZSAWtExvp/arcgis/rest/services/World_Volcanoes/FeatureServer/0', {
+                                id: 'volcanoesLayer',
+                                infoTemplate: infoTemplate,
+                                outFields: ['NAME', 'TYPE']
+                            });
+
+                            layerDeferred.resolve(featureLayer);
+                        });
+                    };
+
+                    // this is a "public" method in the factory
+                    // other directives/controllers will use this to get access to a FeatureLayer instance by a promise
+                    mapUtilsFactory.getFeatureLayer = function() {
+                        // return the promise
+                        return layerDeferred.promise;
+                    };
+
+                    // this is another "public" method in the factory
+                    mapUtilsFactory.toggleFeatureLayerVisibility = function() {
+                        // get reference to the FeatureLayer instance by using the factory's other method
+                        mapUtilsFactory.getFeatureLayer().then(function(featureLayer) {
+                            // toggle the layer visibility
+                            featureLayer.setVisibility(!featureLayer.visible);
+                        });
+                    };
+
+                    // call the feature layer function once to set everything in motion
+                    createFeatureLayer();
+
+                    return mapUtilsFactory;
+                })
+
+            .controller('ExampleController', function(MapUtilsFactory) {
+                // wait for <esri-map> load event
+                this.mapLoaded = function(map) {
+                    // get the FeaturLayer instance from the injected MapUtilsFactory
+                    MapUtilsFactory.getFeatureLayer().then(function(featureLayer) {
+                        // and then add it to the map
+                        map.addLayer(featureLayer);
+                    });
+                };
+
+                this.toggleFeatureLayerVisibility = function() {
+                    // following this pattern, controllers should hold as little model logic as possible
+                    // we can point the button's click to the factory to do the work
+                    MapUtilsFactory.toggleFeatureLayerVisibility();
+                };
+            });
+        </script>
+    </body>
+</html>
