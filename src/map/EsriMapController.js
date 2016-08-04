@@ -256,9 +256,9 @@
         };
 
         // initialize the map
-        if (attrs.webmapId) {
+        if (this.webmapId) {
             // load map object from web map
-            mapPromise = esriMapUtils.createWebMap(attrs.webmapId, attrs.id, this.getMapOptions(), this);
+            mapPromise = esriMapUtils.createWebMap(this.webmapId, attrs.id, this.getMapOptions(), this);
         } else {
             // create a new map object
             mapPromise = esriMapUtils.createMap(attrs.id, this.getMapOptions());
