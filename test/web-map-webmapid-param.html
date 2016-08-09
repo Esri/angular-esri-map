@@ -45,8 +45,6 @@
             <button ng-repeat="bookmark in itemInfo.itemData.bookmarks" ng-click="goToBookmark(bookmark)">{{bookmark.name}}</button>
             <br ><br >
             <label>set <strong>webmap-id</strong> directly in the scope : </label>{{map.webmapid}}
-            <!-- changed codes library if you want to change webmap id directly in the same view -->
-            <!--<input type="text" ng-model="map.webmapid" style="width:300px;"></div>-->
         </div>
         <p>Based on <a href="https://developers.arcgis.com/javascript/3/jssamples/ags_createwebmapid.html">this sample</a>.</p>
 
