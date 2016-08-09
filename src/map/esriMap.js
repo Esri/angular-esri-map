@@ -45,6 +45,7 @@
                 itemInfo: '=?',
                 // one-way binding for other properties
                 basemap: '@',
+                webmapId: '@?',
                 // function binding for event handlers
                 load: '&',
                 extentChange: '&',
