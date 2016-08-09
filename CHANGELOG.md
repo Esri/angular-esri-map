@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Changed
+Modified esriMap `webmap-id` param to be on isolate scope rather than `attrs`, so that it can also be a value from a controller's scope. This also includes a new test page to demonstrate this change. [#297](https://github.com/Esri/angular-esri-map/pull/297) [@stephguignard](https://github.com/stephguignard)
+
 ### Documentation
 
 Added new patterns page, test page, and e2e functional test for developing custom Angular factories that can load and manage the state of Esri modules. [#287](https://github.com/Esri/angular-esri-map/issues/287)
