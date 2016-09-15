@@ -37,14 +37,13 @@
                     <a href="./docs">API</a>
                 </li>
                 <li>
-                    <a href="//arcgis.github.io/angular-esri-map-site-v1/">
-                        Previous Version Docs
-                    </a>
+                    <a href="//arcgis.github.io/angular-esri-map-site-v1/">Previous Version Docs</a>
                 </li>
                 <li>
-                    <a href="//github.com/Esri/angular-esri-map#what-about-angular-2">
-                        Angular 2
-                    </a>
+                    <a href="//github.com/Esri/angular-esri-map/blob/master/README.md#quick-start">Quick Start</a>
+                </li>
+                <li>
+                    <a href="//github.com/Esri/angular-esri-map/blob/master/README.md#what-about-angular-2">Angular 2</a>
                 </li>
                 <li>
                     <a href="//github.com/esri/angular-esri-map">GitHub</a>
@@ -78,10 +77,10 @@
                         </ul>
                         <div class="tab-container">
                             <div ng-repeat="tab in tabs">
-                              <div ng-show="tab === currentTab">
-                                  <div hljs="" include="currentTab"></div>
-                                  <div class="snippet-file-name">{{ tab }}</div>
-                              </div>
+                                <div ng-show="tab === currentTab">
+                                    <div hljs="" include="currentTab"></div>
+                                    <div class="snippet-file-name">{{ tab }}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -132,7 +131,9 @@
     <div ng-controller="AlertController">
         <div ng-if="showAlert" class="alert alert-warning alert-dismissible version-alert" role="alert">
             <button type="button" ng-click="hideAlert()" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            This documentation is for v2 and for use with v4.x of the ArcGIS API for JavaScript. If you are using v3.x of the ArcGIS API for JavaScript, please see <a href="https://arcgis.github.io/angular-esri-map-site-v1/">the v1 documentation</a>.</div>
+            This documentation is for v2 and for use with v4.x of the ArcGIS API for JavaScript.
+            If you are using v3.x of the ArcGIS API for JavaScript, please see
+            <a href="https://arcgis.github.io/angular-esri-map-site-v1/">the v1 documentation</a>.
         </div>
     </div>
 
