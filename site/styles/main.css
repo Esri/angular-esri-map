@@ -109,7 +109,7 @@ a:hover {
   background-color: #f8f8f8;
 }
 .nav-tabs>li>a:hover {
-  border-top: 3px solid #b52e31;
+  border-top: 2px solid #b52e31;
 }
 .badge {
   background-color: #b52e31;
