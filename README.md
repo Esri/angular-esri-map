@@ -7,7 +7,21 @@ A collection of directives to help you use Esri maps and services in your Angula
 
 These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](http://esri.github.io/angular-esri-map/#/about)
 
-## Getting started
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Quick Start](#quick-start)
+  - [Lazy Loading of the ArcGIS API for JavaScript](#lazy-loading-of-the-arcgis-api-for-javascript)
+- [Development Instructions](#development-instructions)
+- [Dependencies](#dependencies)
+- [Resources](#resources)
+- [What about Angular 2?](#what-about-angular-2)
+- [Issues](#issues)
+- [Contributing](#contributing)
+- [Licensing](#licensing)
+
+## Getting Started
+
 Here are [examples and guides](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own Angular 1.x applications.
 
 ### Quick Start
