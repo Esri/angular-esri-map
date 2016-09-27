@@ -27,8 +27,11 @@
                         tilt: 45,
                         heading: 10
                     }
-                }">
+                }"
+                on-create="exampleCtrl.onViewCreated">
             </esri-scene-view>
+            <div id="legendDiv"></div>
+            <p>Note: Legend widget functionality depends on JSAPI version. This standalone test page currently makes use of JSAPI v4.0.</p>
             <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/visualization-vv-extrusion/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -45,7 +48,7 @@
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader) {
+                .controller('ExampleController', function(esriLoader, $scope) {
                     var self = this;
                     // load esri modules
                     esriLoader.require([
@@ -53,8 +56,9 @@
                         'esri/layers/FeatureLayer',
                         'esri/renderers/SimpleRenderer',
                         'esri/symbols/PolygonSymbol3D',
-                        'esri/symbols/ExtrudeSymbol3DLayer'
-                    ], function(Map, FeatureLayer, SimpleRenderer, PolygonSymbol3D, ExtrudeSymbol3DLayer) {
+                        'esri/symbols/ExtrudeSymbol3DLayer',
+                        'esri/widgets/Legend'
+                    ], function(Map, FeatureLayer, SimpleRenderer, PolygonSymbol3D, ExtrudeSymbol3DLayer, Legend) {
                         // limit visualization to southeast U.S. counties
                         var defExp = ['STATE = \'LA\'', 'STATE = \'AL\'', 'STATE = \'AR\'',
                             'STATE = \'MS\'', 'STATE = \'TN\'', 'STATE = \'GA\'',
@@ -95,6 +99,7 @@
                                 }]
                             }]
                         });
+
                         var povLyr = new FeatureLayer({
                             url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/counties_politics_poverty/FeatureServer/0',
                             renderer: renderer,
@@ -124,6 +129,19 @@
                             basemap: 'gray',
                             layers: [povLyr]
                         });
+
+                        // create the legend widget after the view has loaded
+                        self.onViewCreated = function(view) {
+                            var legendWidget = new Legend({
+                                view: view
+                            }, 'legendDiv');
+                            legendWidget.startup();
+
+                            // destroy the legend widget when angular scope is also being destroyed
+                            $scope.$on('$destroy', function() {
+                                legendWidget.destroy();
+                            });
+                        };
                     });
                 });
         </script>

@@ -17,7 +17,7 @@ angular.module('esri-map-docs')
                 content: '<p>As of 2015, <b>{MARRIEDRATE}%</b> of the population in this zip code is married.</p>' +
                     '<ul><li>{MARRIED_CY} people are married</li>' +
                     '<li>{NEVMARR_CY} have never married</li>' +
-                    '<li>{DIVORCD_CY} are divorced</li><ul>',
+                    '<li>{DIVORCD_CY} are divorced</li></ul>',
                 fieldInfos: [{
                     fieldName: 'MARRIED_CY',
                     format: {

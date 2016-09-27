@@ -1,3 +1,13 @@
+<style>
+    .legend-well {
+        margin-top: 20px;
+        float: none;
+    }
+    .legend-well div {
+        white-space: initial;
+    }
+</style>
+
 <h2>Data-Driven Extrusion</h2>
 
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
@@ -14,8 +24,11 @@
             heading: 10
         }
     }"
+    on-create="vm.onViewCreated"
     on-error="vm.onViewError"
     ng-hide="vm.showViewError">
 </esri-scene-view>
+
+<div id="legendDiv" class="well col-sm-5 legend-well"></div>
 
 <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/visualization-vv-extrusion/index.html">this sample</a>.</p>
