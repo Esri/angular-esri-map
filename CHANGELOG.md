@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+## Changed
+
+esriLoader defaults to loading JSAPI v4.1. Docs site uses JSAPI v4.1. [#305](https://github.com/Esri/angular-esri-map/issues/305)
+
 ### Documentation
 
 Added new patterns page, test page, and e2e functional test for developing custom Angular factories that can load and manage the state of Esri modules. [#287](https://github.com/Esri/angular-esri-map/issues/287)
@@ -12,6 +16,8 @@ Added new patterns page, test page, and e2e functional test for developing custo
 Documentation site examples, patterns, and API pages were updated to have more links back to Esri docs and more consistency among module naming conventions. [#290](https://github.com/Esri/angular-esri-map/issues/290)
 
 README and documentation site home page were updated with information about integrating Esri with Angular 2. [#285](https://github.com/Esri/angular-esri-map/issues/285)
+
+Fixed PopupTemplate `<ul>` formatting in docs sample page since the official Esri JSAPI sample was also fixed at JSAPI v4.1. [#299](https://github.com/Esri/angular-esri-map/issues/299)
 
 ## [v2.0.0]
 
