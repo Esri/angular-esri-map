@@ -22,7 +22,7 @@
          * Loads the ArcGIS API for JavaScript.
          *
          * @param {Object=} options Send a list of options of how to load the ArcGIS API for JavaScript.
-         *  This defaults to `{url: '//js.arcgis.com/4.0'}`.
+         *  This defaults to `{url: '//js.arcgis.com/4.1'}`.
          *
          * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
@@ -41,7 +41,7 @@
             // Create Script Object to be loaded
             var script    = document.createElement('script');
             script.type   = 'text/javascript';
-            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/4.0';
+            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/4.1';
 
             // Set onload callback to resolve promise
             script.onload = function() { deferred.resolve( window.require ); };
@@ -82,7 +82,7 @@
                 deferred.reject('Trying to call esriLoader.require(), but Esri ArcGIS API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading Esri ArcGIS API.');
                 return deferred.promise;
             }
-            
+
             if (typeof moduleName === 'string') {
                 require([moduleName], function (module) {
                     // grab the single module passed back from require callback and send to promise
