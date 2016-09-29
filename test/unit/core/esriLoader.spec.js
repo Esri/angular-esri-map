@@ -35,8 +35,8 @@ describe('esriLoader', function() {
             });
 
             describe('when not passing url in options', function() {
-                it('should default to 3.17compact', function() {
-                    var url = window.location.protocol + '//js.arcgis.com/3.17compact';
+                it('should default to 3.18compact', function() {
+                    var url = window.location.protocol + '//js.arcgis.com/3.18compact';
                     esriLoader.bootstrap();
                     expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
                 });

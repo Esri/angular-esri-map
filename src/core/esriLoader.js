@@ -9,7 +9,7 @@
      * @requires $q
      *
      * @description
-     * Use `esriLoader` to lazyload the Esri ArcGIS API or to require API modules.
+     * Use `esriLoader` to lazy load the ArcGIS API for JavaScript or to require API modules.
      */
     angular.module('esri.core').factory('esriLoader', function ($q) {
 
@@ -19,10 +19,10 @@
          * @methodOf esri.core.factory:esriLoader
          *
          * @description
-         * Loads the Esri ArcGIS API for JavaScript.
+         * Loads the ArcGIS API for JavaScript.
          *
-         * @param {Object=} options Send a list of options of how to load the Esri ArcGIS API for JavaScript.
-         *  Defaults to `{url: 'http://js.arcgis.com/3.17compact'}`
+         * @param {Object=} options Send a list of options of how to load the ArcGIS API for JavaScript.
+         *  Defaults to `{url: '//js.arcgis.com/3.18compact'}`
          *
          * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
@@ -34,14 +34,14 @@
 
             // Don't reload API if it is already loaded
             if (isLoaded()) {
-                deferred.reject('ESRI API is already loaded.');
+                deferred.reject('ArcGIS API for JavaScript is already loaded.');
                 return deferred.promise;
             }
 
             // Create Script Object to be loaded
             var script    = document.createElement('script');
             script.type   = 'text/javascript';
-            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/3.17compact';
+            script.src    = opts.url || window.location.protocol + '//js.arcgis.com/3.18compact';
 
             // Set onload callback to resolve promise
             script.onload = function() { deferred.resolve( window.require ); };
@@ -56,7 +56,7 @@
          * @name isLoaded
          * @methodOf esri.core.factory:esriLoader
          *
-         * @return {Boolean} Returns a boolean if the Esri ArcGIS API for JavaScript is already loaded.
+         * @return {Boolean} Returns a boolean if the ArcGIS API for JavaScript is already loaded.
          */
         function isLoaded() {
             return typeof window.require !== 'undefined';
@@ -79,10 +79,10 @@
 
             // Throw Error if Esri is not loaded yet
             if (!isLoaded()) {
-                deferred.reject('Trying to call esriLoader.require(), but Esri ArcGIS API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading Esri ArcGIS API.');
+                deferred.reject('Trying to call esriLoader.require(), but the ArcGIS API for JavaScript has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading the ArcGIS API for JavaScript.');
                 return deferred.promise;
             }
-            
+
             if (typeof moduleName === 'string') {
                 require([moduleName], function (module) {
                     // grab the single module passed back from require callback and send to promise

@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <title>Simple Map</title>
+        <title>Vector Tile Layer</title>
 
         <!-- load Esri CSS -->
         <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.15/esri/css/esri.css">
@@ -13,8 +13,7 @@
         <!-- add map to page and bind to scope map parameters -->
         <esri-map id="map" map-options="map.options">
             <esri-vector-tile-layer 
-                url="//www.arcgis.com/sharing/rest/content/items/f96366254a564adda1dc468b447ed956/resources/styles/root.json
-                "
+                url="//www.arcgis.com/sharing/rest/content/items/bf79e422e9454565ae0cbe9553cf6471/resources/styles/root.json"
                 layer-options="{ id: 'vtl-dark-style', opacity: 0.75 }">
             </esri-vector-tile-layer>
         </esri-map>
@@ -33,7 +32,7 @@
                     $scope.map = {
                         options: {
                             center: [2.3508, 48.8567],
-                            zoom: 10
+                            zoom: 2
                         }
                     };
                 });
