@@ -34,7 +34,7 @@
 
             // Don't reload API if it is already loaded
             if (isLoaded()) {
-                deferred.reject('ESRI API is already loaded.');
+                deferred.reject('ArcGIS API for JavaScript is already loaded.');
                 return deferred.promise;
             }
 
@@ -79,7 +79,7 @@
 
             // Throw Error if Esri is not loaded yet
             if (!isLoaded()) {
-                deferred.reject('Trying to call esriLoader.require(), but Esri ArcGIS API has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading Esri ArcGIS API.');
+                deferred.reject('Trying to call esriLoader.require(), but the ArcGIS API for JavaScript has not been loaded yet. Run esriLoader.bootstrap() if you are lazy loading the ArcGIS API for JavaScript.');
                 return deferred.promise;
             }
 
