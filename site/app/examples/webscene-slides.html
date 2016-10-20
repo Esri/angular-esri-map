@@ -1,15 +1,32 @@
 <style type="text/css">
+    .createSlideDiv {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        border-radius: 10px;
+        background-color: black;
+        opacity: 0.8;
+        color: snow;
+        padding: 6px;
+        font-size: 0.68em;
+    }
+    .createSlideDiv button {
+        vertical-align: inherit;
+    }
+    .createSlideDiv input {
+        color: initial;
+    }
     .slidesDiv {
         position: absolute;
         z-index: 50;
-        top: 0;
+        top: 50px;
         right: 0;
         background-color: black;
         opacity: 0.8;
         color: snow;
         padding: 10px;
         border-radius: 10px;
-        max-height: 85%;
+        max-height: 75%;
         overflow-y: auto;
         overflow-x: hidden;
         font-size: 0.68em;
@@ -30,7 +47,14 @@
 <div class="web-gl-warning" ng-show="vm.showViewError">WebGL is not supported on your platform/browser.</div>
 
 <div ng-hide="vm.showViewError" style="position:relative;">
+
     <esri-scene-view map="vm.map" on-load="vm.onViewLoaded" on-error="vm.onViewError"></esri-scene-view>
+
+    <div class="createSlideDiv" ng-show="vm.sceneView">
+        New slide: <input type="text" ng-model="vm.createSlideTitleInput" />
+        <button ng-click="vm.onCreateClick()" class="btn btn-sm btn-default">Create</button>
+    </div>
+
     <div class="slidesDiv" ng-show="vm.slides.length > 0">
         <span class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
             {{slide.title.text}}
@@ -39,6 +63,7 @@
             <br>
         </span>
     </div>
+
 </div>
 
 <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/webscene-slides/index.html">this sample</a>.</p>

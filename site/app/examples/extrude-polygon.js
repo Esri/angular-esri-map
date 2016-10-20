@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('ExtrudePolygonCtrl', function(esriLoader, browserDetectionService) {
+    .controller('ExtrudePolygonCtrl', function(esriLoader, browserDetectionService, $scope) {
         var self = this;
         // load esri modules
         esriLoader.require([
@@ -7,8 +7,9 @@ angular.module('esri-map-docs')
             'esri/layers/FeatureLayer',
             'esri/renderers/SimpleRenderer',
             'esri/symbols/PolygonSymbol3D',
-            'esri/symbols/ExtrudeSymbol3DLayer'
-        ], function(Map, FeatureLayer, SimpleRenderer, PolygonSymbol3D, ExtrudeSymbol3DLayer) {
+            'esri/symbols/ExtrudeSymbol3DLayer',
+            'esri/widgets/Legend'
+        ], function(Map, FeatureLayer, SimpleRenderer, PolygonSymbol3D, ExtrudeSymbol3DLayer, Legend) {
             // check that the device/browser can support WebGL
             //  by inspecting the userAgent and
             //  by handling the scene view directive's on-error
@@ -57,6 +58,7 @@ angular.module('esri-map-docs')
                     }]
                 }]
             });
+
             var povLyr = new FeatureLayer({
                 url: '//services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/counties_politics_poverty/FeatureServer/0',
                 renderer: renderer,
@@ -86,5 +88,18 @@ angular.module('esri-map-docs')
                 basemap: 'gray',
                 layers: [povLyr]
             });
+
+            // create the legend widget after the view has been successfully created
+            self.onViewCreated = function(view) {
+                var legendWidget = new Legend({
+                    view: view
+                }, 'legendDiv');
+                legendWidget.startup();
+
+                // destroy the legend widget when angular scope is also being destroyed
+                $scope.$on('$destroy', function() {
+                    legendWidget.destroy();
+                });
+            };
         });
     });
