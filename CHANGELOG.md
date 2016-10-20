@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+## [v2.0.1]
+
 ## Changed
 
 esriLoader defaults to loading JSAPI v4.1. Docs site uses JSAPI v4.1. [#305](https://github.com/Esri/angular-esri-map/issues/305)
@@ -285,7 +287,8 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasilgeo for their c
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/Esri/angular-esri-map/compare/v2.0.1...HEAD
+[v2.0.1]: https://github.com/Esri/angular-esri-map/compare/v2.0.0...v2.0.1
 [v2.0.0]: https://github.com/Esri/angular-esri-map/compare/v2.0.0-beta.2...v2.0.0
 [v2.0.0-beta.2]: https://github.com/Esri/angular-esri-map/compare/v2.0.0-beta.1...v2.0.0-beta.2
 [v2.0.0-beta.1]: https://github.com/Esri/angular-esri-map/compare/v1.1.0...v2.0.0-beta.1
