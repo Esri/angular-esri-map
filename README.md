@@ -51,7 +51,7 @@ Once you've added the module to your application, you can use the sample code be
         <title>Angular Esri Quick Start</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.17/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.18/esri/css/esri.css">
     </head>
     <body ng-controller="MapController as vm">
         <esri-map id="map" center="vm.center" zoom="vm.zoom" basemap="topo">
@@ -61,7 +61,7 @@ Once you've added the module to your application, you can use the sample code be
         <p>Lat: {{ vm.center.lat | number:3 }}, Lng: {{ vm.center.lng | number:3 }}, Zoom: {{ vm.zoom }}</p>
 
         <!-- load Esri JSAPI -->
-        <script src="//js.arcgis.com/3.17compact"></script>
+        <script src="//js.arcgis.com/3.18compact"></script>
         <!-- load AngularJS -->
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
         <!-- load angular-esri-map -->

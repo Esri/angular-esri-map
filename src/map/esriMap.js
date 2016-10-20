@@ -9,7 +9,7 @@
      * @scope
      *
      * @description
-     * This is the directive which will create a map using the Esri ArcGIS API for JavaScript.
+     * This is the directive which will create a map using the ArcGIS API for JavaScript.
      * There are plenty of examples showing how to use this directive and its bound parameters.
      * For additional information, we recommend the
      * {@link https://developers.arcgis.com/javascript/jsapi/map-amd.html Esri Map documentation}.

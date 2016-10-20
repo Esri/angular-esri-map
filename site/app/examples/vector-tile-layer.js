@@ -4,7 +4,7 @@ angular.module('esri-map-docs')
         $scope.map = {
             options: {
                 center: [2.3508, 48.8567],
-                zoom: 10
+                zoom: 2
             }
         };
     });

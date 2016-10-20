@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Upcoming changes][unreleased]
 
 ### Changed
+
+esriLoader defaults to loading JSAPI v3.18compact. Docs site uses JSAPI v3.18compact. [#304](https://github.com/Esri/angular-esri-map/issues/304)
+
 Modified esriMap `webmap-id` param to be on isolate scope rather than `attrs`, so that it can also be a value from a controller's scope. This also includes a new test page to demonstrate this change. [#297](https://github.com/Esri/angular-esri-map/pull/297) [@stephguignard](https://github.com/stephguignard)
 
 ### Documentation
