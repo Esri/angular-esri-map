@@ -12,7 +12,7 @@ angular.module('esri-map-docs')
 
             // add a tile layer to the map
             var tileLyr = new VectorTileLayer({
-                url: '//www.arcgis.com/sharing/rest/content/items/f96366254a564adda1dc468b447ed956/resources/styles/root.json'
+                url: '//www.arcgis.com/sharing/rest/content/items/bf79e422e9454565ae0cbe9553cf6471/resources/styles/root.json'
             });
             self.map.add(tileLyr);
         });

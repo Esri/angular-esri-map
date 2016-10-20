@@ -9,19 +9,29 @@
         <link rel="stylesheet" href="//js.arcgis.com/4.0/esri/css/main.css">
         <style type="text/css">
             .esri-view {
-                    height: 400px;
+                height: 400px;
+            }
+            .createSlideDiv {
+                position: absolute;
+                top: 3px;
+                right: 3px;
+                border-radius: 10px;
+                background-color: black;
+                opacity: 0.8;
+                color: snow;
+                padding: 6px;
             }
             .slidesDiv {
                 position: absolute;
                 z-index: 50;
-                top: 0;
+                top: 50px;
                 right: 0;
                 background-color: black;
                 opacity: 0.8;
                 color: snow;
                 padding: 10px;
                 border-radius: 10px;
-                max-height: 85%;
+                max-height: 75%;
                 overflow-y: auto;
                 overflow-x: hidden;
             }
@@ -40,7 +50,14 @@
         <h2>Work with Slides in a WebScene</h2>
         <div ng-controller="ExampleController as exampleCtrl">
             <div style="position:relative;">
+
                 <esri-scene-view map="exampleCtrl.map" on-load="exampleCtrl.onViewLoaded"></esri-scene-view>
+
+                <div class="createSlideDiv" ng-show="exampleCtrl.sceneView">
+                    New slide: <input type="text" ng-model="exampleCtrl.createSlideTitleInput" />
+                    <button ng-click="exampleCtrl.onCreateClick()">Create</button>
+                </div>
+
                 <div class="slidesDiv" ng-show="exampleCtrl.slides.length > 0">
                     <span class="slide" ng-repeat="slide in exampleCtrl.slides" ng-click="exampleCtrl.onSlideClick(slide)">
                         {{slide.title.text}}
@@ -49,7 +66,9 @@
                         <br>
                     </span>
                 </div>
+
             </div>
+
             <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/webscene-slides/index.html">this sample</a>.</p>
         </div>
         <!-- load Esri JavaScript API -->
@@ -66,7 +85,7 @@
 
             // include esri.map module
             angular.module('esri-map-example', ['esri.map'])
-                .controller('ExampleController', function(esriLoader) {
+                .controller('ExampleController', function(esriLoader, $scope) {
                     var self = this;
                     self.slides = [];
                     self.sceneView = null;
@@ -74,10 +93,12 @@
                     // load esri modules
                     esriLoader.require([
                         'esri/portal/PortalItem',
-                        'esri/WebScene'
+                        'esri/WebScene',
+                        'esri/webscene/Slide'
                     ]).then(function(esriModules) {
                         var PortalItem = esriModules[0];
                         var WebScene = esriModules[1];
+                        var Slide = esriModules[2];
 
                         // create a new WebScene
                         var webScene = new WebScene({
@@ -97,18 +118,33 @@
                             // presentation slides are in fact an "esri/core/Collection"
                             // make a shallow copy as a new array object for angular scope
                             self.slides = view.map.presentation.slides.toArray();
-                            // tack on an extra property for ng-class css styling
-                            self.slides.forEach(function(slide) {
-                                slide.isActiveSlide = false;
-                            });
                         };
-                        
+
                         self.onSlideClick = function(slide) {
+                            // add and manage an extra property for ng-class css styling
                             self.slides.forEach(function(slide) {
                                 slide.isActiveSlide = false;
                             });
                             slide.isActiveSlide = true;
+
+                            // animate to the given slide's viewpoint and
+                            //  turn on its visible layers and basemap layers in the view
                             slide.applyTo(self.sceneView);
+                        };
+
+                        // create a new slide using Slide.createFrom after clicking on the button
+                        self.onCreateClick = function() {
+                            Slide.createFrom(self.sceneView).then(function(slide) {
+                                // set the slide title
+                                slide.title.text = self.createSlideTitleInput;
+                                // add the slide to the slides collection of the scene presentation
+                                self.sceneView.map.presentation.slides.add(slide, 0);
+
+                                // make a shallow copy as a new array object for angular scope
+                                self.slides = self.sceneView.map.presentation.slides.toArray();
+                                // apply angular scope since the Slide.createFrom callback is outside the digest cycle
+                                $scope.$apply('WebSceneSlidesCtrl.slides');
+                            });
                         };
                     });
                 });

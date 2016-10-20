@@ -1,5 +1,5 @@
 angular.module('esri-map-docs')
-    .controller('WebSceneSlidesCtrl', function(esriLoader, browserDetectionService) {
+    .controller('WebSceneSlidesCtrl', function(esriLoader, browserDetectionService, $scope) {
         var self = this;
         self.slides = [];
         self.sceneView = null;
@@ -7,7 +7,8 @@ angular.module('esri-map-docs')
         // load esri modules
         esriLoader.require([
             'esri/portal/PortalItem',
-            'esri/WebScene'
+            'esri/WebScene',
+            'esri/webscene/Slide'
         ]).then(function(esriModules) {
             // check that the device/browser can support WebGL
             //  by inspecting the userAgent and
@@ -19,6 +20,7 @@ angular.module('esri-map-docs')
 
             var PortalItem = esriModules[0];
             var WebScene = esriModules[1];
+            var Slide = esriModules[2];
 
             // create a new WebScene
             var webScene = new WebScene({
@@ -34,23 +36,37 @@ angular.module('esri-map-docs')
             //  perform additional logic in the view directive's load callback
             self.onViewLoaded = function(view) {
                 self.sceneView = view;
-                
+
                 // presentation slides are in fact an "esri/core/Collection"
                 // make a shallow copy as a new array object for angular scope
                 self.slides = view.map.presentation.slides.toArray();
-                // tack on an extra property for ng-class css styling
-                self.slides.forEach(function(slide) {
-                    slide.isActiveSlide = false;
-                });
             };
 
-
             self.onSlideClick = function(slide) {
+                // add and manage an extra property for ng-class css styling
                 self.slides.forEach(function(slide) {
                     slide.isActiveSlide = false;
                 });
                 slide.isActiveSlide = true;
+
+                // animate to the given slide's viewpoint and
+                //  turn on its visible layers and basemap layers in the view
                 slide.applyTo(self.sceneView);
+            };
+
+            // create a new slide using Slide.createFrom after clicking on the button
+            self.onCreateClick = function() {
+                Slide.createFrom(self.sceneView).then(function(slide) {
+                    // set the slide title
+                    slide.title.text = self.createSlideTitleInput;
+                    // add the slide to the slides collection of the scene presentation
+                    self.sceneView.map.presentation.slides.add(slide, 0);
+
+                    // make a shallow copy as a new array object for angular scope
+                    self.slides = self.sceneView.map.presentation.slides.toArray();
+                    // apply angular scope since the Slide.createFrom callback is outside the digest cycle
+                    $scope.$apply('WebSceneSlidesCtrl.slides');
+                });
             };
         });
     });

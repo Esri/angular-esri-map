@@ -16,10 +16,21 @@ describe('Popups', function() {
                     return countValue > 0;
                 });
             }, 8000).then(function() {
+                // briefly slow down the test runner and also
+                //  ensure that there are features to be clicked on in the center of the map view element
+                var zoomInDiv = element(by.css('.esri-button.esri-widget-button.esri-interactive'));
+                helper.waitUntilElementIsReady(zoomInDiv);
+                zoomInDiv.click();
+                zoomInDiv.click();
+                zoomInDiv.click();
+
                 var popupDiv = element(by.css('.esri-popup'));
 
                 var clickableMapElements = element.all(by.css('.esri-view-surface'));
                 clickableMapElements.click();
+
+                helper.waitUntilElementIsReady(zoomInDiv);
+                zoomInDiv.click();
 
                 // SHOULD NOT INCLUDE CLASS "esri-invisible"
                 expect(popupDiv.getAttribute('class')).toEqual('esri-popup esri-widget');

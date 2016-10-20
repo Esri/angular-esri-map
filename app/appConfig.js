@@ -94,7 +94,7 @@
                     controller: 'HomeButtonCtrl',
                     controllerAs: 'vm'
                 }
-            }, {
+            }/*, {
                 toc: {
                     title: 'Get Started with PopupTemplate',
                     description: 'Define a PopupTemplate for a FeatureLayer.',
@@ -106,7 +106,7 @@
                     controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
-            }, {
+            }*/, {
                 toc: {
                     title: 'Search',
                     description: 'Add a search tool to find locations on the map.',
