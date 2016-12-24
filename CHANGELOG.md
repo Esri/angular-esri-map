@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Changed
+
+EsriMapController map `extent-change` listener uses `$scope.applyAsync` instead of `$scope.apply`. [#313](https://github.com/Esri/angular-esri-map/issues/313)
+
+### Maintenance
+
+Various npm package.json dev dependency versions were updated to support `gulp test`.
+
 ## [v1.1.7]
 
 ### Changed

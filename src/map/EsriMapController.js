@@ -211,7 +211,7 @@
                         return;
                     }
                     self.inUpdateCycle = true;
-                    scope.$apply(function() {
+                    scope.$applyAsync(function() {
                         // update scope properties
                         updateCenterAndZoom(self, map);
                         $timeout(function() {
