@@ -173,7 +173,7 @@ gulp.task('test', ['karma-coverage', 'serve-test'], function() {
       'configFile': 'test/e2e/conf.js',
       'args': ['--baseUrl', 'http://localhost:9002'],
       'autoStartStopServer': true,
-      'debug': true
+      'debug': false
     }))
     .on('end', function() {
       browserSync.exit();

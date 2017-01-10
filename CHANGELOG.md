@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Maintenance
+
+Various npm package.json dev dependency versions were updated to support `gulp test`.
+
 ## [v2.0.1]
 
 ## Changed
