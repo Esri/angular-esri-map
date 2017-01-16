@@ -53,8 +53,19 @@
             this._bindLayerEvents(scope, attrs, layer, mapController);
         };
 
-        // create the layer
-        layerPromise = esriLayerUtils.createVectorTileLayer(this.url, this.getLayerOptions());
+        // Put initialization logic inside `$onInit()`
+        // to make sure bindings have been initialized.
+        this.$onInit = function() {
+            // create the layer
+            layerPromise = esriLayerUtils.createVectorTileLayer(this.url, this.getLayerOptions());
+        };
+
+        // Prior to v1.5, we need to call `$onInit()` manually.
+        // (Bindings will always be pre-assigned in these versions.)
+        if (angular.version.major === 1 && angular.version.minor < 5) {
+            this.$onInit();
+        }
+
     });
 
 })(angular);
