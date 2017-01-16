@@ -7,11 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+Added support for Angular v1.6.0 and greater due to Angular's breaking changes with pre-assigning bindings on controller instances. [#314](https://github.com/Esri/angular-esri-map/issues/314)
+
 EsriMapController map `extent-change` listener uses `$scope.applyAsync` instead of `$scope.apply`. [#313](https://github.com/Esri/angular-esri-map/issues/313)
 
 ### Maintenance
 
 Various npm package.json dev dependency versions were updated to support `gulp test`.
+
+Updated e2e test pages to use Angular v1.6.1. Docs site uses Angular v1.6.1. [#314](https://github.com/Esri/angular-esri-map/issues/314) [#318](https://github.com/Esri/angular-esri-map/issues/318)
 
 ## [v1.1.7]
 
