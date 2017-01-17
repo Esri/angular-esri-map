@@ -1,9 +1,5 @@
 <style type="text/css">
     .createSlideDiv {
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        border-radius: 10px;
         background-color: black;
         opacity: 0.8;
         color: snow;
@@ -17,22 +13,18 @@
         color: initial;
     }
     .slidesDiv {
-        position: absolute;
-        z-index: 50;
-        top: 50px;
-        right: 0;
         background-color: black;
         opacity: 0.8;
         color: snow;
         padding: 10px;
-        border-radius: 10px;
-        max-height: 75%;
         overflow-y: auto;
-        overflow-x: hidden;
+        text-align: center;
+        height: 260px;
         font-size: 0.68em;
     }
     .slide {
         cursor: pointer;
+        margin-bottom: 6px;
     }
     .activeSlide {
         box-shadow: 0 0 12px #ffffff;
@@ -56,12 +48,10 @@
     </div>
 
     <div class="slidesDiv" ng-show="vm.slides.length > 0">
-        <span class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
-            {{slide.title.text}}
-            <br>
+        <div class="slide" ng-repeat="slide in vm.slides" ng-click="vm.onSlideClick(slide)">
+            <div>{{slide.title.text}}</div>
             <img src="{{slide.thumbnail.url}}" title="{{slide.title.text}}" ng-class="{activeSlide: slide.isActiveSlide}">
-            <br>
-        </span>
+        </div>
     </div>
 
 </div>
