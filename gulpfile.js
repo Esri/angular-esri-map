@@ -183,7 +183,8 @@ gulp.task('test', ['karma-coverage', 'serve-test'], function() {
       browserSync.exit();
     })
     .on('error', function(e) {
-      throw e;
+      browserSync.exit();
+      gutil.log(e);
     });
 });
 

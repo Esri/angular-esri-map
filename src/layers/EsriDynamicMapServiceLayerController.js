@@ -29,7 +29,7 @@
          * @returns {Promise} Returns a $q style promise resolved with an instance of
          *  {@link https://developers.arcgis.com/javascript/jsapi/arcgisdynamicmapservicelayer-amd.html#arcgisdynamicmapservicelayer1 ArcGISDynamicMapServiceLayer}
          */
-        this.getLayer = function () {
+        this.getLayer = function() {
             return layerPromise;
         };
 
@@ -85,8 +85,18 @@
             this._bindLayerEvents(scope, attrs, layer, mapController);
         };
 
-        // create the layer
-        layerPromise = esriLayerUtils.createDynamicMapServiceLayer(this.url, this.getLayerOptions(), this.visibleLayers);
+        // Put initialization logic inside `$onInit()`
+        // to make sure bindings have been initialized.
+        this.$onInit = function() {
+            // create the layer
+            layerPromise = esriLayerUtils.createDynamicMapServiceLayer(this.url, this.getLayerOptions(), this.visibleLayers);
+        };
+
+        // Prior to v1.5, we need to call `$onInit()` manually.
+        // (Bindings will always be pre-assigned in these versions.)
+        if (angular.version.major === 1 && angular.version.minor < 5) {
+            this.$onInit();
+        }
     });
 
 })(angular);

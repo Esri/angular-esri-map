@@ -121,8 +121,8 @@
          *
          * @return {Promise} The promise that will be resolved with the result of `map.removeLayer`.
          */
-        this.removeLayer = function (layer) {
-            return this.getMap().then(function (map) {
+        this.removeLayer = function(layer) {
+            return this.getMap().then(function(map) {
                 return map.removeLayer(layer);
             });
         };
@@ -255,20 +255,31 @@
             });
         };
 
-        // initialize the map
-        if (this.webmapId) {
-            // load map object from web map
-            mapPromise = esriMapUtils.createWebMap(this.webmapId, attrs.id, this.getMapOptions(), this);
-        } else {
-            // create a new map object
-            mapPromise = esriMapUtils.createMap(attrs.id, this.getMapOptions());
+        // Put initialization logic inside `$onInit()`
+        // to make sure bindings have been initialized.
+        this.$onInit = function() {
+            // initialize the map
+            if (this.webmapId) {
+                // load map object from web map
+                mapPromise = esriMapUtils.createWebMap(this.webmapId, attrs.id, this.getMapOptions(), this);
+            } else {
+                // create a new map object
+                mapPromise = esriMapUtils.createMap(attrs.id, this.getMapOptions());
+            }
+
+            // add this map to the registry and get a
+            // handle to deregister the map when it's destroyed
+            if (attrs.registerAs) {
+                this.deregister = esriRegistry._register(attrs.registerAs, mapPromise);
+            }
+        };
+
+        // Prior to v1.5, we need to call `$onInit()` manually.
+        // (Bindings will always be pre-assigned in these versions.)
+        if (angular.version.major === 1 && angular.version.minor < 5) {
+            this.$onInit();
         }
 
-        // add this map to the registry and get a
-        // handle to deregister the map when it's destroyed
-        if (attrs.registerAs) {
-            this.deregister = esriRegistry._register(attrs.registerAs, mapPromise);
-        }
     });
 
 })(angular);
