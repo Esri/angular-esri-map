@@ -7,6 +7,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+esriLoader defaults to loading JSAPI v3.19compact. Docs site uses JSAPI v3.19compact. [#316](https://github.com/Esri/angular-esri-map/issues/316)
+
 Added support for Angular v1.6.0 and greater due to Angular's breaking changes with pre-assigning bindings on controller instances. [#314](https://github.com/Esri/angular-esri-map/issues/314)
 
 EsriMapController map `extent-change` listener uses `$scope.applyAsync` instead of `$scope.apply`. [#313](https://github.com/Esri/angular-esri-map/issues/313)
