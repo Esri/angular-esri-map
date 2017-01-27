@@ -164,7 +164,6 @@ gulp.task('karma', function(done) {
   }, done).start();
 });
 
-
 // TODO: run functional tests once we've written some
 // for now just running karma coverage
 gulp.task('test', ['karma-coverage', 'serve-test'], function() {
@@ -179,7 +178,8 @@ gulp.task('test', ['karma-coverage', 'serve-test'], function() {
       browserSync.exit();
     })
     .on('error', function(e) {
-      throw e;
+      browserSync.exit();
+      gutil.log(e);
     });
 });
 

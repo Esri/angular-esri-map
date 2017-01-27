@@ -2,7 +2,7 @@
 
 var helper = require('../helper');
 
-describe('Deferred Map', function() {
+xdescribe('Deferred Map', function() {
     // shared element locator(s)
     var loadJSAPIButton = element(by.buttonText('Load Esri JSAPI and MapView'));
 

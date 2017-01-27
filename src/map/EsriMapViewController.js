@@ -20,11 +20,21 @@
         .controller('EsriMapViewController', function EsriMapViewController($element, $scope, $q, esriLoader, esriRegistry) {
             var self = this;
 
-            // read options passed in as either a JSON string expression
-            // or as a function bound object
-            self.options = this.viewOptions() || {};
-            // assign required and available properties
-            self.options.container = $element.children()[0];
+            // Put initialization logic inside `$onInit()`
+            // to make sure bindings have been initialized.
+            this.$onInit = function() {
+                // read options passed in as either a JSON string expression
+                // or as a function bound object
+                self.options = this.viewOptions() || {};
+                // assign required and available properties
+                self.options.container = $element.children()[0];
+            };
+
+            // Prior to v1.5, we need to call `$onInit()` manually.
+            // (Bindings will always be pre-assigned in these versions.)
+            if (angular.version.major === 1 && angular.version.minor < 5) {
+                this.$onInit();
+            }
 
             /**
              * @ngdoc function
