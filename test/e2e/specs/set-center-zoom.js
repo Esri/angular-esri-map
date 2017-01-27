@@ -29,7 +29,7 @@ describe('Set Map Center and Zoom', function() {
                 expectedLat = '37.75',
                 expectedLng = '-122.45';
             expect(newValue).toEqual(expectedZoom);
-            expect(zoomSelect.getAttribute('value')).toEqual(expectedZoom);
+            expect(zoomSelect.getAttribute('value')).toEqual('number:' + expectedZoom);
             expect(lat.getAttribute('value')).toEqual(expectedLat);
             expect(lng.getAttribute('value')).toEqual(expectedLng);
         });
@@ -48,8 +48,8 @@ describe('Set Map Center and Zoom', function() {
             var expectedZoom = '12',
                 expectedLat = '40.7127',
                 expectedLng = '-74.0059';
-            expect(newValue).toEqual(expectedZoom.toString());
-            expect(zoomSelect.getAttribute('value')).toEqual(expectedZoom);
+            expect(newValue).toEqual(expectedZoom);
+            expect(zoomSelect.getAttribute('value')).toEqual('number:' + expectedZoom);
             expect(lat.getAttribute('value')).toEqual(expectedLat);
             expect(lng.getAttribute('value')).toEqual(expectedLng);
         });

@@ -5,9 +5,9 @@
     // see: https://github.com/pc035860/angular-highlightjs#demos
     angular
         .module('esri-map-docs', ['ngRoute', 'ngSanitize', 'ngSelect', 'hljs', 'esri.map'])
-        .config(function($routeProvider, appConfig) {
+        .config(function($locationProvider, $routeProvider, appConfig) {
+            $locationProvider.hashPrefix('');
             $routeProvider
-                // TODO: add home page
                 .when('/home', {
                     templateUrl: 'app/home/home.html',
                     controller: 'HomeCtrl'
