@@ -53,7 +53,7 @@ Once you've added the module to your application, you can use the sample code be
 
         <title>Angular Esri Quick Start</title>
 
-        <link rel="stylesheet" href="//js.arcgis.com/4.1/esri/css/main.css">
+        <link rel="stylesheet" href="//js.arcgis.com/4.2/esri/css/main.css">
         <style type="text/css">
             html, body, .esri-view {
                 padding: 0;
@@ -68,9 +68,9 @@ Once you've added the module to your application, you can use the sample code be
         </esri-scene-view>
 
         <!-- load Esri JSAPI -->
-        <script src="//js.arcgis.com/4.1/"></script>
+        <script src="//js.arcgis.com/4.2/"></script>
         <!-- load AngularJS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
         <!-- load angular-esri-map -->
         <script src="//unpkg.com/angular-esri-map@2"></script>
 
