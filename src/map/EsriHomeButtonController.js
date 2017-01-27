@@ -16,8 +16,20 @@
     angular.module('esri.map')
         .controller('EsriHomeButtonController', function EsriHomeButtonController($element, esriLoader) {
             var self = this;
-            var element = $element.children()[0];
-            self.uiPosition = self.viewUiPosition();
+            var element;
+
+            // Put initialization logic inside `$onInit()`
+            // to make sure bindings have been initialized.
+            this.$onInit = function() {
+                element = $element.children()[0];
+                self.uiPosition = self.viewUiPosition();
+            };
+
+            // Prior to v1.5, we need to call `$onInit()` manually.
+            // (Bindings will always be pre-assigned in these versions.)
+            if (angular.version.major === 1 && angular.version.minor < 5) {
+                this.$onInit();
+            }
 
             /**
              * @ngdoc function

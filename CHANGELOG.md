@@ -5,9 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Changed
+
+Added support for Angular v1.6.0 and greater due to Angular's breaking changes with pre-assigning bindings on controller instances. [#314](https://github.com/Esri/angular-esri-map/issues/314)
+
 ### Maintenance
 
 Various npm package.json dev dependency versions were updated to support `gulp test`.
+
+Updated e2e test pages to use Angular v1.6.1. Docs site uses Angular v1.6.1. [#314](https://github.com/Esri/angular-esri-map/issues/314) [#319](https://github.com/Esri/angular-esri-map/issues/319)
 
 ## [v2.0.1]
 
