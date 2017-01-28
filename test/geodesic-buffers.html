@@ -41,7 +41,7 @@
             <esri-map-view class="viewDivBase" id="viewDiv2d" 
                 map="exampleCtrl.map"
                 view-options="{
-                    zoom: 3,
+                    zoom: 2,
                     center: [0, 45]
                 }">
                 <div class="title">MapView</div>
@@ -50,12 +50,12 @@
             <esri-scene-view class="viewDivBase" id="viewDiv3d" 
                 map="exampleCtrl.map"
                 view-options="{
-                    zoom: 4,
+                    zoom: 3,
                     center: [0, 45]
                 }">
                 <div class="title">SceneView</div>
             </esri-scene-view>
-            
+
             <div>
                 <p>Based on <a href="https://developers.arcgis.com/javascript/latest/sample-code/ge-geodesicbuffer/index.html">this sample</a>.</p>
             </div>
@@ -83,20 +83,19 @@
                         'esri/Graphic',
                         'esri/geometry/geometryEngine',
                         'esri/geometry/Point',
-                        'esri/renderers/SimpleRenderer',
                         'esri/symbols/SimpleMarkerSymbol',
                         'esri/symbols/SimpleFillSymbol'
                     ], function(
                         Map, GraphicsLayer, Graphic,
                         geometryEngine, Point,
-                        SimpleRenderer, SimpleMarkerSymbol, SimpleFillSymbol
+                        SimpleMarkerSymbol, SimpleFillSymbol
                     ) {
                         self.map = new Map({
                             basemap: 'satellite'
                         });
 
                         // add two graphics layers to map: one for points, another for buffers
-                        var polySym = new SimpleFillSymbol({
+                        var polygonSymbol = new SimpleFillSymbol({
                             color: [255, 255, 255, 0.5],
                             outline: {
                                 color: [0, 0, 0, 0.5],
@@ -104,7 +103,7 @@
                             }
                         });
 
-                        var pointSym = new SimpleMarkerSymbol({
+                        var pointSymbol = new SimpleMarkerSymbol({
                             color: [255, 0, 0],
                             outline: {
                                 color: [255, 255, 255],
@@ -113,16 +112,12 @@
                             size: 7
                         });
 
-                        var bufferLayer = new GraphicsLayer({
-                            renderer: new SimpleRenderer({
-                                symbol: polySym
-                            })
-                        });
+                        var bufferLayer = new GraphicsLayer();
 
                         var pointLayer = new GraphicsLayer({
-                            renderer: new SimpleRenderer({
-                                symbol: pointSym
-                            })
+                            elevationInfo: {
+                                mode: 'on-the-ground'
+                            }
                         });
 
                         self.map.addMany([bufferLayer, pointLayer]);
@@ -135,12 +130,14 @@
                                 latitude: lat
                             });
                             pointLayer.add(new Graphic({
-                                geometry: point
+                                geometry: point,
+                                symbol: pointSymbol
                             }));
 
                             var buffer = geometryEngine.geodesicBuffer(point, 560, 'kilometers');
                             bufferLayer.add(new Graphic({
-                                geometry: buffer
+                                geometry: buffer,
+                                symbol: polygonSymbol
                             }));
                         }
                     });

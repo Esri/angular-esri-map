@@ -94,7 +94,6 @@ angular.module('esri-map-docs')
                 var legendWidget = new Legend({
                     view: view
                 }, 'legendDiv');
-                legendWidget.startup();
 
                 // destroy the legend widget when angular scope is also being destroyed
                 $scope.$on('$destroy', function() {

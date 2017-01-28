@@ -18,6 +18,5 @@ xdescribe('Deferred Map', function() {
         helper.getMapViewElement().then(function(mapView) {
             expect(mapView.getAttribute('style')).toMatch(/(transform: rotateZ\(0deg\))/);
         });
-
     });
 });
