@@ -94,7 +94,7 @@
                     controller: 'HomeButtonCtrl',
                     controllerAs: 'vm'
                 }
-            }/*, {
+            }, {
                 toc: {
                     title: 'Get Started with PopupTemplate',
                     description: 'Define a PopupTemplate for a FeatureLayer.',
@@ -106,7 +106,7 @@
                     controller: 'PopupsCtrl',
                     controllerAs: 'vm'
                 }
-            }*/, {
+            }, {
                 toc: {
                     title: 'Search',
                     description: 'Add a search tool to find locations on the map.',
@@ -181,51 +181,43 @@
                 }
             }]
         },
-        patternsPages: [
-            {
-                path: '/patterns/other-esri-classes',
-                templateUrl: 'app/patterns/other-esri-modules.html',
-                title: 'Loading and Using Other Esri Classes',
-                shortTitle: 'Loading Esri Classes'
-            },
-            {
-                path: '/patterns/references-to-views',
-                templateUrl: 'app/patterns/references-to-views.html',
-                title: 'Getting a Reference to MapViews and SceneViews',
-                shortTitle: 'MapView and SceneView References'
-            },
-            {
-                path: '/patterns/using-creating-widgets',
-                templateUrl: 'app/patterns/using-creating-widgets.html',
-                title: 'Using and Creating Esri Widgets',
-                shortTitle: 'Creating Widgets'
-            },
-            {
-                path: '/patterns/property-binding',
-                templateUrl: 'app/patterns/property-binding.html',
-                title: 'Binding Properties Between AngularJS and Esri',
-                shortTitle: 'Property Binding'
-            },
+        patternsPages: [{
+            path: '/patterns/other-esri-classes',
+            templateUrl: 'app/patterns/other-esri-modules.html',
+            title: 'Loading and Using Other Esri Classes',
+            shortTitle: 'Loading Esri Classes'
+        }, {
+            path: '/patterns/references-to-views',
+            templateUrl: 'app/patterns/references-to-views.html',
+            title: 'Getting a Reference to MapViews and SceneViews',
+            shortTitle: 'MapView and SceneView References'
+        }, {
+            path: '/patterns/using-creating-widgets',
+            templateUrl: 'app/patterns/using-creating-widgets.html',
+            title: 'Using and Creating Esri Widgets',
+            shortTitle: 'Creating Widgets'
+        }, {
+            path: '/patterns/property-binding',
+            templateUrl: 'app/patterns/property-binding.html',
+            title: 'Binding Properties Between AngularJS and Esri',
+            shortTitle: 'Property Binding'
+        }/*, {
             // TODO: custom directive's page
-            // {
-            //     path: '/patterns/create-your-own-directives',
-            //     templateUrl: 'app/patterns/create-your-own-directives.html',
-            //     title: 'Create Your Own Directives',
-            //     shortTitle: 'Custom Directives'
-            // },
-            {
-                path: '/patterns/create-your-own-factories',
-                templateUrl: 'app/patterns/create-your-own-factories.html',
-                title: 'Create Your Own Factories',
-                shortTitle: 'Custom Factories'
-            },
-            {
-                path: '/patterns/lazy-load',
-                templateUrl: 'app/patterns/lazy-load.html',
-                title: 'Lazy Load the ArcGIS API for JavaScript',
-                shortTitle: 'Lazy Load'
-            }
-        ]
+            path: '/patterns/create-your-own-directives',
+            templateUrl: 'app/patterns/create-your-own-directives.html',
+            title: 'Create Your Own Directives',
+            shortTitle: 'Custom Directives'
+        }*/, {
+            path: '/patterns/create-your-own-factories',
+            templateUrl: 'app/patterns/create-your-own-factories.html',
+            title: 'Create Your Own Factories',
+            shortTitle: 'Custom Factories'
+        }, {
+            path: '/patterns/lazy-load',
+            templateUrl: 'app/patterns/lazy-load.html',
+            title: 'Lazy Load the ArcGIS API for JavaScript',
+            shortTitle: 'Lazy Load'
+        }]
     };
 
     angular.module('esri-map-docs')

@@ -46,7 +46,7 @@ NG_DOCS={
       "type": "overview",
       "moduleName": "esri.map",
       "shortDescription": "esri.map Module",
-      "keywords": "allows api button directive directives elements esri esrimapview esrisceneview includes map maps mapview module overview place reusable scene sceneview ui working"
+      "keywords": "2d 3d allows api button directive directives elements esri esrimapview esrisceneview includes map maps mapview module overview place reusable scene sceneview ui working"
     },
     {
       "section": "api",
@@ -55,7 +55,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create and manage",
-      "keywords": "$element $q add api arcgis clicked constructed controller core create directive esri esrihomebutton executed factory fully function functional functions getviewmodel help homeviewmodel html https instance instances isolate javascript load manage map method module object optional position promise property reference refers requires resolved returns scope set setview style ui valid view view-ui-position viewmodel wrapper"
+      "keywords": "$element $q add api arcgis clicked constructed controller core create directive esri esrihomebutton esrihomebuttoncontroller esriloader executed factory fully function functional functions getviewmodel help homeviewmodel html https instance instances isolate javascript load manage map method module object optional position promise property reference refers requires resolved returns scope set setview style ui valid view view-ui-position viewmodel wrapper"
     },
     {
       "section": "api",
@@ -64,7 +64,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create",
-      "keywords": "$element $q $scope api arcgis constructed contoller controller core create directive esri esrimapview event events execute executed exist factory function functions getmapview help html https instance instances load map mapview module object on-create on-error on-load optional promise property reference refers rejected resolved returns set setmap style view"
+      "keywords": "$element $q $scope api arcgis constructed contoller controller core create directive esri esriloader esrimapview esrimapviewcontroller esriregistry event events execute executed exist factory function functions getmapview help html https instance instances load map mapview module object on-create on-error on-load optional promise property reference refers rejected resolved returns set setmap style view"
     },
     {
       "section": "api",
@@ -73,7 +73,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create",
-      "keywords": "$element $q $scope api arcgis constructed contoller controller core create directive esri esrisceneview event events execute executed exist factory function functions getsceneview help html https instance instances load map module object on-create on-error on-load optional options promise property reference refers rejected resolved returns sceneview set setmap sets style view webscene"
+      "keywords": "$element $q $scope api arcgis constructed contoller controller core create directive esri esriloader esriregistry esrisceneview esrisceneviewcontroller event events execute executed exist factory function functions getsceneview help html https instance instances load map module object on-create on-error on-load optional options promise property reference refers rejected resolved returns sceneview set setmap sets style view webscene"
     },
     {
       "section": "api",
@@ -82,7 +82,7 @@ NG_DOCS={
       "type": "controller",
       "moduleName": "esri.map",
       "shortDescription": "Functions to help create and manage individual slide properties and behaviors.",
-      "keywords": "active api arcgis array assist associated behaviors bound callback clicked controller create css directive entry esri executed function functions help html https individual instance instances manage manipulating map method object on-slide-change onslideclick passes properties sceneview set sets setslides slide slides status styling template true"
+      "keywords": "active api arcgis array assist associated behaviors bound callback clicked controller create css directive entry esri esriwebsceneslidescontroller executed function functions help html https individual instance instances manage manipulating map method object on-slide-change onslideclick passes properties sceneview set sets setslides slide slides status styling template true"
     },
     {
       "section": "api",
@@ -91,7 +91,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a home button using the ArcGIS API for JavaScript.",
-      "keywords": "add alternative api arcgis argument button create css defaultui details directive dom element elements esri examples html https instance javascript map mapview object position positioning properties rules sceneview ui valid view view-ui-position"
+      "keywords": "add alternative api arcgis argument button create css defaultui details directive dom element elements esri esrihomebutton examples html https instance javascript map mapview object position positioning properties rules sceneview ui valid view view-ui-position"
     },
     {
       "section": "api",
@@ -100,7 +100,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a",
-      "keywords": "additional api arcgis bound callback controllers core create creation defining directive esri esriregistry examples factory feature hash html https inline instance javascript layer loading map mapview object on-create on-error on-load parameters plenty properties register-as registering rejected search showing string successful tiles vector view view-options webmap"
+      "keywords": "additional api arcgis bound callback controllers core create creation defining directive esri esrimapview esriregistry examples factory feature hash html https inline instance javascript layer loading map mapview object on-create on-error on-load parameters plenty properties register-as registering rejected search showing string successful tiles vector view view-options webmap"
     },
     {
       "section": "api",
@@ -109,7 +109,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create a",
-      "keywords": "additional api arcgis basemap bound callback controllers core create creation defining directive elevation esri esriregistry example examples extrude factory hash html https inline instance javascript loading map object on-create on-error on-load parameters plenty polygon properties register-as registering rejected sceneview showing string successful supported toggle view view-options webgl webscene"
+      "keywords": "additional api arcgis basemap bound callback controllers core create creation defining directive elevation esri esriregistry esrisceneview example examples extrude factory hash html https inline instance javascript loading map object on-create on-error on-load parameters plenty polygon properties register-as registering rejected sceneview showing string successful supported toggle view view-options webgl webscene"
     },
     {
       "section": "api",
@@ -118,7 +118,7 @@ NG_DOCS={
       "type": "directive",
       "moduleName": "esri.map",
       "shortDescription": "This is the directive which will create slide bookmarks for",
-      "keywords": "active active-slide api arcgis arrange array associated background-color black bookmark bookmarks border-color border-style border-width box box-shadow callback change class clicked clicking color conditional container create created css cursor custom demonstrates directive display div esri example examples function handling highlighted horizontally html https include individual inline-block instances interact javascript location map margin models names ng-class object on-slide-change outer-most padding parts pointer property provide provided rely sceneview screenshot selected set slide slides slides-container solid span styles styling supply thin title update view viewpoint webscene white widgets"
+      "keywords": "10px 12px active active-slide api arcgis arrange array associated background-color black bookmark bookmarks border-color border-style border-width box box-shadow callback change class clicked clicking color conditional container create created css cursor custom demonstrates directive display div esri esriwebsceneslides example examples function handling highlighted horizontally html https include individual inline-block instances interact javascript location map margin models names ng-class object on-slide-change outer-most padding parts pointer property provide provided rely sceneview screenshot selected set slide slides slides-container solid span styles styling supply thin title update view viewpoint webscene white widgets"
     }
   ],
   "apis": {

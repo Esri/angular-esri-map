@@ -254,8 +254,13 @@ directive.ngEmbedApp = ['$templateCache', '$browser', '$rootScope', '$location',
       });
 
       element.bind('$destroy', function() {
-        deregisterEmbedRootScope();
-        embedRootScope.$destroy();
+        if(deregisterEmbedRootScope){
+          deregisterEmbedRootScope()
+        }
+
+        if(embedRootScope){
+          embedRootScope.$destroy();
+        }
       });
 
       element.data('$injector', null);

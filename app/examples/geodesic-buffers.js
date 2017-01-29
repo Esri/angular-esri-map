@@ -8,13 +8,12 @@ angular.module('esri-map-docs')
             'esri/Graphic',
             'esri/geometry/geometryEngine',
             'esri/geometry/Point',
-            'esri/renderers/SimpleRenderer',
             'esri/symbols/SimpleMarkerSymbol',
             'esri/symbols/SimpleFillSymbol'
         ], function(
             Map, GraphicsLayer, Graphic,
             geometryEngine, Point,
-            SimpleRenderer, SimpleMarkerSymbol, SimpleFillSymbol
+            SimpleMarkerSymbol, SimpleFillSymbol
         ) {
             // check that the device/browser can support WebGL
             //  by inspecting the userAgent and
@@ -23,13 +22,13 @@ angular.module('esri-map-docs')
             self.onViewError = function() {
                 self.showViewError = true;
             };
-            
+
             self.map = new Map({
                 basemap: 'satellite'
             });
 
             // add two graphics layers to map: one for points, another for buffers
-            var polySym = new SimpleFillSymbol({
+            var polygonSymbol = new SimpleFillSymbol({
                 color: [255, 255, 255, 0.5],
                 outline: {
                     color: [0, 0, 0, 0.5],
@@ -37,7 +36,7 @@ angular.module('esri-map-docs')
                 }
             });
 
-            var pointSym = new SimpleMarkerSymbol({
+            var pointSymbol = new SimpleMarkerSymbol({
                 color: [255, 0, 0],
                 outline: {
                     color: [255, 255, 255],
@@ -46,16 +45,12 @@ angular.module('esri-map-docs')
                 size: 7
             });
 
-            var bufferLayer = new GraphicsLayer({
-                renderer: new SimpleRenderer({
-                    symbol: polySym
-                })
-            });
+            var bufferLayer = new GraphicsLayer();
 
             var pointLayer = new GraphicsLayer({
-                renderer: new SimpleRenderer({
-                    symbol: pointSym
-                })
+                elevationInfo: {
+                    mode: 'on-the-ground'
+                }
             });
 
             self.map.addMany([bufferLayer, pointLayer]);
@@ -68,12 +63,14 @@ angular.module('esri-map-docs')
                     latitude: lat
                 });
                 pointLayer.add(new Graphic({
-                    geometry: point
+                    geometry: point,
+                    symbol: pointSymbol
                 }));
 
                 var buffer = geometryEngine.geodesicBuffer(point, 560, 'kilometers');
                 bufferLayer.add(new Graphic({
-                    geometry: buffer
+                    geometry: buffer,
+                    symbol: polygonSymbol
                 }));
             }
         });

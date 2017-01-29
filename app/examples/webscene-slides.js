@@ -25,7 +25,7 @@ angular.module('esri-map-docs')
             // create a new WebScene
             var webScene = new WebScene({
                 portalItem: new PortalItem({
-                    id: '51c67be4a5ea4da6948a40210ddfab1a'
+                    id: '1c7a06421a314ac9b7d0fae22aa367fb'
                 })
             });
 
@@ -36,6 +36,10 @@ angular.module('esri-map-docs')
             //  perform additional logic in the view directive's load callback
             self.onViewLoaded = function(view) {
                 self.sceneView = view;
+
+                var createSlideDiv = document.getElementsByClassName('createSlideDiv')[0];
+                var slidesDiv = document.getElementsByClassName('slidesDiv')[0];
+                view.ui.add([createSlideDiv, slidesDiv], 'top-right');
 
                 // presentation slides are in fact an "esri/core/Collection"
                 // make a shallow copy as a new array object for angular scope

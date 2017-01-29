@@ -37,7 +37,7 @@
         <!-- load Esri JavaScript API -->
         <script src="//js.arcgis.com/4.0/"></script>
         <!-- load Angular -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
         <!-- load the angular-esri-map module -->
         <script src="lib/angular-esri-map.js"></script>
         <!-- run example app controller -->
@@ -135,6 +135,7 @@
                             var legendWidget = new Legend({
                                 view: view
                             }, 'legendDiv');
+                            // startup widget method deprecated at JSAPI 4.2+
                             legendWidget.startup();
 
                             // destroy the legend widget when angular scope is also being destroyed
