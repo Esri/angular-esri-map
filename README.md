@@ -12,13 +12,13 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 - [Getting Started](#getting-started)
   - [Quick Start](#quick-start)
   - [Lazy Loading of the ArcGIS API for JavaScript](#lazy-loading-of-the-arcgis-api-for-javascript)
-- [Development Instructions](#development-instructions)
 - [Dependencies](#dependencies)
 - [Resources](#resources)
 - [What about Angular 2?](#what-about-angular-2)
 - [What about Ionic?](#what-about-ionic)
 - [Issues](#issues)
 - [Contributing](#contributing)
+- [Development Instructions](#development-instructions)
 - [Licensing](#licensing)
 
 ## Getting Started
@@ -99,17 +99,6 @@ See the documentation for [examples and guides](http://esri.github.io/angular-es
 
 If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Lazy Load Patterns page](http://esri.github.io/angular-esri-map/#/patterns/lazy-load) for an example of how to do this.
 
-## Development Instructions
-
-Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
-
-1. [Fork and clone this repo](https://help.github.com/articles/fork-a-repo)
-2. `cd` into the `angular-esri-map` folder
-3. Install the dependencies with `npm install`
-4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
-5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
-6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
-
 ## Dependencies
 
 At version 1.x, these directives and services require, at a minimum, AngularJS v1.3.0 and the ArcGIS API for JavaScript v3.12 (though most will work and are tested on v3.11).
@@ -120,13 +109,11 @@ See the compatibility table below for details.
 
 angular-esri-map | AngularJS | ArcGIS API for JavaScript | Notes
 --- | --- | --- | ---
-v1.0.0 | v1.3+ | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
-v1.1.0 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
+v1.0.0 | v1.3 - v1.5 | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
+v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) | 
 v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
-v2.x | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
+v2.0.0 | v1.3 - v1.5 | [v4.0+](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
 v2.0.2 | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/master/CHANGELOG.md#v202).
-
-You will need [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) to do local development.
 
 ## Resources
 
@@ -163,6 +150,17 @@ Find a bug or want to request a new feature? Please let us know by submitting an
 ## Contributing
 
 Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/Esri/angular-esri-map/blob/master/CONTRIBUTING.md).
+
+## Development Instructions
+
+Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
+
+1. [Fork and clone this repo](https://help.github.com/articles/fork-a-repo)
+2. `cd` into the `angular-esri-map` folder
+3. Install the dependencies with `npm install`
+4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
+5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
+6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
 
 ## Licensing
 
