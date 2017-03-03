@@ -16,6 +16,7 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 - [Dependencies](#dependencies)
 - [Resources](#resources)
 - [What about Angular 2?](#what-about-angular-2)
+- [What about Ionic?](#what-about-ionic)
 - [Issues](#issues)
 - [Contributing](#contributing)
 - [Licensing](#licensing)
@@ -30,7 +31,7 @@ To use these directives in your own AngularJS v1.x application, first install th
 
 ```html
 <!-- load angular-esri-map from CDN -->
-<script src="//unpkg.com/angular-esri-map@2"></script>
+<script src="https://unpkg.com/angular-esri-map@2"></script>
 ```
 
 ```bash
@@ -56,7 +57,7 @@ Once you've added the module to your application, you can refer the sample code 
 
         <title>AngularJS Esri Quick Start</title>
 
-        <link rel="stylesheet" href="//js.arcgis.com/4.2/esri/css/main.css">
+        <link rel="stylesheet" href="https://js.arcgis.com/4.2/esri/css/main.css">
         <style type="text/css">
             html, body, .esri-view {
                 padding: 0;
@@ -71,11 +72,11 @@ Once you've added the module to your application, you can refer the sample code 
         </esri-scene-view>
 
         <!-- load Esri JSAPI -->
-        <script src="//js.arcgis.com/4.2/"></script>
+        <script src="https://js.arcgis.com/4.2/"></script>
         <!-- load AngularJS -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
         <!-- load angular-esri-map -->
-        <script src="//unpkg.com/angular-esri-map@2"></script>
+        <script src="https://unpkg.com/angular-esri-map@2"></script>
 
         <script>
             angular.module('esri-map-example', ['esri.map'])
@@ -164,6 +165,7 @@ Find a bug or want to request a new feature? Please let us know by submitting an
 Anyone and everyone is welcome to contribute. Please see our [guidelines for contributing](https://github.com/Esri/angular-esri-map/blob/master/CONTRIBUTING.md).
 
 ## Licensing
+
 Copyright 2014 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
