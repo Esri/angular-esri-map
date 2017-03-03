@@ -153,7 +153,7 @@ Anyone and everyone is welcome to contribute. Please see our [guidelines for con
 
 ## Development Instructions
 
-Make sure you have [Node](http://nodejs.org/) and  [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
+Make sure you have [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
 
 1. [Fork and clone this repo](https://help.github.com/articles/fork-a-repo)
 2. `cd` into the `angular-esri-map` folder
