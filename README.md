@@ -148,6 +148,13 @@ While **angular-esri-map** focuses on providing well tested directives and patte
 * [jwasilgeo/angular2-esri-playground](https://github.com/jwasilgeo/angular2-esri-playground): Example app using the ArcGIS API for JavaScript v4 with Angular 2 loaded via esri-system-js
 * [tomwayson/angular2-esri-example](https://github.com/tomwayson/angular2-esri-example): Example app using the ArcGIS API for JavaScript v3 with Angular 2 loaded via [Webpack](https://webpack.github.io/) based on [@lobsteropteryx](https://github.com/lobsteropteryx)’s (non-Angular-specific) [esri-webpack configuration](https://github.com/lobsteropteryx/esri-webpack).
 
+## What about Ionic?
+
+Ionic is a mobile-ready implementation of Angular that is built on top of Cordova/PhoneGap. The coding patterns shown above can also be used with Ionic.
+
+* [jwasilgeo/ionic-esri-map](https://github.com/jwasilgeo/ionic-esri-map): An Ionic1 app showing how to integrate a map using the angular-esri-map v1 pattern.
+* [andygup/ionic2-esri-map](https://github.com/andygup/ionic2-esri-map): Example using ArcGIS API for JavaScript with Ionic2 using the angular2-esri-loader pattern with webpack.
+
 ## Issues
 
 Find a bug or want to request a new feature? Please let us know by submitting an issue. Thank you!
