@@ -14,7 +14,6 @@ angular.module('esri-map-docs')
                 var searchWidget = new Search({
                     view: view
                 });
-                searchWidget.startup();
 
                 // add the search widget to the top left corner of the view
                 view.ui.add(searchWidget, {
