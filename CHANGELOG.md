@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+esriLoader defaults to loading JSAPI v3.20compact. Docs site uses JSAPI v3.20compact.
+
 ## [v1.1.8]
 
 ### Changed

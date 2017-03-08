@@ -55,7 +55,7 @@ Once you've added the module to your application, you can refer to the sample co
         <title>AngularJS Esri Quick Start</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/3.19/esri/css/esri.css">
+        <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/3.20/esri/css/esri.css">
     </head>
     <body ng-controller="MapController as vm">
         <esri-map id="map" center="vm.center" zoom="vm.zoom" basemap="topo">
@@ -65,9 +65,9 @@ Once you've added the module to your application, you can refer to the sample co
         <p>Lat: {{ vm.center.lat | number:3 }}, Lng: {{ vm.center.lng | number:3 }}, Zoom: {{ vm.zoom }}</p>
 
         <!-- load Esri JSAPI -->
-        <script src="https://js.arcgis.com/3.19compact"></script>
+        <script src="https://js.arcgis.com/3.20compact"></script>
         <!-- load AngularJS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
         <!-- load angular-esri-map -->
         <script src="https://unpkg.com/angular-esri-map@1"></script>
 
@@ -99,7 +99,7 @@ These directives and services require, at a minimum, AngularJS v1.3.0 and the Ar
 angular-esri-map | AngularJS | ArcGIS API for JavaScript | Notes
 --- | --- | --- | ---
 v1.0.0 | v1.3 - v1.5 | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
-v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) | 
+v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) |
 v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
 
 ## Resources
