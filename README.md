@@ -107,12 +107,12 @@ v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to 
 **Websites**
 * [AngularJS v1.x](https://angularjs.org/)
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
-* [ArcGIS for Developers](http://developers.arcgis.com)
-* [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
-* [@Esri](http://twitter.com/esri)
+* [ArcGIS for Developers](https://developers.arcgis.com)
+* [ArcGIS REST API](https://resources.arcgis.com/en/help/arcgis-rest-api/)
+* [@Esri](https://twitter.com/esri)
 
 **Presentations**
-* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](http://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
+* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](https://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
 * [ArcGIS API for JavaScript and AngularJS: What's New, What's Next](https://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016), Esri 2016 International Developer Summit
 * [Angular and the ArcGIS API for JavaScript](https://jwasilgeo.github.io/presentations/2017/angular-and-the-arcgis-api-for-javascript), Esri 2017 International Developer Summit
 
@@ -143,13 +143,13 @@ Anyone and everyone is welcome to contribute. Please see our [guidelines for con
 
 ## Development Instructions
 
-Make sure you have [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
+Make sure you have [Node](https://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
 
 1. [Fork and clone this repo](https://help.github.com/articles/fork-a-repo)
 2. `cd` into the `angular-esri-map` folder
 3. Install the dependencies with `npm install`
 4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
-5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
+5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `https://localhost:9002/simple-map.html`).
 6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
 
 ## Licensing
@@ -159,7 +159,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+   https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
