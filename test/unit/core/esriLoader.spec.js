@@ -35,8 +35,8 @@ describe('esriLoader', function() {
             });
 
             describe('when not passing url in options', function() {
-                it('should default to 4.3', function() {
-                    var url = window.location.protocol + '//js.arcgis.com/4.3';
+                it('should default to 4.4', function() {
+                    var url = window.location.protocol + '//js.arcgis.com/4.4';
                     esriLoader.bootstrap();
                     expect(document.body.appendChild.calls.argsFor(0)[0].src).toEqual(url);
                 });

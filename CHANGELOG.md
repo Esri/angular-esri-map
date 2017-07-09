@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+esriLoader defaults to loading JSAPI v4.4. Docs site uses JSAPI v4.4 and Angular v1.6.5.
+
 ## [v2.0.3]
 
 esriLoader defaults to loading JSAPI v4.3. Docs site uses JSAPI v4.3.
