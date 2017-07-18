@@ -22,7 +22,7 @@
          * Loads the ArcGIS API for JavaScript.
          *
          * @param {Object=} options Send a list of options of how to load the ArcGIS API for JavaScript.
-         *  This defaults to `{url: '//js.arcgis.com/4.4'}`.
+         *  This defaults to `{url: 'https://js.arcgis.com/4.4'}`.
          *
          * @return {Promise} Returns a $q style promise which is resolved once the ArcGIS API for JavaScript has been loaded.
          */
