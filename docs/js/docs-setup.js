@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "service",
       "moduleName": "esri.core",
       "shortDescription": "Use esriLoader to lazy load the ArcGIS API for JavaScript or to require individual API modules.",
-      "keywords": "$q amd api arcgis array boolean bootstrap callback core defaults dojo esri esriloader factory function individual isloaded javascript lazy list load loaded loader loading loads module modules optional options promise require resolved returns send service single string strings style support"
+      "keywords": "$q amd api arcgis array boolean bootstrap callback core defaults dojo esri esriloader factory function https individual isloaded javascript lazy list load loaded loader loading loads module modules optional options promise require resolved returns send service single string strings style support"
     },
     {
       "section": "api",
