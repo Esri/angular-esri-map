@@ -5,7 +5,7 @@ angular-esri-map
 
 A collection of directives to help you use Esri maps and services in your AngularJS v1.x applications.
 
-These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](http://esri.github.io/angular-esri-map/#/about)
+These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](https://esri.github.io/angular-esri-map/#/about)
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 
 ## Getting Started
 
-Here are [examples and guides](http://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own AngularJS v1.x applications.
+Here are [examples and guides](https://esri.github.io/angular-esri-map/) showing how you can use this module to bring Esri maps into your own AngularJS v1.x applications.
 
 ### Quick Start
 
@@ -57,7 +57,7 @@ Once you've added the module to your application, you can refer the sample code 
 
         <title>AngularJS Esri Quick Start</title>
 
-        <link rel="stylesheet" href="https://js.arcgis.com/4.3/esri/css/main.css">
+        <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
         <style type="text/css">
             html, body, .esri-view {
                 padding: 0;
@@ -72,9 +72,9 @@ Once you've added the module to your application, you can refer the sample code 
         </esri-scene-view>
 
         <!-- load Esri JSAPI -->
-        <script src="https://js.arcgis.com/4.3/"></script>
+        <script src="https://js.arcgis.com/4.4/"></script>
         <!-- load AngularJS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.js"></script>
         <!-- load angular-esri-map -->
         <script src="https://unpkg.com/angular-esri-map@2"></script>
 
@@ -93,11 +93,11 @@ Once you've added the module to your application, you can refer the sample code 
 </html>
 ```
 
-See the documentation for [examples and guides](http://esri.github.io/angular-esri-map) of how to use the other directives and services.
+See the documentation for [examples and guides](https://esri.github.io/angular-esri-map) of how to use the other directives and services.
 
 ### Lazy Loading of the ArcGIS API for JavaScript
 
-If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Lazy Load Patterns page](http://esri.github.io/angular-esri-map/#/patterns/lazy-load) for an example of how to do this.
+If your application only shows a map under certain conditions you may want to lazy load the ArcGIS API for JavaScript. You can do this by calling the `esriLoader.bootstrap()` method. See the [Lazy Load Patterns page](https://esri.github.io/angular-esri-map/#/patterns/lazy-load) for an example of how to do this.
 
 ## Dependencies
 
@@ -120,12 +120,12 @@ v2.0.2 | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Due to a b
 **Websites**
 * [AngularJS v1.x](https://angularjs.org/)
 * [ArcGIS API for JavaScript](https://developers.arcgis.com/javascript/)
-* [ArcGIS for Developers](http://developers.arcgis.com)
-* [ArcGIS REST API](http://resources.arcgis.com/en/help/arcgis-rest-api/)
-* [@Esri](http://twitter.com/esri)
+* [ArcGIS for Developers](https://developers.arcgis.com)
+* [ArcGIS REST API](https://resources.arcgis.com/en/help/arcgis-rest-api/)
+* [@Esri](https://twitter.com/esri)
 
 **Presentations**
-* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](http://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
+* [Declarative Mapping Applications with AngularJS and the ArcGIS API for JavaScript](https://proceedings.esri.com/library/userconf/devsummit16/papers/dev_int_193.pdf), Esri 2016 International Developer Summit
 * [ArcGIS API for JavaScript and AngularJS: What's New, What's Next](https://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016), Esri 2016 International Developer Summit
 * [Angular and the ArcGIS API for JavaScript](https://jwasilgeo.github.io/presentations/2017/angular-and-the-arcgis-api-for-javascript), Esri 2017 International Developer Summit
 
@@ -156,13 +156,13 @@ Anyone and everyone is welcome to contribute. Please see our [guidelines for con
 
 ## Development Instructions
 
-Make sure you have [Node](http://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
+Make sure you have [Node](https://nodejs.org/) and [Gulp](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#getting-started) installed.
 
 1. [Fork and clone this repo](https://help.github.com/articles/fork-a-repo)
 2. `cd` into the `angular-esri-map` folder
 3. Install the dependencies with `npm install`
 4. run `gulp` from the command line. This will run the linting and build commands and then start a local web server hosting the application under the `docs` folder
-5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `http://localhost:9002/simple-map.html`).
+5. Modify the source files (under `src`) and test pages (under `test`). Test pages are served along with the docs site when you run the `gulp` task and are accessible from the root (i.e. `https://localhost:9002/simple-map.html`).
 6. Make a [pull request](https://help.github.com/articles/creating-a-pull-request) to contribute your changes
 
 ## Licensing
@@ -173,7 +173,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+   https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
