@@ -9,6 +9,7 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 
 ## Table of Contents
 
+- [Status](#status)
 - [Getting Started](#getting-started)
   - [Quick Start](#quick-start)
   - [Lazy Loading of the ArcGIS API for JavaScript](#lazy-loading-of-the-arcgis-api-for-javascript)
@@ -20,6 +21,14 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 - [Contributing](#contributing)
 - [Development Instructions](#development-instructions)
 - [Licensing](#licensing)
+
+## Status
+
+This project is no longer being actively maintained. It will not be updated or tested with the latest versions of the ArcGIS API for JavaScript and AngularJS v1.x. Ideas for new features or pull requests will likely not be reviewed or merged.
+
+No guarantee of future support is provided, but we will try to respond to new issues about bugs. These should include a link to an existing application or live demo (e.g. Plunkr, JS Bin, JsFiddle) where the bug can be verified, otherwise it is unlikely that we'll be able to help.
+
+You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular). [`esri-loader`](https://github.com/esri/esri-loader) is the preferred way to load ArcGIS API for JavaScript modules in Angular (2+) applications.
 
 ## Getting Started
 
@@ -131,13 +140,7 @@ v2.0.2 | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Due to a b
 
 ## What about Angular 2?
 
-While **angular-esri-map** focuses on providing well tested directives and patterns to help you use Esri maps with AngularJS v1.x, the ArcGIS API for JavaScript can also be used with [Angular 2](https://angular.io/). In addition to the [Angular 2 specific information](https://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016/#/34) discussed in the [2016 "What's New, What's Next" presentation](https://jwasilgeo.github.io/esri-jsapi-and-angular-whats-next-dev-summit-2016) and more recently in the [2017 "Angular and the ArcGIS API for JavaScript" presentation](https://jwasilgeo.github.io/presentations/2017/angular-and-the-arcgis-api-for-javascript) provided above, there are many resources available to inspire you to try out Esri+Angular 2.
-
-* [ArcGIS API for JavaScript v4: Using Frameworks](https://developers.arcgis.com/javascript/latest/guide/using-frameworks/index.html)
-* [tomwayson/angular2-esri-loader](https://github.com/tomwayson/angular2-esri-loader): An Angular 2 service to help you load ArcGIS API for JavaScript Modules
-* [Esri/esri-system-js](https://github.com/Esri/esri-system-js): Load ArcGIS API for JavaScript modules using SystemJS
-* [jwasilgeo/angular2-esri-playground](https://github.com/jwasilgeo/angular2-esri-playground): Example app using the ArcGIS API for JavaScript v4 with Angular 2 loaded via esri-system-js
-* [tomwayson/angular2-esri-example](https://github.com/tomwayson/angular2-esri-example): Example app using the ArcGIS API for JavaScript v3 with Angular 2 loaded via [Webpack](https://webpack.github.io/) based on [@lobsteropteryx](https://github.com/lobsteropteryx)’s (non-Angular-specific) [esri-webpack configuration](https://github.com/lobsteropteryx/esri-webpack).
+You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular). [`esri-loader`](https://github.com/esri/esri-loader) is the preferred way to load ArcGIS API for JavaScript modules in Angular (2+) applications.
 
 ## What about Ionic?
 

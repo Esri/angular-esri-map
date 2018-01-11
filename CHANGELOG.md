@@ -5,6 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
+### Support
+
+Added information to readme to clarify status of this project.
+
+### Maintenance
+
+Updated Travis CI config and package.json ("engines") to indicate the node versions that tests are expected to run on.
+
+### Documentation
+
+Fixed calcite-bootstrap css url in docs pages.
+
 ## [v2.0.4]
 
 esriLoader defaults to loading JSAPI v4.4. Docs site uses JSAPI v4.4 and Angular v1.6.5.

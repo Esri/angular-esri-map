@@ -63,5 +63,8 @@
     "test": "karma start test/unit/karma.conf.js --browsers Firefox --single-run",
     "release": "./scripts/release.sh",
     "start": "gulp"
+  },
+  "engines": {
+    "node": "^4 || ^6 || ^8"
   }
 }
