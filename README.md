@@ -5,6 +5,8 @@ angular-esri-map
 
 A collection of directives to help you use Esri maps and services in your AngularJS v1.x applications.
 
+**NOTE: ** AngularJS goes into Long Term Support on July 1, 2018. For more information go [here](https://github.com/Esri/angular-esri-map/issues/345).
+
 These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](https://esri.github.io/angular-esri-map/#/about)
 
 ## Table of Contents
