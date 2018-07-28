@@ -59,7 +59,7 @@ angular.module('esri-map-docs')
 
                 // Once the housing layer has loaded,
                 // the view will animate to it's initial extent.
-                housingLyr.then(function() {
+                housingLyr.when(function() {
                     view.goTo(housingLyr.fullExtent);
                 });
 

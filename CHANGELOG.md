@@ -5,11 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Upcoming changes][unreleased]
 
-### Support
+### Fixed
+
+Uses [`.when()` instead of `.then()`](https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/making-better-promises/) for JSAPI 4.7+ compatibility
+
+### Changed
+
+esriLoader defaults to loading JSAPI v4.8. Docs site uses JSAPI v4.8
 
 Added information to readme to clarify status of this project.
-
-### Maintenance
 
 Updated Travis CI config and package.json ("engines") to indicate the node versions that tests are expected to run on.
 

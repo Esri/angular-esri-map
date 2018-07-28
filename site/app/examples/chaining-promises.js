@@ -97,7 +97,7 @@ angular.module('esri-map-docs')
             // zooms to the buffer location
             function zoomTo(geom) {
                 // when the view is ready
-                return self.view.then(function() {
+                return self.view.when(function() {
                     // zoom to the buffer geometry
                     return self.view.goTo({
                         target: geom,
