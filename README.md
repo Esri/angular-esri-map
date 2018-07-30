@@ -107,9 +107,9 @@ These directives and services require, at a minimum, AngularJS v1.3.0 and the Ar
 
 angular-esri-map | AngularJS | ArcGIS API for JavaScript | Notes
 --- | --- | --- | ---
-v1.0.0 | v1.3 - v1.5 | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
-v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) |
-v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
+v1.0.0 | v1.3 - v1.5 | [v3.12 - 3.21](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
+v1.1.0 | v1.3 - v1.5 | [v3.15 - 3.21](https://developers.arcgis.com/javascript/3/) |
+v1.1.8 | v1.3+ | [v3.15 - 3.21](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
 
 ## Resources
 
