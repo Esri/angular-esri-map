@@ -120,12 +120,12 @@ See the compatibility table below for details.
 
 angular-esri-map | AngularJS | ArcGIS API for JavaScript | Notes
 --- | --- | --- | ---
-v1.0.0 | v1.3 - v1.5 | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
-v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) |
-v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
-v2.0.0 | v1.3 - v1.5 | [v4.0+](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
+v1.0.0 | v1.3 - v1.5 | [v3.12 - 3.21](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
+v1.1.0 | v1.3 - v1.5 | [v3.15 - 3.21](https://developers.arcgis.com/javascript/3/) |
+v1.1.8 | v1.3+ | [v3.12 - 3.21](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
+v2.0.0 | v1.3 - v1.5 | [v4.0 - v4.6](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
 v2.0.2 | v1.3+ | [v4.0 - v4.6](https://developers.arcgis.com/javascript/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/master/CHANGELOG.md#v202).
-v2.0.5 | v1.3+ | [v4.6+](https://developers.arcgis.com/javascript/) | Uses [`.when()` instead of `.then()`](https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/making-better-promises/)
+v2.0.5 | v1.3+ | [v4.6 - v4.8](https://developers.arcgis.com/javascript/) | Uses [`.when()` instead of `.then()`](https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/making-better-promises/)
 
 ## Resources
 
