@@ -26,11 +26,11 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 
 ## Status
 
-This project is no longer being actively maintained. It will not be updated or tested with the latest versions of the ArcGIS API for JavaScript and AngularJS v1.x. Ideas for new features or pull requests will likely not be reviewed or merged.
+This project is no longer being actively maintained. It will **not** be updated or tested with the latest versions of the ArcGIS API for JavaScript and AngularJS v1.x. Ideas for new features or pull requests are **not** likely to be reviewed or merged.
 
 No guarantee of future support is provided, but we will try to respond to new issues about bugs. These should include a link to an existing application or live demo (e.g. Plunkr, JS Bin, JsFiddle) where the bug can be verified, otherwise it is unlikely that we'll be able to help.
 
-You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular). [`esri-loader`](https://github.com/esri/esri-loader) is the preferred way to load ArcGIS API for JavaScript modules in Angular (2+) applications.
+You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular).
 
 ## Getting Started
 
@@ -68,7 +68,7 @@ Once you've added the module to your application, you can refer the sample code 
 
         <title>AngularJS Esri Quick Start</title>
 
-        <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+        <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
         <style type="text/css">
             html, body, .esri-view {
                 padding: 0;
@@ -83,7 +83,7 @@ Once you've added the module to your application, you can refer the sample code 
         </esri-scene-view>
 
         <!-- load Esri JSAPI -->
-        <script src="https://js.arcgis.com/4.4/"></script>
+        <script src="https://js.arcgis.com/4.8/"></script>
         <!-- load AngularJS -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.js"></script>
         <!-- load angular-esri-map -->
@@ -120,11 +120,12 @@ See the compatibility table below for details.
 
 angular-esri-map | AngularJS | ArcGIS API for JavaScript | Notes
 --- | --- | --- | ---
-v1.0.0 | v1.3 - v1.5 | [v3.12+](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
-v1.1.0 | v1.3 - v1.5 | [v3.15+](https://developers.arcgis.com/javascript/3/) |
-v1.1.8 | v1.3+ | [v3.15+](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
-v2.0.0 | v1.3 - v1.5 | [v4.0+](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
-v2.0.2 | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/master/CHANGELOG.md#v202).
+v1.0.0 | v1.3 - v1.5 | [v3.12 - 3.21](https://developers.arcgis.com/javascript/3/) | Test coverage included for AngularJS v1.3.
+v1.1.0 | v1.3 - v1.5 | [v3.15 - 3.21](https://developers.arcgis.com/javascript/3/) |
+v1.1.8 | v1.3+ | [v3.12 - 3.21](https://developers.arcgis.com/javascript/3/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/v1.x/CHANGELOG.md#v118).
+v2.0.0 | v1.3 - v1.5 | [v4.0 - v4.6](https://developers.arcgis.com/javascript/) | Test coverage included for AngularJS v1.3.
+v2.0.2 | v1.3+ | [v4.0 - v4.6](https://developers.arcgis.com/javascript/) | Due to a breaking change in controllers at AngularJS v1.6, e2e test coverage has been performed with v1.3, but will only continue with v1.6. See [CHANGELOG](https://github.com/Esri/angular-esri-map/blob/master/CHANGELOG.md#v202).
+v2.0.5 | v1.3+ | [v4.6 - v4.8](https://developers.arcgis.com/javascript/) | Uses [`.when()` instead of `.then()`](https://www.esri.com/arcgis-blog/products/js-api-arcgis/mapping/making-better-promises/)
 
 ## Resources
 
@@ -142,7 +143,7 @@ v2.0.2 | v1.3+ | [v4.0+](https://developers.arcgis.com/javascript/) | Due to a b
 
 ## What about Angular 2?
 
-You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular). [`esri-loader`](https://github.com/esri/esri-loader) is the preferred way to load ArcGIS API for JavaScript modules in Angular (2+) applications.
+You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular).
 
 ## What about Ionic?
 

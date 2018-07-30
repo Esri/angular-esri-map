@@ -94,7 +94,7 @@
                             self.onCreate()(self.view);
                         }
 
-                        self.view.then(function() {
+                        self.view.when(function() {
                             if (typeof self.onLoad() === 'function') {
                                 $scope.$apply(function() {
                                     self.onLoad()(self.view);
