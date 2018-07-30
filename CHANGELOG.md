@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Upcoming changes][unreleased]
+## [v2.0.5]
 
 ### Fixed
 
@@ -325,7 +325,7 @@ Thank you to @willisd2, @ScottONeal, @thinking-aloud, and @jwasilgeo for their c
 * Initial public release.
 * Includes directives for map, features layers, and legend and services to facilitate loading Esri modules and enabling controllers to reference the map object.
 
-[unreleased]: https://github.com/Esri/angular-esri-map/compare/v2.0.4...HEAD
+[v2.0.5]: https://github.com/Esri/angular-esri-map/compare/v2.0.4...v2.0.5
 [v2.0.4]: https://github.com/Esri/angular-esri-map/compare/v2.0.3...v2.0.4
 [v2.0.3]: https://github.com/Esri/angular-esri-map/compare/v2.0.2...v2.0.3
 [v2.0.2]: https://github.com/Esri/angular-esri-map/compare/v2.0.1...v2.0.2
