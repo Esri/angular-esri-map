@@ -1,17 +1,24 @@
 angular-esri-map
 ================
 
-[![Build Status](https://travis-ci.org/Esri/angular-esri-map.svg?branch=master)](https://travis-ci.org/Esri/angular-esri-map)
+**The angular-esri-map repository is now retired and will soon be archived (Q4 2020). It started in Long Term Maintenance mode on July 1, 2018.**
+
+Do you have a question related to JavaScript that isn’t specific to Angular? Post these questions in the [GeoNET](https://community.esri.com/community/developers/web-developers/arcgis-api-for-javascript) forum for the ArcGIS API for JavaScript.
+
+Please take a look at these modern alternatives:
+
+- [Esri-loader](https://github.com/esri/esri-loader) - A tiny library to help load ArcGIS API for JavaScript modules in non-Dojo applications.
+- [Arcgis-webpack-plugin](https://github.com/Esri/arcgis-webpack-plugin) – A webpack wrapper for the ArcGIS API for JavaScript.
+- [Angular-cli-esri-map](https://github.com/Esri/angular-cli-esri-map) – A repo that demos using the ArcGIS API for JavaScript in Angular 9+ applications.
+
+---
 
 A collection of directives to help you use Esri maps and services in your AngularJS v1.x applications.
-
-**NOTE: ** AngularJS goes into Long Term Support on July 1, 2018. For more information go [here](https://github.com/Esri/angular-esri-map/issues/345).
 
 These directives can be used as-is if your mapping needs are simple, or as reference examples of the patterns that you can use to write your own directives that use the ArcGIS API for JavaScript. [Read more...](https://esri.github.io/angular-esri-map/#/about)
 
 ## Table of Contents
 
-- [Status](#status)
 - [Getting Started](#getting-started)
   - [Quick Start](#quick-start)
   - [Lazy Loading of the ArcGIS API for JavaScript](#lazy-loading-of-the-arcgis-api-for-javascript)
@@ -23,14 +30,6 @@ These directives can be used as-is if your mapping needs are simple, or as refer
 - [Contributing](#contributing)
 - [Development Instructions](#development-instructions)
 - [Licensing](#licensing)
-
-## Status
-
-This project is no longer being actively maintained. It will **not** be updated or tested with the latest versions of the ArcGIS API for JavaScript and AngularJS v1.x. Ideas for new features or pull requests are **not** likely to be reviewed or merged.
-
-No guarantee of future support is provided, but we will try to respond to new issues about bugs. These should include a link to an existing application or live demo (e.g. Plunkr, JS Bin, JsFiddle) where the bug can be verified, otherwise it is unlikely that we'll be able to help.
-
-You can find up to date information on [using the ArcGIS API for JavaScript in an Angular (2+) application at this Angular resources page](https://github.com/esri/jsapi-resources/tree/master/frameworks/angular).
 
 ## Getting Started
 
