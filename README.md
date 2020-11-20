@@ -1,7 +1,7 @@
 angular-esri-map
 ================
 
-**The angular-esri-map repository is now retired and will soon be archived (Q4 2020). It started in Long Term Maintenance mode on July 1, 2018.**
+**The angular-esri-map repository is now retired and is now archived (November 2020). It started in Long Term Maintenance mode on July 1, 2018.**
 
 Do you have a question related to JavaScript that isn’t specific to Angular? Post these questions in the [GeoNET](https://community.esri.com/community/developers/web-developers/arcgis-api-for-javascript) forum for the ArcGIS API for JavaScript.
 
